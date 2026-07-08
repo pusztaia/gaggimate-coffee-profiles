@@ -22,7 +22,7 @@ Ez a dokumentum minden szükséges információt tartalmaz ahhoz, hogy új espre
 
 ## A JSON profil szerkezete
 
-A GaggiMate Pro firmware a `profile.json` sémát követi. Csak a séma által definiált mezők érvényesek – ismeretlen gyökér mezők érvénytelenek (`additionalProperties: false`). A dokumentációt az `.md` fájlban tartsd, nem a JSON-ban.
+A GaggiMate Pro firmware a `schema/profile.json` sémát követi. Csak a séma által definiált mezők érvényesek – ismeretlen gyökér mezők érvénytelenek (`additionalProperties: false`). A dokumentációt az `.md` fájlban tartsd, nem a JSON-ban.
 
 ### Gyökér mezők
 

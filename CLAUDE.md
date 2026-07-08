@@ -36,13 +36,13 @@ There is no build step, package manager, linter, or test suite in this repo (the
 ## Repository structure
 
 - `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`.
-- `profile.json` (repo root) — **this is the JSON Schema for the profile format**, not a sample profile. It's the canonical documentation of every field GaggiMate firmware accepts, cross-referenced to firmware source lines (`src/display/models/profile.h`, `src/display/core/process/BrewProcess.h`, etc.). When in doubt about what a field does or what values are valid, read the `description` text in this file rather than inferring from an example profile — per its own `$comment`, if the schema and the real firmware parser ever disagree, the parser wins.
+- `schema/profile.json` — **this is the JSON Schema for the profile format**, not a sample profile. It's the canonical documentation of every field GaggiMate firmware accepts, cross-referenced to firmware source lines (`src/display/models/profile.h`, `src/display/core/process/BrewProcess.h`, etc.). When in doubt about what a field does or what values are valid, read the `description` text in this file rather than inferring from an example profile — per its own `$comment`, if the schema and the real firmware parser ever disagree, the parser wins.
 - `tools/render_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
 - `index.html` — single-file static gallery: hardcoded cards linking to each profile's JSON/PNG, plus a tab section that `fetch()`s each coffee's recipe/changelog Markdown at runtime and renders it client-side (see the `file:` entries and the `fetch(entry.file, ...)` call near the end of the file). Adding a new profile means updating both the profile's own directory *and* the corresponding card/entry in `index.html`.
 - `templates/` — starter Markdown templates (`recipe-template.md`, `changelog-template.md`, `shot-log-template.md`) for documenting a new coffee.
 - `README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`, `FILE_NAMING.md`, `PROFILE_CREATION_GUIDE.md`, `BREW_GUIDELINES.md`, `BLUETOOTH_SCALE_WORKFLOW.md`, `CHANGELOG.md` — all human documentation; several are effectively views over the same profile data (index, gallery, naming rules, dial-in guidance, scale workflow) and must be kept in sync manually when profiles change.
 
-## Profile format essentials (from `profile.json`)
+## Profile format essentials (from `schema/profile.json`)
 
 A profile is `{ label, type, description, temperature, utility, phases[] }`. Root object has `additionalProperties: false` — do not add ad-hoc fields; use an underscore-prefixed key (e.g. `_notes`) if you need to stash metadata, since the schema reserves `^_` patterns as firmware-ignored. Never set `id` in hand-authored profiles — it's firmware/UI-managed and generated on import.
 
