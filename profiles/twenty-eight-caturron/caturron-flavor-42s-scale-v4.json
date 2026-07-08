@@ -1,0 +1,118 @@
+{
+  "label": "Twenty Eight Finca el Recreo Caturron Flavor – Scale V4",
+  "type": "pro",
+  "description": "Twenty Eight Caturron Flavor Scale V4 – 18.5 g / stop 42 g volumetric / 95 C / grind 8-10",
+  "temperature": 95,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Fast Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 95,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 8.0
+      }
+    },
+    {
+      "name": "Low Pressure Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 7,
+      "temperature": 95,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.0,
+        "flow": 4.5
+      }
+    },
+    {
+      "name": "Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 95,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 0.4,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 95,
+      "transition": {
+        "type": "linear",
+        "duration": 6,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Fruit Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 35,
+      "temperature": 95,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.2
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42.0
+        }
+      ]
+    },
+    {
+      "name": "Sweet Decline",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 95,
+      "transition": {
+        "type": "linear",
+        "duration": 6,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.6,
+        "flow": 1.8
+      }
+    }
+  ]
+}

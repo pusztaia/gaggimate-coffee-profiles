@@ -1,0 +1,111 @@
+{
+  "label": "Burundi Mubuga Melon Currant 18.5-42.5 38s",
+  "type": "pro",
+  "description": "Burundi Mubuga Melon Currant – 18.5 g / 42.5 g / 94.5 C / grind 10-11",
+  "temperature": 94.5,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Fruit Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 94.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 8.0
+      }
+    },
+    {
+      "name": "Currant Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 94.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.2,
+        "flow": 4.5
+      }
+    },
+    {
+      "name": "Melon Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 94.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 0.5,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 94.5,
+      "transition": {
+        "type": "linear",
+        "duration": 6,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Juicy Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 11,
+      "temperature": 94.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.1
+      }
+    },
+    {
+      "name": "Clean Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 94.5,
+      "transition": {
+        "type": "linear",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.4,
+        "flow": 1.7
+      }
+    }
+  ]
+}

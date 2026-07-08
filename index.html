@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GaggiMate Coffee Profiles</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #f5f3f0;
+  --card:     #ffffff;
+  --border:   #ddd8d0;
+  --accent:   #a06020;
+  --dim:      #888;
+  --text:     #1a1612;
+  --radius:   8px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* ── header ── */
+header {
+  padding: 2rem 2.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+header p {
+  margin-top: .3rem;
+  color: var(--dim);
+  font-size: .82rem;
+}
+
+/* ── nav ── */
+nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  overflow-x: auto;
+}
+nav button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--dim);
+  cursor: pointer;
+  font: inherit;
+  font-size: .82rem;
+  padding: .75rem 1rem;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+nav button:hover { color: var(--text); }
+nav button.on { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── main ── */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+.tab { display: none; }
+.tab.on { display: block; }
+
+/* ── section heading ── */
+h2 {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 1.25rem;
+}
+
+/* ── profiles grid ── */
+.profiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.card {
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+}
+.card-head {
+  padding: 1.1rem 1.25rem .8rem;
+}
+.card-head h3 {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .15rem;
+}
+.card-head .sub {
+  font-size: .75rem;
+  color: var(--dim);
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-top: .6rem;
+}
+.pill {
+  font-size: .68rem;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--dim);
+}
+.pill-proc { border-color: #d8b888; color: #7a4a10; background: #fdf5e8; }
+.pill-note { border-color: #b0d0c8; color: #2a7060; background: #edf6f3; }
+
+/* ── stats row ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+}
+.stat {
+  padding: .65rem .5rem;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-val { display: block; font-size: .95rem; font-weight: 600; color: var(--accent); }
+.stat-key { display: block; font-size: .62rem; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; margin-top: .05rem; }
+
+/* ── chart ── */
+.chart {
+  border-top: 1px solid var(--border);
+  padding: .75rem 1rem;
+}
+.chart img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+/* ── phase bars ── */
+.phases {
+  border-top: 1px solid var(--border);
+  padding: .5rem 0;
+}
+.phase-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto 90px;
+  align-items: center;
+  gap: .5rem;
+  padding: .3rem 1.25rem;
+  font-size: .75rem;
+}
+.phase-row:hover { background: #f5f0ea; }
+.ph-name { color: var(--text); }
+.ph-cat { font-size: .62rem; color: var(--dim); text-transform: uppercase; }
+.ph-dur { color: var(--dim); text-align: right; }
+.bar-track { background: #ddd8d0; border-radius: 3px; height: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+.bar-fill.flow { background: #5090b8; }
+
+/* ── card footer ── */
+.card-foot {
+  border-top: 1px solid var(--border);
+  padding: .65rem 1.25rem;
+  display: flex;
+  gap: .4rem;
+  margin-top: auto;
+}
+a.dl {
+  font-size: .72rem;
+  padding: .3rem .7rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  text-decoration: none;
+  transition: color .15s, border-color .15s;
+}
+a.dl:hover { color: var(--accent); border-color: var(--accent); }
+a.dl.v4 { color: #3a6888; border-color: #a0c0d8; }
+a.dl.v4:hover { color: #1a4a68; border-color: #3a6888; }
+
+/* ── setup ── */
+.kv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.kv {
+  background: var(--card);
+  padding: .8rem 1rem;
+}
+.kv-key { font-size: .68rem; color: var(--dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .2rem; }
+.kv-val { font-size: .85rem; font-weight: 500; color: var(--text); }
+
+/* ── generic table ── */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .78rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.tbl thead th {
+  background: #ede8e2;
+  color: var(--dim);
+  font-size: .66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  padding: .5rem .9rem;
+  text-align: left;
+}
+.tbl tbody td {
+  padding: .45rem .9rem;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+.tbl tbody tr:hover td { background: #f5f0ea; }
+.tbl code { font-family: monospace; font-size: .8em; color: #3a6080; }
+.g { color: #3a7a3a; }
+.w { color: #a06020; }
+.r { color: #8a3030; }
+
+/* ── code block ── */
+pre {
+  background: #f0ede8;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  font-size: .75rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  color: #2a3a4a;
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 2rem;
+}
+.note {
+  border-left: 2px solid var(--accent);
+  background: #fdf5e8;
+  padding: .6rem .9rem;
+  font-size: .78rem;
+  color: #7a4a10;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1.25rem;
+}
+h3.sh {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin: 1.75rem 0 .75rem;
+}
+
+/* ── modal overlay ── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,22,18,.55);
+  z-index: 100;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem 2rem;
+  overflow-y: auto;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 700px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem .85rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-header h2 {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+}
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--dim);
+  padding: .2rem .4rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text); background: var(--border); }
+.modal-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  font-size: .8rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+/* modal content typography */
+.modal-body h1 { font-size: 1rem; font-weight: 700; margin: 0 0 1rem; color: var(--text); }
+.modal-body h2 { font-size: .82rem; font-weight: 700; color: var(--accent); text-transform: none; letter-spacing: 0; margin: 1.4rem 0 .5rem; border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
+.modal-body h3 { font-size: .77rem; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; margin: 1rem 0 .4rem; }
+.modal-body p { margin-bottom: .7rem; }
+.modal-body ul { margin: .4rem 0 .8rem 1.2rem; }
+.modal-body li { margin-bottom: .25rem; }
+.modal-body strong { color: var(--text); }
+.modal-body table { width: 100%; border-collapse: collapse; font-size: .76rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.modal-body thead th { background: #ede8e2; color: var(--dim); font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; padding: .4rem .75rem; text-align: left; }
+.modal-body tbody td { padding: .35rem .75rem; border-top: 1px solid var(--border); }
+.modal-body tbody tr:hover td { background: #f5f0ea; }
+.modal-body blockquote { border-left: 2px solid var(--accent); background: #fdf5e8; padding: .5rem .85rem; color: #7a4a10; border-radius: 0 4px 4px 0; margin: .75rem 0; font-size: .75rem; }
+.modal-body code { font-family: monospace; font-size: .82em; color: #3a6080; background: #eef2f5; padding: .05em .3em; border-radius: 3px; }
+.modal-body hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>GaggiMate Coffee Profiles</h1>
+  <p>Gaggia Classic Pro 2025 · GaggiMate Pro · DF64V Gen 2 · BOOKOO Themis Ultra · V4 Bluetooth Scale Edition</p>
+</header>
+
+<nav>
+  <button class="on" onclick="tab('profiles',this)">Profilok</button>
+  <button onclick="tab('setup',this)">Setup</button>
+  <button onclick="tab('guide',this)">Profil készítés</button>
+  <button onclick="tab('schema',this)">Firmware séma</button>
+</nav>
+
+<main>
+
+<!-- ══ PROFILOK ══ -->
+<div id="profiles" class="tab on">
+  <h2>Aktív espresso profilok</h2>
+  <div class="profiles">
+
+                
+
+    
+
+    
+
+    <!-- 9 BAR -->
+    <div class="card">
+      <div class="card-head">
+        <h3>9 Bar Espresso</h3>
+        <div class="sub">Klasszikus baseline</div>
+        <div class="pills">
+          <span class="pill pill-proc">közepes / sötét</span>
+          <span class="pill pill-note">csoki</span>
+          <span class="pill pill-note">mogyoró</span>
+          <span class="pill pill-note">karamell</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">36-40 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">95 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">28 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/9-bar/profile-9bar-profile.png" alt="9 Bar grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Pump</span><span class="ph-cat">brew</span><span class="ph-dur">28 s</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/9-bar/profile-9bar.json" download>↓ JSON</a>
+        <a class="dl" href="#" onclick="openModal('9bar-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('9bar-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- CREMINA LEVER -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Cremina lever machine</h3>
+        <div class="sub">Sötét pörkölésű, lever-style</div>
+        <div class="pills">
+          <span class="pill pill-proc">közepes-sötét / sötét</span>
+          <span class="pill pill-note">édes</span>
+          <span class="pill pill-note">kerek</span>
+          <span class="pill pill-note">csokis-diós</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">27-40 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">86.5 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">40-60 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/cremina-lever/profile-lever-profile.png" alt="Cremina Lever grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">preinfusion start</span><span class="ph-cat">PI</span><span class="ph-dur">2 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">preinfusion</span><span class="ph-cat">PI</span><span class="ph-dur">3 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">soak</span><span class="ph-cat">PI</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">ramp</span><span class="ph-cat">brew</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">ramp-down</span><span class="ph-cat">brew</span><span class="ph-dur">50 s</span><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/cremina-lever/profile-lever.json" download>↓ JSON</a>
+        <a class="dl" href="#" onclick="openModal('cremina-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('cremina-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- DAMIAN\'S LM LEVA -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Damian\'s LM Leva</h3>
+        <div class="sub">Modern specialty, lever-style</div>
+        <div class="pills">
+          <span class="pill pill-proc">világos-közepes / közepes</span>
+          <span class="pill pill-note">tiszta</span>
+          <span class="pill pill-note">gyümölcsös</span>
+          <span class="pill pill-note">hosszú lefolyás</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">36-45 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">89 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">20-45 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/damians-lm-leva/profile-lmleva-profile.png" alt="Damian\'s LM Leva grafikon"></div>
+       <div class="phases">
+        <div class="phase-row"><span class="ph-name">fill start</span><span class="ph-cat">PI</span><span class="ph-dur">2 s</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">fill</span><span class="ph-cat">PI</span><span class="ph-dur">20 s</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">preinfusion</span><span class="ph-cat">PI</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:24%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">rise</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">hold</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">decline</span><span class="ph-cat">brew</span><span class="ph-dur">58 s</span><div class="bar-track"><div class="bar-fill" style="width:24%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/damians-lm-leva/profile-lmleva.json" download>↓ JSON</a>
+        <a class="dl" href="#" onclick="openModal('lmleva-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('lmleva-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- WANGERA -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Kenya Wangera — Stable Start</h3>
+        <div class="sub">Impresso · Kenya, Nyeri / Kirinyaga</div>
+        <div class="pills">
+          <span class="pill pill-proc">washed</span>
+          <span class="pill pill-note">szeder</span>
+          <span class="pill pill-note">tejszín</span>
+          <span class="pill pill-note">pomelo</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">42 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">38 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/wangera/wangera-stable-38s-945c-profile.png" alt="Wangera grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Stronger Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Stable Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:19%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Cream Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Soft Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Blackberry Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">11 s</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Cream Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/wangera/wangera-stable-38s-945c.json" download>↓ V3</a>
+        <a class="dl v4" href="profiles/wangera/wangera-stable-38s-945c-scale-v4.json" download>↓ V4</a>
+        <a class="dl" href="#" onclick="openModal('wangera-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('wangera-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- BURUNDI -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Burundi Mubuga — Melon Currant</h3>
+        <div class="sub">Impresso · Burundi, Ngozi, Mubuga</div>
+        <div class="pills">
+          <span class="pill pill-proc">natural</span>
+          <span class="pill pill-note">sárgadinnye</span>
+          <span class="pill pill-note">alma</span>
+          <span class="pill pill-note">ribizli</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">42.5 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">38 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/burundi-mubuga/burundi-mubuga-38s-profile.png" alt="Burundi grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Fruit Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Currant Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Melon Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Juicy Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">11 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Clean Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/burundi-mubuga/burundi-mubuga-38s.json" download>↓ V3</a>
+        <a class="dl v4" href="profiles/burundi-mubuga/burundi-mubuga-38s-scale-v4.json" download>↓ V4</a>
+        <a class="dl" href="#" onclick="openModal('burundi-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('burundi-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- COLOMBIA -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Colombia Manos Juntas — Jam Mango</h3>
+        <div class="sub">Impresso · Colombia, Cauca, Manos Juntas</div>
+        <div class="pills">
+          <span class="pill pill-proc">anaerobic natural</span>
+          <span class="pill pill-note">vörösáfonya dzsem</span>
+          <span class="pill pill-note">karamell</span>
+          <span class="pill pill-note">mangó</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">43 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">39 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/colombia-manos-juntas/colombia-manos-juntas-39s-profile.png" alt="Colombia grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Jam Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Mango Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:19%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Sweet Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Soft Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Jam Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">12 s</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Caramel Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:46%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/colombia-manos-juntas/colombia-manos-juntas-39s.json" download>↓ V3</a>
+        <a class="dl v4" href="profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json" download>↓ V4</a>
+        <a class="dl" href="#" onclick="openModal('colombia-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('colombia-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- KIRINYAGA -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Kenya Kirinyaga PB — Tea Rose</h3>
+        <div class="sub">Impresso · Kenya, Kirinyaga</div>
+        <div class="pills">
+          <span class="pill pill-proc">washed</span>
+          <span class="pill pill-note">hibiszkusz</span>
+          <span class="pill pill-note">csipkebogyó</span>
+          <span class="pill pill-note">fekete tea</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">43 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">37 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/kirinyaga/kirinyaga-tea-rose-37s-profile.png" alt="Kirinyaga grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Tea Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill flow" style="width:50%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Even Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Hibiscus Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Black Tea Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">12 s</span><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Rosehip Finish</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:47%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/kirinyaga/kirinyaga-tea-rose-37s.json" download>↓ V3</a>
+        <a class="dl v4" href="profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json" download>↓ V4</a>
+        <a class="dl" href="#" onclick="openModal('kirinyaga-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('kirinyaga-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- ADAPTIVE V2 -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Adaptive v2 — Univerzális</h3>
+        <div class="sub">Light to Medium · Fine grind · 1:2–2.5</div>
+        <div class="pills">
+          <span class="pill pill-proc">univerzális</span>
+          <span class="pill pill-note">adaptív PI</span>
+          <span class="pill pill-note">flow-hold</span>
+          <span class="pill pill-note">93/88 °C</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">38 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">88 °C</span><span class="stat-key">extr. hő</span></div>
+        <div class="stat"><span class="stat-val">25–40 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/adaptive v2/profile-adapt-profile.png" alt="Adaptive v2 grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Prefill</span><span class="ph-cat">PI</span><span class="ph-dur">≤5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:55%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Fill</span><span class="ph-cat">PI</span><span class="ph-dur">≤12 s</span><div class="bar-track"><div class="bar-fill flow" style="width:55%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Compressing</span><span class="ph-cat">PI</span><span class="ph-dur">≤12 s</span><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Dripping</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Pressurize</span><span class="ph-cat">brew</span><span class="ph-dur">≤6 s</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">≤60 s</span><div class="bar-track"><div class="bar-fill flow" style="width:65%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/adaptive v2/profile-adapt.json" download>↓ JSON</a>
+        <a class="dl" href="#" onclick="openModal('adaptive-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('adaptive-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+    <!-- CATURRON -->
+    <div class="card">
+      <div class="card-head">
+        <h3>Twenty Eight Caturron — Flavor</h3>
+        <div class="sub">Twenty Eight · Finca el Recreo, Guatemala</div>
+        <div class="pills">
+          <span class="pill pill-proc">natural</span>
+          <span class="pill pill-note">meggy</span>
+          <span class="pill pill-note">konyakmeggy</span>
+          <span class="pill pill-note">bonbonos édesség</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
+        <div class="stat"><span class="stat-val">42 g</span><span class="stat-key">hozam</span></div>
+        <div class="stat"><span class="stat-val">95 °C</span><span class="stat-key">hő</span></div>
+        <div class="stat"><span class="stat-val">42 s</span><span class="stat-key">idő</span></div>
+      </div>
+      <div class="chart"><img src="profiles/twenty-eight-caturron/caturron-flavor-42s-profile.png" alt="Caturron grafikon"></div>
+      <div class="phases">
+        <div class="phase-row"><span class="ph-name">Fast Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Low Pressure Sat.</span><span class="ph-cat">PI</span><span class="ph-dur">7 s</span><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Fruit Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">13 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        <div class="phase-row"><span class="ph-name">Sweet Decline</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:47%"></div></div></div>
+      </div>
+      <div class="card-foot">
+        <a class="dl" href="profiles/twenty-eight-caturron/caturron-flavor-42s.json" download>↓ V3</a>
+        <a class="dl v4" href="profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json" download>↓ V4</a>
+        <a class="dl" href="#" onclick="openModal('caturron-recipe');return false;">recept</a>
+        <a class="dl" href="#" onclick="openModal('caturron-changelog');return false;">changelog</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SETUP ══ -->
+<div id="setup" class="tab">
+  <h2>Equipment</h2>
+  <div class="kv-grid">
+    <div class="kv"><div class="kv-key">Gép</div><div class="kv-val">Gaggia Classic Pro 2025</div></div>
+    <div class="kv"><div class="kv-key">Vezérlő</div><div class="kv-val">GaggiMate Pro</div></div>
+    <div class="kv"><div class="kv-key">Daráló</div><div class="kv-val">DF64V Gen 2</div></div>
+    <div class="kv"><div class="kv-key">Kések</div><div class="kv-val">SSP Sweet Lab Espresso V3</div></div>
+    <div class="kv"><div class="kv-key">Kosár</div><div class="kv-val">IMS B682TH24.5M</div></div>
+    <div class="kv"><div class="kv-key">Mérleg</div><div class="kv-val">BOOKOO Themis Ultra</div></div>
+    <div class="kv"><div class="kv-key">Kapcsolat</div><div class="kv-val">Bluetooth</div></div>
+    <div class="kv"><div class="kv-key">RPM</div><div class="kv-val">1200 (800–1800)</div></div>
+    <div class="kv"><div class="kv-key">Őrlőskála</div><div class="kv-val">0–90, egész jelölések</div></div>
+    <div class="kv"><div class="kv-key">Dózis</div><div class="kv-val">18.5 g</div></div>
+  </div>
+
+  <h2>Profilok összehasonlítása</h2>
+  <table class="tbl">
+    <thead>
+      <tr><th>Kávé</th><th>Feldolgozás</th><th>Hő</th><th>Sat.</th><th>Extract</th><th>Finish</th><th>Grind</th><th>Hozam</th><th>Idő</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Kenya Wangera</td><td>washed</td><td>94.5 °C</td><td>2.3 bar</td><td>7.4 bar</td><td>5.8 bar</td><td>10–11</td><td>42 g</td><td>38 s</td></tr>
+      <tr><td>Burundi Mubuga</td><td>natural</td><td>94.5 °C</td><td>2.2 bar</td><td>7.2 bar</td><td>5.4 bar</td><td>10–11</td><td>42.5 g</td><td>38 s</td></tr>
+      <tr><td>Colombia Manos Juntas</td><td>anaerobic natural</td><td>94.5 °C</td><td>2.3 bar</td><td>7.3 bar</td><td>5.5 bar</td><td>10–11</td><td>43 g</td><td>39 s</td></tr>
+      <tr><td>Kenya Kirinyaga PB</td><td>washed</td><td>94.5 °C</td><td>2.1 bar</td><td>7.6 bar</td><td>5.6 bar</td><td>9–10</td><td>43 g</td><td>37 s</td></tr>
+      <tr><td>Twenty Eight Caturron</td><td>natural</td><td>95.0 °C</td><td>2.0 bar</td><td>7.2 bar</td><td>5.6 bar</td><td>8–10</td><td>42 g</td><td>42 s</td></tr>
+    </tbody>
+  </table>
+
+  <h2>V3 vs V4</h2>
+  <table class="tbl">
+    <thead><tr><th></th><th>V3 – Time Based</th><th>V4 – Scale Edition</th></tr></thead>
+    <tbody>
+      <tr><td>Shot stop</td><td>Időalapú (fix s)</td><td class="g">Beverage weight (g)</td></tr>
+      <tr><td>Mérleg</td><td>Kézi figyelés</td><td class="g">Automatikus Bluetooth stop</td></tr>
+      <tr><td>Konzisztencia</td><td class="w">Flow-függő</td><td class="g">Reprodukálható hozam</td></tr>
+      <tr><td>Fallback</td><td class="r">Nincs</td><td class="g">Phase duration hard cap</td></tr>
+      <tr><td>JSON target</td><td>—</td><td class="g"><code>volumetric gte X</code> az extraction fázisban</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ GUIDE ══ -->
+<div id="guide" class="tab">
+  <h2>Profil készítés</h2>
+
+  <h3 class="sh">Kiindulópont – feldolgozás alapján</h3>
+  <table class="tbl">
+    <thead><tr><th>Feldolgozás</th><th>Alap profil</th><th>Logika</th></tr></thead>
+    <tbody>
+      <tr><td>Washed Kenya / Ethiopia</td><td>Kirinyaga Tea Rose</td><td>Magasabb főnyomás, rövidebb idő, élénk savak</td></tr>
+      <tr><td>Natural Burundi / Ethiopia</td><td>Burundi Mubuga</td><td>Közepes nyomás, édesség megőrzése</td></tr>
+      <tr><td>Anaerobic / Honey</td><td>Colombia Manos Juntas</td><td>Hosszabb extraction, szirupos test</td></tr>
+      <tr><td>Natural Guatemala / Közép-Amerika</td><td>Twenty Eight Caturron</td><td>Magasabb hő, hosszabb bloom</td></tr>
+      <tr><td>Általános washed</td><td>Kenya Wangera</td><td>Stable start, bevált baseline</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Paraméter hatások</h3>
+  <table class="tbl">
+    <thead><tr><th>Paraméter</th><th>Alacsonyabb</th><th>Magasabb</th></tr></thead>
+    <tbody>
+      <tr><td>Hőmérséklet</td><td>Kevesebb sav, több édesség</td><td>Több sav, több aroma, keserűség kockázat</td></tr>
+      <tr><td>Extraction nyomás</td><td>Lágy, kerek, kevesebb kinyerés</td><td>Intenzív, több test, over-extraction kockázat</td></tr>
+      <tr><td>Finish nyomás</td><td>Lágy lecsengés</td><td>Kemény lecsengés, channeling kockázat</td></tr>
+      <tr><td>Flow limit (extraction)</td><td>Lassabb, több kinyerés</td><td>Gyorsabb, kevesebb kinyerés</td></tr>
+      <tr><td>Hozam (gramm)</td><td>Tömörebb, intenzívebb, édesebb</td><td>Könnyedebb, több savasság, over-extraction kockázat</td></tr>
+      <tr><td>Saturation idő</td><td>Gyorsabb nedvesítés</td><td>Egyenletesebb szaturáció, kevesebb channeling</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Fázis blueprint (meglévő profilok alapján)</h3>
+  <table class="tbl">
+    <thead><tr><th>#</th><th>Fázis</th><th>Kat.</th><th>Idő</th><th>Target</th><th>Nyomás</th><th>Flow</th><th>Transition</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Wetting</td><td>PI</td><td>4–5 s</td><td>flow</td><td>0</td><td>7.5–8.0 g/s</td><td>ease-out / 2 s / adaptive</td></tr>
+      <tr><td>2</td><td>Saturation</td><td>PI</td><td>6–8 s</td><td>pressure</td><td>2.0–2.3 bar</td><td>4.5 g/s</td><td>instant / 0 s / adaptive</td></tr>
+      <tr><td>3</td><td>Bloom</td><td>PI</td><td>4–6 s</td><td>pressure</td><td>0.4–0.5 bar</td><td>0</td><td>ease-out / 2 s / adaptive</td></tr>
+      <tr><td>4</td><td>Ramp</td><td>brew</td><td>5–6 s</td><td>pressure</td><td>7.2–7.6 bar</td><td>2.4 g/s</td><td>linear / 5–6 s / adaptive</td></tr>
+      <tr><td>5</td><td>Extraction</td><td>brew</td><td>11–13 s (V3) / 30 s cap (V4)</td><td>pressure</td><td>7.2–7.6 bar</td><td>2.1–2.2 g/s</td><td>instant / 0 s / adaptive</td></tr>
+      <tr><td>6</td><td>Finish</td><td>brew</td><td>4–6 s</td><td>pressure</td><td>5.4–5.8 bar</td><td>1.7–1.8 g/s</td><td>linear / 4–7 s / adaptive</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Fájlnév konvenció</h3>
+  <table class="tbl">
+    <thead><tr><th>Fájl</th><th>Minta</th></tr></thead>
+    <tbody>
+      <tr><td>Könyvtár</td><td><code>profiles/{eredet-kave}/</code></td></tr>
+      <tr><td>JSON (V3)</td><td><code>{kave}-{ido}[{ho}].json</code></td></tr>
+      <tr><td>JSON (V4)</td><td><code>{v3-stem}-scale-v4.json</code></td></tr>
+      <tr><td>PNG</td><td><code>{json-stem}-profile.png</code> — auto: <code>python3 tools/render_profiles.py</code></td></tr>
+      <tr><td>Recept</td><td><code>{konyvtar}-recipe.md</code></td></tr>
+      <tr><td>Changelog</td><td><code>{konyvtar}-changelog.md</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ SCHEMA ══ -->
+<div id="schema" class="tab">
+  <h2>Firmware séma – GaggiMate Pro 1.8.1</h2>
+
+  <div class="note">A JSON gyökérben csak a séma által definiált mezők érvényesek (<code>additionalProperties: false</code>). Dokumentációt ne tárolj a JSON-ban. A <code>_</code> prefix-szel kezdődő mezők (pl. <code>_recipe</code>) annotációs mezők: a firmware figyelmen kívül hagyja őket.</div>
+
+  <h3 class="sh">Gyökér mezők</h3>
+  <table class="tbl">
+    <thead><tr><th>Mező</th><th>Típus</th><th>Leírás</th></tr></thead>
+    <tbody>
+      <tr><td><code>label</code></td><td>string</td><td>UI-ban megjelenő profilnév</td></tr>
+      <tr><td><code>type</code></td><td><code>"pro"</code></td><td>Mindig <code>pro</code> — multi-phase, PID vezérlés</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td>Rövid egysoros összefoglaló</td></tr>
+      <tr><td><code>temperature</code></td><td>0–150 °C</td><td>Boiler setpoint; fázisok felülírhatják</td></tr>
+      <tr><td><code>utility</code></td><td>boolean</td><td><code>false</code> brew profiloknál</td></tr>
+      <tr><td><code>phases</code></td><td>array</td><td>Fázisok listája, sorban futnak le (min. 1)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Pump mezők</h3>
+  <table class="tbl">
+    <thead><tr><th>Mező</th><th>Tartomány</th><th>Szerep</th></tr></thead>
+    <tbody>
+      <tr><td><code>target: "pressure"</code></td><td>—</td><td>Nyomás a setpoint, flow a soft limit</td></tr>
+      <tr><td><code>target: "flow"</code></td><td>—</td><td>Flow a setpoint, nyomás a soft limit</td></tr>
+      <tr><td><code>pressure</code></td><td>0–12 bar</td><td>Setpoint vagy soft limit; <code>0</code> = nincs limit; <code>-1</code> = tartsd a mért értéket</td></tr>
+      <tr><td><code>flow</code></td><td>0–15 g/s</td><td>Setpoint vagy soft limit; <code>0</code> = nincs limit; <code>-1</code> = tartsd a mért értéket</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Transition típusok</h3>
+  <table class="tbl">
+    <thead><tr><th>type</th><th>Leírás</th></tr></thead>
+    <tbody>
+      <tr><td><code>instant</code></td><td>Azonnali ugrás</td></tr>
+      <tr><td><code>linear</code></td><td>Egyenletes ramp</td></tr>
+      <tr><td><code>ease-in</code></td><td>Lassan indul, gyorsul</td></tr>
+      <tr><td><code>ease-out</code></td><td>Gyorsan indul, lassan ér célt — ajánlott PI fázisokhoz</td></tr>
+      <tr><td><code>ease-in-out</code></td><td>Lassan indul, gyorsul, lassan ér célt</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><code>adaptive: true</code> — a ramp a ténylegesen mért értékből indul, nem a setpointból. Ajánlott preinfusion → brew átmenetnél.</div>
+
+  <h3 class="sh">Target típusok</h3>
+  <table class="tbl">
+    <thead><tr><th>type</th><th>Egység</th><th>Megjegyzés</th></tr></thead>
+    <tbody>
+      <tr><td><code>volumetric</code></td><td>gramm</td><td class="w">Bluetooth scale + brew-by-weight mód szükséges. Ha hiányzik, csendesen nem tüzel — a duration veszi át.</td></tr>
+      <tr><td><code>pressure</code></td><td>bar</td><td>Jelenlegi mért nyomás</td></tr>
+      <tr><td><code>flow</code></td><td>ml/s</td><td>Jelenlegi mért flow</td></tr>
+      <tr><td><code>pumped</code></td><td>ml</td><td>Fázisban pumpált víz mennyisége — fázis határon nullázódik</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><code>operator</code> csak <code>"gte"</code> vagy <code>"lte"</code> lehet, kisbetűvel. Bármely más string → firmware alapértelmezése <code>lte</code>, ami hibás viselkedést okoz.</div>
+
+  <h3 class="sh">pro típus viselkedése</h3>
+  <table class="tbl">
+    <thead><tr><th>Szabály</th><th>Részlet</th></tr></thead>
+    <tbody>
+      <tr><td><code>duration</code></td><td class="w">Mindig hard cap — a target csak hamarabb zárhatja a fázist, tovább nem tarthatja nyitva</td></tr>
+      <tr><td>Max. duration</td><td>300 s / fázis</td></tr>
+      <tr><td>Target kiértékelés</td><td>Minden 100 ms-ban</td></tr>
+      <tr><td>Target logika</td><td>OR — az első tüzelő target azonnal zárja a fázist</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Minimális V4 JSON sablon</h3>
+<pre>{
+  "label": "Kávé – 18.5g / stop 42g / 94.5C / grind 10-11",
+  "type": "pro",
+  "description": "Kávé Scale V4 – 18.5 g / stop 42g volumetric / 94.5C / grind 10-11",
+  "temperature": 94.5,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Wetting", "phase": "preinfusion", "valve": 1, "duration": 5,
+      "temperature": 94.5,
+      "transition": { "type": "ease-out", "duration": 2, "adaptive": true },
+      "pump": { "target": "flow", "pressure": 0, "flow": 8.0 }
+    },
+    {
+      "name": "Saturation", "phase": "preinfusion", "valve": 1, "duration": 8,
+      "temperature": 94.5,
+      "transition": { "type": "instant", "duration": 0, "adaptive": true },
+      "pump": { "target": "pressure", "pressure": 2.3, "flow": 4.5 }
+    },
+    {
+      "name": "Bloom", "phase": "preinfusion", "valve": 1, "duration": 4,
+      "temperature": 94.5,
+      "transition": { "type": "ease-out", "duration": 2, "adaptive": true },
+      "pump": { "target": "pressure", "pressure": 0.5, "flow": 0 }
+    },
+    {
+      "name": "Ramp", "phase": "brew", "valve": 1, "duration": 6,
+      "temperature": 94.5,
+      "transition": { "type": "linear", "duration": 6, "adaptive": true },
+      "pump": { "target": "pressure", "pressure": 7.4, "flow": 2.4 }
+    },
+    {
+      "name": "Extraction", "phase": "brew", "valve": 1, "duration": 30,
+      "temperature": 94.5,
+      "transition": { "type": "instant", "duration": 0, "adaptive": true },
+      "pump": { "target": "pressure", "pressure": 7.4, "flow": 2.1 },
+      "targets": [{ "type": "volumetric", "operator": "gte", "value": 42.0 }]
+    },
+    {
+      "name": "Finish", "phase": "brew", "valve": 1, "duration": 8,
+      "temperature": 94.5,
+      "transition": { "type": "linear", "duration": 4, "adaptive": true },
+      "pump": { "target": "pressure", "pressure": 5.8, "flow": 1.7 }
+    }
+  ]
+}</pre>
+</div>
+
+</main>
+
+<!-- ══ MODAL OVERLAY ══ -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 id="modal-title"></h2>
+      <button class="modal-close" onclick="closeModal()" title="Bezárás">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ══ RECEPT / CHANGELOG MD BETÖLTÉS ══ -->
+<script>
+const MD_CONTENT = {
+  '9bar-recipe': {
+    title: '9 Bar Espresso – Recept',
+    file: 'profiles/9-bar/9-bar-recipe.md'
+  },
+  '9bar-changelog': {
+    title: '9 Bar Espresso – Changelog',
+    file: 'profiles/9-bar/9-bar-changelog.md'
+  },
+  'cremina-recipe': {
+    title: 'Cremina lever machine – Recept',
+    file: 'profiles/cremina-lever/cremina-lever-recipe.md'
+  },
+  'cremina-changelog': {
+    title: 'Cremina lever machine – Changelog',
+    file: 'profiles/cremina-lever/cremina-lever-changelog.md'
+  },
+  'lmleva-recipe': {
+    title: "Damian's LM Leva – Recept",
+    file: 'profiles/damians-lm-leva/damians-lm-leva-recipe.md'
+  },
+  'lmleva-changelog': {
+    title: "Damian's LM Leva – Changelog",
+    file: 'profiles/damians-lm-leva/damians-lm-leva-changelog.md'
+  },
+  'wangera-recipe': {
+    title: 'Kenya Wangera – Recept',
+    file: 'profiles/wangera/wangera-recipe.md'
+  },
+  'wangera-changelog': {
+    title: 'Kenya Wangera – Changelog',
+    file: 'profiles/wangera/wangera-changelog.md'
+  },
+  'burundi-recipe': {
+    title: 'Burundi Mubuga – Recept',
+    file: 'profiles/burundi-mubuga/burundi-mubuga-recipe.md'
+  },
+  'burundi-changelog': {
+    title: 'Burundi Mubuga – Changelog',
+    file: 'profiles/burundi-mubuga/burundi-mubuga-changelog.md'
+  },
+  'colombia-recipe': {
+    title: 'Colombia Manos Juntas – Recept',
+    file: 'profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md'
+  },
+  'colombia-changelog': {
+    title: 'Colombia Manos Juntas – Changelog',
+    file: 'profiles/colombia-manos-juntas/colombia-manos-juntas-changelog.md'
+  },
+  'kirinyaga-recipe': {
+    title: 'Kirinyaga PB – Recept',
+    file: 'profiles/kirinyaga/kirinyaga-recipe.md'
+  },
+  'kirinyaga-changelog': {
+    title: 'Kirinyaga PB – Changelog',
+    file: 'profiles/kirinyaga/kirinyaga-changelog.md'
+  },
+  'adaptive-recipe': {
+    title: 'Adaptive v2 – Recept',
+    file: 'profiles/adaptive v2/adaptive-v2-recipe.md'
+  },
+  'adaptive-changelog': {
+    title: 'Adaptive v2 – Changelog',
+    file: 'profiles/adaptive v2/adaptive-v2-changelog.md'
+  },
+  'caturron-recipe': {
+    title: 'Twenty Eight Caturron – Recept',
+    file: 'profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md'
+  },
+  'caturron-changelog': {
+    title: 'Twenty Eight Caturron – Changelog',
+    file: 'profiles/twenty-eight-caturron/twenty-eight-caturron-changelog.md'
+  }
+};
+
+const mdCache = new Map();
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function inlineMarkdown(text) {
+  let html = escapeHtml(text);
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+  return html;
+}
+
+function isTableSeparator(line) {
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+}
+
+function splitTableRow(line) {
+  return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => cell.trim());
+}
+
+function renderTable(lines) {
+  const header = splitTableRow(lines[0]);
+  const rows = lines.slice(2).map(splitTableRow);
+  return '<table><thead><tr>' +
+    header.map(cell => '<th>' + inlineMarkdown(cell) + '</th>').join('') +
+    '</tr></thead><tbody>' +
+    rows.map(row => '<tr>' + row.map(cell => '<td>' + inlineMarkdown(cell) + '</td>').join('') + '</tr>').join('') +
+    '</tbody></table>';
+}
+
+function renderMarkdown(markdown) {
+  const lines = markdown.replace(/\r\n?/g, '\n').split('\n');
+  const html = [];
+  let i = 0;
+  let inCode = false;
+  let codeLines = [];
+  let paragraph = [];
+  let list = [];
+  let orderedList = false;
+  let blockquote = [];
+
+  function flushParagraph() {
+    if (!paragraph.length) return;
+    html.push('<p>' + inlineMarkdown(paragraph.join(' ')) + '</p>');
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!list.length) return;
+    html.push((orderedList ? '<ol>' : '<ul>') + list.map(item => '<li>' + inlineMarkdown(item) + '</li>').join('') + (orderedList ? '</ol>' : '</ul>'));
+    list = [];
+  }
+
+  function flushBlockquote() {
+    if (!blockquote.length) return;
+    html.push('<blockquote>' + renderMarkdown(blockquote.join('\n')) + '</blockquote>');
+    blockquote = [];
+  }
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('```')) {
+      flushParagraph();
+      flushList();
+      flushBlockquote();
+      if (inCode) {
+        html.push('<pre><code>' + escapeHtml(codeLines.join('\n')) + '</code></pre>');
+        codeLines = [];
+        inCode = false;
+      } else {
+        inCode = true;
+      }
+      i++;
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(line);
+      i++;
+      continue;
+    }
+
+    if (trimmed === '') {
+      flushParagraph();
+      flushList();
+      flushBlockquote();
+      i++;
+      continue;
+    }
+
+    if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+      flushParagraph();
+      flushList();
+      flushBlockquote();
+      html.push('<hr>');
+      i++;
+      continue;
+    }
+
+    if (trimmed.includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
+      flushParagraph();
+      flushList();
+      flushBlockquote();
+      const tableLines = [line, lines[i + 1]];
+      i += 2;
+      while (i < lines.length && lines[i].trim().includes('|') && lines[i].trim() !== '') {
+        tableLines.push(lines[i]);
+        i++;
+      }
+      html.push(renderTable(tableLines));
+      continue;
+    }
+
+    const heading = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      flushBlockquote();
+      const level = heading[1].length;
+      html.push('<h' + level + '>' + inlineMarkdown(heading[2]) + '</h' + level + '>');
+      i++;
+      continue;
+    }
+
+    const quote = trimmed.match(/^>\s?(.*)$/);
+    if (quote) {
+      flushParagraph();
+      flushList();
+      blockquote.push(quote[1]);
+      i++;
+      continue;
+    }
+
+    const unordered = trimmed.match(/^[-*+]\s+(.+)$/);
+    const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
+    if (unordered || ordered) {
+      flushParagraph();
+      flushBlockquote();
+      const nowOrdered = Boolean(ordered);
+      if (list.length && orderedList !== nowOrdered) flushList();
+      orderedList = nowOrdered;
+      list.push((unordered || ordered)[1]);
+      i++;
+      continue;
+    }
+
+    flushList();
+    flushBlockquote();
+    paragraph.push(trimmed);
+    i++;
+  }
+
+  if (inCode) html.push('<pre><code>' + escapeHtml(codeLines.join('\n')) + '</code></pre>');
+  flushParagraph();
+  flushList();
+  flushBlockquote();
+  return html.join('\n');
+}
+
+async function loadMarkdown(entry) {
+  if (mdCache.has(entry.file)) return mdCache.get(entry.file);
+  const response = await fetch(entry.file, { cache: 'no-store' });
+  if (!response.ok) throw new Error('Nem található: ' + entry.file);
+  const markdown = await response.text();
+  const html = renderMarkdown(markdown);
+  mdCache.set(entry.file, html);
+  return html;
+}
+
+async function openModal(key) {
+  const entry = MD_CONTENT[key];
+  if (!entry) return;
+  document.getElementById('modal-title').textContent = entry.title;
+  document.getElementById('modal-body').innerHTML = '<p>Betöltés...</p>';
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  try {
+    document.getElementById('modal-body').innerHTML = await loadMarkdown(entry);
+  } catch (error) {
+    document.getElementById('modal-body').innerHTML =
+      '<blockquote><strong>Nem sikerült betölteni az MD fájlt.</strong><br>' +
+      escapeHtml(error.message) + '<br><br>' +
+      'Ellenőrizd, hogy a fájl ezen az útvonalon létezik-e:<br>' +
+      '<code>' + escapeHtml(entry.file) + '</code></blockquote>';
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal-backdrop')) closeModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+function tab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>

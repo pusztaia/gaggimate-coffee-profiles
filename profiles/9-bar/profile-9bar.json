@@ -1,0 +1,33 @@
+{
+  "label": "9 Bar Espresso",
+  "type": "pro",
+  "description": "",
+  "temperature": 95,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Pump",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 28,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 9,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 40
+        }
+      ]
+    }
+  ]
+}
