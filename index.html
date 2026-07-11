@@ -1019,7 +1019,12 @@ function escapeHtml(value) {
 function inlineMarkdown(text) {
   let html = escapeHtml(text);
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_match, label, href) {
+    if (/\.md(?:[?#].*)?$/i.test(href)) {
+      return '<a href="#" class="md-link" data-md-file="' + href + '">' + label + '</a>';
+    }
+    return '<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>';
+  });
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
@@ -1206,10 +1211,9 @@ async function openMarkdownTab(tabId, btn, key) {
   }
 }
 
-async function openModal(key) {
-  const entry = MD_CONTENT[key];
-  if (!entry) return;
-  document.getElementById('modal-title').textContent = entry.title;
+async function showMarkdownModal(entry) {
+  if (!entry || !entry.file) return;
+  document.getElementById('modal-title').textContent = entry.title || entry.file;
   document.getElementById('modal-body').innerHTML = '<p>Betöltés...</p>';
   document.getElementById('modal-backdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1225,6 +1229,19 @@ async function openModal(key) {
   }
 }
 
+async function openModal(key) {
+  const entry = MD_CONTENT[key];
+  if (!entry) return;
+  await showMarkdownModal(entry);
+}
+
+async function openMarkdownFile(file, title) {
+  await showMarkdownModal({
+    title: title || file.split('/').pop(),
+    file: file
+  });
+}
+
 function closeModal() {
   document.getElementById('modal-backdrop').classList.remove('open');
   document.body.style.overflow = '';
@@ -1236,6 +1253,13 @@ function closeModalOutside(e) {
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
+});
+
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a.md-link');
+  if (!link) return;
+  e.preventDefault();
+  openMarkdownFile(link.dataset.mdFile, link.textContent.trim());
 });
 
 function tab(id, btn) {
