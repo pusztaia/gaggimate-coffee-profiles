@@ -1018,19 +1018,39 @@ function escapeHtml(value) {
 
 function inlineMarkdown(text) {
   let html = escapeHtml(text);
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  const protectedParts = [];
+
+  function protect(fragment) {
+    const token = '@@MDTOKEN' + protectedParts.length + '@@';
+    protectedParts.push(fragment);
+    return token;
+  }
+
+  // Protect code, images and links before applying emphasis rules. This keeps
+  // underscores in filenames such as BREW_GUIDELINES.md out of the <em> regex.
+  html = html.replace(/`([^`]+)`/g, function(_match, code) {
+    return protect('<code>' + code + '</code>');
+  });
+
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(_match, alt, src) {
+    return protect('<img src="' + src + '" alt="' + alt + '">');
+  });
+
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_match, label, href) {
     if (/\.md(?:[?#].*)?$/i.test(href)) {
-      return '<a href="#" class="md-link" data-md-file="' + href + '">' + label + '</a>';
+      return protect('<a href="#" class="md-link" data-md-file="' + href + '">' + label + '</a>');
     }
-    return '<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>';
+    return protect('<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>');
   });
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
-  return html;
+
+  return html.replace(/@@MDTOKEN(\d+)@@/g, function(_match, index) {
+    return protectedParts[Number(index)];
+  });
 }
 
 function isTableSeparator(line) {
