@@ -344,6 +344,14 @@ h3.sh {
 .modal-body blockquote { border-left: 2px solid var(--accent); background: #fdf5e8; padding: .5rem .85rem; color: #7a4a10; border-radius: 0 4px 4px 0; margin: .75rem 0; font-size: .75rem; }
 .modal-body code { font-family: monospace; font-size: .82em; color: #3a6080; background: #eef2f5; padding: .05em .3em; border-radius: 3px; }
 .modal-body hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+
+/* ── standalone Markdown document tab ── */
+.doc-body {
+  max-width: 860px;
+  padding: 0;
+}
+.doc-body > h1:first-child { margin-top: 0; }
+.doc-body img { max-width: 100%; height: auto; }
 </style>
 </head>
 <body>
@@ -356,6 +364,7 @@ h3.sh {
 <nav>
   <button class="on" onclick="tab('profiles',this)">Profilok</button>
   <button onclick="tab('setup',this)">Setup</button>
+  <button onclick="openMarkdownTab('grinder',this,'grinder-guidelines')">Darálás</button>
   <button onclick="tab('guide',this)">Profil készítés</button>
   <button onclick="tab('schema',this)">Firmware séma</button>
 </nav>
@@ -724,6 +733,13 @@ h3.sh {
   </table>
 </div>
 
+<!-- ══ DARÁLÁSI ÚTMUTATÓ ══ -->
+<div id="grinder" class="tab">
+  <div class="modal-body doc-body" id="grinder-body">
+    <p>A darálási útmutató betöltéséhez válaszd a Darálás menüpontot.</p>
+  </div>
+</div>
+
 <!-- ══ GUIDE ══ -->
 <div id="guide" class="tab">
   <h2>Profil készítés</h2>
@@ -911,6 +927,10 @@ h3.sh {
 <!-- ══ RECEPT / CHANGELOG MD BETÖLTÉS ══ -->
 <script>
 const MD_CONTENT = {
+  'grinder-guidelines': {
+    title: 'Darálási útmutató – DF64V Gen 2',
+    file: 'GRINDER_GUIDELINES.md'
+  },
   '9bar-recipe': {
     title: '9 Bar Espresso – Recept',
     file: 'profiles/9-bar/9-bar-recipe.md'
@@ -1165,6 +1185,25 @@ async function loadMarkdown(entry) {
   const html = renderMarkdown(markdown);
   mdCache.set(entry.file, html);
   return html;
+}
+
+async function openMarkdownTab(tabId, btn, key) {
+  tab(tabId, btn);
+  const entry = MD_CONTENT[key];
+  const body = document.getElementById(tabId + '-body');
+  if (!entry || !body || body.dataset.loaded === 'true') return;
+
+  body.innerHTML = '<p>Betöltés...</p>';
+  try {
+    body.innerHTML = await loadMarkdown(entry);
+    body.dataset.loaded = 'true';
+  } catch (error) {
+    body.innerHTML =
+      '<blockquote><strong>Nem sikerült betölteni az MD fájlt.</strong><br>' +
+      escapeHtml(error.message) + '<br><br>' +
+      'Ellenőrizd, hogy a fájl ezen az útvonalon létezik-e:<br>' +
+      '<code>' + escapeHtml(entry.file) + '</code></blockquote>';
+  }
 }
 
 async function openModal(key) {
