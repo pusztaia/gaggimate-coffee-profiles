@@ -1,11 +1,12 @@
 # Damian's LM Leva
 
-**Profil jellege:** La Marzocco Leva jellegű, modern lever / pressure profiling irány.
-
-**Kávé:** modern specialty espresso
-**Pörkölés:** világos-közepes / közepes
-**Várható karakter:** tiszta, gyümölcsösebb, hosszabb lefolyás
-**Arányok:** 1:2.0–1:2.5
+| Mező | Érték |
+|---|---|
+| Profil jellege | La Marzocco Leva jellegű, modern lever / pressure profiling irány |
+| Kávé | modern specialty espresso |
+| Pörkölés | világos-közepes / közepes |
+| Várható karakter | tiszta, gyümölcsösebb, hosszabb lefolyás |
+| Arányok | 1:2.0–1:2.5 |
 
 **Setup:**
 - **Gaggia Classic Pro + Gaggiuino**

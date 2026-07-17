@@ -1,20 +1,16 @@
 # Impresso Colombia Manos Juntas Jam Mango 18.5-43 – Scale V4
 
-**Kávé:** Impresso Colombia Manos Juntas  
-**Feldolgozás:** anaerobic natural  
-**Eredet:** Colombia, Cauca, Manos Juntas micromill  
-**Ízjegyek:** vörösáfonya dzsem · karamell · mangó  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / BOOKOO Themis Ultra  
-**Őrlőskála:** 0-90, egész jelölések  
-**Fordulat:** 1200 RPM baseline  
-**Stop:** Bluetooth-mérleggel, kétlépcsős beverage-weight target alapján  
-**Verzió:** Scale V4 – 2026-07-17, javított automatikus megállás; a V4 fájlnév változatlan
-
----
-
-## Profil grafikon
-
-![Profile graph](colombia-manos-juntas-profile.png)
+| Mező | Érték |
+|---|---|
+| Kávé | Impresso Colombia Manos Juntas |
+| Feldolgozás | anaerobic natural |
+| Eredet | Colombia, Cauca, Manos Juntas micromill |
+| Ízjegyek | vörösáfonya dzsem · karamell · mangó |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / BOOKOO Themis Ultra |
+| Őrlőskála | 0-90, egész jelölések |
+| Fordulat | 1200 RPM baseline |
+| Stop | Bluetooth-mérleggel, kétlépcsős beverage-weight target alapján |
+| Verzió | Scale V4 – 2026-07-17, javított automatikus megállás; a V4 fájlnév változatlan |
 
 ---
 

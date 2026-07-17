@@ -1,18 +1,15 @@
 # Twenty Eight Finca el Recreo Caturron Flavor 18.5-42 – GaggiMate Pro recept
 
-**Márka:** Twenty Eight  
-**Kávé:** Finca el Recreo Caturron  
-**Ízjegyek:** meggy · konyakmeggy · piros gyümölcs · bonbonos édesség  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár  
-**Őrlőskála:** 0-90, egész jelölések  
-**Verzió:** 2026-06-29 – Twenty Eight brand fix, targetless 42s, GitHub-clean
+| Mező | Érték |
+|---|---|
+| Márka | Twenty Eight |
+| Kávé | Finca el Recreo Caturron |
+| Ízjegyek | meggy · konyakmeggy · piros gyümölcs · bonbonos édesség |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Őrlőskála | 0-90, egész jelölések |
+| Verzió | 2026-06-29 – Twenty Eight brand fix, targetless 42s, GitHub-clean |
 
 ---
-
-## Profil grafikon
-
-![Profile graph](twenty-eight-caturron-profile.png)
-
 
 ## Cél ízprofil
 

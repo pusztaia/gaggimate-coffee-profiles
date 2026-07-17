@@ -1,11 +1,12 @@
 # Cremina Lever Machine
 
-**Profil jellege:** Klasszikus, karos kávégép karaktert utánzó profil.
-
-**Kávé:** klasszikus, testes espresso
-**Pörkölés:** közepes-sötét / sötét
-**Várható karakter:** édes, kerek, alacsony sav, csokis-diós
-**Arányok:** 1:1.5–1:2.2
+| Mező | Érték |
+|---|---|
+| Profil jellege | Klasszikus, karos kávégép karaktert utánzó profil |
+| Kávé | klasszikus, testes espresso |
+| Pörkölés | közepes-sötét / sötét |
+| Várható karakter | édes, kerek, alacsony sav, csokis-diós |
+| Arányok | 1:1.5–1:2.2 |
 
 **Setup:**
 - **Gaggia Classic Pro + Gaggiuino**

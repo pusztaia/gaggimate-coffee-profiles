@@ -1,19 +1,16 @@
 # Kirinyaga PB Tea Rose 18.5-43 37s – GaggiMate Pro recept
 
-**Kávé:** Impresso Kenya Kirinyaga PB  
-**Ízjegyek:** hibiszkusz · csipkebogyó · fekete tea  
-**Feldolgozás:** washed  
-**Eredet:** Kenya, Kirinyaga  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár  
-**Őrlőskála:** 0-90, egész jelölések  
-**Verzió:** 2026-06-29 – 37s, targetless, GitHub-clean
+| Mező | Érték |
+|---|---|
+| Kávé | Impresso Kenya Kirinyaga PB |
+| Ízjegyek | hibiszkusz · csipkebogyó · fekete tea |
+| Feldolgozás | washed |
+| Eredet | Kenya, Kirinyaga |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Őrlőskála | 0-90, egész jelölések |
+| Verzió | 2026-06-29 – 37s, targetless, GitHub-clean |
 
 ---
-
-## Profil grafikon
-
-![Profile graph](kirinyaga-profile.png)
-
 
 ## Cél ízprofil
 

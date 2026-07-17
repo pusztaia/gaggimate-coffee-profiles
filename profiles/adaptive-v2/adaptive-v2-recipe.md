@@ -1,18 +1,14 @@
 # Adaptive v2 – Univerzális adaptív profil
 
-**Profil neve:** Adaptive v2  
-**Típus:** Univerzális, kávéfüggetlen adaptív preinfusion  
-**Leírás:** Light to Medium – Fine grind – 25–40 s – 1:2–2.5 arány  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár  
-**Őrlőskála:** 0–90, egész jelölések  
-**Fordulat:** 1200 RPM baseline  
-**Verzió:** 2026-07-07 – analízis és dokumentáció
-
----
-
-## Profil grafikon
-
-![Adaptive v2 profil grafikon](profile-adapt-profile.png)
+| Mező | Érték |
+|---|---|
+| Profil neve | Adaptive v2 |
+| Típus | Univerzális, kávéfüggetlen adaptív preinfusion |
+| Leírás | Light to Medium – Fine grind – 25–40 s – 1:2–2.5 arány |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Őrlőskála | 0–90, egész jelölések |
+| Fordulat | 1200 RPM baseline |
+| Verzió | 2026-07-07 – analízis és dokumentáció |
 
 ---
 

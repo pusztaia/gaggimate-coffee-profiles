@@ -1,20 +1,17 @@
 # Impresso Burundi Mubuga Melon Currant 18.5-42.5 38s
 
-**Kávé:** Impresso Burundi Mubuga  
-**Feldolgozás:** natural  
-**Eredet:** Burundi, Ngozi, Mubuga  
-**Ízjegyek:** sárgadinnye · alma · ribizli  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár  
-**Őrlőskála:** 0-90, egész jelölések  
-**Fordulat:** 1200 RPM baseline  
-**Stop:** idő/fázis alapú profil + kézi mérleges figyelés; BOOKOO mérleg jelenleg nincs.
+| Mező | Érték |
+|---|---|
+| Kávé | Impresso Burundi Mubuga |
+| Feldolgozás | natural |
+| Eredet | Burundi, Ngozi, Mubuga |
+| Ízjegyek | sárgadinnye · alma · ribizli |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Őrlőskála | 0-90, egész jelölések |
+| Fordulat | 1200 RPM baseline |
+| Stop | idő/fázis alapú profil + kézi mérleges figyelés; BOOKOO mérleg jelenleg nincs. |
 
 ---
-
-## Profil grafikon
-
-![Profile graph](burundi-mubuga-profile.png)
-
 
 ## Cél ízprofil
 

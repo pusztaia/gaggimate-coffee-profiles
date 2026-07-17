@@ -1,10 +1,11 @@
 # 9 Bar Espresso
 
-**Profil jellege:** Klasszikus, egyszerű 9 baros espresso baseline.
-
-**Kávé:** klasszikus espresso baseline
-**Pörkölés:** közepes / közepes-sötét
-**Várható karakter:** direkt, egyszerű, klasszikus 9 bar
+| Mező | Érték |
+|---|---|
+| Profil jellege | Klasszikus, egyszerű 9 baros espresso baseline |
+| Kávé | klasszikus espresso baseline |
+| Pörkölés | közepes / közepes-sötét |
+| Várható karakter | direkt, egyszerű, klasszikus 9 bar |
 
 **Setup:**
 - **Gaggia Classic Pro + Gaggiuino**

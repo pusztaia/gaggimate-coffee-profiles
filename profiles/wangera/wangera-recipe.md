@@ -1,14 +1,14 @@
 # Kenya Wangera Creamy Fruit 18.5-42 – Stable Start 38s 94.5C
 
-![Profile graph](wangera-profile.png)
-
-**Kávé:** Impresso Kenya Wangera  
-**Ízjegyek:** szeder · tejszín · pomelo  
-**Setup:** DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár  
-**Őrlőskála:** 0-90, egész jelölések  
-**Fordulat:** 1200 RPM baseline  
-**Státusz:** bevált baseline – 42 g körüli hozam  
-**Verzió:** 2026-07-17 – Scale V4 stop-logika javítva, a V4 fájlnevek változatlanok
+| Mező | Érték |
+|---|---|
+| Kávé | Impresso Kenya Wangera |
+| Ízjegyek | szeder · tejszín · pomelo |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Őrlőskála | 0-90, egész jelölések |
+| Fordulat | 1200 RPM baseline |
+| Státusz | bevált baseline – 42 g körüli hozam |
+| Verzió | 2026-07-17 – Scale V4 stop-logika javítva, a V4 fájlnevek változatlanok |
 
 ---
 
