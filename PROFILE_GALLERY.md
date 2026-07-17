@@ -14,6 +14,10 @@
 
 ![Damian's LM Leva](profiles/damians-lm-leva/profile-lmleva-profile.png)
 
+### Adaptive v2
+
+![Adaptive v2](profiles/adaptive-v2/profile-adapt-profile.png)
+
 ---
 
 ## Time Based profilok (V3)

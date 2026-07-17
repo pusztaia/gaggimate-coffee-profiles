@@ -30,6 +30,7 @@
 | 9 Bar Espresso | Klasszikus 9 baros baseline | [profile-9bar.json](profiles/9-bar/profile-9bar.json) | [9-bar-recipe.md](profiles/9-bar/9-bar-recipe.md) |
 | Cremina lever machine | Sötét pörkölésű, testes, édes, leveres espresso | [profile-lever.json](profiles/cremina-lever/profile-lever.json) | [cremina-lever-recipe.md](profiles/cremina-lever/cremina-lever-recipe.md) |
 | Damian's LM Leva | Modern specialty, világos-közepes pörköléshez | [profile-lmleva.json](profiles/damians-lm-leva/profile-lmleva.json) | [damians-lm-leva-recipe.md](profiles/damians-lm-leva/damians-lm-leva-recipe.md) |
+| Adaptive v2 | Univerzális, adaptív preinfusion, light-to-medium pörköléshez | [profile-adapt.json](profiles/adaptive-v2/profile-adapt.json) | [adaptive-v2-recipe.md](profiles/adaptive-v2/adaptive-v2-recipe.md) |
 
 ---
 
@@ -70,6 +71,10 @@
 ### Damian's LM Leva
 
 ![Damian's LM Leva](profiles/damians-lm-leva/profile-lmleva-profile.png)
+
+### Adaptive v2
+
+![Adaptive v2](profiles/adaptive-v2/profile-adapt-profile.png)
 
 ---
 
@@ -135,11 +140,6 @@ profiles/
 │   ├── twenty-eight-caturron-profile.png
 │   ├── twenty-eight-caturron-recipe.md
 │   └── twenty-eight-caturron-changelog.md
-├── caturron/
-    ├── caturron-42s.json
-    ├── caturron-42s-scale-v4.json
-    ├── caturron-recipe.md
-    └── caturron-changelog.md
 ├── 9-bar/
 │   ├── profile-9bar.json
 │   ├── 9-bar-recipe.md
@@ -152,6 +152,10 @@ profiles/
 │   ├── profile-lmleva.json
 │   ├── damians-lm-leva-recipe.md
 │   └── damians-lm-leva-changelog.md
+├── adaptive-v2/
+│   ├── profile-adapt.json
+│   ├── adaptive-v2-recipe.md
+│   └── adaptive-v2-changelog.md
 equipment/
 └── setup.md
 templates/

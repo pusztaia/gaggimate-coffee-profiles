@@ -46,6 +46,17 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 ---
 
+## Általános (nem kávé-specifikus) profilok
+
+| Profil | Leírás | JSON | Grafikon | Recept |
+|---|---|---|---|---|
+| 9 Bar Espresso | Klasszikus 9 baros baseline | [`profile-9bar.json`](profiles/9-bar/profile-9bar.json) | [`profile-9bar-profile.png`](profiles/9-bar/profile-9bar-profile.png) | [`9-bar-recipe.md`](profiles/9-bar/9-bar-recipe.md) |
+| Cremina lever machine | Sötét pörkölésű, testes, édes, leveres espresso | [`profile-lever.json`](profiles/cremina-lever/profile-lever.json) | [`profile-lever-profile.png`](profiles/cremina-lever/profile-lever-profile.png) | [`cremina-lever-recipe.md`](profiles/cremina-lever/cremina-lever-recipe.md) |
+| Damian's LM Leva | Modern specialty, világos-közepes pörköléshez | [`profile-lmleva.json`](profiles/damians-lm-leva/profile-lmleva.json) | [`profile-lmleva-profile.png`](profiles/damians-lm-leva/profile-lmleva-profile.png) | [`damians-lm-leva-recipe.md`](profiles/damians-lm-leva/damians-lm-leva-recipe.md) |
+| Adaptive v2 | Univerzális, adaptív preinfusion, light-to-medium pörköléshez | [`profile-adapt.json`](profiles/adaptive-v2/profile-adapt.json) | [`profile-adapt-profile.png`](profiles/adaptive-v2/profile-adapt-profile.png) | [`adaptive-v2-recipe.md`](profiles/adaptive-v2/adaptive-v2-recipe.md) |
+
+---
+
 ## Bluetooth Scale Edition
 
 ### Támogatott hardver

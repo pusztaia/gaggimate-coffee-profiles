@@ -2,6 +2,18 @@
 
 ---
 
+## Repo konzisztencia takarítás (2026-07-17)
+
+### Removed
+
+- **`profiles/caturron/`** – törölve, mert a `profiles/twenty-eight-caturron/` pontos duplikátuma volt (a JSON leírás is erre utalt: "caturron könyvtár" változat). A `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json` marad az egyetlen kanonikus verzió.
+
+### Changed
+
+- **`profiles/adaptive v2/` → `profiles/adaptive-v2/`** – a könyvtárnév szóközt tartalmazott, ami sérti a FILE_NAMING.md konvenciót; átnevezve, `index.html` hivatkozásai frissítve.
+- **`FILE_NAMING.md`** – eltávolítva a törölt `caturron/` könyvtárra és `caturron-42s.json` fájlra mutató, már érvénytelen példasorok.
+- **`README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`** – pótolva a hiányzó, nem kávé-specifikus profilok (9 Bar Espresso, Cremina lever machine, Damian's LM Leva, Adaptive v2) dokumentációja.
+
 ## V4 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added

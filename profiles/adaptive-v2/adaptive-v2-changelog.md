@@ -13,3 +13,7 @@
 - Profil kártya hozzáadva a Profilok tabhoz az index.html-ben.
 - Recept és changelog modal tartalomként beágyazva.
 - Fázis sávok megjelenítve a kártyán (max duration alapján, mert az adaptive profil valós ideje változó).
+
+## 2026-07-17 – könyvtár átnevezés
+
+- A könyvtár átnevezve `adaptive v2` → `adaptive-v2` (a szóköz sértette a FILE_NAMING.md konvenciót); `index.html` hivatkozásai frissítve.

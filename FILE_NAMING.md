@@ -21,7 +21,6 @@ Minden kávénak saját könyvtára van. A könyvtár neve a kávé rövid, URL-
 | `colombia-manos-juntas/` | Impresso Colombia Manos Juntas |
 | `kirinyaga/` | Impresso Kenya Kirinyaga PB |
 | `twenty-eight-caturron/` | Twenty Eight Finca el Recreo Caturron |
-| `caturron/` | (korábbi, márka nélküli változat) |
 
 **Szabályok:**
 - csak kisbetű
@@ -49,7 +48,6 @@ A GaggiMate Pro-ba importálható profil. Neve tartalmazza a kávé azonosítój
 | `kirinyaga-tea-rose-37s.json` | Kirinyaga, Tea Rose profil, 37 s |
 | `kirinyaga-37s.json` | Kirinyaga, 37 s (korábbi verzió) |
 | `caturron-flavor-42s.json` | Caturron, Flavor profil, 42 s |
-| `caturron-42s.json` | Caturron, 42 s (korábbi verzió) |
 
 **Szabályok:**
 - Ha egy könyvtárban több JSON van, mindegyik egyedi nevet kap.
