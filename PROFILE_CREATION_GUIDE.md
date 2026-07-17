@@ -12,6 +12,7 @@ Ez a dokumentum minden szükséges információt tartalmaz ahhoz, hogy új espre
 | Daráló | DF64V Gen 2 |
 | Kések | SSP Sweet Lab Espresso V3 |
 | Kosár | IMS B682TH24.5M |
+| Puck screen | IMS E&B Lab, Ø 2.4 mm, 253 lyuk (DS58.5) |
 | RPM baseline | 1200 |
 | RPM tartomány | 800–1800 |
 | Őrlőskála | 0–90, egész jelölések |

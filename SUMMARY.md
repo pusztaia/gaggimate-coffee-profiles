@@ -5,6 +5,7 @@
 **Gép:** Gaggia Classic Pro 2025 + GaggiMate Pro
 **Daráló:** DF64V Gen 2 · SSP Sweet Lab Espresso V3 kések · 1200 RPM baseline
 **Kosár:** IMS B682TH24.5M · Dózis: 18.5 g
+**Puck screen:** IMS E&B Lab puck diffuser screen, Ø 2.4 mm, 253 lyuk (DS58.5)
 **Mérleg:** BOOKOO Themis Ultra (Bluetooth, aktív)
 **Stop mód:** beverage weight (V4) / időalapú fallback (V3)
 

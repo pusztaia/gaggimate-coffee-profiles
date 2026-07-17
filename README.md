@@ -14,6 +14,7 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 - **Grinder:** DF64V Gen 2
 - **Burrs:** SSP Sweet Lab Espresso V3
 - **Basket:** IMS B682TH24.5M
+- **Puck screen:** IMS E&B Lab puck diffuser screen, Ø 2.4 mm, 253 holes (DS58.5)
 - **RPM:** 1200 baseline
 - **Grinder scale:** 0–90, egész jelölések
 - **Scale:** BOOKOO Themis Ultra (Bluetooth, aktív)

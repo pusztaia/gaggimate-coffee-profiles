@@ -6,7 +6,7 @@
 | Feldolgozás | natural |
 | Eredet | Burundi, Ngozi, Mubuga |
 | Ízjegyek | sárgadinnye · alma · ribizli |
-| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) |
 | Őrlőskála | 0-90, egész jelölések |
 | Fordulat | 1200 RPM baseline |
 | Stop | idő/fázis alapú profil + kézi mérleges figyelés; BOOKOO mérleg jelenleg nincs. |

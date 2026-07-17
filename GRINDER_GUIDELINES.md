@@ -22,6 +22,7 @@ Ez a dokumentum a darálással és az espresso dial-in folyamattal kapcsolatos l
 | Őrlőskála | 0–90, egész jelölések |
 | Gép | Gaggia Classic Pro 2025 + GaggiMate Pro |
 | Kosár | IMS B682TH24.5M, 18–21 g |
+| Puck screen | IMS E&B Lab, Ø 2.4 mm, 253 lyuk (DS58.5) |
 | Rögzített dózis | 18.5 g |
 | Mérleg | BOOKOO Themis Ultra Bluetooth |
 

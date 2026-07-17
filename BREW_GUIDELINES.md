@@ -2,7 +2,7 @@
 
 Általános irányelvek az espresso dial-in folyamathoz ezzel a setuppal.
 
-**Setup:** Gaggia Classic Pro 2025 + GaggiMate Pro · DF64V Gen 2 (SSP Sweet Lab Espresso V3) · IMS B682TH24.5M · BOOKOO Themis Ultra
+**Setup:** Gaggia Classic Pro 2025 + GaggiMate Pro · DF64V Gen 2 (SSP Sweet Lab Espresso V3) · IMS B682TH24.5M · IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) · BOOKOO Themis Ultra
 
 ---
 

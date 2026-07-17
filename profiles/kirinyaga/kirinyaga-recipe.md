@@ -6,7 +6,7 @@
 | Ízjegyek | hibiszkusz · csipkebogyó · fekete tea |
 | Feldolgozás | washed |
 | Eredet | Kenya, Kirinyaga |
-| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) |
 | Őrlőskála | 0-90, egész jelölések |
 | Verzió | 2026-06-29 – 37s, targetless, GitHub-clean |
 
