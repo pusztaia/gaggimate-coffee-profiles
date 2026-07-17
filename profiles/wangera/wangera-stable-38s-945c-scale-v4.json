@@ -1,7 +1,7 @@
 {
-  "label": "Kenya Wangera Creamy Fruit – 18.5g-42 g11 94.5C – Scale",
+  "label": "Kenya Wangera Creamy Fruit – 18.5g→42g, g11, 94.5C, Scale V5",
   "type": "pro",
-  "description": "Kenya Wangera Stable Start Scale V4 – 18.5 g / stop 42 g volumetric / 94.5 C / grind 10-11",
+  "description": "Kenya Wangera Stable Start Scale V5 – 18.5 g dose / finish starts at 37.0 g / pump stop at 40.5 g / expected final yield about 42 g / 94.5 C / grind 10-11",
   "temperature": 94.5,
   "utility": false,
   "phases": [
@@ -93,7 +93,7 @@
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 42.0
+          "value": 37.0
         }
       ]
     },
@@ -112,7 +112,14 @@
         "target": "pressure",
         "pressure": 5.8,
         "flow": 1.7
-      }
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 40.5
+        }
+      ]
     }
   ]
 }
