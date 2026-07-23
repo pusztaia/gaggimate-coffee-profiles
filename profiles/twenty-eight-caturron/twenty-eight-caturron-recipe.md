@@ -68,19 +68,19 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ---
 
-## Mérleg / stop workflow – V3 (időalapú)
+## Mérleg / stop workflow – V1 (időalapú)
 
 Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
-## V4 – Bluetooth Scale Edition
+## V2 – Bluetooth Scale Edition
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V4 profil fájl:** [`caturron-flavor-42s-scale-v4.json`](caturron-flavor-42s-scale-v4.json)
+**V2 profil fájl:** [`caturron-flavor-42s-scale-v2.json`](caturron-flavor-42s-scale-v2.json)
 
-### V4 paraméterek
+### V2 paraméterek
 
 | Paraméter | Érték |
 |---|---:|
@@ -92,7 +92,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`)
 | Stop | **42.0 g beverage weight** |
 | Safety timeout | **50 s** |
 
-### V4 fázis stop logika
+### V2 fázis stop logika
 
 | Fázis | Stop trigger | Duration (hard cap) |
 |---|---|---:|
@@ -105,11 +105,11 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`)
 
 > **Firmware viselkedés (`pro` típus):** A `targets` tömb fázis szinten működik — minden 100 ms-ban kiértékeli. Az OR feltételek közül az első tüzelés zárja a fázist. A `duration` mindig hard cap: ha a volumetric target 42.0 g-nál tüzel, a Fruit Extraction fázis azonnal véget ér. Ha a scale nem csatlakozik vagy a target nem tüzel, a 35 s-os duration zárja a fázist (safety fallback). A `volumetric` target csak aktív Bluetooth scale + brew-by-weight mód esetén működik.
 
-### V4 dial-in
+### V2 dial-in
 
 | Eredmény | Következő lépés |
 |---|---|
-| **40.5-43 g, meggy/konyakmeggy/bonbonos, tiszta** | A Scale V4 profil helyes, nincs teendő. |
+| **40.5-43 g, meggy/konyakmeggy/bonbonos, tiszta** | A Scale V2 profil helyes, nincs teendő. |
 | **Savas, vékony, 43 g fölé fut** | stop_at_g értéket csökkentsd 41.5 g-ra, vagy menj 8 felé az őrlésen. |
 | **Nehéz, alkoholosan keserű** | stop_at_g értéket csökkentsd 40.5-41.0 g-ra, vagy próbálj 94.5 °C-ot. |
 | **Safety timeout (50 s) lép életbe** | Bluetooth megszakadt vagy flow túl lassú. |
@@ -120,6 +120,6 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`)
 
 **Twenty Eight Finca el Recreo Caturron Flavor**
 
-**V3 (időalapú):** 18.5 g · grind 9 · 1200 RPM · 95 °C · 42 s · 42 g out cél
+**V1 (időalapú):** 18.5 g · grind 9 · 1200 RPM · 95 °C · 42 s · 42 g out cél
 
-**V4 (Scale):** 18.5 g · grind 9 · 1200 RPM · 95 °C · stop 42.0 g beverage weight · safety 50 s
+**V2 (Scale):** 18.5 g · grind 9 · 1200 RPM · 95 °C · stop 42.0 g beverage weight · safety 50 s

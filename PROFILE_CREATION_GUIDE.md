@@ -319,12 +319,12 @@ Példák:
 - `profiles/ethiopia-yirgacheffe/ethiopia-yirgacheffe-37s-945c.json`
 - `profiles/kenya-gathugu/kenya-gathugu-38s.json`
 
-**V4 Scale Edition fájlnév** (ha scale-t is készítesz):
+**V2 Scale Edition fájlnév** (ha scale-t is készítesz):
 ```
-{alap-json-neve-kiterjesztés-nélkül}-scale-v4.json
+{alap-json-neve-kiterjesztés-nélkül}-scale-v2.json
 ```
 
-### 3. JSON sablon (V3, időalapú)
+### 3. JSON sablon (V1, időalapú)
 
 ```json
 {
@@ -392,15 +392,15 @@ Példák:
 }
 ```
 
-### 4. JSON sablon (V4, Scale Edition)
+### 4. JSON sablon (V2, Scale Edition)
 
-A V4 az V3 másolata, de az Extraction fázisban `targets` tömb kerül, és a `duration` nagyobb (safety cap):
+A V2 az V1 másolata, de az Extraction fázisban `targets` tömb kerül, és a `duration` nagyobb (safety cap):
 
 ```json
 {
-  "label": "Kávé neve Scale V4 – 18.5g / stop Xg / hőC / grind X-Y",
+  "label": "Kávé neve Scale V2 – 18.5g / stop Xg / hőC / grind X-Y",
   "type": "pro",
-  "description": "Kávé neve Scale V4 – 18.5 g / stop Xg volumetric / hőC / grind X-Y",
+  "description": "Kávé neve Scale V2 – 18.5 g / stop Xg volumetric / hőC / grind X-Y",
   "temperature": 94.5,
   "utility": false,
   "phases": [
@@ -474,7 +474,7 @@ Kötelező tartalom:
 - Alap recept táblázat (dózis, hozam, hő, idő, arány, őrlés, RPM, kosár)
 - GaggiMate Pro fázistáblázat (fázisnév, idő, hő, pump target, nyomás/flow)
 - Dial-in logika táblázat (tünet → következő lépés)
-- V3 és V4 rövid recept sor
+- V1 és V2 rövid recept sor
 
 ### 6. Changelog.md fájl létrehozása
 
@@ -557,8 +557,8 @@ A script a JSON neve alapján hozza létre a PNG-t: `{json-stem}-profile.png`.
 | Fájl | Minta |
 |---|---|
 | Könyvtár | `profiles/{eredet-kave}/` |
-| JSON (V3) | `{eredet-kave}-{idő}[{hő}].json` |
-| JSON (V4) | `{v3-json-stem}-scale-v4.json` |
+| JSON (V1) | `{eredet-kave}-{idő}[{hő}].json` |
+| JSON (V2) | `{v1-json-stem}-scale-v2.json` |
 | PNG | `{json-stem}-profile.png` (auto) |
 | Recept | `{könyvtárnév}-recipe.md` |
 | Changelog | `{könyvtárnév}-changelog.md` |

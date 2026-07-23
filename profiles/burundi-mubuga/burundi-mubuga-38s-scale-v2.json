@@ -1,15 +1,15 @@
 {
-  "label": "Kirinyaga PB Tea Rose 37s (korábbi alap) – Scale V4",
+  "label": "Burundi Mubuga Melon Currant – Scale V2",
   "type": "pro",
-  "description": "Kirinyaga PB Tea Rose (korábbi alap) Scale V4 – 18.5 g / stop 43 g volumetric / 94.5 C / grind 9-10",
+  "description": "Burundi Mubuga Melon Currant Scale V2 – 18.5 g / stop 42.5 g volumetric / 94.5 C / grind 10-11",
   "temperature": 94.5,
   "utility": false,
   "phases": [
     {
-      "name": "Tea Wetting",
+      "name": "Fruit Wetting",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 4,
+      "duration": 5,
       "temperature": 94.5,
       "transition": {
         "type": "ease-out",
@@ -19,14 +19,14 @@
       "pump": {
         "target": "flow",
         "pressure": 0,
-        "flow": 7.5
+        "flow": 8.0
       }
     },
     {
-      "name": "Even Saturation",
+      "name": "Currant Saturation",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 6,
+      "duration": 8,
       "temperature": 94.5,
       "transition": {
         "type": "instant",
@@ -35,12 +35,12 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 2.1,
+        "pressure": 2.2,
         "flow": 4.5
       }
     },
     {
-      "name": "Hibiscus Bloom",
+      "name": "Melon Bloom",
       "phase": "preinfusion",
       "valve": 1,
       "duration": 4,
@@ -60,7 +60,7 @@
       "name": "Gentle Ramp",
       "phase": "brew",
       "valve": 1,
-      "duration": 5,
+      "duration": 6,
       "temperature": 94.5,
       "transition": {
         "type": "linear",
@@ -69,12 +69,12 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.6,
+        "pressure": 7.2,
         "flow": 2.4
       }
     },
     {
-      "name": "Black Tea Extraction",
+      "name": "Juicy Extraction",
       "phase": "brew",
       "valve": 1,
       "duration": 30,
@@ -86,32 +86,32 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.6,
+        "pressure": 7.2,
         "flow": 2.1
       },
       "targets": [
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 43.0
+          "value": 42.5
         }
       ]
     },
     {
-      "name": "Rosehip Finish",
+      "name": "Clean Finish",
       "phase": "brew",
       "valve": 1,
       "duration": 8,
       "temperature": 94.5,
       "transition": {
         "type": "linear",
-        "duration": 7,
+        "duration": 4,
         "adaptive": true
       },
       "pump": {
         "target": "pressure",
-        "pressure": 5.6,
-        "flow": 1.8
+        "pressure": 5.4,
+        "flow": 1.7
       }
     }
   ]

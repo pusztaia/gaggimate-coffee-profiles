@@ -1,28 +1,28 @@
-# GaggiMate Coffee Profiles V4 – Összefoglaló
+# GaggiMate Coffee Profiles V2 – Összefoglaló
 
-**Verzió:** V4 – Bluetooth Scale Edition
+**Verzió:** V2 – Bluetooth Scale Edition
 
 **Gép:** Gaggia Classic Pro 2025 + GaggiMate Pro
 **Daráló:** DF64V Gen 2 · SSP Sweet Lab Espresso V3 kések · 1200 RPM baseline
 **Kosár:** IMS B682TH24.5M · Dózis: 18.5 g
 **Puck screen:** IMS E&B Lab puck diffuser screen, Ø 2.4 mm, 253 lyuk (DS58.5)
 **Mérleg:** BOOKOO Themis Ultra (Bluetooth, aktív)
-**Stop mód:** beverage weight (V4) / időalapú fallback (V3)
+**Stop mód:** beverage weight (V2) / időalapú fallback (V1)
 
 ---
 
-## V4 Scale Edition profilok
+## V2 Scale Edition profilok
 
-| Kávé | Target Yield | Arány | Hő | Safety | V4 JSON |
+| Kávé | Target Yield | Arány | Hő | Safety | V2 JSON |
 |---|---:|---|---:|---:|---|
-| Kenya Wangera | 42.0 g | 1:2.27 | 94.5 °C | 45 s | [wangera-stable-38s-945c-scale-v4.json](profiles/wangera/wangera-stable-38s-945c-scale-v4.json) |
-| Kenya Wangera (94C) | 42.0 g | 1:2.27 | 94.0 °C | 45 s | [wangera-stable-38s-scale-v4.json](profiles/wangera/wangera-stable-38s-scale-v4.json) |
-| Burundi Mubuga | 42.5 g | 1:2.30 | 94.5 °C | 45 s | [burundi-mubuga-38s-scale-v4.json](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v4.json) |
-| Colombia Manos Juntas | 43.0 g | 1:2.32 | 94.5 °C | 47 s | [colombia-manos-juntas-39s-scale-v4.json](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json) |
-| Kenya Kirinyaga PB | 43.0 g | 1:2.32 | 94.5 °C | 45 s | [kirinyaga-tea-rose-37s-scale-v4.json](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json) |
-| Twenty Eight Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-flavor-42s-scale-v4.json](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json) |
-| El Salvador Ochupse | 41.0 g | 1:2.22 | 93.0 °C | 45 s | [el-salvador-ochupse-31s-93c-scale-v4.json](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4.json) |
-| Honduras Las Calaveras | 39.0 g | 1:2.11 | 92.0 °C | 33 s | [honduras-las-calaveras-scale-v4.json](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4.json) |
+| Kenya Wangera | 42.0 g | 1:2.27 | 94.5 °C | 45 s | [wangera-stable-38s-945c-scale-v2.json](profiles/wangera/wangera-stable-38s-945c-scale-v2.json) |
+| Kenya Wangera (94C) | 42.0 g | 1:2.27 | 94.0 °C | 45 s | [wangera-stable-38s-scale-v2.json](profiles/wangera/wangera-stable-38s-scale-v2.json) |
+| Burundi Mubuga | 42.5 g | 1:2.30 | 94.5 °C | 45 s | [burundi-mubuga-38s-scale-v2.json](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json) |
+| Colombia Manos Juntas | 43.0 g | 1:2.32 | 94.5 °C | 47 s | [colombia-manos-juntas-39s-scale-v2.json](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2.json) |
+| Kenya Kirinyaga PB | 43.0 g | 1:2.32 | 94.5 °C | 45 s | [kirinyaga-tea-rose-37s-scale-v2.json](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json) |
+| Twenty Eight Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-flavor-42s-scale-v2.json](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json) |
+| El Salvador Ochupse | 41.0 g | 1:2.22 | 93.0 °C | 45 s | [el-salvador-ochupse-31s-93c-scale-v2.json](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2.json) |
+| Honduras Las Calaveras | 39.0 g | 1:2.11 | 92.0 °C | 33 s | [honduras-las-calaveras-scale-v2.json](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v2.json) |
 
 ---
 
@@ -37,7 +37,7 @@
 
 ---
 
-## V3 Time Based profilok (referencia)
+## V1 Time Based profilok (referencia)
 
 | Kávé | Profil | Idő | Hő | Dózis | Célhozam | Őrlés | JSON | Recept |
 |---|---|---:|---:|---:|---:|---:|---|---|
@@ -84,7 +84,7 @@
 
 ---
 
-## V3 Profilgrafikonok
+## V1 Profilgrafikonok
 
 ### Kenya Wangera – Stable Start 38s 94.5C
 
@@ -117,36 +117,36 @@
 ```
 profiles/
 ├── wangera/
-│   ├── wangera-stable-38s-945c.json          ← V3 időalapú profil
-│   ├── wangera-stable-38s.json               ← V3 időalapú profil (94.0C)
-│   ├── wangera-stable-38s-945c-scale-v4.json ← V4 Scale Edition (94.5C)
-│   ├── wangera-stable-38s-scale-v4.json      ← V4 Scale Edition (94.0C)
-│   ├── wangera-profile.png                   ← V3 grafikon
-│   ├── wangera-recipe.md                     ← recept (V3 + V4 szakasz)
+│   ├── wangera-stable-38s-945c.json          ← V1 időalapú profil
+│   ├── wangera-stable-38s.json               ← V1 időalapú profil (94.0C)
+│   ├── wangera-stable-38s-945c-scale-v2.json ← V2 Scale Edition (94.5C)
+│   ├── wangera-stable-38s-scale-v2.json      ← V2 Scale Edition (94.0C)
+│   ├── wangera-profile.png                   ← V1 grafikon
+│   ├── wangera-recipe.md                     ← recept (V1 + V2 szakasz)
 │   └── wangera-changelog.md
 ├── burundi-mubuga/
 │   ├── burundi-mubuga-38s.json
-│   ├── burundi-mubuga-38s-scale-v4.json
+│   ├── burundi-mubuga-38s-scale-v2.json
 │   ├── burundi-mubuga-profile.png
 │   ├── burundi-mubuga-recipe.md
 │   └── burundi-mubuga-changelog.md
 ├── colombia-manos-juntas/
 │   ├── colombia-manos-juntas-39s.json
-│   ├── colombia-manos-juntas-39s-scale-v4.json
+│   ├── colombia-manos-juntas-39s-scale-v2.json
 │   ├── colombia-manos-juntas-profile.png
 │   ├── colombia-manos-juntas-recipe.md
 │   └── colombia-manos-juntas-changelog.md
 ├── kirinyaga/
 │   ├── kirinyaga-tea-rose-37s.json
 │   ├── kirinyaga-37s.json
-│   ├── kirinyaga-tea-rose-37s-scale-v4.json
-│   ├── kirinyaga-37s-scale-v4.json
+│   ├── kirinyaga-tea-rose-37s-scale-v2.json
+│   ├── kirinyaga-37s-scale-v2.json
 │   ├── kirinyaga-profile.png
 │   ├── kirinyaga-recipe.md
 │   └── kirinyaga-changelog.md
 ├── twenty-eight-caturron/
 │   ├── caturron-flavor-42s.json
-│   ├── caturron-flavor-42s-scale-v4.json
+│   ├── caturron-flavor-42s-scale-v2.json
 │   ├── twenty-eight-caturron-profile.png
 │   ├── twenty-eight-caturron-recipe.md
 │   └── twenty-eight-caturron-changelog.md
@@ -167,15 +167,15 @@ profiles/
 │   ├── adaptive-v2-recipe.md
 │   └── adaptive-v2-changelog.md
 ├── el-salvador-ochupse/
-│   ├── el-salvador-ochupse-31s-93c.json          ← V3 időalapú profil
-│   ├── el-salvador-ochupse-31s-93c-scale-v4.json ← V4 Scale Edition
+│   ├── el-salvador-ochupse-31s-93c.json          ← V1 időalapú profil
+│   ├── el-salvador-ochupse-31s-93c-scale-v2.json ← V2 Scale Edition
 │   ├── el-salvador-ochupse-31s-93c-profile.png
-│   ├── el-salvador-ochupse-31s-93c-scale-v4-profile.png
-│   ├── el-salvador-ochupse-recipe.md             ← recept (V3 + V4 szakasz)
+│   ├── el-salvador-ochupse-31s-93c-scale-v2-profile.png
+│   ├── el-salvador-ochupse-recipe.md             ← recept (V1 + V2 szakasz)
 │   └── el-salvador-ochupse-changelog.md
 ├── honduras-las-calaveras/
-│   ├── honduras-las-calaveras-scale-v4.json      ← csak V4 Scale Edition
-│   ├── honduras-las-calaveras-scale-v4-profile.png
+│   ├── honduras-las-calaveras-scale-v2.json      ← csak V2 Scale Edition
+│   ├── honduras-las-calaveras-scale-v2-profile.png
 │   ├── honduras-las-calaveras-recipe.md
 │   └── honduras-las-calaveras-changelog.md
 equipment/
@@ -197,7 +197,7 @@ tools/
 | [README.md](README.md) | Projekt áttekintő, profilok táblázata, Bluetooth Scale Edition leírás |
 | [BLUETOOTH_SCALE_WORKFLOW.md](BLUETOOTH_SCALE_WORKFLOW.md) | Párosítás, kalibráció, shot workflow, troubleshooting |
 | [BREW_GUIDELINES.md](BREW_GUIDELINES.md) | Dial-in irányelvek, dózis, arány, hozam, shot értékelés |
-| [PROFILE_GALLERY.md](PROFILE_GALLERY.md) | V3 és V4 profilgrafikonok galériája |
+| [PROFILE_GALLERY.md](PROFILE_GALLERY.md) | V1 és V2 profilgrafikonok galériája |
 | [FILE_NAMING.md](FILE_NAMING.md) | Fájlelnevezési konvenció |
 | [CHANGELOG.md](CHANGELOG.md) | Projekt szintű változásnapló |
 | [speciality_kave_feldolgozasok.md](speciality_kave_feldolgozasok.md) | Kávé feldolgozási módszerek |
@@ -208,12 +208,12 @@ tools/
 ## Grafikonok újragenerálása
 
 ```bash
-# Összes profil (V3 és V4 egyaránt)
+# Összes profil (V1 és V2 egyaránt)
 python3 tools/render_profiles.py
 
 # Egyetlen profil
 python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c.json
-python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c-scale-v4.json
+python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c-scale-v2.json
 ```
 
 A script a JSON neve alapján generálja a PNG-t: `{json-stem}-profile.png`.
@@ -222,4 +222,4 @@ A script a JSON neve alapján generálja a PNG-t: `{json-stem}-profile.png`.
 
 ## JSON import
 
-A JSON profilokat (V3 és V4 egyaránt) a GaggiMate Web UI-ban lehet importálni: **Profiles → Import**.
+A JSON profilokat (V1 és V2 egyaránt) a GaggiMate Web UI-ban lehet importálni: **Profiles → Import**.

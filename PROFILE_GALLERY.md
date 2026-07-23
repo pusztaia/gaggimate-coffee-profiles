@@ -20,7 +20,7 @@
 
 ---
 
-## Time Based profilok (V3)
+## Time Based profilok (V1)
 
 Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot külön mérlegen kell figyelni.
 
@@ -50,50 +50,50 @@ Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot 
 
 ---
 
-## Bluetooth Scale Edition profilok (V4)
+## Bluetooth Scale Edition profilok (V2)
 
 Ezek a profilok BOOKOO Themis Ultra Bluetooth mérleggel automatikusan megállnak a céltömegnél. A grafikonok a fázis/nyomás/flow értékeket mutatják – a tényleges shot hossza a mérleg stopjától függ.
 
-### Wangera Stable Start 94.5C – Scale V4
+### Wangera Stable Start 94.5C – Scale V2
 
-![Wangera Scale V4 94.5C](profiles/wangera/wangera-stable-38s-945c-scale-v4-profile.png)
+![Wangera Scale V2 94.5C](profiles/wangera/wangera-stable-38s-945c-scale-v2-profile.png)
 
-### Wangera Stable Start 94.0C – Scale V4
+### Wangera Stable Start 94.0C – Scale V2
 
-![Wangera Scale V4 94.0C](profiles/wangera/wangera-stable-38s-scale-v4-profile.png)
+![Wangera Scale V2 94.0C](profiles/wangera/wangera-stable-38s-scale-v2-profile.png)
 
-### Burundi Mubuga Melon Currant – Scale V4
+### Burundi Mubuga Melon Currant – Scale V2
 
-![Burundi Mubuga Scale V4](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v4-profile.png)
+![Burundi Mubuga Scale V2](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2-profile.png)
 
-### Colombia Manos Juntas Jam Mango – Scale V4
+### Colombia Manos Juntas Jam Mango – Scale V2
 
-![Colombia Manos Juntas Scale V4](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4-profile.png)
+![Colombia Manos Juntas Scale V2](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2-profile.png)
 
-### Kirinyaga PB Tea Rose – Scale V4
+### Kirinyaga PB Tea Rose – Scale V2
 
-![Kirinyaga Scale V4](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4-profile.png)
+![Kirinyaga Scale V2](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2-profile.png)
 
-### Twenty Eight Finca el Recreo Caturron Flavor – Scale V4
+### Twenty Eight Finca el Recreo Caturron Flavor – Scale V2
 
-![Twenty Eight Caturron Scale V4](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4-profile.png)
+![Twenty Eight Caturron Scale V2](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2-profile.png)
 
-### El Salvador Ochupse Grape Rose – Scale V4
+### El Salvador Ochupse Grape Rose – Scale V2
 
-![El Salvador Ochupse Scale V4](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4-profile.png)
+![El Salvador Ochupse Scale V2](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2-profile.png)
 
-### Honduras Las Calaveras – Scale V4
+### Honduras Las Calaveras – Scale V2
 
-![Honduras Las Calaveras Scale V4](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4-profile.png)
+![Honduras Las Calaveras Scale V2](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v2-profile.png)
 
 ---
 
-## Megjegyzés a V4 grafikonokhoz
+## Megjegyzés a V2 grafikonokhoz
 
-A V4 Scale Edition grafikonokat a `tools/render_profiles.py` script generálja a `*-scale-v4.json` fájlokból:
+A V2 Scale Edition grafikonokat a `tools/render_profiles.py` script generálja a `*-scale-v2.json` fájlokból:
 
 ```bash
 python3 tools/render_profiles.py
 ```
 
-A V4 grafikonok az időalapú V3 grafikonokhoz hasonlók (azonos fázis/nyomás/flow értékek), de a fázisok duration értékei hosszabbak, mivel a tényleges shot stop a mérleg által vezérelt.
+A V2 grafikonok az időalapú V1 grafikonokhoz hasonlók (azonos fázis/nyomás/flow értékek), de a fázisok duration értékei hosszabbak, mivel a tényleges shot stop a mérleg által vezérelt.

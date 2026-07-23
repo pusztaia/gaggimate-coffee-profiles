@@ -1,16 +1,16 @@
 {
-  "label": "Kenya Wangera Creamy Fruit – 18.5g→42g, g11, 94.0C, Scale V5",
+  "label": "Twenty Eight Finca el Recreo Caturron Flavor – Scale V2",
   "type": "pro",
-  "description": "Kenya Wangera Stable Start Scale V5 – 18.5 g dose / finish starts at 37.0 g / pump stop at 40.5 g / expected final yield about 42 g / 94.0 C / grind 10-11",
-  "temperature": 94.0,
+  "description": "Twenty Eight Caturron Flavor Scale V2 – 18.5 g / stop 42 g volumetric / 95 C / grind 8-10",
+  "temperature": 95,
   "utility": false,
   "phases": [
     {
-      "name": "Stronger Wetting",
+      "name": "Fast Wetting",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 5,
-      "temperature": 94.0,
+      "duration": 4,
+      "temperature": 95,
       "transition": {
         "type": "ease-out",
         "duration": 2,
@@ -23,11 +23,11 @@
       }
     },
     {
-      "name": "Stable Saturation",
+      "name": "Low Pressure Saturation",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 8,
-      "temperature": 94.0,
+      "duration": 7,
+      "temperature": 95,
       "transition": {
         "type": "instant",
         "duration": 0,
@@ -35,16 +35,16 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 2.3,
+        "pressure": 2.0,
         "flow": 4.5
       }
     },
     {
-      "name": "Cream Bloom",
+      "name": "Bloom",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 4,
-      "temperature": 94.0,
+      "duration": 6,
+      "temperature": 95,
       "transition": {
         "type": "ease-out",
         "duration": 2,
@@ -52,16 +52,16 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 0.5,
+        "pressure": 0.4,
         "flow": 0
       }
     },
     {
-      "name": "Soft Ramp",
+      "name": "Gentle Ramp",
       "phase": "brew",
       "valve": 1,
       "duration": 6,
-      "temperature": 94.0,
+      "temperature": 95,
       "transition": {
         "type": "linear",
         "duration": 6,
@@ -69,16 +69,16 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.4,
+        "pressure": 7.2,
         "flow": 2.4
       }
     },
     {
-      "name": "Blackberry Extraction",
+      "name": "Fruit Extraction",
       "phase": "brew",
       "valve": 1,
-      "duration": 30,
-      "temperature": 94.0,
+      "duration": 35,
+      "temperature": 95,
       "transition": {
         "type": "instant",
         "duration": 0,
@@ -86,40 +86,33 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.4,
-        "flow": 2.1
+        "pressure": 7.2,
+        "flow": 2.2
       },
       "targets": [
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 37.0
+          "value": 42.0
         }
       ]
     },
     {
-      "name": "Cream Finish",
+      "name": "Sweet Decline",
       "phase": "brew",
       "valve": 1,
       "duration": 8,
-      "temperature": 94.0,
+      "temperature": 95,
       "transition": {
         "type": "linear",
-        "duration": 4,
+        "duration": 6,
         "adaptive": true
       },
       "pump": {
         "target": "pressure",
-        "pressure": 5.8,
-        "flow": 1.7
-      },
-      "targets": [
-        {
-          "type": "volumetric",
-          "operator": "gte",
-          "value": 40.5
-        }
-      ]
+        "pressure": 5.6,
+        "flow": 1.8
+      }
     }
   ]
 }

@@ -1,15 +1,15 @@
 {
-  "label": "Impresso Colombia Manos Juntas 18.5g→43g, g10, 94.5C, Scale",
+  "label": "Kirinyaga PB Tea Rose 37s (korábbi alap) – Scale V2",
   "type": "pro",
-  "description": "Colombia Manos Juntas Scale V4 18.5 g / finish starts at 38 g / pump stop at 42 g / expected final yield about 43 g / 94.5 C / grind 10",
+  "description": "Kirinyaga PB Tea Rose (korábbi alap) Scale V2 – 18.5 g / stop 43 g volumetric / 94.5 C / grind 9-10",
   "temperature": 94.5,
   "utility": false,
   "phases": [
     {
-      "name": "Jam Wetting",
+      "name": "Tea Wetting",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 5,
+      "duration": 4,
       "temperature": 94.5,
       "transition": {
         "type": "ease-out",
@@ -19,14 +19,14 @@
       "pump": {
         "target": "flow",
         "pressure": 0,
-        "flow": 8.0
+        "flow": 7.5
       }
     },
     {
-      "name": "Mango Saturation",
+      "name": "Even Saturation",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 8,
+      "duration": 6,
       "temperature": 94.5,
       "transition": {
         "type": "instant",
@@ -35,12 +35,12 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 2.3,
+        "pressure": 2.1,
         "flow": 4.5
       }
     },
     {
-      "name": "Sweet Bloom",
+      "name": "Hibiscus Bloom",
       "phase": "preinfusion",
       "valve": 1,
       "duration": 4,
@@ -57,10 +57,10 @@
       }
     },
     {
-      "name": "Soft Ramp",
+      "name": "Gentle Ramp",
       "phase": "brew",
       "valve": 1,
-      "duration": 6,
+      "duration": 5,
       "temperature": 94.5,
       "transition": {
         "type": "linear",
@@ -69,15 +69,15 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.3,
+        "pressure": 7.6,
         "flow": 2.4
       }
     },
     {
-      "name": "Jam Extraction",
+      "name": "Black Tea Extraction",
       "phase": "brew",
       "valve": 1,
-      "duration": 16,
+      "duration": 30,
       "temperature": 94.5,
       "transition": {
         "type": "instant",
@@ -86,40 +86,33 @@
       },
       "pump": {
         "target": "pressure",
-        "pressure": 7.3,
+        "pressure": 7.6,
         "flow": 2.1
       },
       "targets": [
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 38.0
+          "value": 43.0
         }
       ]
     },
     {
-      "name": "Caramel Finish",
+      "name": "Rosehip Finish",
       "phase": "brew",
       "valve": 1,
       "duration": 8,
       "temperature": 94.5,
       "transition": {
         "type": "linear",
-        "duration": 4,
+        "duration": 7,
         "adaptive": true
       },
       "pump": {
         "target": "pressure",
-        "pressure": 5.5,
-        "flow": 1.7
-      },
-      "targets": [
-        {
-          "type": "volumetric",
-          "operator": "gte",
-          "value": 42.0
-        }
-      ]
+        "pressure": 5.6,
+        "flow": 1.8
+      }
     }
   ]
 }

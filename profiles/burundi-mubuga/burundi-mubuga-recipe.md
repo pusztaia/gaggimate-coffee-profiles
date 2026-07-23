@@ -74,19 +74,19 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ---
 
-## Mérleg / stop workflow – V3 (időalapú)
+## Mérleg / stop workflow – V1 (időalapú)
 
 Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
-## V4 – Bluetooth Scale Edition
+## V2 – Bluetooth Scale Edition
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V4 profil fájl:** [`burundi-mubuga-38s-scale-v4.json`](burundi-mubuga-38s-scale-v4.json)
+**V2 profil fájl:** [`burundi-mubuga-38s-scale-v2.json`](burundi-mubuga-38s-scale-v2.json)
 
-### V4 paraméterek
+### V2 paraméterek
 
 | Paraméter | Érték |
 |---|---:|
@@ -98,7 +98,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`).
 | Stop | **42.5 g beverage weight** |
 | Safety timeout | **45 s** |
 
-### V4 fázis stop logika
+### V2 fázis stop logika
 
 | Fázis | Stop trigger | Duration (hard cap) |
 |---|---|---:|
@@ -111,11 +111,11 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`).
 
 > **Firmware viselkedés (`pro` típus):** A `targets` tömb fázis szinten működik — minden 100 ms-ban kiértékeli. Az OR feltételek közül az első tüzelés zárja a fázist. A `duration` mindig hard cap: ha a volumetric target 42.5 g-nál tüzel, a Juicy Extraction fázis azonnal véget ér. Ha a scale nem csatlakozik vagy a target nem tüzel, a 30 s-os duration zárja a fázist (safety fallback). A `volumetric` target csak aktív Bluetooth scale + brew-by-weight mód esetén működik.
 
-### V4 dial-in
+### V2 dial-in
 
 | Eredmény | Következő lépés |
 |---|---|
-| **42-43 g, lédús, dinnyés-ribizlis, tiszta** | A Scale V4 profil helyes, nincs teendő. |
+| **42-43 g, lédús, dinnyés-ribizlis, tiszta** | A Scale V2 profil helyes, nincs teendő. |
 | **Mérleg korán áll meg, 40 g alatt, fojtott** | WDT/tamp/screen és Bluetooth kapcsolat ellenőrzés; ha stabil, picit 11 felé. |
 | **Safety timeout (45 s) lép életbe** | Bluetooth megszakadt vagy flow túl lassú. |
 | **Jó hozam, de lapos, kevés gyümölcs** | stop_at_g értéket emeld 43.0 g-ra. |
@@ -127,6 +127,6 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`).
 
 **Burundi Mubuga Melon Currant**
 
-**V3 (időalapú):** 18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · 38 s · 42.5 g out cél
+**V1 (időalapú):** 18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · 38 s · 42.5 g out cél
 
-**V4 (Scale):** 18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · stop 42.5 g beverage weight · safety 45 s
+**V2 (Scale):** 18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · stop 42.5 g beverage weight · safety 45 s

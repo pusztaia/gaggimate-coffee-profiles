@@ -1,8 +1,8 @@
-# Coffee Profiles V4 – Bluetooth Scale Edition
+# Coffee Profiles V2 – Bluetooth Scale Edition
 
 GaggiMate Pro JSON profilok grafikus előnézettel.
 
-**Jelenlegi verzió:** V4 – Bluetooth Scale Edition (BOOKOO Themis Ultra aktív)
+**Jelenlegi verzió:** V2 – Bluetooth Scale Edition (BOOKOO Themis Ultra aktív)
 
 A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Import**.
 
@@ -18,11 +18,11 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 - **RPM:** 1200 baseline
 - **Grinder scale:** 0–90, egész jelölések
 - **Scale:** BOOKOO Themis Ultra (Bluetooth, aktív)
-- **Stop mód:** beverage weight (V4 profilok) / időalapú (V3 profilok)
+- **Stop mód:** beverage weight (V2 profilok) / időalapú (V1 profilok)
 
 ---
 
-## Aktív profilok – V3 (Time Based)
+## Aktív profilok – V1 (Time Based)
 
 | Kávé | Profil | JSON | Grafikon | Recept |
 |---|---|---|---|---|
@@ -35,18 +35,18 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 ---
 
-## Aktív profilok – V4 (Bluetooth Scale Edition)
+## Aktív profilok – V2 (Bluetooth Scale Edition)
 
-| Kávé | V4 JSON | Target Yield | Safety Timeout |
+| Kávé | V2 JSON | Target Yield | Safety Timeout |
 |---|---|---:|---:|
-| Impresso Kenya Wangera | [`wangera-stable-38s-945c-scale-v4.json`](profiles/wangera/wangera-stable-38s-945c-scale-v4.json) | 42.0 g | 45 s |
-| Impresso Kenya Wangera (94.0 C) | [`wangera-stable-38s-scale-v4.json`](profiles/wangera/wangera-stable-38s-scale-v4.json) | 42.0 g | 45 s |
-| Impresso Burundi Mubuga | [`burundi-mubuga-38s-scale-v4.json`](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v4.json) | 42.5 g | 45 s |
-| Impresso Colombia Manos Juntas | [`colombia-manos-juntas-39s-scale-v4.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json) | 43.0 g | 47 s |
-| Impresso Kenya Kirinyaga PB | [`kirinyaga-tea-rose-37s-scale-v4.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json) | 43.0 g | 45 s |
-| Twenty Eight Finca el Recreo Caturron | [`caturron-flavor-42s-scale-v4.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json) | 42.0 g | 50 s |
-| Impresso El Salvador Ochupse | [`el-salvador-ochupse-31s-93c-scale-v4.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4.json) | 41.0 g | 45 s |
-| Impresso Honduras Las Calaveras | [`honduras-las-calaveras-scale-v4.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4.json) | 39.0 g | 33 s |
+| Impresso Kenya Wangera | [`wangera-stable-38s-945c-scale-v2.json`](profiles/wangera/wangera-stable-38s-945c-scale-v2.json) | 42.0 g | 45 s |
+| Impresso Kenya Wangera (94.0 C) | [`wangera-stable-38s-scale-v2.json`](profiles/wangera/wangera-stable-38s-scale-v2.json) | 42.0 g | 45 s |
+| Impresso Burundi Mubuga | [`burundi-mubuga-38s-scale-v2.json`](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json) | 42.5 g | 45 s |
+| Impresso Colombia Manos Juntas | [`colombia-manos-juntas-39s-scale-v2.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2.json) | 43.0 g | 47 s |
+| Impresso Kenya Kirinyaga PB | [`kirinyaga-tea-rose-37s-scale-v2.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json) | 43.0 g | 45 s |
+| Twenty Eight Finca el Recreo Caturron | [`caturron-flavor-42s-scale-v2.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json) | 42.0 g | 50 s |
+| Impresso El Salvador Ochupse | [`el-salvador-ochupse-31s-93c-scale-v2.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2.json) | 41.0 g | 45 s |
+| Impresso Honduras Las Calaveras | [`honduras-las-calaveras-scale-v2.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v2.json) | 39.0 g | 33 s |
 
 ---
 
@@ -74,7 +74,7 @@ A GaggiMate Pro a BOOKOO Themis Ultra mérleggel Bluetooth-on kommunikál. A pá
 
 ### Automatikus shot stop
 
-A V4 profilok beverage weight alapján állítják meg a shotot:
+A V2 profilok beverage weight alapján állítják meg a shotot:
 
 1. A mérleg méri a csészébe folyó kávé súlyát (beverage weight)
 2. Amikor eléri a profil `stop_at_g` értékét, a GaggiMate Pro leállítja a pumpát
@@ -82,18 +82,18 @@ A V4 profilok beverage weight alapján állítják meg a shotot:
 
 ### Stop workflow összehasonlítás
 
-| | V3 (Time Based) | V4 (Scale Edition) |
+| | V1 (Time Based) | V2 (Scale Edition) |
 |---|---|---|
 | Shot stop | Időalapú (38-42 s) | Beverage weight (gramm) |
 | Mérleg | Manuális figyelés | Automatikus Bluetooth stop |
 | Konzisztencia | Variábilis (flow-függő) | Reprodukálható hozam |
 | Fallback | Nincs | Safety timeout (45-50 s) |
 
-### V4 workflow
+### V2 workflow
 
 1. Mérleg bekapcsolás és kalibráció (tare)
 2. GaggiMate Web UI: Bluetooth mérleg csatlakoztatás
-3. V4 profil betöltése és importálása
+3. V2 profil betöltése és importálása
 4. Portafilter behelyezése, csésze a mérlegre
 5. Shot indítása – a GaggiMate automatikusan megáll a céltömegnél
 
@@ -101,7 +101,7 @@ Részletes workflow: [`BLUETOOTH_SCALE_WORKFLOW.md`](BLUETOOTH_SCALE_WORKFLOW.md
 
 ### Firmware viselkedés (GaggiMate 1.8.1)
 
-A `targets` tömb **fázis szintű** — minden phase-hez külön definiálható. A V4 profilok az extraction fázisba helyezik a `volumetric` target-et:
+A `targets` tömb **fázis szintű** — minden phase-hez külön definiálható. A V2 profilok az extraction fázisba helyezik a `volumetric` target-et:
 
 - A target minden 100 ms-ban kiértékelődik
 - Ha a mért beverage weight eléri a beállított értéket, a fázis azonnal véget ér
@@ -148,7 +148,7 @@ Egyetlen profilhoz:
 python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c.json
 ```
 
-A script minden JSON mellé létrehozza / felülírja az egyedi nevű `*-profile.png` képet. A V4 JSON profilokhoz is generál grafikont.
+A script minden JSON mellé létrehozza / felülírja az egyedi nevű `*-profile.png` képet. A V2 JSON profilokhoz is generál grafikont.
 
 ---
 

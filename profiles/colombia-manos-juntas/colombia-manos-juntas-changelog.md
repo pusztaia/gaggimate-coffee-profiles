@@ -1,6 +1,6 @@
 # Changelog – Colombia Manos Juntas Jam Mango
 
-## V4 – Bluetooth Scale Edition (2026-07-06)
+## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
 
@@ -8,14 +8,14 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 43.0 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `colombia-manos-juntas-39s-scale-v4.json`
+- Új profil fájl: `colombia-manos-juntas-39s-scale-v2.json`
 - Safety timeout: 47 s (Bluetooth disconnect fallback)
 
 ### Changed
 
 - Time stop replaced by beverage weight stop az extraction fázisban
 - A preinfusion és ramp fázisok időalapúak maradnak (firmware korlát)
-- Recipe.md frissítve V4 szakasszal, V4 dial-in logikával
+- Recipe.md frissítve V2 szakasszal, V2 dial-in logikával
 
 ## 2026-07-04 – kezdeti GaggiMate Pro profil
 - Új profil Impresso Colombia Manos Juntas kávéhoz.

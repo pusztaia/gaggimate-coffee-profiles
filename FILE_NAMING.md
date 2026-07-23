@@ -112,25 +112,25 @@ A profil változástörténete:
 
 ---
 
-## V4 Scale Edition JSON fájlok
+## V2 Scale Edition JSON fájlok
 
-A V4 Bluetooth Scale Edition profilok neve az alap JSON nevéből képződik, `scale-v4` utótaggal:
+A V2 Bluetooth Scale Edition profilok neve az alap JSON nevéből képződik, `scale-v2` utótaggal:
 
 ```
-{alap-json-név-kiterjesztés-nélkül}-scale-v4.json
+{alap-json-név-kiterjesztés-nélkül}-scale-v2.json
 ```
 
 **Példák:**
 
-| Alap JSON (V3) | V4 Scale Edition JSON |
+| Alap JSON (V1) | V2 Scale Edition JSON |
 |---|---|
-| `burundi-mubuga-38s.json` | `burundi-mubuga-38s-scale-v4.json` |
-| `wangera-stable-38s-945c.json` | `wangera-stable-38s-945c-scale-v4.json` |
-| `kirinyaga-tea-rose-37s.json` | `kirinyaga-tea-rose-37s-scale-v4.json` |
-| `colombia-manos-juntas-39s.json` | `colombia-manos-juntas-39s-scale-v4.json` |
-| `caturron-flavor-42s.json` | `caturron-flavor-42s-scale-v4.json` |
+| `burundi-mubuga-38s.json` | `burundi-mubuga-38s-scale-v2.json` |
+| `wangera-stable-38s-945c.json` | `wangera-stable-38s-945c-scale-v2.json` |
+| `kirinyaga-tea-rose-37s.json` | `kirinyaga-tea-rose-37s-scale-v2.json` |
+| `colombia-manos-juntas-39s.json` | `colombia-manos-juntas-39s-scale-v2.json` |
+| `caturron-flavor-42s.json` | `caturron-flavor-42s-scale-v2.json` |
 
-**Szabály:** A V3 alap profil megmarad; a V4 verzió mindig külön fájl. A régi időalapú profilokat nem töröljük.
+**Szabály:** A V1 alap profil megmarad; a V2 verzió mindig külön fájl. A régi időalapú profilokat nem töröljük.
 
 ---
 
@@ -139,8 +139,8 @@ A V4 Bluetooth Scale Edition profilok neve az alap JSON nevéből képződik, `s
 | Fájltípus | Névképzés alapja | Minta |
 |---|---|---|
 | **Könyvtár** | kávé neve | `burundi-mubuga/` |
-| **JSON (V3)** | kávé + profil paraméterei | `burundi-mubuga-38s.json` |
-| **JSON (V4)** | V3 JSON neve + `-scale-v4` | `burundi-mubuga-38s-scale-v4.json` |
+| **JSON (V1)** | kávé + profil paraméterei | `burundi-mubuga-38s.json` |
+| **JSON (V2)** | V1 JSON neve + `-scale-v2` | `burundi-mubuga-38s-scale-v2.json` |
 | **PNG** | JSON neve + `-profile` | `burundi-mubuga-38s-profile.png` |
 | **Recept MD** | könyvtárnév + `-recipe` | `burundi-mubuga-recipe.md` |
 | **Changelog MD** | könyvtárnév + `-changelog` | `burundi-mubuga-changelog.md` |

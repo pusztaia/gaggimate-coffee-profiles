@@ -68,19 +68,19 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ---
 
-## Mérleg / stop workflow – V3 (időalapú)
+## Mérleg / stop workflow – V1 (időalapú)
 
 Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
-## V4 – Bluetooth Scale Edition
+## V2 – Bluetooth Scale Edition
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V4 profil fájl:** [`kirinyaga-tea-rose-37s-scale-v4.json`](kirinyaga-tea-rose-37s-scale-v4.json)
+**V2 profil fájl:** [`kirinyaga-tea-rose-37s-scale-v2.json`](kirinyaga-tea-rose-37s-scale-v2.json)
 
-### V4 paraméterek
+### V2 paraméterek
 
 | Paraméter | Érték |
 |---|---:|
@@ -92,7 +92,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.jso
 | Stop | **43.0 g beverage weight** |
 | Safety timeout | **45 s** |
 
-### V4 fázis stop logika
+### V2 fázis stop logika
 
 | Fázis | Stop trigger | Duration (hard cap) |
 |---|---|---:|
@@ -105,11 +105,11 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.jso
 
 > **Firmware viselkedés (`pro` típus):** A `targets` tömb fázis szinten működik — minden 100 ms-ban kiértékeli. Az OR feltételek közül az első tüzelés zárja a fázist. A `duration` mindig hard cap: ha a volumetric target 43.0 g-nál tüzel, a Black Tea Extraction fázis azonnal véget ér. Ha a scale nem csatlakozik vagy a target nem tüzel, a 30 s-os duration zárja a fázist (safety fallback). A `volumetric` target csak aktív Bluetooth scale + brew-by-weight mód esetén működik.
 
-### V4 dial-in
+### V2 dial-in
 
 | Eredmény | Következő lépés |
 |---|---|
-| **42-44 g, hibiszkuszos-csipkebogyós, fekete tea** | A Scale V4 profil helyes, nincs teendő. |
+| **42-44 g, hibiszkuszos-csipkebogyós, fekete tea** | A Scale V2 profil helyes, nincs teendő. |
 | **Savanyú, vékony, citromos** | stop_at_g értéket emeld 43.5-44.0 g-ra, vagy finomabb őrlés, vagy 95 °C. |
 | **Hibiszkusz szép, de fanyar/száraz** | stop_at_g értéket csökkentsd 42.0-42.5 g-ra. |
 | **Safety timeout (45 s) lép életbe** | Bluetooth megszakadt vagy flow túl lassú. |
@@ -120,6 +120,6 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.jso
 
 **Kirinyaga PB Tea Rose 37s**
 
-**V3 (időalapú):** 18.5 g · grind 9 · 1200 RPM · 94.5 °C · 37 s · 43 g out cél
+**V1 (időalapú):** 18.5 g · grind 9 · 1200 RPM · 94.5 °C · 37 s · 43 g out cél
 
-**V4 (Scale):** 18.5 g · grind 9 · 1200 RPM · 94.5 °C · stop 43.0 g beverage weight · safety 45 s
+**V2 (Scale):** 18.5 g · grind 9 · 1200 RPM · 94.5 °C · stop 43.0 g beverage weight · safety 45 s

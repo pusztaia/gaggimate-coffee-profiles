@@ -26,4 +26,4 @@
 ## Repo konzisztencia (2026-07-23)
 
 - A recept és changelog fájl átnevezve `honduras-las-calaveras-recipe.md` / `honduras-las-calaveras-changelog.md` névre (a JSON-fájlnév-alapú `-39g-92c-scale-recipe.md` helyett), a FILE_NAMING.md könyvtárnév-alapú konvenciója szerint.
-- A JSON átnevezve `honduras-las-calaveras-39g-92c-scale.json` → `honduras-las-calaveras-scale-v4.json`, a repo többi profiljánál használt `-scale-v4` végződés szerint (nincs külön időalapú V3 verzió, ezért nincs profilidő a névben); a PNG újragenerálva az új névvel.
+- A JSON átnevezve `honduras-las-calaveras-39g-92c-scale.json` → `honduras-las-calaveras-scale-v2.json`, a repo többi profiljánál használt `-scale-v2` végződés szerint (nincs külön időalapú V1 verzió, ezért nincs profilidő a névben); a PNG újragenerálva az új névvel.

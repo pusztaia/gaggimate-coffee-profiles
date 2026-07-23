@@ -61,11 +61,11 @@
 
 ## 3. Shot workflow
 
-### Teljes workflow (V4 Scale Edition profil)
+### Teljes workflow (V2 Scale Edition profil)
 
 1. **Mérleg bekapcsolása** – hagyd 1-2 percig stabilizálódni
 2. **GaggiMate Web UI** – ellenőrizd, hogy a mérleg státusza Connected
-3. **Profil betöltése** – importáld a kívánt `*-scale-v4.json` fájlt a Web UI-ban (**Profiles → Import**)
+3. **Profil betöltése** – importáld a kívánt `*-scale-v2.json` fájlt a Web UI-ban (**Profiles → Import**)
 4. **Kávé adagolása** – 18.5 g (DF64V Gen 2, a profilnak megfelelő jelölésen)
 5. **Puck prep** – WDT, tamp, puck screen (száraz és tiszta)
 6. **Portafilter behelyezése**
@@ -74,7 +74,7 @@
 9. **Automatikus stop** – a GaggiMate megáll, amikor a beverage weight eléri a `stop_at_g` értéket
 10. **Hozam ellenőrzése** – a mérleg mutatja a végső értéket; rögzítsd a shot log-ban
 
-### V4 profil stop logika (GaggiMate 1.8.1 firmware)
+### V2 profil stop logika (GaggiMate 1.8.1 firmware)
 
 | Fázis | Stop trigger | Megjegyzés |
 |---|---|---|

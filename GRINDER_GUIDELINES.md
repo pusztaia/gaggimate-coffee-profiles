@@ -177,11 +177,11 @@ Ne változtasd egyszerre az őrlést, RPM-et, dózist és hőmérsékletet. Töb
 
 ---
 
-## 7. V3 és V4 profilok darálási logikája
+## 7. V1 és V2 profilok darálási logikája
 
-### V3 – Time Based
+### V1 – Time Based
 
-A V3 profilok beállított időtartamig futnak. Az őrlés egyszerre befolyásolja:
+A V1 profilok beállított időtartamig futnak. Az őrlés egyszerre befolyásolja:
 
 - a flow-t;
 - a teljes hozamot;
@@ -189,17 +189,17 @@ A V3 profilok beállított időtartamig futnak. Az őrlés egyszerre befolyásol
 
 Ha túl durva az őrlés, a profil végére túl sok ital kerülhet a csészébe. Ha túl finom, a kívánt hozam nem érhető el a profilidő alatt.
 
-### V4 – Bluetooth Scale Edition
+### V2 – Bluetooth Scale Edition
 
-A V4 profilok beverage weight alapján állnak meg. Az őrlés elsősorban azt határozza meg:
+A V2 profilok beverage weight alapján állnak meg. Az őrlés elsősorban azt határozza meg:
 
 - milyen gyorsan éri el a shot a célhozamot;
 - melyik fázisban tüzel a tömegalapú stop;
 - mennyire stabil és egyenletes az extrakció.
 
-A V4 profil azonos hozamot képes adni túl finom és túl durva őrlésnél is, de az eltérő elérési idő és flow miatt az íz jelentősen különbözhet.
+A V2 profil azonos hozamot képes adni túl finom és túl durva őrlésnél is, de az eltérő elérési idő és flow miatt az íz jelentősen különbözhet.
 
-### V4 célzóna
+### V2 célzóna
 
 Általános irányelvként az extraction fázisban a céltömeg stopja jellemzően **20–30 másodpercen belül** legyen elérhető. A profil teljes kijelzett ideje a preinfusion fázisok miatt ennél hosszabb lehet.
 
@@ -273,7 +273,7 @@ Minden shotnál érdemes rögzíteni:
 | Mező | Példa |
 |---|---|
 | Kávé | Kenya Wangera |
-| Profil | `wangera-stable-38s-945c-scale-v4.json` |
+| Profil | `wangera-stable-38s-945c-scale-v2.json` |
 | Dózis | 18.5 g |
 | Őrlés | 10 |
 | RPM | 1200 |
@@ -284,7 +284,7 @@ Minden shotnál érdemes rögzíteni:
 | Íz | savasság, édesség, test, lecsengés |
 | Következő lépés | egy jelöléssel finomabb |
 
-Két egymást követő, azonos paraméterű shot hozamának legfeljebb ±1.0 g eltérése elfogadható. V4 profilnál a hozam automatikusan stabilabb, ezért az idő és a flow változása különösen fontos diagnosztikai adat.
+Két egymást követő, azonos paraméterű shot hozamának legfeljebb ±1.0 g eltérése elfogadható. V2 profilnál a hozam automatikusan stabilabb, ezért az idő és a flow változása különösen fontos diagnosztikai adat.
 
 ---
 
@@ -329,5 +329,5 @@ Csak az újradial-inelt shotok ízbeli különbsége tulajdonítható érdemben 
 - Túl gyors shothoz általában finomabb, fojtott shothoz durvább őrlés kell.
 - Spriccelésnél először a puck prep-et ellenőrizd.
 - RPM-változtatás után mindig újra kell dial-in-elni.
-- A V4 tömegalapú stop stabil hozamot ad, de a jó ízhez az elérési időnek és a flow-nak is megfelelőnek kell lennie.
+- A V2 tömegalapú stop stabil hozamot ad, de a jó ízhez az elérési időnek és a flow-nak is megfelelőnek kell lennie.
 - Egyszerre csak egy paramétert változtass, és minden shotot naplózz.

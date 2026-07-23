@@ -6,7 +6,7 @@
 
 ### Removed
 
-- **`profiles/caturron/`** – törölve, mert a `profiles/twenty-eight-caturron/` pontos duplikátuma volt (a JSON leírás is erre utalt: "caturron könyvtár" változat). A `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json` marad az egyetlen kanonikus verzió.
+- **`profiles/caturron/`** – törölve, mert a `profiles/twenty-eight-caturron/` pontos duplikátuma volt (a JSON leírás is erre utalt: "caturron könyvtár" változat). A `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json` marad az egyetlen kanonikus verzió.
 
 ### Changed
 
@@ -14,41 +14,41 @@
 - **`FILE_NAMING.md`** – eltávolítva a törölt `caturron/` könyvtárra és `caturron-42s.json` fájlra mutató, már érvénytelen példasorok.
 - **`README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`** – pótolva a hiányzó, nem kávé-specifikus profilok (9 Bar Espresso, Cremina lever machine, Damian's LM Leva, Adaptive v2) dokumentációja.
 
-## V4 – Bluetooth Scale Edition (2026-07-06)
+## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
 
 - **BOOKOO Themis Ultra Bluetooth Scale** integráció – a mérleg Bluetooth-on csatlakozik a GaggiMate Pro-hoz
 - **Beverage weight stop** minden profilhoz – a shot automatikusan megáll a céltömegnél
-- **7 új Scale V4 JSON profil:**
-  - `profiles/wangera/wangera-stable-38s-945c-scale-v4.json` – Wangera 94.5 °C, stop 42.0 g, timeout 45 s
-  - `profiles/wangera/wangera-stable-38s-scale-v4.json` – Wangera 94.0 °C, stop 42.0 g, timeout 45 s
-  - `profiles/burundi-mubuga/burundi-mubuga-38s-scale-v4.json` – Burundi Mubuga, stop 42.5 g, timeout 45 s
-  - `profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json` – Colombia, stop 43.0 g, timeout 47 s
-  - `profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json` – Kirinyaga Tea Rose, stop 43.0 g, timeout 45 s
-  - `profiles/kirinyaga/kirinyaga-37s-scale-v4.json` – Kirinyaga korábbi alap Scale V4 változata
-  - `profiles/caturron/caturron-42s-scale-v4.json` – Caturron (caturron könyvtár), stop 42.0 g, timeout 50 s
-  - `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json` – Caturron Flavor, stop 42.0 g, timeout 50 s
-- **Safety timeout** minden V4 profilban – Bluetooth disconnect esetén fallback stop
+- **7 új Scale V2 JSON profil:**
+  - `profiles/wangera/wangera-stable-38s-945c-scale-v2.json` – Wangera 94.5 °C, stop 42.0 g, timeout 45 s
+  - `profiles/wangera/wangera-stable-38s-scale-v2.json` – Wangera 94.0 °C, stop 42.0 g, timeout 45 s
+  - `profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json` – Burundi Mubuga, stop 42.5 g, timeout 45 s
+  - `profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2.json` – Colombia, stop 43.0 g, timeout 47 s
+  - `profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json` – Kirinyaga Tea Rose, stop 43.0 g, timeout 45 s
+  - `profiles/kirinyaga/kirinyaga-37s-scale-v2.json` – Kirinyaga korábbi alap Scale V2 változata
+  - `profiles/caturron/caturron-42s-scale-v2.json` – Caturron (caturron könyvtár), stop 42.0 g, timeout 50 s
+  - `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json` – Caturron Flavor, stop 42.0 g, timeout 50 s
+- **Safety timeout** minden V2 profilban – Bluetooth disconnect esetén fallback stop
 - **BLUETOOTH_SCALE_WORKFLOW.md** – párosítás, kalibráció, shot workflow, troubleshooting
 - **BREW_GUIDELINES.md** – dial-in irányelvek, dózis, arány, hozam, shot értékelés
-- **V4 szakasz** minden recipe.md fájlban – V4 paraméterek, fázis stop logika, V4 dial-in táblázat
-- **V4 changelog bejegyzés** minden profil changelog fájlában
+- **V2 szakasz** minden recipe.md fájlban – V2 paraméterek, fázis stop logika, V2 dial-in táblázat
+- **V2 changelog bejegyzés** minden profil changelog fájlában
 
 ### Changed
 
-- **README.md** – frissítve V4 Bluetooth Scale Edition fejezet, V4 profil táblázat, dokumentum index
+- **README.md** – frissítve V2 Bluetooth Scale Edition fejezet, V2 profil táblázat, dokumentum index
 - **PROFILE_GALLERY.md** – Time Based és Bluetooth Scale Edition szekciók szétválasztva
-- **SUMMARY.md** – frissítve V4 profilokkal és új dokumentumokkal
-- **FILE_NAMING.md** – frissítve `scale-v4` fájlnév konvencióval
+- **SUMMARY.md** – frissítve V2 profilokkal és új dokumentumokkal
+- **FILE_NAMING.md** – frissítve `scale-v2` fájlnév konvencióval
 
 ### Firmware viselkedés (GaggiMate 1.8.1)
 
-A `targets` tömb **fázis szintű** a GaggiMate 1.8.1 firmware-ben. A V4 JSON profilok az extraction fázisba helyezik a `volumetric` target-et (`type: "volumetric"`, `operator: "gte"`, `value: <céltömeg>`). A `duration` `pro` típusnál mindig hard cap — ha a scale nem csatlakozik, a duration zárja a fázist (safety fallback). A preinfusion fázisokban nincs volumetric target beállítva, ezek tisztán időalapúak maradnak.
+A `targets` tömb **fázis szintű** a GaggiMate 1.8.1 firmware-ben. A V2 JSON profilok az extraction fázisba helyezik a `volumetric` target-et (`type: "volumetric"`, `operator: "gte"`, `value: <céltömeg>`). A `duration` `pro` típusnál mindig hard cap — ha a scale nem csatlakozik, a duration zárja a fázist (safety fallback). A preinfusion fázisokban nincs volumetric target beállítva, ezek tisztán időalapúak maradnak.
 
 ---
 
-## V3 – Time Based (2026-07-04)
+## V1 – Time Based (2026-07-04)
 
 ### Added
 

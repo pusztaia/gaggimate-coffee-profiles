@@ -210,7 +210,7 @@ Prefill (93°C, flow 8)  ──pumped≥100──►  Fill (93°C, flow 8)
 | Hozam célszám | 38 g | 42–43 g |
 | Arány | 1:2.0–2.5 | 1:2.2–2.3 |
 | Pörkölt célcsoport | Light–Medium, fine grind | Profil-specifikus |
-| Scale igény | Ajánlott (volumetric stop) | V3: opcionális, V4: kötelező |
+| Scale igény | Ajánlott (volumetric stop) | V1: opcionális, V2: kötelező |
 
 ---
 

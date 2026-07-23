@@ -1,6 +1,10 @@
 # Changelog – Kenya Wangera Creamy Fruit
 
-## V4 – Bluetooth Scale Edition (2026-07-06)
+## Repo konzisztencia (2026-07-23)
+
+- A két V2 JSON `label`/`description` mezőjében javítva egy elgépelés: "Scale V5" → "Scale V2" (a PNG grafikonok újragenerálva az új címmel).
+
+## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
 
@@ -8,15 +12,15 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 42.0 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `wangera-stable-38s-945c-scale-v4.json`
-- Új profil fájl: `wangera-stable-38s-scale-v4.json` (94.0 C változat)
+- Új profil fájl: `wangera-stable-38s-945c-scale-v2.json`
+- Új profil fájl: `wangera-stable-38s-scale-v2.json` (94.0 C változat)
 - Safety timeout: 45 s (Bluetooth disconnect fallback)
 
 ### Changed
 
 - Time stop replaced by beverage weight stop az extraction fázisban
 - A preinfusion és ramp fázisok időalapúak maradnak (firmware korlát)
-- Recipe.md frissítve V4 szakasszal, V4 dial-in logikával
+- Recipe.md frissítve V2 szakasszal, V2 dial-in logikával
 
 ## 2026-07-04 – bevált 42g baseline rögzítve
 - A **Stable Start 38s 94.5C** profil 42 g hozamot adott.
