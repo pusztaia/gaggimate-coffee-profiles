@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is **not** a software application — it's a documentation/data repository of espresso brew profiles for a **GaggiMate Pro** controller (Gaggia Classic Pro 2025 + DF64V Gen 2 grinder + BOOKOO Themis Ultra Bluetooth scale). The "code" is JSON profile files consumed by GaggiMate firmware, a Python chart-rendering script, and a static HTML gallery viewer. Most prose in the repo is in Hungarian.
+This is **not** a software application — it's a documentation/data repository of espresso brew profiles for a **GaggiMate Pro** controller (Gaggia Classic Pro 2025 + DF64V Gen 2 grinder + IMS B682TH24.5M basket + IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 holes, DS58.5) + BOOKOO Themis Ultra Bluetooth scale). The "code" is JSON profile files consumed by GaggiMate firmware, a Python chart-rendering script, and a static HTML gallery viewer. Most prose in the repo is in Hungarian.
 
 ## Commands
 
@@ -35,7 +35,7 @@ There is no build step, package manager, linter, or test suite in this repo (the
 
 ## Repository structure
 
-- `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`.
+- `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`. Even when a coffee has both a V3 and a V4 profile, there is still only **one** `{dir}-recipe.md` and **one** `{dir}-changelog.md` per coffee — V4-specific content goes in a `## V4 – Bluetooth Scale Edition` section within the same file, not a separate file. A coffee doesn't strictly need a V3 profile (e.g. a coffee can ship with only a `-scale-v4.json`), but if a V3 baseline already exists it is never deleted when a V4 version is added.
 - `schema/profile.json` — **this is the JSON Schema for the profile format**, not a sample profile. It's the canonical documentation of every field GaggiMate firmware accepts, cross-referenced to firmware source lines (`src/display/models/profile.h`, `src/display/core/process/BrewProcess.h`, etc.). When in doubt about what a field does or what values are valid, read the `description` text in this file rather than inferring from an example profile — per its own `$comment`, if the schema and the real firmware parser ever disagree, the parser wins.
 - `tools/render_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
 - `index.html` — single-file static gallery: hardcoded cards linking to each profile's JSON/PNG, plus a tab section that `fetch()`s each coffee's recipe/changelog Markdown at runtime and renders it client-side (see the `file:` entries and the `fetch(entry.file, ...)` call near the end of the file). Adding a new profile means updating both the profile's own directory *and* the corresponding card/entry in `index.html`.
@@ -62,6 +62,11 @@ profiles/{coffee-slug}/{coffee-slug}-changelog.md
 ```
 
 All names: lowercase, hyphen-separated, no accents/spaces/punctuation (except the file extension). `945c` in a filename means 94.5°C (decimal point dropped for filename safety). The old V3 profile is always kept alongside a new V4 version — never delete/replace it.
+
+## Recipe.md content conventions
+
+- The header metadata block (Kávé, Feldolgozás, Ízjegyek, Setup, etc.) must be a markdown table (`| Mező | Érték |`), not a run of `**Label:** value` lines. `index.html`'s hand-rolled `renderMarkdown()`/`inlineMarkdown()` joins consecutive non-blank lines into a single paragraph with a plain space (no `<br>` support, trailing double-space line breaks are ignored) — a table is the only block type it renders row-by-row.
+- Don't embed the profile chart image (`![...](...-profile.png)`) anywhere in a recipe.md body. The chart is already shown on the coffee's card in `index.html`; an embedded copy just duplicates it (often broken, since the image path is relative to the modal's fetch location, not the recipe's own directory) when the recipe is opened in the "Recept" modal.
 
 ## Adding a new coffee profile
 
