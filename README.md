@@ -31,6 +31,7 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 | Impresso Colombia Manos Juntas | Jam Mango 39s | [`colombia-manos-juntas-39s.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s.json) | [`colombia-manos-juntas-profile.png`](profiles/colombia-manos-juntas/colombia-manos-juntas-profile.png) | [`colombia-manos-juntas-recipe.md`](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
 | Impresso Kenya Kirinyaga PB | Tea Rose 37s | [`kirinyaga-tea-rose-37s.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s.json) | [`kirinyaga-profile.png`](profiles/kirinyaga/kirinyaga-profile.png) | [`kirinyaga-recipe.md`](profiles/kirinyaga/kirinyaga-recipe.md) |
 | Twenty Eight Finca el Recreo Caturron | Flavor 42s | [`caturron-flavor-42s.json`](profiles/twenty-eight-caturron/caturron-flavor-42s.json) | [`twenty-eight-caturron-profile.png`](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png) | [`twenty-eight-caturron-recipe.md`](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
+| Impresso El Salvador Ochupse | Grape Rose 31s 93C | [`el-salvador-ochupse-31s-93c.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c.json) | [`el-salvador-ochupse-31s-93c-profile.png`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-profile.png) | [`el-salvador-ochupse-recipe.md`](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
 
 ---
 
@@ -44,6 +45,8 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 | Impresso Colombia Manos Juntas | [`colombia-manos-juntas-39s-scale-v4.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json) | 43.0 g | 47 s |
 | Impresso Kenya Kirinyaga PB | [`kirinyaga-tea-rose-37s-scale-v4.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json) | 43.0 g | 45 s |
 | Twenty Eight Finca el Recreo Caturron | [`caturron-flavor-42s-scale-v4.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json) | 42.0 g | 50 s |
+| Impresso El Salvador Ochupse | [`el-salvador-ochupse-31s-93c-scale-v4.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4.json) | 41.0 g | 45 s |
+| Impresso Honduras Las Calaveras | [`honduras-las-calaveras-scale-v4.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4.json) | 39.0 g | 33 s |
 
 ---
 

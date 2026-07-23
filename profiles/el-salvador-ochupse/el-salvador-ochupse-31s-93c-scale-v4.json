@@ -1,0 +1,84 @@
+{
+  "label": "El Salvador Ochupse 18.5-41 Grape Rose 93C BOOKOO V1",
+  "type": "pro",
+  "description": "18.5 g, grind: 10-11, auto stop at 41.0 g, 93 C",
+  "temperature": 93,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Grape Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 93,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 7.5
+      }
+    },
+    {
+      "name": "Rosehip Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 93,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.2,
+        "flow": 4.2
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 93,
+      "transition": {
+        "type": "linear",
+        "duration": 5,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Grape Chocolate Extraction to 41g",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 30,
+      "temperature": 93,
+      "transition": {
+        "type": "linear",
+        "duration": 30,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.2,
+        "flow": 1.8
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 41.0
+        }
+      ]
+    }
+  ]
+}

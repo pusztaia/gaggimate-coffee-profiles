@@ -1,0 +1,94 @@
+{
+  "label": "El Salvador Ochupse 18.5-41 Grape Rose 31s 93C",
+  "type": "pro",
+  "description": "Impresso El Salvador Ochupse espresso baseline: Pacas, 60h natural anaerobic; grape, rosehip, apricot and dark-chocolate finish. 18.5 g in, 41 g out, 93 C, 10 s preinfusion, 31 s target time.",
+  "temperature": 93,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Grape Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 93,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 7.5
+      }
+    },
+    {
+      "name": "Rosehip Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 93,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.2,
+        "flow": 4.2
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 93,
+      "transition": {
+        "type": "linear",
+        "duration": 5,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Apricot Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 93,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.1
+      }
+    },
+    {
+      "name": "Chocolate Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 93,
+      "transition": {
+        "type": "linear",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.4,
+        "flow": 1.7
+      }
+    }
+  ]
+}

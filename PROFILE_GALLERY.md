@@ -44,6 +44,10 @@ Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot 
 
 ![Twenty Eight Finca el Recreo Caturron Flavor 42s](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
 
+### El Salvador Ochupse Grape Rose 31s 93C – Time Based
+
+![El Salvador Ochupse Grape Rose 31s 93C](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-profile.png)
+
 ---
 
 ## Bluetooth Scale Edition profilok (V4)
@@ -73,6 +77,14 @@ Ezek a profilok BOOKOO Themis Ultra Bluetooth mérleggel automatikusan megállna
 ### Twenty Eight Finca el Recreo Caturron Flavor – Scale V4
 
 ![Twenty Eight Caturron Scale V4](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4-profile.png)
+
+### El Salvador Ochupse Grape Rose – Scale V4
+
+![El Salvador Ochupse Scale V4](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4-profile.png)
+
+### Honduras Las Calaveras – Scale V4
+
+![Honduras Las Calaveras Scale V4](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4-profile.png)
 
 ---
 

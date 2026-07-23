@@ -21,6 +21,8 @@
 | Colombia Manos Juntas | 43.0 g | 1:2.32 | 94.5 °C | 47 s | [colombia-manos-juntas-39s-scale-v4.json](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v4.json) |
 | Kenya Kirinyaga PB | 43.0 g | 1:2.32 | 94.5 °C | 45 s | [kirinyaga-tea-rose-37s-scale-v4.json](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v4.json) |
 | Twenty Eight Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-flavor-42s-scale-v4.json](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v4.json) |
+| El Salvador Ochupse | 41.0 g | 1:2.22 | 93.0 °C | 45 s | [el-salvador-ochupse-31s-93c-scale-v4.json](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v4.json) |
+| Honduras Las Calaveras | 39.0 g | 1:2.11 | 92.0 °C | 33 s | [honduras-las-calaveras-scale-v4.json](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v4.json) |
 
 ---
 
@@ -44,6 +46,7 @@
 | Colombia Manos Juntas | Jam Mango | 39 s | 94.5 °C | 18.5 g | 43 g | 10-11 | [colombia-manos-juntas-39s.json](profiles/colombia-manos-juntas/colombia-manos-juntas-39s.json) | [colombia-manos-juntas-recipe.md](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
 | Kenya Kirinyaga PB | Tea Rose | 37 s | 94.5 °C | 18.5 g | 43 g | 9-10 | [kirinyaga-tea-rose-37s.json](profiles/kirinyaga/kirinyaga-tea-rose-37s.json) | [kirinyaga-recipe.md](profiles/kirinyaga/kirinyaga-recipe.md) |
 | Twenty Eight Caturron | Flavor | 42 s | 95 °C | 18.5 g | 42 g | 8-10 | [caturron-flavor-42s.json](profiles/twenty-eight-caturron/caturron-flavor-42s.json) | [twenty-eight-caturron-recipe.md](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
+| El Salvador Ochupse | Grape Rose | 31 s | 93 °C | 18.5 g | 41 g | 10-11 | [el-salvador-ochupse-31s-93c.json](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c.json) | [el-salvador-ochupse-recipe.md](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
 
 ---
 
@@ -56,6 +59,8 @@
 | Colombia Manos Juntas | anaerobic natural | vörösáfonya dzsem · karamell · mangó |
 | Kenya Kirinyaga PB | washed | hibiszkusz · csipkebogyó · fekete tea |
 | Twenty Eight Caturron | natural | meggy · konyakmeggy · piros gyümölcs · bonbonos édesség |
+| El Salvador Ochupse | natural anaerob | szőlő · csipkebogyó · sárgabarack · étcsokoládé |
+| Honduras Las Calaveras | natural anaerob | sangria · sült alma · szegfűszeg |
 
 ---
 
@@ -100,6 +105,10 @@
 ### Twenty Eight Caturron – Flavor 42s
 
 ![Twenty Eight Caturron](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
+
+### El Salvador Ochupse – Grape Rose 31s 93C
+
+![El Salvador Ochupse](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-profile.png)
 
 ---
 
@@ -157,6 +166,18 @@ profiles/
 │   ├── profile-adapt.json
 │   ├── adaptive-v2-recipe.md
 │   └── adaptive-v2-changelog.md
+├── el-salvador-ochupse/
+│   ├── el-salvador-ochupse-31s-93c.json          ← V3 időalapú profil
+│   ├── el-salvador-ochupse-31s-93c-scale-v4.json ← V4 Scale Edition
+│   ├── el-salvador-ochupse-31s-93c-profile.png
+│   ├── el-salvador-ochupse-31s-93c-scale-v4-profile.png
+│   ├── el-salvador-ochupse-recipe.md             ← recept (V3 + V4 szakasz)
+│   └── el-salvador-ochupse-changelog.md
+├── honduras-las-calaveras/
+│   ├── honduras-las-calaveras-scale-v4.json      ← csak V4 Scale Edition
+│   ├── honduras-las-calaveras-scale-v4-profile.png
+│   ├── honduras-las-calaveras-recipe.md
+│   └── honduras-las-calaveras-changelog.md
 equipment/
 └── setup.md
 templates/

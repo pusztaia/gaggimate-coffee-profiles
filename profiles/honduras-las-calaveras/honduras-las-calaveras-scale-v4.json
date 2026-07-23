@@ -1,0 +1,50 @@
+{
+  "label": "Honduras Las Calaveras | 18.5 g, grind: 10-11, auto stop at 39.0 g, 92 C",
+  "type": "pro",
+  "description": "18.5 g, grind: 10-11, auto stop at 39.0 g, 92 C",
+  "temperature": 92,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Anaerobic Preinfusion",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 92,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.0,
+        "flow": 4.0
+      }
+    },
+    {
+      "name": "Sangria Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 25,
+      "temperature": 92,
+      "transition": {
+        "type": "ease-in-out",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.2,
+        "flow": 2.4
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 39.0
+        }
+      ]
+    }
+  ]
+}
