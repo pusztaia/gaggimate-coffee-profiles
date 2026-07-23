@@ -84,7 +84,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`).
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`burundi-mubuga-38s-scale-v2.json`](burundi-mubuga-38s-scale-v2.json)
+**V2 profil fájl:** [`burundi-mubuga-38s-scale-v2.json`](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json)
 
 ### V2 paraméterek
 

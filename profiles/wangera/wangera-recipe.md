@@ -99,8 +99,8 @@ A verziószám **szándékosan V2 maradt**. A meglévő V2 JSON-fájlok tartalma
 
 **Változatlan fájlnevek:**
 
-- [`wangera-stable-38s-scale-v2.json`](wangera-stable-38s-scale-v2.json) – 94.0 °C
-- [`wangera-stable-38s-945c-scale-v2.json`](wangera-stable-38s-945c-scale-v2.json) – 94.5 °C
+- [`wangera-stable-38s-scale-v2.json`](profiles/wangera/wangera-stable-38s-scale-v2.json) – 94.0 °C
+- [`wangera-stable-38s-945c-scale-v2.json`](profiles/wangera/wangera-stable-38s-945c-scale-v2.json) – 94.5 °C
 
 ### V2 paraméterek
 

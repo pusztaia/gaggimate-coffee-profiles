@@ -84,7 +84,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`el-salvador-ochupse-31s-93
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`el-salvador-ochupse-31s-93c-scale-v2.json`](el-salvador-ochupse-31s-93c-scale-v2.json)
+**V2 profil fájl:** [`el-salvador-ochupse-31s-93c-scale-v2.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2.json)
 
 A BOOKOO Themis Ultra legyen bekapcsolva, párosítva és nullázva a főzés előtt. A gyártó szerint a Themis Ultra Bluetooth 5.0 kapcsolatot használ; az eszköz neve jellemzően `BOOKOO_SC U XXXX` formátumú. A GaggiMate dokumentációja szerint a `volumetric` target Bluetooth mérleggel működik a legpontosabban.
 

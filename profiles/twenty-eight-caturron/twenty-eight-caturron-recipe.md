@@ -78,7 +78,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`)
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`caturron-flavor-42s-scale-v2.json`](caturron-flavor-42s-scale-v2.json)
+**V2 profil fájl:** [`caturron-flavor-42s-scale-v2.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json)
 
 ### V2 paraméterek
 
