@@ -2,11 +2,29 @@
 
 ---
 
+## JSON fájlnevek egységesítése: manual/scale minta (2026-07-25)
+
+### Changed
+
+- Minden kávé JSON fájlneve átalakítva a `kirinyaga/` mintájára: `{kávé}-manual.json` (V1, időalapú) / `{kávé}-scale.json` (V2, BOOKOO scale). Ahol egy kávénak több variánsa van ugyanabból a típusból (pl. wangera két hőmérséklet-verziója), `-v1`, `-v2`, ... sorszám különbözteti meg őket.
+- Érintett könyvtárak: `burundi-mubuga/`, `colombia-manos-juntas/`, `twenty-eight-caturron/` (`caturron-manual.json`/`caturron-scale.json`), `el-salvador-ochupse/`, `honduras-las-calaveras/` (csak `-scale.json`, nincs manual), `wangera/` (`-manual-v1/v2.json`, `-scale-v1/v2.json`, ahol v1 = 94.0 °C, v2 = 94.5 °C).
+- A PNG-k újragenerálva az új JSON nevekkel; minden recipe.md/changelog.md, `README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`, `index.html`, `FILE_NAMING.md`, `CLAUDE.md`, `PROFILE_CREATION_GUIDE.md` hivatkozása frissítve.
+
+## Kirinyaga JSON egyszerűsítés (2026-07-25)
+
+### Removed
+
+- **`profiles/kirinyaga/kirinyaga-37s.json`, `kirinyaga-37s-scale-v2.json`** – törölve; ez volt a korábbi, külön megtartott "37s" alap-profilpár a fő Tea Rose recept mellett.
+
+### Changed
+
+- **`profiles/kirinyaga/kirinyaga-tea-rose-37s.json` → `kirinyaga-manual.json`**, **`kirinyaga-tea-rose-37s-scale-v2.json` → `kirinyaga-scale.json`** – a könyvtárban innentől csak egy V1 (`manual`) / V2 (`scale`) pár marad. A PNG-k újragenerálva, `README.md`/`SUMMARY.md`/`PROFILE_GALLERY.md`/`index.html`/`FILE_NAMING.md` hivatkozásai frissítve.
+
 ## Repo konzisztencia takarítás (2026-07-17)
 
 ### Removed
 
-- **`profiles/caturron/`** – törölve, mert a `profiles/twenty-eight-caturron/` pontos duplikátuma volt (a JSON leírás is erre utalt: "caturron könyvtár" változat). A `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json` marad az egyetlen kanonikus verzió.
+- **`profiles/caturron/`** – törölve, mert a `profiles/twenty-eight-caturron/` pontos duplikátuma volt (a JSON leírás is erre utalt: "caturron könyvtár" változat). A `profiles/twenty-eight-caturron/caturron-scale.json` marad az egyetlen kanonikus verzió.
 
 ### Changed
 
@@ -21,14 +39,14 @@
 - **BOOKOO Themis Ultra Bluetooth Scale** integráció – a mérleg Bluetooth-on csatlakozik a GaggiMate Pro-hoz
 - **Beverage weight stop** minden profilhoz – a shot automatikusan megáll a céltömegnél
 - **7 új Scale V2 JSON profil:**
-  - `profiles/wangera/wangera-stable-38s-945c-scale-v2.json` – Wangera 94.5 °C, stop 42.0 g, timeout 45 s
-  - `profiles/wangera/wangera-stable-38s-scale-v2.json` – Wangera 94.0 °C, stop 42.0 g, timeout 45 s
-  - `profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json` – Burundi Mubuga, stop 42.5 g, timeout 45 s
-  - `profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2.json` – Colombia, stop 43.0 g, timeout 47 s
+  - `profiles/wangera/wangera-scale-v2.json` – Wangera 94.5 °C, stop 42.0 g, timeout 45 s
+  - `profiles/wangera/wangera-scale-v1.json` – Wangera 94.0 °C, stop 42.0 g, timeout 45 s
+  - `profiles/burundi-mubuga/burundi-mubuga-scale.json` – Burundi Mubuga, stop 42.5 g, timeout 45 s
+  - `profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json` – Colombia, stop 43.0 g, timeout 47 s
   - `profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json` – Kirinyaga Tea Rose, stop 43.0 g, timeout 45 s
   - `profiles/kirinyaga/kirinyaga-37s-scale-v2.json` – Kirinyaga korábbi alap Scale V2 változata
   - `profiles/caturron/caturron-42s-scale-v2.json` – Caturron (caturron könyvtár), stop 42.0 g, timeout 50 s
-  - `profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json` – Caturron Flavor, stop 42.0 g, timeout 50 s
+  - `profiles/twenty-eight-caturron/caturron-scale.json` – Caturron Flavor, stop 42.0 g, timeout 50 s
 - **Safety timeout** minden V2 profilban – Bluetooth disconnect esetén fallback stop
 - **BLUETOOTH_SCALE_WORKFLOW.md** – párosítás, kalibráció, shot workflow, troubleshooting
 - **BREW_GUIDELINES.md** – dial-in irányelvek, dózis, arány, hozam, shot értékelés

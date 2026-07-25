@@ -310,19 +310,17 @@ Válaszd a kávéhoz legközelebb álló meglévő profilt feldolgozás alapján
 
 ### 2. JSON fájl létrehozása
 
-**Fájlnév konvenció:**
+**Fájlnév konvenció** (a minta a `profiles/kirinyaga/` könyvtár):
 ```
-profiles/{kávé-azonosító}/{kávé-azonosító}-{idő}[{hő}].json
+profiles/{kávé-azonosító}/{kávé-azonosító}-manual.json   # V1, időalapú
+profiles/{kávé-azonosító}/{kávé-azonosító}-scale.json    # V2, BOOKOO scale-alapú
 ```
 
 Példák:
-- `profiles/ethiopia-yirgacheffe/ethiopia-yirgacheffe-37s-945c.json`
-- `profiles/kenya-gathugu/kenya-gathugu-38s.json`
+- `profiles/ethiopia-yirgacheffe/ethiopia-yirgacheffe-manual.json`
+- `profiles/kenya-gathugu/kenya-gathugu-manual.json`
 
-**V2 Scale Edition fájlnév** (ha scale-t is készítesz):
-```
-{alap-json-neve-kiterjesztés-nélkül}-scale-v2.json
-```
+Ha ugyanabból a típusból (manual vagy scale) több variáns is készül (pl. eltérő hőmérséklet), a fájlnév végén `-v1`, `-v2`, ... sorszám jelzi őket — lásd `profiles/wangera/` (`wangera-manual-v1.json`/`wangera-scale-v1.json` a 94.0 °C, `-v2` a 94.5 °C variáns). Ha egy kávénak csak egy manual és egy scale profilja van, nem kell sorszám.
 
 ### 3. JSON sablon (V1, időalapú)
 
@@ -557,8 +555,8 @@ A script a JSON neve alapján hozza létre a PNG-t: `{json-stem}-profile.png`.
 | Fájl | Minta |
 |---|---|
 | Könyvtár | `profiles/{eredet-kave}/` |
-| JSON (V1) | `{eredet-kave}-{idő}[{hő}].json` |
-| JSON (V2) | `{v1-json-stem}-scale-v2.json` |
+| JSON (V1) | `{eredet-kave}-manual.json` (több variánsnál `-manual-v1.json`, `-v2.json`, ...) |
+| JSON (V2) | `{eredet-kave}-scale.json` (több variánsnál `-scale-v1.json`, `-v2.json`, ...) |
 | PNG | `{json-stem}-profile.png` (auto) |
 | Recept | `{könyvtárnév}-recipe.md` |
 | Changelog | `{könyvtárnév}-changelog.md` |

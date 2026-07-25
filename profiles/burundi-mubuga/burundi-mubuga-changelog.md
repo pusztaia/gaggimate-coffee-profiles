@@ -1,5 +1,9 @@
 # Changelog – Burundi Mubuga Melon Currant
 
+## Repo konzisztencia (2026-07-25)
+
+- A JSON fájlnevek átalakítva: `burundi-mubuga-38s.json` → `burundi-mubuga-manual.json`, `burundi-mubuga-38s-scale-v2.json` → `burundi-mubuga-scale.json` (a `kirinyaga/` mintáját követve). A PNG-k újragenerálva.
+
 ## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
@@ -8,7 +12,7 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 42.5 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `burundi-mubuga-38s-scale-v2.json`
+- Új profil fájl: `burundi-mubuga-scale.json`
 - Safety timeout: 45 s (Bluetooth disconnect fallback)
 
 ### Changed

@@ -70,7 +70,7 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ## Mérleg / stop workflow – V1 (időalapú)
 
-Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
+Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-manual.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
@@ -78,7 +78,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-flavor-42s.json`)
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`caturron-flavor-42s-scale-v2.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json)
+**V2 profil fájl:** [`caturron-scale.json`](profiles/twenty-eight-caturron/caturron-scale.json)
 
 ### V2 paraméterek
 

@@ -273,7 +273,7 @@ Minden shotnál érdemes rögzíteni:
 | Mező | Példa |
 |---|---|
 | Kávé | Kenya Wangera |
-| Profil | `wangera-stable-38s-945c-scale-v2.json` |
+| Profil | `wangera-scale-v2.json` |
 | Dózis | 18.5 g |
 | Őrlés | 10 |
 | RPM | 1200 |

@@ -26,12 +26,12 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 | Kávé | Profil | JSON | Grafikon | Recept |
 |---|---|---|---|---|
-| Impresso Kenya Wangera | Stable Start 38s 94.5C | [`wangera-stable-38s-945c.json`](profiles/wangera/wangera-stable-38s-945c.json) | [`wangera-profile.png`](profiles/wangera/wangera-profile.png) | [`wangera-recipe.md`](profiles/wangera/wangera-recipe.md) |
-| Impresso Burundi Mubuga | Melon Currant 38s | [`burundi-mubuga-38s.json`](profiles/burundi-mubuga/burundi-mubuga-38s.json) | [`burundi-mubuga-profile.png`](profiles/burundi-mubuga/burundi-mubuga-profile.png) | [`burundi-mubuga-recipe.md`](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
-| Impresso Colombia Manos Juntas | Jam Mango 39s | [`colombia-manos-juntas-39s.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s.json) | [`colombia-manos-juntas-profile.png`](profiles/colombia-manos-juntas/colombia-manos-juntas-profile.png) | [`colombia-manos-juntas-recipe.md`](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
-| Impresso Kenya Kirinyaga PB | Tea Rose 37s | [`kirinyaga-tea-rose-37s.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s.json) | [`kirinyaga-profile.png`](profiles/kirinyaga/kirinyaga-profile.png) | [`kirinyaga-recipe.md`](profiles/kirinyaga/kirinyaga-recipe.md) |
-| Twenty Eight Finca el Recreo Caturron | Flavor 42s | [`caturron-flavor-42s.json`](profiles/twenty-eight-caturron/caturron-flavor-42s.json) | [`twenty-eight-caturron-profile.png`](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png) | [`twenty-eight-caturron-recipe.md`](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
-| Impresso El Salvador Ochupse | Grape Rose 31s 93C | [`el-salvador-ochupse-31s-93c.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c.json) | [`el-salvador-ochupse-31s-93c-profile.png`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-profile.png) | [`el-salvador-ochupse-recipe.md`](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
+| Impresso Kenya Wangera | Stable Start 38s 94.5C | [`wangera-manual-v2.json`](profiles/wangera/wangera-manual-v2.json) | [`wangera-profile.png`](profiles/wangera/wangera-profile.png) | [`wangera-recipe.md`](profiles/wangera/wangera-recipe.md) |
+| Impresso Burundi Mubuga | Melon Currant 38s | [`burundi-mubuga-manual.json`](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [`burundi-mubuga-profile.png`](profiles/burundi-mubuga/burundi-mubuga-profile.png) | [`burundi-mubuga-recipe.md`](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
+| Impresso Colombia Manos Juntas | Jam Mango 39s | [`colombia-manos-juntas-manual.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json) | [`colombia-manos-juntas-profile.png`](profiles/colombia-manos-juntas/colombia-manos-juntas-profile.png) | [`colombia-manos-juntas-recipe.md`](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
+| Impresso Kenya Kirinyaga PB | Tea Rose 37s | [`kirinyaga-manual.json`](profiles/kirinyaga/kirinyaga-manual.json) | [`kirinyaga-profile.png`](profiles/kirinyaga/kirinyaga-profile.png) | [`kirinyaga-recipe.md`](profiles/kirinyaga/kirinyaga-recipe.md) |
+| Twenty Eight Finca el Recreo Caturron | Flavor 42s | [`caturron-manual.json`](profiles/twenty-eight-caturron/caturron-manual.json) | [`twenty-eight-caturron-profile.png`](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png) | [`twenty-eight-caturron-recipe.md`](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
+| Impresso El Salvador Ochupse | Grape Rose 31s 93C | [`el-salvador-ochupse-manual.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-manual.json) | [`el-salvador-ochupse-manual-profile.png`](profiles/el-salvador-ochupse/el-salvador-ochupse-manual-profile.png) | [`el-salvador-ochupse-recipe.md`](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
 
 ---
 
@@ -39,14 +39,14 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 | Kávé | V2 JSON | Target Yield | Safety Timeout |
 |---|---|---:|---:|
-| Impresso Kenya Wangera | [`wangera-stable-38s-945c-scale-v2.json`](profiles/wangera/wangera-stable-38s-945c-scale-v2.json) | 42.0 g | 45 s |
-| Impresso Kenya Wangera (94.0 C) | [`wangera-stable-38s-scale-v2.json`](profiles/wangera/wangera-stable-38s-scale-v2.json) | 42.0 g | 45 s |
-| Impresso Burundi Mubuga | [`burundi-mubuga-38s-scale-v2.json`](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json) | 42.5 g | 45 s |
-| Impresso Colombia Manos Juntas | [`colombia-manos-juntas-39s-scale-v2.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2.json) | 43.0 g | 47 s |
-| Impresso Kenya Kirinyaga PB | [`kirinyaga-tea-rose-37s-scale-v2.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json) | 43.0 g | 45 s |
-| Twenty Eight Finca el Recreo Caturron | [`caturron-flavor-42s-scale-v2.json`](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2.json) | 42.0 g | 50 s |
-| Impresso El Salvador Ochupse | [`el-salvador-ochupse-31s-93c-scale-v2.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2.json) | 41.0 g | 45 s |
-| Impresso Honduras Las Calaveras | [`honduras-las-calaveras-scale-v2.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v2.json) | 39.0 g | 33 s |
+| Impresso Kenya Wangera | [`wangera-scale-v2.json`](profiles/wangera/wangera-scale-v2.json) | 42.0 g | 45 s |
+| Impresso Kenya Wangera (94.0 C) | [`wangera-scale-v1.json`](profiles/wangera/wangera-scale-v1.json) | 42.0 g | 45 s |
+| Impresso Burundi Mubuga | [`burundi-mubuga-scale.json`](profiles/burundi-mubuga/burundi-mubuga-scale.json) | 42.5 g | 45 s |
+| Impresso Colombia Manos Juntas | [`colombia-manos-juntas-scale.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json) | 43.0 g | 47 s |
+| Impresso Kenya Kirinyaga PB | [`kirinyaga-scale.json`](profiles/kirinyaga/kirinyaga-scale.json) | 43.0 g | 45 s |
+| Twenty Eight Finca el Recreo Caturron | [`caturron-scale.json`](profiles/twenty-eight-caturron/caturron-scale.json) | 42.0 g | 50 s |
+| Impresso El Salvador Ochupse | [`el-salvador-ochupse-scale.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-scale.json) | 41.0 g | 45 s |
+| Impresso Honduras Las Calaveras | [`honduras-las-calaveras-scale.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale.json) | 39.0 g | 33 s |
 
 ---
 
@@ -145,7 +145,7 @@ python3 tools/render_profiles.py
 Egyetlen profilhoz:
 
 ```bash
-python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c.json
+python3 tools/render_profiles.py profiles/wangera/wangera-manual-v2.json
 ```
 
 A script minden JSON mellé létrehozza / felülírja az egyedi nevű `*-profile.png` képet. A V2 JSON profilokhoz is generál grafikont.

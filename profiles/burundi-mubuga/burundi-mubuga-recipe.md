@@ -76,7 +76,7 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ## Mérleg / stop workflow – V1 (időalapú)
 
-Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
+Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-manual.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
@@ -84,7 +84,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`burundi-mubuga-38s.json`).
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`burundi-mubuga-38s-scale-v2.json`](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2.json)
+**V2 profil fájl:** [`burundi-mubuga-scale.json`](profiles/burundi-mubuga/burundi-mubuga-scale.json)
 
 ### V2 paraméterek
 

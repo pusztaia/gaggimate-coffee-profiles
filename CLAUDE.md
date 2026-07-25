@@ -12,7 +12,7 @@ Regenerate profile charts from JSON (requires `matplotlib`):
 
 ```bash
 python3 tools/render_profiles.py                                   # all profiles under profiles/**/*.json
-python3 tools/render_profiles.py profiles/wangera/wangera-stable-38s-945c.json  # single profile
+python3 tools/render_profiles.py profiles/wangera/wangera-manual-v2.json  # single profile
 ```
 
 Output is always written next to the source JSON as `{json-stem}-profile.png` (overwrites existing).
@@ -35,7 +35,7 @@ There is no build step, package manager, linter, or test suite in this repo (the
 
 ## Repository structure
 
-- `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`. Even when a coffee has both a V1 and a V2 profile, there is still only **one** `{dir}-recipe.md` and **one** `{dir}-changelog.md` per coffee — V2-specific content goes in a `## V2 – Bluetooth Scale Edition` section within the same file, not a separate file. A coffee doesn't strictly need a V1 profile (e.g. a coffee can ship with only a `-scale-v2.json`), but if a V1 baseline already exists it is never deleted when a V2 version is added.
+- `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`. Even when a coffee has both a V1 and a V2 profile, there is still only **one** `{dir}-recipe.md` and **one** `{dir}-changelog.md` per coffee — V2-specific content goes in a `## V2 – Bluetooth Scale Edition` section within the same file, not a separate file. A coffee doesn't strictly need a V1 profile (e.g. a coffee can ship with only a `-scale.json`), but if a V1 baseline already exists it is never deleted when a V2 version is added.
 - `schema/profile.json` — **this is the JSON Schema for the profile format**, not a sample profile. It's the canonical documentation of every field GaggiMate firmware accepts, cross-referenced to firmware source lines (`src/display/models/profile.h`, `src/display/core/process/BrewProcess.h`, etc.). When in doubt about what a field does or what values are valid, read the `description` text in this file rather than inferring from an example profile — per its own `$comment`, if the schema and the real firmware parser ever disagree, the parser wins.
 - `tools/render_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
 - `index.html` — single-file static gallery: hardcoded cards linking to each profile's JSON/PNG, plus a tab section that `fetch()`s each coffee's recipe/changelog Markdown at runtime and renders it client-side (see the `file:` entries and the `fetch(entry.file, ...)` call near the end of the file). Adding a new profile means updating both the profile's own directory *and* the corresponding card/entry in `index.html`.
@@ -49,19 +49,21 @@ A profile is `{ label, type, description, temperature, utility, phases[] }`. Roo
 - **`type: "pro"`** (every real profile in this repo) — `duration` on each phase is always a **hard cap**; a `targets[]` stop condition can only end a phase *early*, never extend it past `duration`. (`type: "standard"` behaves oppositely — a volumetric target blocks the duration timeout — but this repo doesn't use standard profiles.)
 - **Phases** run in order; each has `pump` (pressure- or flow-controlled, with the non-selected field acting as a soft limit — `0` means "no limit", `-1` means "hold whatever was measured at phase entry"), an optional `transition` (ramp easing from the previous setpoint), and optional `targets[]`.
 - **`targets[]`** are OR-combined and evaluated every 100 ms; the first one to fire ends the phase. `operator` must be lowercase `"gte"` or `"lte"` — any other string (including `"gt"` or `"GTE"`) silently falls back to `lte` in the firmware parser, a common source of profiles that behave backwards. For `type: "volumetric"`, `value: 0` means "no target, run full duration."
-- **V1 vs V2 naming convention** used throughout this repo (not a firmware concept): "V1" profiles are pure time-based (no `targets`, yield is only checked by weighing the cup separately). "V2" / `-scale-v2.json` profiles add a `volumetric` target (BOOKOO Themis Ultra beverage-weight stop) to the extraction phase, with a longer `duration` acting as a safety-timeout fallback if the Bluetooth scale disconnects or isn't in brew-by-weight mode.
+- **V1 vs V2 naming convention** used throughout this repo (not a firmware concept): "V1" profiles are pure time-based (no `targets`, yield is only checked by weighing the cup separately). "V2" / `-scale.json` profiles add a `volumetric` target (BOOKOO Themis Ultra beverage-weight stop) to the extraction phase, with a longer `duration` acting as a safety-timeout fallback if the Bluetooth scale disconnects or isn't in brew-by-weight mode.
 
 ## File naming convention (see `FILE_NAMING.md` for full detail)
 
 ```
-profiles/{coffee-slug}/{coffee-slug}-{time}[{temp}].json        # V1 (e.g. burundi-mubuga-38s.json)
-profiles/{coffee-slug}/{v1-json-stem}-scale-v2.json              # V2 (e.g. burundi-mubuga-38s-scale-v2.json)
-profiles/{coffee-slug}/{json-stem}-profile.png                   # auto-generated chart
+profiles/{coffee-slug}/{coffee-slug}-manual.json   # V1, time-based (e.g. kirinyaga-manual.json)
+profiles/{coffee-slug}/{coffee-slug}-scale.json    # V2, BOOKOO scale-based (e.g. kirinyaga-scale.json)
+profiles/{coffee-slug}/{json-stem}-profile.png     # auto-generated chart
 profiles/{coffee-slug}/{coffee-slug}-recipe.md
 profiles/{coffee-slug}/{coffee-slug}-changelog.md
 ```
 
-All names: lowercase, hyphen-separated, no accents/spaces/punctuation (except the file extension). `945c` in a filename means 94.5°C (decimal point dropped for filename safety). The old V1 profile is always kept alongside a new V2 version — never delete/replace it.
+`profiles/kirinyaga/` is the reference example: exactly one `-manual.json` and one `-scale.json`. If a coffee has multiple variants of the same type (e.g. two temperature options), append `-v1`, `-v2`, ... to both the manual and scale filenames, keeping the same number for the same variant (see `profiles/wangera/`: `wangera-manual-v1.json`/`wangera-scale-v1.json` are the 94.0°C pair, `-v2` is the 94.5°C pair). A coffee doesn't need both types — e.g. `honduras-las-calaveras-scale.json` has no manual counterpart.
+
+All names: lowercase, hyphen-separated, no accents/spaces/punctuation (except the file extension). An existing manual profile is never deleted when a scale version is added — the one documented exception is `kirinyaga/`, where an old separately-kept baseline pair was explicitly removed at the user's request.
 
 ## Recipe.md content conventions
 

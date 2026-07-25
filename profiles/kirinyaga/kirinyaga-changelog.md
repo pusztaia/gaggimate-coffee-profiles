@@ -6,6 +6,11 @@
 
 # Changelog – Kirinyaga PB Tea Rose
 
+## Repo konzisztencia (2026-07-25)
+
+- A korábbi, külön megtartott "37s" alap-profilpár (`kirinyaga-37s.json`, `kirinyaga-37s-scale-v2.json`) törölve, mert a mappában innentől csak egy V1/V2 pár marad.
+- A fő Tea Rose pár átnevezve: `kirinyaga-tea-rose-37s.json` → `kirinyaga-manual.json`, `kirinyaga-tea-rose-37s-scale-v2.json` → `kirinyaga-scale.json`. A PNG-k újragenerálva az új nevekkel.
+
 ## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
@@ -14,8 +19,7 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 43.0 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `kirinyaga-tea-rose-37s-scale-v2.json`
-- Új profil fájl: `kirinyaga-37s-scale-v2.json` (korábbi alap Scale V2 változata)
+- Új profil fájl: `kirinyaga-scale.json`
 - Safety timeout: 45 s (Bluetooth disconnect fallback)
 
 ### Changed

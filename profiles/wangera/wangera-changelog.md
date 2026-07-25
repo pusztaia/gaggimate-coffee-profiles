@@ -1,5 +1,9 @@
 # Changelog – Kenya Wangera Creamy Fruit
 
+## Repo konzisztencia (2026-07-25)
+
+- A négy JSON fájlnév átalakítva a `kirinyaga/` mintájára: `wangera-stable-38s.json` → `wangera-manual-v1.json` (94.0 °C), `wangera-stable-38s-945c.json` → `wangera-manual-v2.json` (94.5 °C), `wangera-stable-38s-scale-v2.json` → `wangera-scale-v1.json` (94.0 °C), `wangera-stable-38s-945c-scale-v2.json` → `wangera-scale-v2.json` (94.5 °C). A `-v1`/`-v2` sorszám a manual és scale oldalon ugyanazt a hőmérséklet-variánst jelöli. A PNG-k újragenerálva.
+
 ## Repo konzisztencia (2026-07-23)
 
 - A két V2 JSON `label`/`description` mezőjében javítva egy elgépelés: "Scale V5" → "Scale V2" (a PNG grafikonok újragenerálva az új címmel).
@@ -12,8 +16,8 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 42.0 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `wangera-stable-38s-945c-scale-v2.json`
-- Új profil fájl: `wangera-stable-38s-scale-v2.json` (94.0 C változat)
+- Új profil fájl: `wangera-scale-v2.json`
+- Új profil fájl: `wangera-scale-v1.json` (94.0 C változat)
 - Safety timeout: 45 s (Bluetooth disconnect fallback)
 
 ### Changed

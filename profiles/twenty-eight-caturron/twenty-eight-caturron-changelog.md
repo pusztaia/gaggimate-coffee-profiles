@@ -1,6 +1,10 @@
 
 # Changelog – Twenty Eight Finca el Recreo Caturron (twenty-eight-caturron)
 
+## Repo konzisztencia (2026-07-25)
+
+- A JSON fájlnevek átalakítva: `caturron-flavor-42s.json` → `caturron-manual.json`, `caturron-flavor-42s-scale-v2.json` → `caturron-scale.json` (a `kirinyaga/` mintáját követve, a könyvtárnévnél rövidebb `caturron` azonosítót megtartva). A PNG-k újragenerálva.
+
 ## V2 – Bluetooth Scale Edition (2026-07-06)
 
 ### Added
@@ -9,7 +13,7 @@
 - Yield-based stop: automatikus shot stop beverage weight alapján
 - Automatic shot stop: 42.0 g beverage weight elérésekor
 - Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
-- Új profil fájl: `caturron-flavor-42s-scale-v2.json`
+- Új profil fájl: `caturron-scale.json`
 - Safety timeout: 50 s (Bluetooth disconnect fallback)
 
 ### Changed

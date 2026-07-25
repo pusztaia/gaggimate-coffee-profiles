@@ -76,7 +76,7 @@ A profil targetless, ezért idő alapján fut végig. A célhozamot külön mér
 
 ## Mérleg / stop workflow – V1 (időalapú)
 
-Ez a recept **idő/fázis alapú GaggiMate profil** (`el-salvador-ochupse-31s-93c.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
+Ez a recept **idő/fázis alapú GaggiMate profil** (`el-salvador-ochupse-manual.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
@@ -84,7 +84,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`el-salvador-ochupse-31s-93
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`el-salvador-ochupse-31s-93c-scale-v2.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2.json)
+**V2 profil fájl:** [`el-salvador-ochupse-scale.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-scale.json)
 
 A BOOKOO Themis Ultra legyen bekapcsolva, párosítva és nullázva a főzés előtt. A gyártó szerint a Themis Ultra Bluetooth 5.0 kapcsolatot használ; az eszköz neve jellemzően `BOOKOO_SC U XXXX` formátumú. A GaggiMate dokumentációja szerint a `volumetric` target Bluetooth mérleggel működik a legpontosabban.
 

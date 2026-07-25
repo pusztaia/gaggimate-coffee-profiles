@@ -46,7 +46,7 @@ Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot 
 
 ### El Salvador Ochupse Grape Rose 31s 93C – Time Based
 
-![El Salvador Ochupse Grape Rose 31s 93C](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-profile.png)
+![El Salvador Ochupse Grape Rose 31s 93C](profiles/el-salvador-ochupse/el-salvador-ochupse-manual-profile.png)
 
 ---
 
@@ -56,35 +56,35 @@ Ezek a profilok BOOKOO Themis Ultra Bluetooth mérleggel automatikusan megállna
 
 ### Wangera Stable Start 94.5C – Scale V2
 
-![Wangera Scale V2 94.5C](profiles/wangera/wangera-stable-38s-945c-scale-v2-profile.png)
+![Wangera Scale V2 94.5C](profiles/wangera/wangera-scale-v2-profile.png)
 
 ### Wangera Stable Start 94.0C – Scale V2
 
-![Wangera Scale V2 94.0C](profiles/wangera/wangera-stable-38s-scale-v2-profile.png)
+![Wangera Scale V2 94.0C](profiles/wangera/wangera-scale-v1-profile.png)
 
 ### Burundi Mubuga Melon Currant – Scale V2
 
-![Burundi Mubuga Scale V2](profiles/burundi-mubuga/burundi-mubuga-38s-scale-v2-profile.png)
+![Burundi Mubuga Scale V2](profiles/burundi-mubuga/burundi-mubuga-scale-profile.png)
 
 ### Colombia Manos Juntas Jam Mango – Scale V2
 
-![Colombia Manos Juntas Scale V2](profiles/colombia-manos-juntas/colombia-manos-juntas-39s-scale-v2-profile.png)
+![Colombia Manos Juntas Scale V2](profiles/colombia-manos-juntas/colombia-manos-juntas-scale-profile.png)
 
 ### Kirinyaga PB Tea Rose – Scale V2
 
-![Kirinyaga Scale V2](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2-profile.png)
+![Kirinyaga Scale V2](profiles/kirinyaga/kirinyaga-scale-profile.png)
 
 ### Twenty Eight Finca el Recreo Caturron Flavor – Scale V2
 
-![Twenty Eight Caturron Scale V2](profiles/twenty-eight-caturron/caturron-flavor-42s-scale-v2-profile.png)
+![Twenty Eight Caturron Scale V2](profiles/twenty-eight-caturron/caturron-scale-profile.png)
 
 ### El Salvador Ochupse Grape Rose – Scale V2
 
-![El Salvador Ochupse Scale V2](profiles/el-salvador-ochupse/el-salvador-ochupse-31s-93c-scale-v2-profile.png)
+![El Salvador Ochupse Scale V2](profiles/el-salvador-ochupse/el-salvador-ochupse-scale-profile.png)
 
 ### Honduras Las Calaveras – Scale V2
 
-![Honduras Las Calaveras Scale V2](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-v2-profile.png)
+![Honduras Las Calaveras Scale V2](profiles/honduras-las-calaveras/honduras-las-calaveras-scale-profile.png)
 
 ---
 

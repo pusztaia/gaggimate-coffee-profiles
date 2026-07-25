@@ -1,6 +1,6 @@
 # Changelog – Honduras Las Calaveras
 
-## V1 – Initial BOOKOO Scale Profile (2026-07-23)
+## V2 – Initial BOOKOO Scale Profile (2026-07-23)
 
 ### Added
 
@@ -26,4 +26,8 @@
 ## Repo konzisztencia (2026-07-23)
 
 - A recept és changelog fájl átnevezve `honduras-las-calaveras-recipe.md` / `honduras-las-calaveras-changelog.md` névre (a JSON-fájlnév-alapú `-39g-92c-scale-recipe.md` helyett), a FILE_NAMING.md könyvtárnév-alapú konvenciója szerint.
-- A JSON átnevezve `honduras-las-calaveras-39g-92c-scale.json` → `honduras-las-calaveras-scale-v2.json`, a repo többi profiljánál használt `-scale-v2` végződés szerint (nincs külön időalapú V1 verzió, ezért nincs profilidő a névben); a PNG újragenerálva az új névvel.
+- A JSON átnevezve `honduras-las-calaveras-39g-92c-scale.json` → `honduras-las-calaveras-scale.json`, a repo `kirinyaga/`-mintájú manual/scale konvenciója szerint (nincs külön időalapú manual verzió, ezért csak a `-scale.json` létezik); a PNG újragenerálva az új névvel.
+
+## Repo konzisztencia (2026-07-25)
+
+- A fentebbi `-scale.json` fájlnév a `kirinyaga/` mintáját követi, ami mostantól a repo egészének egységes manual/scale konvenciója.

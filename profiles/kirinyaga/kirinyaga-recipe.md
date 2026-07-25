@@ -70,7 +70,7 @@ Automatikus előreléptető targetek nincsenek; a profil idő alapján fut végi
 
 ## Mérleg / stop workflow – V1 (időalapú)
 
-Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
+Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-manual.json`). A célhozamot külön mérlegen kell figyelni és kézzel megállítani.
 
 ---
 
@@ -78,7 +78,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-tea-rose-37s.jso
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`kirinyaga-tea-rose-37s-scale-v2.json`](profiles/kirinyaga/kirinyaga-tea-rose-37s-scale-v2.json)
+**V2 profil fájl:** [`kirinyaga-scale.json`](profiles/kirinyaga/kirinyaga-scale.json)
 
 ### V2 paraméterek
 

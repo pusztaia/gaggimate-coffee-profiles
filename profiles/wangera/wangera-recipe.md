@@ -85,7 +85,7 @@ A tényleges shotidőt a Bluetooth mérleg targetjei rövidítik. A `duration` �
 
 A mérleg nélküli recept továbbra is idő/fázis alapú GaggiMate profil:
 
-- `wangera-stable-38s-945c.json`
+- `wangera-manual-v2.json`
 - a célhozamot külön mérlegen kell figyelni;
 - szükség esetén kézzel kell megállítani.
 
@@ -99,8 +99,8 @@ A verziószám **szándékosan V2 maradt**. A meglévő V2 JSON-fájlok tartalma
 
 **Változatlan fájlnevek:**
 
-- [`wangera-stable-38s-scale-v2.json`](profiles/wangera/wangera-stable-38s-scale-v2.json) – 94.0 °C
-- [`wangera-stable-38s-945c-scale-v2.json`](profiles/wangera/wangera-stable-38s-945c-scale-v2.json) – 94.5 °C
+- [`wangera-scale-v1.json`](profiles/wangera/wangera-scale-v1.json) – 94.0 °C
+- [`wangera-scale-v2.json`](profiles/wangera/wangera-scale-v2.json) – 94.5 °C
 
 ### V2 paraméterek
 

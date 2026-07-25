@@ -31,28 +31,37 @@ Minden kávénak saját könyvtára van. A könyvtár neve a kávé rövid, URL-
 
 ## JSON profilfájlok
 
-A GaggiMate Pro-ba importálható profil. Neve tartalmazza a kávé azonosítóját és a profil legfontosabb paraméterét:
+A GaggiMate Pro-ba importálható profil. Neve a kávé azonosítójából és a profil típusából áll — a minta a `kirinyaga/` könyvtár:
 
 ```
-{kávé-azonosító}-{profilidő}[{hőmérséklet}].json
+{kávé-azonosító}-manual.json   # időalapú (V1) profil
+{kávé-azonosító}-scale.json    # BOOKOO Bluetooth scale-alapú (V2) profil
+```
+
+Ha egy kávénak több manual vagy több scale változata is van (pl. eltérő hőmérséklet-variánsok), a fájlnév végén sorszám különbözteti meg őket:
+
+```
+{kávé-azonosító}-manual-v1.json / -v2.json / ...
+{kávé-azonosító}-scale-v1.json  / -v2.json / ...
 ```
 
 **Példák:**
 
 | Fájlnév | Mit jelent |
 |---|---|
-| `wangera-stable-38s-945c.json` | Wangera, Stable Start profil, 38 s, 94.5 °C |
-| `wangera-stable-38s.json` | Wangera, Stable Start profil, 38 s (korábbi verzió) |
-| `burundi-mubuga-38s.json` | Burundi Mubuga, 38 s profil |
-| `colombia-manos-juntas-39s.json` | Colombia Manos Juntas, 39 s profil |
-| `kirinyaga-tea-rose-37s.json` | Kirinyaga, Tea Rose profil, 37 s |
-| `kirinyaga-37s.json` | Kirinyaga, 37 s (korábbi verzió) |
-| `caturron-flavor-42s.json` | Caturron, Flavor profil, 42 s |
+| `kirinyaga-manual.json` / `kirinyaga-scale.json` | Kirinyaga — a minta: egy manual + egy scale profil |
+| `burundi-mubuga-manual.json` / `burundi-mubuga-scale.json` | Burundi Mubuga — szintén egy-egy profil |
+| `colombia-manos-juntas-manual.json` / `colombia-manos-juntas-scale.json` | Colombia Manos Juntas |
+| `caturron-manual.json` / `caturron-scale.json` | Twenty Eight Caturron (a könyvtárnévnél rövidebb `caturron` azonosítóval) |
+| `wangera-manual-v1.json` / `wangera-manual-v2.json` | Wangera, két hőmérséklet-variáns (94.0 °C / 94.5 °C), időalapú |
+| `wangera-scale-v1.json` / `wangera-scale-v2.json` | Wangera, ugyanaz a két variáns, scale-alapú — a `-v1`/`-v2` sorszám a manual és a scale oldalon ugyanazt a variánst jelöli |
+| `honduras-las-calaveras-scale.json` | Honduras Las Calaveras — csak scale profil létezik, nincs manual változat |
 
 **Szabályok:**
-- Ha egy könyvtárban több JSON van, mindegyik egyedi nevet kap.
-- A hőmérséklet csak akkor kerül a névbe, ha különböző hőmérsékletű verziók is léteznek.
-- `945c` = 94.5 °C (a pont elhagyva, hogy fájlnév-biztonságos legyen).
+- Ha egy kávénak csak egy manual és egy scale profilja van, nincs sorszám a néven.
+- Ha egy kávénak csak az egyik típusból (manual vagy scale) van profilja, a másik egyszerűen hiányzik — nincs placeholder fájl.
+- A `-v1`, `-v2`, ... sorszám kizárólag akkor jelenik meg, ha ugyanabból a típusból (manual vagy scale) több variáns is létezik ugyanabban a könyvtárban.
+- Egy meglévő manual profilt új scale verzió hozzáadásakor nem törlünk (a `kirinyaga/` mappa a kivétel, ahol a régi, külön megtartott alap-variáns explicit kérésre lett eltávolítva).
 
 ---
 
@@ -68,11 +77,10 @@ A `tools/render_profiles.py` script generálja őket a JSON fájlokból. A PNG n
 
 | JSON | Generált PNG |
 |---|---|
-| `wangera-stable-38s-945c.json` | `wangera-stable-38s-945c-profile.png` |
-| `wangera-stable-38s.json` | `wangera-stable-38s-profile.png` |
-| `burundi-mubuga-38s.json` | `burundi-mubuga-38s-profile.png` |
-| `kirinyaga-tea-rose-37s.json` | `kirinyaga-tea-rose-37s-profile.png` |
-| `kirinyaga-37s.json` | `kirinyaga-37s-profile.png` |
+| `kirinyaga-manual.json` | `kirinyaga-manual-profile.png` |
+| `kirinyaga-scale.json` | `kirinyaga-scale-profile.png` |
+| `wangera-manual-v1.json` | `wangera-manual-v1-profile.png` |
+| `wangera-scale-v2.json` | `wangera-scale-v2-profile.png` |
 
 **Szabály:** Ha egy könyvtárban több JSON van, mindegyikhez külön PNG keletkezik. A script automatikusan kezeli ezt.
 
@@ -112,36 +120,14 @@ A profil változástörténete:
 
 ---
 
-## V2 Scale Edition JSON fájlok
-
-A V2 Bluetooth Scale Edition profilok neve az alap JSON nevéből képződik, `scale-v2` utótaggal:
-
-```
-{alap-json-név-kiterjesztés-nélkül}-scale-v2.json
-```
-
-**Példák:**
-
-| Alap JSON (V1) | V2 Scale Edition JSON |
-|---|---|
-| `burundi-mubuga-38s.json` | `burundi-mubuga-38s-scale-v2.json` |
-| `wangera-stable-38s-945c.json` | `wangera-stable-38s-945c-scale-v2.json` |
-| `kirinyaga-tea-rose-37s.json` | `kirinyaga-tea-rose-37s-scale-v2.json` |
-| `colombia-manos-juntas-39s.json` | `colombia-manos-juntas-39s-scale-v2.json` |
-| `caturron-flavor-42s.json` | `caturron-flavor-42s-scale-v2.json` |
-
-**Szabály:** A V1 alap profil megmarad; a V2 verzió mindig külön fájl. A régi időalapú profilokat nem töröljük.
-
----
-
 ## Összefoglalás
 
 | Fájltípus | Névképzés alapja | Minta |
 |---|---|---|
 | **Könyvtár** | kávé neve | `burundi-mubuga/` |
-| **JSON (V1)** | kávé + profil paraméterei | `burundi-mubuga-38s.json` |
-| **JSON (V2)** | V1 JSON neve + `-scale-v2` | `burundi-mubuga-38s-scale-v2.json` |
-| **PNG** | JSON neve + `-profile` | `burundi-mubuga-38s-profile.png` |
+| **JSON (V1)** | kávé azonosító + `-manual` (+ `-vN` több variánsnál) | `burundi-mubuga-manual.json` |
+| **JSON (V2)** | kávé azonosító + `-scale` (+ `-vN` több variánsnál) | `burundi-mubuga-scale.json` |
+| **PNG** | JSON neve + `-profile` | `burundi-mubuga-manual-profile.png` |
 | **Recept MD** | könyvtárnév + `-recipe` | `burundi-mubuga-recipe.md` |
 | **Changelog MD** | könyvtárnév + `-changelog` | `burundi-mubuga-changelog.md` |
 
