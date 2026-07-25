@@ -1,1390 +1,541 @@
-<!DOCTYPE html>
-<html lang="hu">
+<!doctype html>
+<html lang="hu" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7d1d2f">
+<meta name="description" content="Moduláris GaggiMate Coffee Profiles katalógus JSON-alapú profilkártyákkal.">
 <title>GaggiMate Coffee Profiles</title>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:       #f5f3f0;
-  --card:     #ffffff;
-  --border:   #ddd8d0;
-  --accent:   #a06020;
-  --dim:      #888;
-  --text:     #1a1612;
-  --radius:   8px;
+:root{
+  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
+  --line:#dfd1c1;--accent:#7d1d2f;--accent2:#b94a31;--gold:#d59842;--blue:#1677b8;
+  --flow:#ef7622;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
+  --radius-xl:32px;--radius-lg:24px;--radius-md:18px;--max:1180px;color-scheme:light;
 }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font: 14px/1.6 system-ui, sans-serif;
-  min-height: 100vh;
+html[data-theme="dark"]{
+  --bg:#171210;--surface:#211a17;--surface2:#2b211d;--text:#f7eee7;--muted:#c3b4a9;
+  --line:#45372f;--accent:#ef7189;--accent2:#ff8b69;--gold:#efb864;--blue:#78b8e6;
+  --flow:#ff9b54;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
+  color-scheme:dark;
 }
-
-/* ── header ── */
-header {
-  padding: 2rem 2.5rem 1.75rem;
-  border-bottom: 1px solid var(--border);
-}
-header h1 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  color: var(--text);
-}
-header p {
-  margin-top: .3rem;
-  color: var(--dim);
-  font-size: .82rem;
-}
-
-/* ── nav ── */
-nav {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border);
-  padding: 0 2.5rem;
-  overflow-x: auto;
-}
-nav button {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--dim);
-  cursor: pointer;
-  font: inherit;
-  font-size: .82rem;
-  padding: .75rem 1rem;
-  white-space: nowrap;
-  transition: color .15s, border-color .15s;
-}
-nav button:hover { color: var(--text); }
-nav button.on { color: var(--accent); border-bottom-color: var(--accent); }
-
-/* ── main ── */
-main {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem 5rem;
-}
-.tab { display: none; }
-.tab.on { display: block; }
-
-/* ── section heading ── */
-h2 {
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 1.25rem;
-}
-
-/* ── profiles grid ── */
-.profiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.card {
-  background: var(--card);
-  display: flex;
-  flex-direction: column;
-}
-.card-head {
-  padding: 1.1rem 1.25rem .8rem;
-}
-.card-head h3 {
-  font-size: .95rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: .15rem;
-}
-.card-head .sub {
-  font-size: .75rem;
-  color: var(--dim);
-}
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .3rem;
-  margin-top: .6rem;
-}
-.pill {
-  font-size: .68rem;
-  padding: .15rem .55rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: var(--dim);
-}
-.pill-proc { border-color: #d8b888; color: #7a4a10; background: #fdf5e8; }
-.pill-note { border-color: #b0d0c8; color: #2a7060; background: #edf6f3; }
-
-/* ── stats row ── */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border);
-}
-.stat {
-  padding: .65rem .5rem;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
-.stat:last-child { border-right: none; }
-.stat-val { display: block; font-size: .95rem; font-weight: 600; color: var(--accent); }
-.stat-key { display: block; font-size: .62rem; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; margin-top: .05rem; }
-
-/* ── chart ── */
-.chart {
-  border-top: 1px solid var(--border);
-  padding: .75rem 1rem;
-}
-.chart img {
-  width: 100%;
-  display: block;
-  border-radius: 4px;
-}
-
-/* ── phase bars ── */
-.phases {
-  border-top: 1px solid var(--border);
-  padding: .5rem 0;
-}
-.phase-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto 90px;
-  align-items: center;
-  gap: .5rem;
-  padding: .3rem 1.25rem;
-  font-size: .75rem;
-}
-.phase-row:hover { background: #f5f0ea; }
-.ph-name { color: var(--text); }
-.ph-cat { font-size: .62rem; color: var(--dim); text-transform: uppercase; }
-.ph-dur { color: var(--dim); text-align: right; }
-.bar-track { background: #ddd8d0; border-radius: 3px; height: 4px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
-.bar-fill.flow { background: #5090b8; }
-
-/* ── card footer ── */
-.card-foot {
-  border-top: 1px solid var(--border);
-  padding: .65rem 1.25rem;
-  display: flex;
-  gap: .4rem;
-  margin-top: auto;
-}
-a.dl {
-  font-size: .72rem;
-  padding: .3rem .7rem;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  color: var(--dim);
-  text-decoration: none;
-  transition: color .15s, border-color .15s;
-}
-a.dl:hover { color: var(--accent); border-color: var(--accent); }
-a.dl.v2 { color: #3a6888; border-color: #a0c0d8; }
-a.dl.v2:hover { color: #1a4a68; border-color: #3a6888; }
-
-/* ── setup ── */
-.kv-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-.kv {
-  background: var(--card);
-  padding: .8rem 1rem;
-}
-.kv-key { font-size: .68rem; color: var(--dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .2rem; }
-.kv-val { font-size: .85rem; font-weight: 500; color: var(--text); }
-
-/* ── generic table ── */
-.tbl {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .78rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-.tbl thead th {
-  background: #ede8e2;
-  color: var(--dim);
-  font-size: .66rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .4px;
-  padding: .5rem .9rem;
-  text-align: left;
-}
-.tbl tbody td {
-  padding: .45rem .9rem;
-  border-top: 1px solid var(--border);
-  color: var(--text);
-}
-.tbl tbody tr:hover td { background: #f5f0ea; }
-.tbl code { font-family: monospace; font-size: .8em; color: #3a6080; }
-.g { color: #3a7a3a; }
-.w { color: #a06020; }
-.r { color: #8a3030; }
-
-/* ── code block ── */
-pre {
-  background: #f0ede8;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.1rem 1.25rem;
-  font-size: .75rem;
-  line-height: 1.55;
-  overflow-x: auto;
-  color: #2a3a4a;
-  font-family: 'Fira Code', monospace;
-  margin-bottom: 2rem;
-}
-.note {
-  border-left: 2px solid var(--accent);
-  background: #fdf5e8;
-  padding: .6rem .9rem;
-  font-size: .78rem;
-  color: #7a4a10;
-  border-radius: 0 4px 4px 0;
-  margin-bottom: 1.25rem;
-}
-h3.sh {
-  font-size: .78rem;
-  font-weight: 600;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  margin: 1.75rem 0 .75rem;
-}
-
-/* ── modal overlay ── */
-.modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(26,22,18,.55);
-  z-index: 100;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2rem 1rem 2rem;
-  overflow-y: auto;
-}
-.modal-backdrop.open { display: flex; }
-.modal {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  max-width: 700px;
-  width: 100%;
-  margin: auto;
-  position: relative;
-}
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem .85rem;
-  border-bottom: 1px solid var(--border);
-}
-.modal-header h2 {
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--text);
-  text-transform: none;
-  letter-spacing: 0;
-  margin: 0;
-}
-.modal-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-  color: var(--dim);
-  padding: .2rem .4rem;
-  border-radius: 4px;
-  line-height: 1;
-}
-.modal-close:hover { color: var(--text); background: var(--border); }
-.modal-body {
-  padding: 1.25rem 1.5rem 1.5rem;
-  font-size: .8rem;
-  line-height: 1.65;
-  color: var(--text);
-}
-/* modal content typography */
-.modal-body h1 { font-size: 1rem; font-weight: 700; margin: 0 0 1rem; color: var(--text); }
-.modal-body h2 { font-size: .82rem; font-weight: 700; color: var(--accent); text-transform: none; letter-spacing: 0; margin: 1.4rem 0 .5rem; border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
-.modal-body h3 { font-size: .77rem; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; margin: 1rem 0 .4rem; }
-.modal-body p { margin-bottom: .7rem; }
-.modal-body ul { margin: .4rem 0 .8rem 1.2rem; }
-.modal-body li { margin-bottom: .25rem; }
-.modal-body strong { color: var(--text); }
-.modal-body table { width: 100%; border-collapse: collapse; font-size: .76rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-.modal-body thead th { background: #ede8e2; color: var(--dim); font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; padding: .4rem .75rem; text-align: left; }
-.modal-body tbody td { padding: .35rem .75rem; border-top: 1px solid var(--border); }
-.modal-body tbody tr:hover td { background: #f5f0ea; }
-.modal-body blockquote { border-left: 2px solid var(--accent); background: #fdf5e8; padding: .5rem .85rem; color: #7a4a10; border-radius: 0 4px 4px 0; margin: .75rem 0; font-size: .75rem; }
-.modal-body code { font-family: monospace; font-size: .82em; color: #3a6080; background: #eef2f5; padding: .05em .3em; border-radius: 3px; }
-.modal-body hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
-
-/* ── standalone Markdown document tab ── */
-.doc-body {
-  max-width: 860px;
-  padding: 0;
-}
-.doc-body > h1:first-child { margin-top: 0; }
-.doc-body img { max-width: 100%; height: auto; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--accent2) 14%,transparent),transparent 34%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,a{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+img{display:block;max-width:100%}
+.skip{position:fixed;left:1rem;top:-5rem;z-index:100;background:var(--text);color:var(--bg);padding:.7rem 1rem;border-radius:999px}.skip:focus{top:1rem}
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:1rem}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;min-width:0}
+.brand-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--gold));color:#fff;box-shadow:var(--shadow-soft);flex:0 0 auto}
+.brand-text{min-width:0}.brand-text strong{display:block;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-text span{display:block;font-size:.72rem;color:var(--muted)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:.25rem}.nav a,.icon-btn{border:1px solid transparent;background:transparent;color:var(--text);text-decoration:none;border-radius:999px;padding:.5rem .72rem;cursor:pointer}
+.nav a:hover,.icon-btn:hover{background:var(--surface2);border-color:var(--line)}
+.container{max-width:var(--max);margin:auto;padding:0 1.1rem}
+.hero{padding:5.5rem 0 3.6rem}
+.hero-grid{display:grid;grid-template-columns:1.22fr .78fr;gap:2rem;align-items:stretch}
+.eyebrow{color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.16em;font-size:.78rem}
+h1{font-size:clamp(2.8rem,7vw,6.4rem);line-height:.92;letter-spacing:-.07em;margin:.7rem 0 1.2rem;max-width:900px}
+h1 span{color:var(--accent)}
+.lead{font-size:clamp(1.05rem,2vw,1.28rem);max-width:760px;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.55rem .85rem;font-weight:760}.chip.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+.hero-card{background:linear-gradient(150deg,var(--accent),#3e1320);color:#fff;border-radius:32px;padding:2rem;box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:400px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-card:before,.hero-card:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}.hero-card:before{width:260px;height:260px;right:-70px;top:-80px}.hero-card:after{width:150px;height:150px;left:-40px;bottom:-55px}.hero-card>*{position:relative;z-index:1}
+.hero-card h2{font-size:2rem;line-height:1.08;margin:0}.hero-card p{opacity:.86;margin:.35rem 0 0}
+.cup{width:180px;height:180px;margin:1rem auto 0}.cup svg{width:100%;height:100%}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:.85rem;margin-top:1.75rem}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.15rem;box-shadow:var(--shadow)}
+.metric .k{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:850}.metric .v{font-size:1.8rem;line-height:1.1;font-weight:950;margin:.3rem 0}.metric .u{font-size:.85rem;color:var(--muted)}
+section{padding:4rem 0;scroll-margin-top:78px}
+.section-head{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:1.5rem}.section-head h2{font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.045em;line-height:1.04;margin:0}.section-head p{max-width:700px;color:var(--muted);margin:.5rem 0 0}
+.toolbar{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:.75rem;margin-bottom:1rem}
+.field{position:relative}.field svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search,.select{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:.78rem 1rem}.search{padding-left:2.7rem}.select{cursor:pointer}
+.filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}.filter{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.55rem .85rem;cursor:pointer;font-weight:800}.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted);margin-bottom:1rem}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}
+.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.profile-card{--card-accent:var(--accent);--card-accent2:var(--accent2);background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;min-width:0}
+.profile-card.featured{box-shadow:var(--shadow)}
+.card-top{padding:1.3rem 1.35rem 1rem;position:relative}.card-top:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--card-accent),var(--card-accent2))}
+.card-kicker{display:flex;justify-content:space-between;gap:.75rem;color:var(--muted);font-size:.76rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em}.card-kicker .kind{color:var(--card-accent)}
+.profile-card h3{font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.04em;line-height:1.05;margin:.55rem 0 .2rem}.subtitle{color:var(--card-accent);font-weight:850}.origin{color:var(--muted);font-size:.88rem;margin-top:.28rem}
+.pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem}.pill{border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:.28rem .55rem;font-size:.72rem}.pill.process{color:var(--card-accent);border-color:color-mix(in srgb,var(--card-accent) 32%,var(--line));background:color-mix(in srgb,var(--card-accent) 8%,var(--surface))}
+.variant-row{display:flex;gap:.6rem;align-items:center;margin-top:1rem}.variant-row label{font-size:.75rem;color:var(--muted);font-weight:800}.variant-select{min-width:0;flex:1;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:.58rem .7rem}
+.card-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.card-stat{padding:.75rem .45rem;text-align:center;border-right:1px solid var(--line)}.card-stat:last-child{border-right:0}.card-stat strong{display:block;font-size:1.02rem}.card-stat span{display:block;font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.1rem}
+.chart-box{padding:1rem 1rem .7rem;background:linear-gradient(180deg,color-mix(in srgb,var(--surface2) 65%,transparent),var(--surface));min-height:250px}.mini-chart{width:100%;height:230px;display:block}.chart-fallback{min-height:230px;display:grid;place-items:center;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;padding:1rem}
+.chart-legend{display:flex;gap:.8rem;flex-wrap:wrap;color:var(--muted);font-size:.72rem;padding:.3rem .2rem 0}.chart-legend i{display:inline-block;width:18px;height:3px;border-radius:99px;margin-right:.28rem;vertical-align:middle}.chart-legend .p i{background:var(--blue)}.chart-legend .f i{background:var(--flow)}.chart-legend .t i{background:var(--card-accent)}
+.phase-list{display:grid;gap:.45rem;padding:.2rem 1rem 1rem}.phase-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.55rem;align-items:center;background:var(--surface2);border:1px solid var(--line);border-radius:13px;padding:.55rem .65rem;font-size:.76rem}.phase-row strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.phase-row span{color:var(--muted)}.phase-row .target{color:var(--card-accent);font-weight:850}
+.card-actions{display:flex;flex-wrap:wrap;gap:.45rem;padding:.9rem 1rem 1rem;margin-top:auto;border-top:1px solid var(--line)}.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.58rem .78rem;cursor:pointer;font-weight:820;font-size:.78rem}.btn:hover{border-color:var(--card-accent);color:var(--card-accent)}.btn.primary{background:var(--card-accent);border-color:var(--card-accent);color:#fff}.btn[hidden]{display:none}
+.empty{grid-column:1/-1;padding:3rem 1rem;text-align:center;border:1px dashed var(--line);border-radius:24px;color:var(--muted)}
+.setup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}.setup-card,.doc-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:1.1rem;box-shadow:var(--shadow-soft)}.setup-card span{display:block;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em}.setup-card strong{display:block;font-size:1.05rem;margin-top:.28rem}
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.doc-card{display:flex;flex-direction:column;min-height:190px}.doc-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent);font-weight:950}.doc-card h3{font-size:1.1rem;margin:.8rem 0 .25rem}.doc-card p{color:var(--muted);font-size:.84rem;margin:0 0 1rem}.doc-card .btn{margin-top:auto;align-self:flex-start}
+.modular{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.code-card{background:#1f1815;color:#f8eee7;border-radius:24px;padding:1.2rem;overflow:auto;box-shadow:var(--shadow)}pre{margin:0;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}.steps{display:grid;gap:.75rem;counter-reset:step}.step{counter-increment:step;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1rem}.step:before{content:counter(step);display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--accent);color:#fff;font-weight:950}.step p{margin:.1rem 0;color:var(--muted)}.step strong{color:var(--text)}
+.notice{border-left:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 13%,var(--surface));padding:1rem 1.1rem;border-radius:0 16px 16px 0;margin-top:1rem}
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:80;background:rgba(12,7,6,.76);backdrop-filter:blur(8px);padding:1rem;overflow:auto}.modal-backdrop.open{display:grid;place-items:center}.modal{width:min(920px,96vw);max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.modal-head{position:sticky;top:0;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);z-index:2}.modal-head h2{font-size:1rem;margin:0}.modal-close{border:1px solid var(--line);background:var(--surface2);color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer}.modal-body{padding:1.2rem 1.4rem 1.6rem}.modal-body h1{font-size:2rem;line-height:1.05}.modal-body h2{font-size:1.45rem;margin-top:1.7rem}.modal-body h3{font-size:1.1rem;margin-top:1.4rem}.modal-body p,.modal-body li{color:var(--muted)}.modal-body table{width:100%;border-collapse:collapse;font-size:.84rem}.modal-body th,.modal-body td{padding:.7rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.modal-body th{background:var(--surface2)}.modal-body pre{background:#1f1815;color:#f8eee7;border-radius:16px;padding:1rem;overflow:auto}.modal-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface2);padding:.08em .3em;border-radius:5px;color:var(--text)}.modal-body blockquote{border-left:4px solid var(--gold);margin:1rem 0;padding:.7rem 1rem;background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:0 12px 12px 0}.modal-body img{border-radius:16px;box-shadow:var(--shadow-soft)}
+.footer-space{height:2rem}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
+@media(max-width:980px){.nav a{display:none}.hero-grid,.modular{grid-template-columns:1fr}.hero-card{min-height:330px}.metrics{grid-template-columns:repeat(3,1fr)}.profile-grid{grid-template-columns:1fr}.setup-grid{grid-template-columns:repeat(2,1fr)}.docs-grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field{grid-column:1/-1}}
+@media(max-width:640px){.hero{padding-top:3.3rem}.hero h1{font-size:3.25rem}.hero-card{min-height:300px}.cup{width:145px;height:145px}.metrics{grid-template-columns:repeat(2,1fr);margin-top:1.25rem}.setup-grid,.docs-grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.card-stats{grid-template-columns:repeat(2,1fr)}.card-stat:nth-child(2){border-right:0}.card-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.section-head{display:block}.phase-row{grid-template-columns:minmax(0,1fr) auto}.phase-row .target{grid-column:1/-1}.brand-text span{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media print{.topbar,.toolbar,.filter-row,.card-actions,.docs-grid,.modular,.modal-backdrop{display:none!important}body{background:#fff}.profile-card,.metric,.setup-card{box-shadow:none;break-inside:avoid}.profile-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-
-<header>
-  <h1>GaggiMate Coffee Profiles</h1>
-  <p>Gaggia Classic Pro 2025 · GaggiMate Pro · DF64V Gen 2 · BOOKOO Themis Ultra · V2 Bluetooth Scale Edition</p>
+<a class="skip" href="#main">Ugrás a tartalomhoz</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" aria-label="Vissza az oldal tetejére">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7.5 4.5h9v6.8a4.5 4.5 0 0 1-9 0V4.5Z" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 7h1.3a2.7 2.7 0 0 1 0 5.4h-1.5M5 19.5h14" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+      </span>
+      <span class="brand-text"><strong>GaggiMate Coffee Profiles</strong><span>Moduláris profil-katalógus</span></span>
+    </a>
+    <nav class="nav" aria-label="Fő navigáció">
+      <a href="#profiles">Profilok</a><a href="#setup">Setup</a><a href="#documents">Dokumentáció</a><a href="#modular">Új profil</a>
+      <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </nav>
+  </div>
 </header>
 
-<nav>
-  <button class="on" onclick="tab('profiles',this)">Profilok</button>
-  <button onclick="tab('setup',this)">Setup</button>
-  <button onclick="openMarkdownTab('grinder',this,'grinder-guidelines')">Darálás</button>
-  <button onclick="tab('guide',this)">Profil készítés</button>
-  <button onclick="tab('schema',this)">Firmware séma</button>
-</nav>
-
-<main>
-
-<!-- ══ PROFILOK ══ -->
-<div id="profiles" class="tab on">
-  <h2>Aktív espresso profilok</h2>
-  <div class="profiles">
-
-                
-
-    
-
-    
-
-    <!-- 9 BAR -->
-    <div class="card">
-      <div class="card-head">
-        <h3>9 Bar Espresso</h3>
-        <div class="sub">Klasszikus baseline</div>
-        <div class="pills">
-          <span class="pill pill-proc">közepes / sötét</span>
-          <span class="pill pill-note">csoki</span>
-          <span class="pill pill-note">mogyoró</span>
-          <span class="pill pill-note">karamell</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">36-40 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">95 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">28 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/9-bar/profile-9bar-profile.png" alt="9 Bar grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Pump</span><span class="ph-cat">brew</span><span class="ph-dur">28 s</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/9-bar/profile-9bar.json" download>↓ JSON</a>
-        <a class="dl" href="#" onclick="openModal('9bar-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('9bar-changelog');return false;">changelog</a>
-      </div>
+<main id="main">
+<div class="container">
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Gaggia Classic Pro · GaggiMate Pro · BOOKOO</div>
+      <h1>Kávéprofilok<br><span>egy helyen</span></h1>
+      <p class="lead">A profilkártyákat nem kézzel tartja karban az index: a <code>profiles/catalog.json</code> és az egyes GaggiMate JSON profilok alapján építi fel őket. Új profil hozzáadásakor az index HTML-hez nem kell hozzányúlni.</p>
+      <div class="chips"><span class="chip accent">JSON-alapú</span><span class="chip">Manual + Scale</span><span class="chip">Interaktív grafikon</span><span class="chip">GitHub Pages kompatibilis</span></div>
     </div>
-
-    <!-- CREMINA LEVER -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Cremina lever machine</h3>
-        <div class="sub">Sötét pörkölésű, lever-style</div>
-        <div class="pills">
-          <span class="pill pill-proc">közepes-sötét / sötét</span>
-          <span class="pill pill-note">édes</span>
-          <span class="pill pill-note">kerek</span>
-          <span class="pill pill-note">csokis-diós</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">27-40 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">86.5 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">40-60 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/cremina-lever/profile-lever-profile.png" alt="Cremina Lever grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">preinfusion start</span><span class="ph-cat">PI</span><span class="ph-dur">2 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">preinfusion</span><span class="ph-cat">PI</span><span class="ph-dur">3 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">soak</span><span class="ph-cat">PI</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">ramp</span><span class="ph-cat">brew</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">ramp-down</span><span class="ph-cat">brew</span><span class="ph-dur">50 s</span><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/cremina-lever/profile-lever.json" download>↓ JSON</a>
-        <a class="dl" href="#" onclick="openModal('cremina-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('cremina-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- DAMIAN\'S LM LEVA -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Damian\'s LM Leva</h3>
-        <div class="sub">Modern specialty, lever-style</div>
-        <div class="pills">
-          <span class="pill pill-proc">világos-közepes / közepes</span>
-          <span class="pill pill-note">tiszta</span>
-          <span class="pill pill-note">gyümölcsös</span>
-          <span class="pill pill-note">hosszú lefolyás</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">36-45 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">89 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">20-45 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/damians-lm-leva/profile-lmleva-profile.png" alt="Damian\'s LM Leva grafikon"></div>
-       <div class="phases">
-        <div class="phase-row"><span class="ph-name">fill start</span><span class="ph-cat">PI</span><span class="ph-dur">2 s</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">fill</span><span class="ph-cat">PI</span><span class="ph-dur">20 s</span><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">preinfusion</span><span class="ph-cat">PI</span><span class="ph-dur">10 s</span><div class="bar-track"><div class="bar-fill" style="width:24%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">rise</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">hold</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">decline</span><span class="ph-cat">brew</span><span class="ph-dur">58 s</span><div class="bar-track"><div class="bar-fill" style="width:24%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/damians-lm-leva/profile-lmleva.json" download>↓ JSON</a>
-        <a class="dl" href="#" onclick="openModal('lmleva-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('lmleva-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- WANGERA -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Kenya Wangera — Stable Start</h3>
-        <div class="sub">Impresso · Kenya, Nyeri / Kirinyaga</div>
-        <div class="pills">
-          <span class="pill pill-proc">washed</span>
-          <span class="pill pill-note">szeder</span>
-          <span class="pill pill-note">tejszín</span>
-          <span class="pill pill-note">pomelo</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">42 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">38 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/wangera/wangera-manual-v2-profile.png" alt="Wangera grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Stronger Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Stable Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:19%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Cream Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Soft Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Blackberry Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">11 s</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Cream Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/wangera/wangera-manual-v2.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/wangera/wangera-scale-v2.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('wangera-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('wangera-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- BURUNDI -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Burundi Mubuga — Melon Currant</h3>
-        <div class="sub">Impresso · Burundi, Ngozi, Mubuga</div>
-        <div class="pills">
-          <span class="pill pill-proc">natural</span>
-          <span class="pill pill-note">sárgadinnye</span>
-          <span class="pill pill-note">alma</span>
-          <span class="pill pill-note">ribizli</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">42.5 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">38 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/burundi-mubuga/burundi-mubuga-manual-profile.png" alt="Burundi grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Fruit Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Currant Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Melon Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Juicy Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">11 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Clean Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/burundi-mubuga/burundi-mubuga-manual.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/burundi-mubuga/burundi-mubuga-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('burundi-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('burundi-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- COLOMBIA -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Colombia Manos Juntas — Jam Mango</h3>
-        <div class="sub">Impresso · Colombia, Cauca, Manos Juntas</div>
-        <div class="pills">
-          <span class="pill pill-proc">anaerobic natural</span>
-          <span class="pill pill-note">vörösáfonya dzsem</span>
-          <span class="pill pill-note">karamell</span>
-          <span class="pill pill-note">mangó</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">43 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">39 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/colombia-manos-juntas/colombia-manos-juntas-manual-profile.png" alt="Colombia grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Jam Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Mango Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:19%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Sweet Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Soft Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Jam Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">12 s</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Caramel Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:46%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('colombia-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('colombia-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- KIRINYAGA -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Kenya Kirinyaga PB — Tea Rose</h3>
-        <div class="sub">Impresso · Kenya, Kirinyaga</div>
-        <div class="pills">
-          <span class="pill pill-proc">washed</span>
-          <span class="pill pill-note">hibiszkusz</span>
-          <span class="pill pill-note">csipkebogyó</span>
-          <span class="pill pill-note">fekete tea</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">43 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">94.5 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">37 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/kirinyaga/kirinyaga-manual-profile.png" alt="Kirinyaga grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Tea Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill flow" style="width:50%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Even Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Hibiscus Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Black Tea Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">12 s</span><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Rosehip Finish</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:47%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/kirinyaga/kirinyaga-manual.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/kirinyaga/kirinyaga-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('kirinyaga-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('kirinyaga-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- ADAPTIVE V2 -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Adaptive v2 — Univerzális</h3>
-        <div class="sub">Light to Medium · Fine grind · 1:2–2.5</div>
-        <div class="pills">
-          <span class="pill pill-proc">univerzális</span>
-          <span class="pill pill-note">adaptív PI</span>
-          <span class="pill pill-note">flow-hold</span>
-          <span class="pill pill-note">93/88 °C</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">38 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">88 °C</span><span class="stat-key">extr. hő</span></div>
-        <div class="stat"><span class="stat-val">25–40 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/adaptive-v2/profile-adapt-profile.png" alt="Adaptive v2 grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Prefill</span><span class="ph-cat">PI</span><span class="ph-dur">≤5 s</span><div class="bar-track"><div class="bar-fill flow" style="width:55%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Fill</span><span class="ph-cat">PI</span><span class="ph-dur">≤12 s</span><div class="bar-track"><div class="bar-fill flow" style="width:55%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Compressing</span><span class="ph-cat">PI</span><span class="ph-dur">≤12 s</span><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Dripping</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Pressurize</span><span class="ph-cat">brew</span><span class="ph-dur">≤6 s</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">≤60 s</span><div class="bar-track"><div class="bar-fill flow" style="width:65%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/adaptive-v2/profile-adapt.json" download>↓ JSON</a>
-        <a class="dl" href="#" onclick="openModal('adaptive-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('adaptive-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- CATURRON -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Twenty Eight Caturron — Flavor</h3>
-        <div class="sub">Twenty Eight · Finca el Recreo, Guatemala</div>
-        <div class="pills">
-          <span class="pill pill-proc">natural</span>
-          <span class="pill pill-note">meggy</span>
-          <span class="pill pill-note">konyakmeggy</span>
-          <span class="pill pill-note">bonbonos édesség</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">42 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">95 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">42 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/twenty-eight-caturron/caturron-manual-profile.png" alt="Caturron grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Fast Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill flow" style="width:53%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Low Pressure Sat.</span><span class="ph-cat">PI</span><span class="ph-dur">7 s</span><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Bloom</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Fruit Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">13 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Sweet Decline</span><span class="ph-cat">brew</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:47%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/twenty-eight-caturron/caturron-manual.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/twenty-eight-caturron/caturron-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('caturron-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('caturron-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- EL SALVADOR OCHUPSE -->
-    <div class="card">
-      <div class="card-head">
-        <h3>El Salvador Ochupse — Grape Rose</h3>
-        <div class="sub">Impresso Micro Roastery · El Salvador, Apaneca-Ilamatepec</div>
-        <div class="pills">
-          <span class="pill pill-proc">natural anaerob</span>
-          <span class="pill pill-note">szőlő</span>
-          <span class="pill pill-note">csipkebogyó</span>
-          <span class="pill pill-note">sárgabarack</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">41 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">93 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">31 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/el-salvador-ochupse/el-salvador-ochupse-manual-profile.png" alt="El Salvador Ochupse grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Grape Wetting</span><span class="ph-cat">PI</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill flow" style="width:50%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Rosehip Saturation</span><span class="ph-cat">PI</span><span class="ph-dur">6 s</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Gentle Ramp</span><span class="ph-cat">brew</span><span class="ph-dur">5 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Apricot Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">12 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Chocolate Finish</span><span class="ph-cat">brew</span><span class="ph-dur">4 s</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl" href="profiles/el-salvador-ochupse/el-salvador-ochupse-manual.json" download>↓ V1</a>
-        <a class="dl v2" href="profiles/el-salvador-ochupse/el-salvador-ochupse-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('el-salvador-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('el-salvador-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
-    <!-- HONDURAS LAS CALAVERAS -->
-    <div class="card">
-      <div class="card-head">
-        <h3>Honduras Las Calaveras</h3>
-        <div class="sub">Impresso · Montecillos, Honduras</div>
-        <div class="pills">
-          <span class="pill pill-proc">natural anaerob</span>
-          <span class="pill pill-note">sangria</span>
-          <span class="pill pill-note">sült alma</span>
-          <span class="pill pill-note">szegfűszeg</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val">18.5 g</span><span class="stat-key">dózis</span></div>
-        <div class="stat"><span class="stat-val">39 g</span><span class="stat-key">hozam</span></div>
-        <div class="stat"><span class="stat-val">92 °C</span><span class="stat-key">hő</span></div>
-        <div class="stat"><span class="stat-val">22–28 s</span><span class="stat-key">idő</span></div>
-      </div>
-      <div class="chart"><img src="profiles/honduras-las-calaveras/honduras-las-calaveras-scale-profile.png" alt="Honduras Las Calaveras grafikon"></div>
-      <div class="phases">
-        <div class="phase-row"><span class="ph-name">Anaerobic Preinfusion</span><span class="ph-cat">PI</span><span class="ph-dur">8 s</span><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div></div>
-        <div class="phase-row"><span class="ph-name">Sangria Extraction</span><span class="ph-cat">brew</span><span class="ph-dur">25 s</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-      </div>
-      <div class="card-foot">
-        <a class="dl v2" href="profiles/honduras-las-calaveras/honduras-las-calaveras-scale.json" download>↓ V2</a>
-        <a class="dl" href="#" onclick="openModal('honduras-recipe');return false;">recept</a>
-        <a class="dl" href="#" onclick="openModal('honduras-changelog');return false;">changelog</a>
-      </div>
-    </div>
-
+    <aside class="hero-card">
+      <div><h2>V2 Bluetooth Scale</h2><p>BOOKOO Themis Ultra · beverage weight stop</p></div>
+      <div class="cup" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><linearGradient id="coffee" x1="0" x2="1"><stop stop-color="#4c111b"/><stop offset="1" stop-color="#a33435"/></linearGradient></defs><ellipse cx="92" cy="146" rx="72" ry="18" fill="rgba(255,255,255,.16)"/><path d="M38 58h112l-10 82c-2 18-17 31-35 31H82c-18 0-33-13-35-31Z" fill="#fff4e7"/><ellipse cx="94" cy="60" rx="55" ry="16" fill="#e9d6c6"/><ellipse cx="94" cy="60" rx="48" ry="12" fill="url(#coffee)"/><path d="M149 77c35-4 39 50 6 56" fill="none" stroke="#fff4e7" stroke-width="16" stroke-linecap="round"/><path d="M75 45c-13-19 9-21 0-40M104 45c-13-19 9-21 0-40" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <div><strong id="heroProfileCount">Profilkatalógus betöltése…</strong><p id="heroVariantCount">A JSON fájlokból élő előnézet készül.</p></div>
+    </aside>
   </div>
-</div>
-
-<!-- ══ SETUP ══ -->
-<div id="setup" class="tab">
-  <h2>Equipment</h2>
-  <div class="kv-grid">
-    <div class="kv"><div class="kv-key">Gép</div><div class="kv-val">Gaggia Classic Pro 2025</div></div>
-    <div class="kv"><div class="kv-key">Vezérlő</div><div class="kv-val">GaggiMate Pro</div></div>
-    <div class="kv"><div class="kv-key">Daráló</div><div class="kv-val">DF64V Gen 2</div></div>
-    <div class="kv"><div class="kv-key">Kések</div><div class="kv-val">SSP Sweet Lab Espresso V3</div></div>
-    <div class="kv"><div class="kv-key">Kosár</div><div class="kv-val">IMS B682TH24.5M</div></div>
-    <div class="kv"><div class="kv-key">Puck screen</div><div class="kv-val">IMS E&amp;B Lab, Ø 2.4 mm, 253 lyuk (DS58.5)</div></div>
-    <div class="kv"><div class="kv-key">Mérleg</div><div class="kv-val">BOOKOO Themis Ultra</div></div>
-    <div class="kv"><div class="kv-key">Kapcsolat</div><div class="kv-val">Bluetooth</div></div>
-    <div class="kv"><div class="kv-key">RPM</div><div class="kv-val">1200 (800–1800)</div></div>
-    <div class="kv"><div class="kv-key">Őrlőskála</div><div class="kv-val">0–90, egész jelölések</div></div>
-    <div class="kv"><div class="kv-key">Dózis</div><div class="kv-val">18.5 g</div></div>
+  <div class="metrics">
+    <article class="metric"><div class="k">Profilcsalád</div><div class="v" id="metricProfiles">—</div><div class="u">katalógusbejegyzés</div></article>
+    <article class="metric"><div class="k">JSON variáns</div><div class="v" id="metricVariants">—</div><div class="u">betölthető profil</div></article>
+    <article class="metric"><div class="k">Scale profil</div><div class="v" id="metricScale">—</div><div class="u">BOOKOO mód</div></article>
+    <article class="metric"><div class="k">Manual profil</div><div class="v" id="metricManual">—</div><div class="u">időalapú mód</div></article>
+    <article class="metric"><div class="k">Dózis</div><div class="v">18,5</div><div class="u">gramm baseline</div></article>
+    <article class="metric"><div class="k">RPM</div><div class="v">1200</div><div class="u">DF64V baseline</div></article>
   </div>
+</section>
 
-  <h2>Profilok összehasonlítása</h2>
-  <table class="tbl">
-    <thead>
-      <tr><th>Kávé</th><th>Feldolgozás</th><th>Hő</th><th>Sat.</th><th>Extract</th><th>Finish</th><th>Grind</th><th>Hozam</th><th>Idő</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Kenya Wangera</td><td>washed</td><td>94.5 °C</td><td>2.3 bar</td><td>7.4 bar</td><td>5.8 bar</td><td>10–11</td><td>42 g</td><td>38 s</td></tr>
-      <tr><td>Burundi Mubuga</td><td>natural</td><td>94.5 °C</td><td>2.2 bar</td><td>7.2 bar</td><td>5.4 bar</td><td>10–11</td><td>42.5 g</td><td>38 s</td></tr>
-      <tr><td>Colombia Manos Juntas</td><td>anaerobic natural</td><td>94.5 °C</td><td>2.3 bar</td><td>7.3 bar</td><td>5.5 bar</td><td>10–11</td><td>43 g</td><td>39 s</td></tr>
-      <tr><td>Kenya Kirinyaga PB</td><td>washed</td><td>94.5 °C</td><td>2.1 bar</td><td>7.6 bar</td><td>5.6 bar</td><td>9–10</td><td>43 g</td><td>37 s</td></tr>
-      <tr><td>Twenty Eight Caturron</td><td>natural</td><td>95.0 °C</td><td>2.0 bar</td><td>7.2 bar</td><td>5.6 bar</td><td>8–10</td><td>42 g</td><td>42 s</td></tr>
-      <tr><td>El Salvador Ochupse</td><td>natural anaerob</td><td>93.0 °C</td><td>2.2 bar</td><td>7.2 bar</td><td>5.4 bar</td><td>10–11</td><td>41 g</td><td>31 s</td></tr>
-      <tr><td>Honduras Las Calaveras</td><td>natural anaerob</td><td>92.0 °C</td><td>2.0 bar</td><td>7.2 bar</td><td>—</td><td>10–11</td><td>39 g</td><td>22–28 s</td></tr>
-    </tbody>
-  </table>
-
-  <h2>V1 vs V2</h2>
-  <table class="tbl">
-    <thead><tr><th></th><th>V1 – Time Based</th><th>V2 – Scale Edition</th></tr></thead>
-    <tbody>
-      <tr><td>Shot stop</td><td>Időalapú (fix s)</td><td class="g">Beverage weight (g)</td></tr>
-      <tr><td>Mérleg</td><td>Kézi figyelés</td><td class="g">Automatikus Bluetooth stop</td></tr>
-      <tr><td>Konzisztencia</td><td class="w">Flow-függő</td><td class="g">Reprodukálható hozam</td></tr>
-      <tr><td>Fallback</td><td class="r">Nincs</td><td class="g">Phase duration hard cap</td></tr>
-      <tr><td>JSON target</td><td>—</td><td class="g"><code>volumetric gte X</code> az extraction fázisban</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- ══ DARÁLÁSI ÚTMUTATÓ ══ -->
-<div id="grinder" class="tab">
-  <div class="modal-body doc-body" id="grinder-body">
-    <p>A darálási útmutató betöltéséhez válaszd a Darálás menüpontot.</p>
+<section id="profiles">
+  <div class="section-head"><div><h2>Profilkatalógus</h2><p>Keresés, szűrés és variánsváltás. A kártyák fázisai, hőmérséklete és stop targetje az aktuálisan kiválasztott GaggiMate JSON-ból érkezik.</p></div></div>
+  <div class="toolbar">
+    <div class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="searchInput" type="search" placeholder="Keresés név, eredet, feldolgozás vagy ízjegy alapján…" autocomplete="off"></div>
+    <select class="select" id="processSelect" aria-label="Feldolgozás szűrése"><option value="">Minden feldolgozás</option></select>
+    <select class="select" id="sortSelect" aria-label="Rendezés"><option value="featured">Kiemeltek előre</option><option value="title">Név szerint</option><option value="temperature">Hőmérséklet szerint</option></select>
   </div>
-</div>
+  <div class="filter-row" aria-label="Profiltípus szűrése">
+    <button class="filter" data-filter="all" aria-pressed="true">Összes</button>
+    <button class="filter" data-filter="coffee" aria-pressed="false">Kávéspecifikus</button>
+    <button class="filter" data-filter="general" aria-pressed="false">Általános</button>
+    <button class="filter" data-filter="scale" aria-pressed="false">Scale</button>
+    <button class="filter" data-filter="manual" aria-pressed="false">Manual</button>
+  </div>
+  <div id="catalogStatus" class="status">A profilkatalógus betöltése folyamatban…</div>
+  <div id="profileGrid" class="profile-grid" aria-live="polite"></div>
+</section>
 
-<!-- ══ GUIDE ══ -->
-<div id="guide" class="tab">
-  <h2>Profil készítés</h2>
+<section id="setup">
+  <div class="section-head"><div><h2>Setup referencia</h2><p>Az összes kávéspecifikus profil ehhez a hardverhez és baseline-hoz készült.</p></div></div>
+  <div class="setup-grid" id="setupGrid"></div>
+</section>
 
-  <h3 class="sh">Kiindulópont – feldolgozás alapján</h3>
-  <table class="tbl">
-    <thead><tr><th>Feldolgozás</th><th>Alap profil</th><th>Logika</th></tr></thead>
-    <tbody>
-      <tr><td>Washed Kenya / Ethiopia</td><td>Kirinyaga Tea Rose</td><td>Magasabb főnyomás, rövidebb idő, élénk savak</td></tr>
-      <tr><td>Natural Burundi / Ethiopia</td><td>Burundi Mubuga</td><td>Közepes nyomás, édesség megőrzése</td></tr>
-      <tr><td>Anaerobic / Honey</td><td>Colombia Manos Juntas</td><td>Hosszabb extraction, szirupos test</td></tr>
-      <tr><td>Natural Guatemala / Közép-Amerika</td><td>Twenty Eight Caturron</td><td>Magasabb hő, hosszabb bloom</td></tr>
-      <tr><td>Általános washed</td><td>Kenya Wangera</td><td>Stable start, bevált baseline</td></tr>
-    </tbody>
-  </table>
+<section id="documents">
+  <div class="section-head"><div><h2>Dokumentáció</h2><p>A Markdown fájlok az oldalon belül, HTML-formázással nyílnak meg.</p></div></div>
+  <div class="docs-grid" id="docsGrid"></div>
+</section>
 
-  <h3 class="sh">Paraméter hatások</h3>
-  <table class="tbl">
-    <thead><tr><th>Paraméter</th><th>Alacsonyabb</th><th>Magasabb</th></tr></thead>
-    <tbody>
-      <tr><td>Hőmérséklet</td><td>Kevesebb sav, több édesség</td><td>Több sav, több aroma, keserűség kockázat</td></tr>
-      <tr><td>Extraction nyomás</td><td>Lágy, kerek, kevesebb kinyerés</td><td>Intenzív, több test, over-extraction kockázat</td></tr>
-      <tr><td>Finish nyomás</td><td>Lágy lecsengés</td><td>Kemény lecsengés, channeling kockázat</td></tr>
-      <tr><td>Flow limit (extraction)</td><td>Lassabb, több kinyerés</td><td>Gyorsabb, kevesebb kinyerés</td></tr>
-      <tr><td>Hozam (gramm)</td><td>Tömörebb, intenzívebb, édesebb</td><td>Könnyedebb, több savasság, over-extraction kockázat</td></tr>
-      <tr><td>Saturation idő</td><td>Gyorsabb nedvesítés</td><td>Egyenletesebb szaturáció, kevesebb channeling</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sh">Fázis blueprint (meglévő profilok alapján)</h3>
-  <table class="tbl">
-    <thead><tr><th>#</th><th>Fázis</th><th>Kat.</th><th>Idő</th><th>Target</th><th>Nyomás</th><th>Flow</th><th>Transition</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Wetting</td><td>PI</td><td>4–5 s</td><td>flow</td><td>0</td><td>7.5–8.0 g/s</td><td>ease-out / 2 s / adaptive</td></tr>
-      <tr><td>2</td><td>Saturation</td><td>PI</td><td>6–8 s</td><td>pressure</td><td>2.0–2.3 bar</td><td>4.5 g/s</td><td>instant / 0 s / adaptive</td></tr>
-      <tr><td>3</td><td>Bloom</td><td>PI</td><td>4–6 s</td><td>pressure</td><td>0.4–0.5 bar</td><td>0</td><td>ease-out / 2 s / adaptive</td></tr>
-      <tr><td>4</td><td>Ramp</td><td>brew</td><td>5–6 s</td><td>pressure</td><td>7.2–7.6 bar</td><td>2.4 g/s</td><td>linear / 5–6 s / adaptive</td></tr>
-      <tr><td>5</td><td>Extraction</td><td>brew</td><td>11–13 s (V1) / 30 s cap (V2)</td><td>pressure</td><td>7.2–7.6 bar</td><td>2.1–2.2 g/s</td><td>instant / 0 s / adaptive</td></tr>
-      <tr><td>6</td><td>Finish</td><td>brew</td><td>4–6 s</td><td>pressure</td><td>5.4–5.8 bar</td><td>1.7–1.8 g/s</td><td>linear / 4–7 s / adaptive</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sh">Fájlnév konvenció</h3>
-  <table class="tbl">
-    <thead><tr><th>Fájl</th><th>Minta</th></tr></thead>
-    <tbody>
-      <tr><td>Könyvtár</td><td><code>profiles/{eredet-kave}/</code></td></tr>
-      <tr><td>JSON (V1)</td><td><code>{kave}-{ido}[{ho}].json</code></td></tr>
-      <tr><td>JSON (V2)</td><td><code>{v1-stem}-scale-v2.json</code></td></tr>
-      <tr><td>PNG</td><td><code>{json-stem}-profile.png</code> — auto: <code>python3 tools/render_profiles.py</code></td></tr>
-      <tr><td>Recept</td><td><code>{konyvtar}-recipe.md</code></td></tr>
-      <tr><td>Changelog</td><td><code>{konyvtar}-changelog.md</code></td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- ══ SCHEMA ══ -->
-<div id="schema" class="tab">
-  <h2>Firmware séma – GaggiMate Pro 1.8.1</h2>
-
-  <div class="note">A JSON gyökérben csak a séma által definiált mezők érvényesek (<code>additionalProperties: false</code>). Dokumentációt ne tárolj a JSON-ban. A <code>_</code> prefix-szel kezdődő mezők (pl. <code>_recipe</code>) annotációs mezők: a firmware figyelmen kívül hagyja őket.</div>
-
-  <h3 class="sh">Gyökér mezők</h3>
-  <table class="tbl">
-    <thead><tr><th>Mező</th><th>Típus</th><th>Leírás</th></tr></thead>
-    <tbody>
-      <tr><td><code>label</code></td><td>string</td><td>UI-ban megjelenő profilnév</td></tr>
-      <tr><td><code>type</code></td><td><code>"pro"</code></td><td>Mindig <code>pro</code> — multi-phase, PID vezérlés</td></tr>
-      <tr><td><code>description</code></td><td>string</td><td>Rövid egysoros összefoglaló</td></tr>
-      <tr><td><code>temperature</code></td><td>0–150 °C</td><td>Boiler setpoint; fázisok felülírhatják</td></tr>
-      <tr><td><code>utility</code></td><td>boolean</td><td><code>false</code> brew profiloknál</td></tr>
-      <tr><td><code>phases</code></td><td>array</td><td>Fázisok listája, sorban futnak le (min. 1)</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sh">Pump mezők</h3>
-  <table class="tbl">
-    <thead><tr><th>Mező</th><th>Tartomány</th><th>Szerep</th></tr></thead>
-    <tbody>
-      <tr><td><code>target: "pressure"</code></td><td>—</td><td>Nyomás a setpoint, flow a soft limit</td></tr>
-      <tr><td><code>target: "flow"</code></td><td>—</td><td>Flow a setpoint, nyomás a soft limit</td></tr>
-      <tr><td><code>pressure</code></td><td>0–12 bar</td><td>Setpoint vagy soft limit; <code>0</code> = nincs limit; <code>-1</code> = tartsd a mért értéket</td></tr>
-      <tr><td><code>flow</code></td><td>0–15 g/s</td><td>Setpoint vagy soft limit; <code>0</code> = nincs limit; <code>-1</code> = tartsd a mért értéket</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sh">Transition típusok</h3>
-  <table class="tbl">
-    <thead><tr><th>type</th><th>Leírás</th></tr></thead>
-    <tbody>
-      <tr><td><code>instant</code></td><td>Azonnali ugrás</td></tr>
-      <tr><td><code>linear</code></td><td>Egyenletes ramp</td></tr>
-      <tr><td><code>ease-in</code></td><td>Lassan indul, gyorsul</td></tr>
-      <tr><td><code>ease-out</code></td><td>Gyorsan indul, lassan ér célt — ajánlott PI fázisokhoz</td></tr>
-      <tr><td><code>ease-in-out</code></td><td>Lassan indul, gyorsul, lassan ér célt</td></tr>
-    </tbody>
-  </table>
-  <div class="note"><code>adaptive: true</code> — a ramp a ténylegesen mért értékből indul, nem a setpointból. Ajánlott preinfusion → brew átmenetnél.</div>
-
-  <h3 class="sh">Target típusok</h3>
-  <table class="tbl">
-    <thead><tr><th>type</th><th>Egység</th><th>Megjegyzés</th></tr></thead>
-    <tbody>
-      <tr><td><code>volumetric</code></td><td>gramm</td><td class="w">Bluetooth scale + brew-by-weight mód szükséges. Ha hiányzik, csendesen nem tüzel — a duration veszi át.</td></tr>
-      <tr><td><code>pressure</code></td><td>bar</td><td>Jelenlegi mért nyomás</td></tr>
-      <tr><td><code>flow</code></td><td>ml/s</td><td>Jelenlegi mért flow</td></tr>
-      <tr><td><code>pumped</code></td><td>ml</td><td>Fázisban pumpált víz mennyisége — fázis határon nullázódik</td></tr>
-    </tbody>
-  </table>
-  <div class="note"><code>operator</code> csak <code>"gte"</code> vagy <code>"lte"</code> lehet, kisbetűvel. Bármely más string → firmware alapértelmezése <code>lte</code>, ami hibás viselkedést okoz.</div>
-
-  <h3 class="sh">pro típus viselkedése</h3>
-  <table class="tbl">
-    <thead><tr><th>Szabály</th><th>Részlet</th></tr></thead>
-    <tbody>
-      <tr><td><code>duration</code></td><td class="w">Mindig hard cap — a target csak hamarabb zárhatja a fázist, tovább nem tarthatja nyitva</td></tr>
-      <tr><td>Max. duration</td><td>300 s / fázis</td></tr>
-      <tr><td>Target kiértékelés</td><td>Minden 100 ms-ban</td></tr>
-      <tr><td>Target logika</td><td>OR — az első tüzelő target azonnal zárja a fázist</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sh">Minimális V2 JSON sablon</h3>
-<pre>{
-  "label": "Kávé – 18.5g / stop 42g / 94.5C / grind 10-11",
-  "type": "pro",
-  "description": "Kávé Scale V2 – 18.5 g / stop 42g volumetric / 94.5C / grind 10-11",
-  "temperature": 94.5,
-  "utility": false,
-  "phases": [
+<section id="modular">
+  <div class="section-head"><div><h2>Új profil hozzáadása</h2><p>Az index kódját nem kell másolni vagy bővíteni. Egy új mappa és egy katalógusbejegyzés elegendő.</p></div></div>
+  <div class="modular">
+    <div class="steps">
+      <div class="step"><p><strong>Hozd létre a profil mappáját</strong><br><code>profiles/uj-kave/</code>, a fájlelnevezési konvenció szerint.</p></div>
+      <div class="step"><p><strong>Tedd bele a JSON, PNG, recipe és changelog fájlokat</strong><br>A PNG neve automatikusan a JSON stem + <code>-profile.png</code>.</p></div>
+      <div class="step"><p><strong>Adj hozzá egy objektumot a katalógushoz</strong><br>A <code>profiles/catalog.json</code> <code>profiles</code> tömbjéhez.</p></div>
+      <div class="step"><p><strong>Nem kell módosítani az indexet</strong><br>Az új kártya, variánsok, fázislista és mini grafikon automatikusan megjelenik.</p></div>
+    </div>
+    <div>
+      <div class="code-card"><pre>{
+  "id": "ethiopia-yirgacheffe",
+  "folder": "ethiopia-yirgacheffe",
+  "title": "Ethiopia Yirgacheffe",
+  "subtitle": "Floral Citrus",
+  "origin": "Pörkölő · Ethiopia",
+  "process": "washed",
+  "notes": ["jázmin", "citrom", "fekete tea"],
+  "grind": "9–10",
+  "dose": 18.5,
+  "yield": "43 g",
+  "expectedTime": "37 s",
+  "page": "ethiopia-yirgacheffe.html",
+  "variants": [
     {
-      "name": "Wetting", "phase": "preinfusion", "valve": 1, "duration": 5,
-      "temperature": 94.5,
-      "transition": { "type": "ease-out", "duration": 2, "adaptive": true },
-      "pump": { "target": "flow", "pressure": 0, "flow": 8.0 }
+      "id": "scale",
+      "label": "Scale V2",
+      "kind": "scale",
+      "file": "ethiopia-yirgacheffe-scale.json",
+      "default": true
     },
     {
-      "name": "Saturation", "phase": "preinfusion", "valve": 1, "duration": 8,
-      "temperature": 94.5,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 2.3, "flow": 4.5 }
-    },
-    {
-      "name": "Bloom", "phase": "preinfusion", "valve": 1, "duration": 4,
-      "temperature": 94.5,
-      "transition": { "type": "ease-out", "duration": 2, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 0.5, "flow": 0 }
-    },
-    {
-      "name": "Ramp", "phase": "brew", "valve": 1, "duration": 6,
-      "temperature": 94.5,
-      "transition": { "type": "linear", "duration": 6, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 7.4, "flow": 2.4 }
-    },
-    {
-      "name": "Extraction", "phase": "brew", "valve": 1, "duration": 30,
-      "temperature": 94.5,
-      "transition": { "type": "instant", "duration": 0, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 7.4, "flow": 2.1 },
-      "targets": [{ "type": "volumetric", "operator": "gte", "value": 42.0 }]
-    },
-    {
-      "name": "Finish", "phase": "brew", "valve": 1, "duration": 8,
-      "temperature": 94.5,
-      "transition": { "type": "linear", "duration": 4, "adaptive": true },
-      "pump": { "target": "pressure", "pressure": 5.8, "flow": 1.7 }
+      "id": "manual",
+      "label": "Manual",
+      "kind": "manual",
+      "file": "ethiopia-yirgacheffe-manual.json"
     }
   ]
-}</pre>
+}</pre></div>
+      <div class="notice"><strong>Futtatás:</strong> a dinamikus JSON- és Markdown-betöltéshez GitHub Pages vagy helyi HTTP-szerver szükséges. Példa: <code>python -m http.server 8000</code>.</div>
+    </div>
+  </div>
+</section>
+<div class="footer-space"></div>
 </div>
-
 </main>
 
-<!-- ══ MODAL OVERLAY ══ -->
-<div class="modal-backdrop" id="modal-backdrop" onclick="closeModalOutside(event)">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <h2 id="modal-title"></h2>
-      <button class="modal-close" onclick="closeModal()" title="Bezárás">✕</button>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
+<div class="modal-backdrop" id="modalBackdrop" role="presentation">
+  <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal-head"><h2 id="modalTitle">Dokumentum</h2><button class="modal-close" id="modalClose" aria-label="Bezárás">×</button></header>
+    <div class="modal-body" id="modalBody"></div>
+  </article>
 </div>
 
-<!-- ══ RECEPT / CHANGELOG MD BETÖLTÉS ══ -->
 <script>
-const MD_CONTENT = {
-  'grinder-guidelines': {
-    title: 'Darálási útmutató – DF64V Gen 2',
-    file: 'GRINDER_GUIDELINES.md'
-  },
-  '9bar-recipe': {
-    title: '9 Bar Espresso – Recept',
-    file: 'profiles/9-bar/9-bar-recipe.md'
-  },
-  '9bar-changelog': {
-    title: '9 Bar Espresso – Changelog',
-    file: 'profiles/9-bar/9-bar-changelog.md'
-  },
-  'cremina-recipe': {
-    title: 'Cremina lever machine – Recept',
-    file: 'profiles/cremina-lever/cremina-lever-recipe.md'
-  },
-  'cremina-changelog': {
-    title: 'Cremina lever machine – Changelog',
-    file: 'profiles/cremina-lever/cremina-lever-changelog.md'
-  },
-  'lmleva-recipe': {
-    title: "Damian's LM Leva – Recept",
-    file: 'profiles/damians-lm-leva/damians-lm-leva-recipe.md'
-  },
-  'lmleva-changelog': {
-    title: "Damian's LM Leva – Changelog",
-    file: 'profiles/damians-lm-leva/damians-lm-leva-changelog.md'
-  },
-  'wangera-recipe': {
-    title: 'Kenya Wangera – Recept',
-    file: 'profiles/wangera/wangera-recipe.md'
-  },
-  'wangera-changelog': {
-    title: 'Kenya Wangera – Changelog',
-    file: 'profiles/wangera/wangera-changelog.md'
-  },
-  'burundi-recipe': {
-    title: 'Burundi Mubuga – Recept',
-    file: 'profiles/burundi-mubuga/burundi-mubuga-recipe.md'
-  },
-  'burundi-changelog': {
-    title: 'Burundi Mubuga – Changelog',
-    file: 'profiles/burundi-mubuga/burundi-mubuga-changelog.md'
-  },
-  'colombia-recipe': {
-    title: 'Colombia Manos Juntas – Recept',
-    file: 'profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md'
-  },
-  'colombia-changelog': {
-    title: 'Colombia Manos Juntas – Changelog',
-    file: 'profiles/colombia-manos-juntas/colombia-manos-juntas-changelog.md'
-  },
-  'kirinyaga-recipe': {
-    title: 'Kirinyaga PB – Recept',
-    file: 'profiles/kirinyaga/kirinyaga-recipe.md'
-  },
-  'kirinyaga-changelog': {
-    title: 'Kirinyaga PB – Changelog',
-    file: 'profiles/kirinyaga/kirinyaga-changelog.md'
-  },
-  'adaptive-recipe': {
-    title: 'Adaptive v2 – Recept',
-    file: 'profiles/adaptive-v2/adaptive-v2-recipe.md'
-  },
-  'adaptive-changelog': {
-    title: 'Adaptive v2 – Changelog',
-    file: 'profiles/adaptive-v2/adaptive-v2-changelog.md'
-  },
-  'caturron-recipe': {
-    title: 'Twenty Eight Caturron – Recept',
-    file: 'profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md'
-  },
-  'caturron-changelog': {
-    title: 'Twenty Eight Caturron – Changelog',
-    file: 'profiles/twenty-eight-caturron/twenty-eight-caturron-changelog.md'
-  },
-  'el-salvador-recipe': {
-    title: 'El Salvador Ochupse – Recept',
-    file: 'profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md'
-  },
-  'el-salvador-changelog': {
-    title: 'El Salvador Ochupse – Changelog',
-    file: 'profiles/el-salvador-ochupse/el-salvador-ochupse-changelog.md'
-  },
-  'honduras-recipe': {
-    title: 'Honduras Las Calaveras – Recept',
-    file: 'profiles/honduras-las-calaveras/honduras-las-calaveras-recipe.md'
-  },
-  'honduras-changelog': {
-    title: 'Honduras Las Calaveras – Changelog',
-    file: 'profiles/honduras-las-calaveras/honduras-las-calaveras-changelog.md'
-  }
-};
+"use strict";
+const CATALOG_URL = "profiles/catalog.json";
+const DOCS = [
+  {title:"README",file:"README.md",type:"MD",description:"Projektáttekintés, profilok, Bluetooth Scale Edition."},
+  {title:"Összefoglaló",file:"SUMMARY.md",type:"MD",description:"Aktuális profilok, ízjegyek és könyvtárszerkezet."},
+  {title:"Brew Guidelines",file:"BREW_GUIDELINES.md",type:"MD",description:"Dózis, hozam, őrlés, puck prep és dial-in."},
+  {title:"Darálási útmutató",file:"GRINDER_GUIDELINES.md",type:"MD",description:"DF64V Gen 2 és SSP Sweet Lab Espresso V3."},
+  {title:"Bluetooth Scale Workflow",file:"BLUETOOTH_SCALE_WORKFLOW.md",type:"MD",description:"BOOKOO párosítás, kalibráció és hibakeresés."},
+  {title:"Profilkészítési útmutató",file:"PROFILE_CREATION_GUIDE.md",type:"MD",description:"GaggiMate JSON séma, fázisok és új profil készítése."},
+  {title:"Fájlelnevezés",file:"FILE_NAMING.md",type:"MD",description:"Mappa-, JSON-, PNG-, recipe- és changelog-nevek."},
+  {title:"Profile Gallery",file:"PROFILE_GALLERY.md",type:"MD",description:"Manual és Scale profilgrafikonok."},
+  {title:"Projekt changelog",file:"CHANGELOG.md",type:"MD",description:"Repository-szintű változások."},
+  {title:"Feldolgozások",file:"speciality_kave_feldolgozasok.md",type:"MD",description:"Washed, natural, honey, anaerob és carbonic."}
+];
 
-const mdCache = new Map();
+const state={catalog:null,profiles:[],filter:"all",query:"",process:"",sort:"featured",loaded:new Map()};
+const $=(sel,root=document)=>root.querySelector(sel);
+const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+function esc(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+function pathFor(entry,file){return `profiles/${entry.folder}/${file}`;}
+function defaultVariant(entry){return entry.variants.find(v=>v.default)||entry.variants[0];}
+function formatNumber(value,digits=1){const n=Number(value);return Number.isFinite(n)?n.toLocaleString("hu-HU",{maximumFractionDigits:digits}):"—";}
+function resolveTemperature(phase,root){const value=Number(phase?.temperature||0);return value===0?Number(root||0):value;}
+function totalDuration(profile){return (profile?.phases||[]).reduce((sum,p)=>sum+Math.max(0,Number(p.duration)||0),0);}
+function lastWeightTarget(profile){let result=null;(profile?.phases||[]).forEach(p=>(p.targets||[]).forEach(t=>{if(t?.type==="volumetric"&&Number(t.value)>0)result=Number(t.value);}));return result;}
+function peakPressure(profile){let peak=0;(profile?.phases||[]).forEach(p=>{const v=Number(p?.pump?.pressure);if(Number.isFinite(v)&&v>=0)peak=Math.max(peak,v);});return peak;}
+function hasKind(entry,kind){return entry.variants.some(v=>v.kind===kind);}
+function isGeneral(entry){return entry.variants.every(v=>v.kind==="general");}
+function recipeFile(entry){return `${entry.folder}-recipe.md`;}
+function changelogFile(entry){return `${entry.folder}-changelog.md`;}
+function pngFile(variant){return variant.file.replace(/\.json$/i,"-profile.png");}
+
+async function fetchJSON(url){
+  const response=await fetch(url,{cache:"no-store"});
+  if(!response.ok)throw new Error(`${response.status} ${response.statusText}`);
+  return response.json();
+}
+async function fetchText(url){
+  const response=await fetch(url,{cache:"no-store"});
+  if(!response.ok)throw new Error(`${response.status} ${response.statusText}`);
+  return response.text();
 }
 
-function inlineMarkdown(text) {
-  const protectedParts = [];
-
-  function protect(fragment) {
-    const index = protectedParts.push(fragment) - 1;
-    return '\uE000' + index + '\uE001';
+async function loadCatalog(){
+  const status=$("#catalogStatus");
+  try{
+    const catalog=await fetchJSON(CATALOG_URL);
+    if(!catalog||!Array.isArray(catalog.profiles))throw new Error("A catalog.json profiles tömbje hiányzik.");
+    state.catalog=catalog;
+    state.profiles=catalog.profiles.map((entry,index)=>({...entry,_index:index,_variant:defaultVariant(entry),_profile:null,_error:null}));
+    status.hidden=true;
+    populateControls();
+    updateMetrics();
+    renderSetup(catalog.defaults||{});
+    renderDocuments();
+    renderProfiles();
+  }catch(error){
+    status.className="status error";
+    status.innerHTML=`<strong>Nem sikerült betölteni a profilkatalógust.</strong><br>${esc(error.message)}<br><br>Az oldalt HTTP-kiszolgálóról nyisd meg, és ellenőrizd a <code>${CATALOG_URL}</code> fájlt.`;
+    renderDocuments();
   }
+}
 
-  function formatLinkLabel(label) {
-    const codeLabel = label.match(/^`([^`]+)`$/);
-    if (codeLabel) return '<code>' + escapeHtml(codeLabel[1]) + '</code>';
+function populateControls(){
+  const values=[...new Set(state.profiles.map(p=>p.process).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"hu"));
+  $("#processSelect").innerHTML='<option value="">Minden feldolgozás</option>'+values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join("");
+}
+function updateMetrics(){
+  const variants=state.profiles.flatMap(p=>p.variants);
+  const scale=variants.filter(v=>v.kind==="scale").length;
+  const manual=variants.filter(v=>v.kind==="manual").length;
+  $("#metricProfiles").textContent=state.profiles.length;
+  $("#metricVariants").textContent=variants.length;
+  $("#metricScale").textContent=scale;
+  $("#metricManual").textContent=manual;
+  $("#heroProfileCount").textContent=`${state.profiles.length} profilcsalád`;
+  $("#heroVariantCount").textContent=`${variants.length} JSON variáns · ${scale} Scale · ${manual} Manual`;
+}
+function renderSetup(defaults){
+  const items=[
+    ["Gép",defaults.machine||"Gaggia Classic Pro 2025 + GaggiMate Pro"],
+    ["Daráló",defaults.grinder||"DF64V Gen 2"],
+    ["Kosár",defaults.basket||"IMS B682TH24.5M"],
+    ["Mérleg",defaults.scale||"BOOKOO Themis Ultra"],
+    ["Dózis",`${defaults.dose??18.5} g`],
+    ["RPM",String(defaults.rpm??1200)],
+    ["Stop mód","Scale / időalapú"],
+    ["Katalógus",CATALOG_URL]
+  ];
+  $("#setupGrid").innerHTML=items.map(([k,v])=>`<article class="setup-card"><span>${esc(k)}</span><strong>${esc(v)}</strong></article>`).join("");
+}
+function renderDocuments(){
+  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon">${esc(doc.type)}</div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p><button class="btn doc-open" data-doc="${index}">Megnyitás</button></article>`).join("");
+}
 
-    let safe = escapeHtml(label);
-    safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    safe = safe.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-    safe = safe.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    safe = safe.replace(/_([^_]+)_/g, '<em>$1</em>');
-    return safe;
-  }
-
-  // A linket és a képet még HTML-escape előtt védjük le. Így a fájlnevekben
-  // található aláhúzás nem lesz dőlt szöveg, és nem marad vissza token.
-  let source = String(text);
-
-  source = source.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(_match, alt, src) {
-    return protect('<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(alt) + '">');
+function filteredProfiles(){
+  const q=state.query.trim().toLocaleLowerCase("hu-HU");
+  let list=state.profiles.filter(entry=>{
+    if(state.filter==="coffee"&&isGeneral(entry))return false;
+    if(state.filter==="general"&&!isGeneral(entry))return false;
+    if(state.filter==="scale"&&!hasKind(entry,"scale"))return false;
+    if(state.filter==="manual"&&!hasKind(entry,"manual"))return false;
+    if(state.process&&entry.process!==state.process)return false;
+    if(q){
+      const hay=[entry.title,entry.subtitle,entry.origin,entry.process,entry.grind,...(entry.notes||[])].join(" ").toLocaleLowerCase("hu-HU");
+      if(!hay.includes(q))return false;
+    }
+    return true;
   });
+  if(state.sort==="title")list.sort((a,b)=>a.title.localeCompare(b.title,"hu"));
+  else if(state.sort==="temperature")list.sort((a,b)=>(Number(b._profile?.temperature)||0)-(Number(a._profile?.temperature)||0));
+  else list.sort((a,b)=>(Number(Boolean(b.featured))-Number(Boolean(a.featured)))||(a._index-b._index));
+  return list;
+}
 
-  source = source.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_match, label, href) {
-    const safeHref = escapeHtml(href);
-    const safeLabel = formatLinkLabel(label);
-    if (/\.md(?:[?#].*)?$/i.test(href)) {
-      return protect('<a href="#" class="md-link" data-md-file="' + safeHref + '">' + safeLabel + '</a>');
-    }
-    return protect('<a href="' + safeHref + '" target="_blank" rel="noopener">' + safeLabel + '</a>');
+function kindLabel(variant){
+  if(variant.kind==="scale")return "Scale";
+  if(variant.kind==="manual")return "Manual";
+  return "Általános";
+}
+function profileStats(entry){
+  const p=entry._profile;
+  const target=lastWeightTarget(p);
+  return {
+    dose:entry.dose?`${String(entry.dose).replace(".",",")} g`:"—",
+    yield:target?`${formatNumber(target)} g`:entry.yield||"—",
+    temp:p&&Number.isFinite(Number(p.temperature))?`${formatNumber(p.temperature)} °C`:"—",
+    time:p?`${formatNumber(totalDuration(p),0)} s max`:entry.expectedTime||"—"
+  };
+}
+function targetText(phase){
+  const parts=(phase.targets||[]).map(t=>{
+    const unit={volumetric:"g",pressure:"bar",flow:"ml/s",pumped:"ml"}[t.type]||"";
+    const op=t.operator==="lte"?"≤":"≥";
+    return `${t.type} ${op} ${formatNumber(t.value)}${unit}`;
   });
+  return parts.join(" · ");
+}
+function phasesHTML(profile){
+  if(!profile?.phases?.length)return '<div class="phase-row"><strong>JSON betöltésre vár</strong><span>—</span><span class="target">—</span></div>';
+  return profile.phases.slice(0,7).map((p,index)=>{
+    const pump=p.pump||{};
+    const target=pump.target==="flow"?`${formatNumber(pump.flow)} ml/s`:`${formatNumber(pump.pressure)} bar`;
+    return `<div class="phase-row"><strong>${index+1}. ${esc(p.name||"Fázis")}</strong><span>${esc(target)} · ${formatNumber(p.duration,0)} s</span><span class="target">${esc(targetText(p))}</span></div>`;
+  }).join("");
+}
 
-  source = source.replace(/`([^`]+)`/g, function(_match, code) {
-    return protect('<code>' + escapeHtml(code) + '</code>');
+function renderProfiles(){
+  const list=filteredProfiles();
+  const grid=$("#profileGrid");
+  if(!list.length){grid.innerHTML='<div class="empty">Nincs a szűrésnek megfelelő profil.</div>';return;}
+  grid.innerHTML=list.map(cardHTML).join("");
+  list.forEach(loadEntryProfile);
+}
+function cardHTML(entry){
+  const variant=entry._variant||defaultVariant(entry);
+  const stats=profileStats(entry);
+  const style=`--card-accent:${entry.accent||"var(--accent)"};--card-accent2:${entry.accent2||entry.accent||"var(--accent2)"}`;
+  const page=entry.page?pathFor(entry,entry.page):"";
+  return `<article class="profile-card${entry.featured?" featured":""}" data-id="${esc(entry.id)}" style="${esc(style)}">
+    <div class="card-top">
+      <div class="card-kicker"><span>${esc(entry.process||"profil")}</span><span class="kind">${esc(kindLabel(variant))}</span></div>
+      <h3>${esc(entry.title)}</h3><div class="subtitle">${esc(entry.subtitle||"")}</div><div class="origin">${esc(entry.origin||"")}</div>
+      <div class="pills"><span class="pill process">${esc(entry.process||"profil")}</span>${(entry.notes||[]).map(n=>`<span class="pill">${esc(n)}</span>`).join("")}</div>
+      <div class="variant-row"><label for="variant-${esc(entry.id)}">Profil</label><select id="variant-${esc(entry.id)}" class="variant-select" data-variant-select="${esc(entry.id)}">${entry.variants.map(v=>`<option value="${esc(v.id)}"${v.id===variant.id?" selected":""}>${esc(v.label)}</option>`).join("")}</select></div>
+    </div>
+    <div class="card-stats">
+      <div class="card-stat"><strong data-stat="dose">${esc(stats.dose)}</strong><span>Dózis</span></div>
+      <div class="card-stat"><strong data-stat="yield">${esc(stats.yield)}</strong><span>Hozam / stop</span></div>
+      <div class="card-stat"><strong data-stat="temp">${esc(stats.temp)}</strong><span>Hőmérséklet</span></div>
+      <div class="card-stat"><strong data-stat="time">${esc(stats.time)}</strong><span>Max idő</span></div>
+    </div>
+    <div class="chart-box"><div class="chart-host" data-chart="${esc(entry.id)}"><div class="chart-fallback">A profilgrafikon betöltése…</div></div><div class="chart-legend"><span class="p"><i></i>Nyomás</span><span class="f"><i></i>Flow</span><span class="t"><i></i>Hőmérséklet</span></div></div>
+    <div class="phase-list" data-phases="${esc(entry.id)}">${phasesHTML(entry._profile)}</div>
+    <div class="card-actions">
+      <a class="btn primary page-link" href="${esc(page)}"${page?"":" hidden"}>Profil megnyitása</a>
+      <a class="btn json-link" href="${esc(pathFor(entry,variant.file))}" download>JSON</a>
+      <a class="btn png-link" href="${esc(pathFor(entry,pngFile(variant)))}" target="_blank" rel="noopener">PNG</a>
+      <button class="btn md-open" data-entry="${esc(entry.id)}" data-kind="recipe">Recept</button>
+      <button class="btn md-open" data-entry="${esc(entry.id)}" data-kind="changelog">Changelog</button>
+    </div>
+  </article>`;
+}
+
+async function loadEntryProfile(entry,force=false){
+  const key=`${entry.folder}/${entry._variant.file}`;
+  if(!force&&state.loaded.has(key)){entry._profile=state.loaded.get(key);updateCard(entry);return;}
+  try{
+    const profile=await fetchJSON(pathFor(entry,entry._variant.file));
+    state.loaded.set(key,profile);entry._profile=profile;entry._error=null;
+  }catch(error){entry._profile=null;entry._error=error.message;}
+  updateCard(entry);
+}
+function updateCard(entry){
+  const card=$(`.profile-card[data-id="${CSS.escape(entry.id)}"]`);
+  if(!card)return;
+  const stats=profileStats(entry);
+  Object.entries(stats).forEach(([key,value])=>{const el=$(`[data-stat="${key}"]`,card);if(el)el.textContent=value;});
+  const phases=$(`[data-phases="${CSS.escape(entry.id)}"]`,card);if(phases)phases.innerHTML=phasesHTML(entry._profile);
+  const chart=$(`[data-chart="${CSS.escape(entry.id)}"]`,card);
+  if(chart)chart.innerHTML=entry._profile?renderMiniChart(entry._profile,entry):`<div class="chart-fallback"><strong>A JSON nem tölthető be.</strong><br>${esc(entry._error||"Ismeretlen hiba")}<br><small>${esc(pathFor(entry,entry._variant.file))}</small></div>`;
+  const json=$(".json-link",card);if(json)json.href=pathFor(entry,entry._variant.file);
+  const png=$(".png-link",card);if(png)png.href=pathFor(entry,pngFile(entry._variant));
+  const kind=$(".card-kicker .kind",card);if(kind)kind.textContent=kindLabel(entry._variant);
+}
+
+function easing(kind,p){
+  p=Math.max(0,Math.min(1,p));
+  if(kind==="linear")return p;
+  if(kind==="ease-in")return p*p;
+  if(kind==="ease-out")return 1-(1-p)*(1-p);
+  if(kind==="ease-in-out")return .5*(1-Math.cos(Math.PI*p));
+  return 1;
+}
+function curveSeries(profile,variable){
+  const phases=profile.phases||[];let t=0;let previous=0;const points=[];
+  phases.forEach(phase=>{
+    const d=Math.max(0,Number(phase.duration)||0),pump=phase.pump||{},value=Number(pump[variable]);
+    if(pump.target!==variable||!Number.isFinite(value)||value<0){points.push([t,null],[t+d,null]);t+=d;return;}
+    const tr=phase.transition||{},rd=Math.min(d,Math.max(0,Number(tr.duration)||0));
+    if(tr.type&&tr.type!=="instant"&&rd>0){
+      const steps=Math.max(8,Math.round(rd*4));
+      for(let i=0;i<=steps;i++){const p=i/steps;points.push([t+rd*p,previous+(value-previous)*easing(tr.type,p)]);}
+      points.push([t+d,value]);
+    }else{points.push([t,previous],[t,value],[t+d,value]);}
+    previous=value;t+=d;
   });
+  return points;
+}
+function tempSeries(profile){
+  let t=0,prev=null;const points=[];
+  (profile.phases||[]).forEach(phase=>{const d=Math.max(0,Number(phase.duration)||0),value=resolveTemperature(phase,profile.temperature);if(prev!==null)points.push([t,prev]);points.push([t,value],[t+d,value]);prev=value;t+=d;});
+  return points;
+}
+function pathData(points,xScale,yScale){
+  let out="",open=false;
+  points.forEach(([x,y])=>{if(y===null||!Number.isFinite(y)){open=false;return;}out+=(open?"L":"M")+xScale(x).toFixed(1)+" "+yScale(y).toFixed(1)+" ";open=true;});
+  return out.trim();
+}
+function renderMiniChart(profile,entry){
+  const W=760,H=260,pad={l:44,r:42,t:20,b:34},total=Math.max(1,totalDuration(profile));
+  const p=curveSeries(profile,"pressure"),f=curveSeries(profile,"flow"),temp=tempSeries(profile);
+  const leftVals=[...p,...f].map(v=>v[1]).filter(Number.isFinite),leftMax=Math.max(10,...leftVals)+1;
+  const temps=temp.map(v=>v[1]).filter(Number.isFinite),tMin=Math.min(...temps),tMax=Math.max(...temps),tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
+  const x=v=>pad.l+(W-pad.l-pad.r)*(v/total),y=v=>H-pad.b-(H-pad.t-pad.b)*(v/leftMax),yt=v=>H-pad.b-(H-pad.t-pad.b)*((v-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
+  let bands="",cursor=0;(profile.phases||[]).forEach((phase,i)=>{const d=Math.max(0,Number(phase.duration)||0);if(i%2)bands+=`<rect x="${x(cursor)}" y="${pad.t}" width="${Math.max(0,x(cursor+d)-x(cursor))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".035"/>`;bands+=`<line x1="${x(cursor)}" y1="${pad.t}" x2="${x(cursor)}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/>`;cursor+=d;});
+  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".10"/>`).join("");
+  return `<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(entry.title)} profilgrafikon">
+    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
+    <g color="var(--text)">${grid}${bands}<line x1="${W-pad.r}" y1="${pad.t}" x2="${W-pad.r}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/></g>
+    <path d="${pathData(p,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${pathData(f,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="${pathData(temp,x,yt)}" fill="none" stroke="var(--card-accent)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>
+    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text><text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)}</text><text x="18" y="${H-pad.b}">0</text><text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text></g>
+  </svg>`;
+}
 
-  let html = escapeHtml(source);
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+function selectVariant(entryId,variantId){
+  const entry=state.profiles.find(p=>p.id===entryId);if(!entry)return;
+  const variant=entry.variants.find(v=>v.id===variantId);if(!variant)return;
+  entry._variant=variant;entry._profile=null;entry._error=null;
+  const card=$(`.profile-card[data-id="${CSS.escape(entry.id)}"]`);
+  if(card){const host=$(`[data-chart="${CSS.escape(entry.id)}"]`,card);if(host)host.innerHTML='<div class="chart-fallback">Az új profil betöltése…</div>';}
+  loadEntryProfile(entry,true);
+}
 
-  return html.replace(/\uE000(\d+)\uE001/g, function(_match, index) {
-    return protectedParts[Number(index)];
+function inlineMarkdown(text){
+  const protectedParts=[];
+  const protect=fragment=>`\uE000${protectedParts.push(fragment)-1}\uE001`;
+  let source=String(text);
+  source=source.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(_,alt,src)=>protect(`<img src="${esc(src)}" alt="${esc(alt)}">`));
+  source=source.replace(/\[([^\]]+)\]\(([^)]+)\)/g,(_,label,href)=>{
+    if(/\.md(?:[?#].*)?$/i.test(href))return protect(`<a href="#" class="nested-md" data-file="${esc(href)}">${esc(label)}</a>`);
+    return protect(`<a href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`);
   });
+  source=source.replace(/`([^`]+)`/g,(_,code)=>protect(`<code>${esc(code)}</code>`));
+  let html=esc(source).replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/__([^_]+)__/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");
+  return html.replace(/\uE000(\d+)\uE001/g,(_,i)=>protectedParts[Number(i)]);
 }
-function isTableSeparator(line) {
-  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
-}
-
-function splitTableRow(line) {
-  return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => cell.trim());
-}
-
-function renderTable(lines) {
-  const header = splitTableRow(lines[0]);
-  const rows = lines.slice(2).map(splitTableRow);
-  return '<table><thead><tr>' +
-    header.map(cell => '<th>' + inlineMarkdown(cell) + '</th>').join('') +
-    '</tr></thead><tbody>' +
-    rows.map(row => '<tr>' + row.map(cell => '<td>' + inlineMarkdown(cell) + '</td>').join('') + '</tr>').join('') +
-    '</tbody></table>';
-}
-
-function renderMarkdown(markdown) {
-  const lines = markdown.replace(/\r\n?/g, '\n').split('\n');
-  const html = [];
-  let i = 0;
-  let inCode = false;
-  let codeLines = [];
-  let paragraph = [];
-  let list = [];
-  let orderedList = false;
-  let blockquote = [];
-
-  function flushParagraph() {
-    if (!paragraph.length) return;
-    html.push('<p>' + inlineMarkdown(paragraph.join(' ')) + '</p>');
-    paragraph = [];
+function isTableSep(line){return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);}
+function splitRow(line){return line.trim().replace(/^\|/,"").replace(/\|$/,"").split("|").map(c=>c.trim());}
+function renderMarkdown(markdown){
+  const lines=String(markdown).replace(/\r\n?/g,"\n").split("\n"),out=[];let i=0,inCode=false,code=[],para=[],list=[],ordered=false,quote=[];
+  const flushP=()=>{if(para.length){out.push(`<p>${inlineMarkdown(para.join(" "))}</p>`);para=[];}};
+  const flushL=()=>{if(list.length){out.push(`${ordered?"<ol>":"<ul>"}${list.map(x=>`<li>${inlineMarkdown(x)}</li>`).join("")}${ordered?"</ol>":"</ul>"}`);list=[];}};
+  const flushQ=()=>{if(quote.length){out.push(`<blockquote>${renderMarkdown(quote.join("\n"))}</blockquote>`);quote=[];}};
+  while(i<lines.length){
+    const line=lines[i],trim=line.trim();
+    if(trim.startsWith("```")){flushP();flushL();flushQ();if(inCode){out.push(`<pre><code>${esc(code.join("\n"))}</code></pre>`);code=[];inCode=false;}else inCode=true;i++;continue;}
+    if(inCode){code.push(line);i++;continue;}
+    if(!trim){flushP();flushL();flushQ();i++;continue;}
+    if((trim==="---"||trim==="***"||trim==="___")){flushP();flushL();flushQ();out.push("<hr>");i++;continue;}
+    if(trim.includes("|")&&i+1<lines.length&&isTableSep(lines[i+1])){flushP();flushL();flushQ();const rows=[line,lines[i+1]];i+=2;while(i<lines.length&&lines[i].trim().includes("|")&&lines[i].trim())rows.push(lines[i++]);const head=splitRow(rows[0]),body=rows.slice(2).map(splitRow);out.push(`<table><thead><tr>${head.map(c=>`<th>${inlineMarkdown(c)}</th>`).join("")}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(c=>`<td>${inlineMarkdown(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);continue;}
+    const h=trim.match(/^(#{1,6})\s+(.+)$/);if(h){flushP();flushL();flushQ();out.push(`<h${h[1].length}>${inlineMarkdown(h[2])}</h${h[1].length}>`);i++;continue;}
+    const q=trim.match(/^>\s?(.*)$/);if(q){flushP();flushL();quote.push(q[1]);i++;continue;}
+    const ul=trim.match(/^[-*+]\s+(.+)$/),ol=trim.match(/^\d+\.\s+(.+)$/);if(ul||ol){flushP();flushQ();const now=Boolean(ol);if(list.length&&ordered!==now)flushL();ordered=now;list.push((ul||ol)[1]);i++;continue;}
+    flushL();flushQ();para.push(trim);i++;
   }
-
-  function flushList() {
-    if (!list.length) return;
-    html.push((orderedList ? '<ol>' : '<ul>') + list.map(item => '<li>' + inlineMarkdown(item) + '</li>').join('') + (orderedList ? '</ol>' : '</ul>'));
-    list = [];
-  }
-
-  function flushBlockquote() {
-    if (!blockquote.length) return;
-    html.push('<blockquote>' + renderMarkdown(blockquote.join('\n')) + '</blockquote>');
-    blockquote = [];
-  }
-
-  while (i < lines.length) {
-    const line = lines[i];
-    const trimmed = line.trim();
-
-    if (trimmed.startsWith('```')) {
-      flushParagraph();
-      flushList();
-      flushBlockquote();
-      if (inCode) {
-        html.push('<pre><code>' + escapeHtml(codeLines.join('\n')) + '</code></pre>');
-        codeLines = [];
-        inCode = false;
-      } else {
-        inCode = true;
-      }
-      i++;
-      continue;
-    }
-
-    if (inCode) {
-      codeLines.push(line);
-      i++;
-      continue;
-    }
-
-    if (trimmed === '') {
-      flushParagraph();
-      flushList();
-      flushBlockquote();
-      i++;
-      continue;
-    }
-
-    if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
-      flushParagraph();
-      flushList();
-      flushBlockquote();
-      html.push('<hr>');
-      i++;
-      continue;
-    }
-
-    if (trimmed.includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
-      flushParagraph();
-      flushList();
-      flushBlockquote();
-      const tableLines = [line, lines[i + 1]];
-      i += 2;
-      while (i < lines.length && lines[i].trim().includes('|') && lines[i].trim() !== '') {
-        tableLines.push(lines[i]);
-        i++;
-      }
-      html.push(renderTable(tableLines));
-      continue;
-    }
-
-    const heading = trimmed.match(/^(#{1,6})\s+(.+)$/);
-    if (heading) {
-      flushParagraph();
-      flushList();
-      flushBlockquote();
-      const level = heading[1].length;
-      html.push('<h' + level + '>' + inlineMarkdown(heading[2]) + '</h' + level + '>');
-      i++;
-      continue;
-    }
-
-    const quote = trimmed.match(/^>\s?(.*)$/);
-    if (quote) {
-      flushParagraph();
-      flushList();
-      blockquote.push(quote[1]);
-      i++;
-      continue;
-    }
-
-    const unordered = trimmed.match(/^[-*+]\s+(.+)$/);
-    const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
-    if (unordered || ordered) {
-      flushParagraph();
-      flushBlockquote();
-      const nowOrdered = Boolean(ordered);
-      if (list.length && orderedList !== nowOrdered) flushList();
-      orderedList = nowOrdered;
-      list.push((unordered || ordered)[1]);
-      i++;
-      continue;
-    }
-
-    flushList();
-    flushBlockquote();
-    paragraph.push(trimmed);
-    i++;
-  }
-
-  if (inCode) html.push('<pre><code>' + escapeHtml(codeLines.join('\n')) + '</code></pre>');
-  flushParagraph();
-  flushList();
-  flushBlockquote();
-  return html.join('\n');
+  if(inCode)out.push(`<pre><code>${esc(code.join("\n"))}</code></pre>`);flushP();flushL();flushQ();return out.join("\n");
 }
-
-async function loadMarkdown(entry) {
-  if (mdCache.has(entry.file)) return mdCache.get(entry.file);
-  const response = await fetch(entry.file, { cache: 'no-store' });
-  if (!response.ok) throw new Error('Nem található: ' + entry.file);
-  const markdown = await response.text();
-  const html = renderMarkdown(markdown);
-  mdCache.set(entry.file, html);
-  return html;
+async function openMarkdown(file,title){
+  const backdrop=$("#modalBackdrop"),body=$("#modalBody");$("#modalTitle").textContent=title||file;body.innerHTML="<p>Betöltés…</p>";backdrop.classList.add("open");document.body.style.overflow="hidden";
+  try{body.innerHTML=renderMarkdown(await fetchText(file));}catch(error){body.innerHTML=`<blockquote><strong>Nem sikerült betölteni.</strong><br>${esc(error.message)}<br><code>${esc(file)}</code></blockquote>`;}
 }
+function closeModal(){const b=$("#modalBackdrop");b.classList.remove("open");document.body.style.overflow="";}
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
 
-async function openMarkdownTab(tabId, btn, key) {
-  tab(tabId, btn);
-  const entry = MD_CONTENT[key];
-  const body = document.getElementById(tabId + '-body');
-  if (!entry || !body || body.dataset.loaded === 'true') return;
-
-  body.innerHTML = '<p>Betöltés...</p>';
-  try {
-    body.innerHTML = await loadMarkdown(entry);
-    body.dataset.loaded = 'true';
-  } catch (error) {
-    body.innerHTML =
-      '<blockquote><strong>Nem sikerült betölteni az MD fájlt.</strong><br>' +
-      escapeHtml(error.message) + '<br><br>' +
-      'Ellenőrizd, hogy a fájl ezen az útvonalon létezik-e:<br>' +
-      '<code>' + escapeHtml(entry.file) + '</code></blockquote>';
-  }
-}
-
-async function showMarkdownModal(entry) {
-  if (!entry || !entry.file) return;
-  document.getElementById('modal-title').textContent = entry.title || entry.file;
-  document.getElementById('modal-body').innerHTML = '<p>Betöltés...</p>';
-  document.getElementById('modal-backdrop').classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  try {
-    document.getElementById('modal-body').innerHTML = await loadMarkdown(entry);
-  } catch (error) {
-    document.getElementById('modal-body').innerHTML =
-      '<blockquote><strong>Nem sikerült betölteni az MD fájlt.</strong><br>' +
-      escapeHtml(error.message) + '<br><br>' +
-      'Ellenőrizd, hogy a fájl ezen az útvonalon létezik-e:<br>' +
-      '<code>' + escapeHtml(entry.file) + '</code></blockquote>';
-  }
-}
-
-async function openModal(key) {
-  const entry = MD_CONTENT[key];
-  if (!entry) return;
-  await showMarkdownModal(entry);
-}
-
-async function openMarkdownFile(file, title) {
-  await showMarkdownModal({
-    title: title || file.split('/').pop(),
-    file: file
-  });
-}
-
-function closeModal() {
-  document.getElementById('modal-backdrop').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeModalOutside(e) {
-  if (e.target === document.getElementById('modal-backdrop')) closeModal();
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
+document.addEventListener("change",event=>{
+  const select=event.target.closest("[data-variant-select]");if(select)selectVariant(select.dataset.variantSelect,select.value);
 });
-
-document.addEventListener('click', function(e) {
-  const link = e.target.closest('a.md-link');
-  if (!link) return;
-  e.preventDefault();
-  openMarkdownFile(link.dataset.mdFile, link.textContent.trim());
+document.addEventListener("click",event=>{
+  const filter=event.target.closest(".filter");if(filter){state.filter=filter.dataset.filter;$$(".filter").forEach(b=>b.setAttribute("aria-pressed",String(b===filter)));renderProfiles();return;}
+  const md=event.target.closest(".md-open");if(md){const entry=state.profiles.find(p=>p.id===md.dataset.entry);if(!entry)return;const kind=md.dataset.kind;openMarkdown(pathFor(entry,kind==="recipe"?recipeFile(entry):changelogFile(entry)),`${entry.title} – ${kind==="recipe"?"Recept":"Changelog"}`);return;}
+  const doc=event.target.closest(".doc-open");if(doc){const item=DOCS[Number(doc.dataset.doc)];if(item)openMarkdown(item.file,item.title);return;}
+  const nested=event.target.closest(".nested-md");if(nested){event.preventDefault();openMarkdown(nested.dataset.file,nested.textContent.trim());}
 });
-
-function tab(id, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  btn.classList.add('on');
-}
+$("#searchInput").addEventListener("input",event=>{state.query=event.target.value;renderProfiles();});
+$("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();});
+$("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();});
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+$("#modalClose").addEventListener("click",closeModal);
+$("#modalBackdrop").addEventListener("click",event=>{if(event.target.id==="modalBackdrop")closeModal();});
+document.addEventListener("keydown",event=>{if(event.key==="Escape")closeModal();});
+setTheme(localStorage.getItem("gaggimate-theme")||"light");
+if(location.protocol==="file:"){$("#catalogStatus").className="status error";$("#catalogStatus").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>A böngésző a kapcsolódó JSON/Markdown fájlokat valószínűleg nem engedi betölteni. Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
+loadCatalog();
 </script>
 </body>
 </html>

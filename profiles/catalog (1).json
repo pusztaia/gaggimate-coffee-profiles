@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "updated": "2026-07-25",
+  "defaults": {
+    "dose": 18.5,
+    "rpm": 1200,
+    "machine": "Gaggia Classic Pro 2025 + GaggiMate Pro",
+    "grinder": "DF64V Gen 2 · SSP Sweet Lab Espresso V3",
+    "basket": "IMS B682TH24.5M",
+    "scale": "BOOKOO Themis Ultra"
+  },
+  "profiles": [
+    {
+      "id": "9-bar",
+      "folder": "9-bar",
+      "title": "9 Bar Espresso",
+      "subtitle": "Klasszikus baseline",
+      "origin": "Általános espresso profil",
+      "process": "közepes / sötét",
+      "notes": [
+        "csokoládé",
+        "mogyoró",
+        "karamell"
+      ],
+      "grind": "espresso finomság",
+      "dose": 18.5,
+      "yield": "36–40 g",
+      "expectedTime": "28 s",
+      "page": "9-bar-espresso.html",
+      "accent": "#8c294b",
+      "accent2": "#c26a45",
+      "featured": true,
+      "variants": [
+        {
+          "id": "baseline",
+          "label": "9 bar · 95 °C",
+          "kind": "general",
+          "file": "profile-9bar.json"
+        }
+      ]
+    },
+    {
+      "id": "adaptive-v2",
+      "folder": "adaptive-v2",
+      "title": "Adaptive v2",
+      "subtitle": "Univerzális adaptív profil",
+      "origin": "Light–medium pörkölés · finom őrlés",
+      "process": "univerzális",
+      "notes": [
+        "adaptív PI",
+        "flow hold",
+        "93 → 88 °C"
+      ],
+      "grind": "finom espresso",
+      "dose": 18.5,
+      "yield": "38 g",
+      "expectedTime": "25–40 s",
+      "page": "adaptive-v2.html",
+      "accent": "#6c315d",
+      "accent2": "#b24d75",
+      "featured": true,
+      "variants": [
+        {
+          "id": "adaptive",
+          "label": "Adaptive",
+          "kind": "general",
+          "file": "profile-adapt.json"
+        }
+      ]
+    },
+    {
+      "id": "cremina-lever",
+      "folder": "cremina-lever",
+      "title": "Cremina Lever",
+      "subtitle": "Klasszikus lever-style",
+      "origin": "Sötétebb pörköléshez",
+      "process": "lever",
+      "notes": [
+        "édes",
+        "kerek",
+        "csokis-diós"
+      ],
+      "grind": "recept szerint",
+      "dose": 18.5,
+      "yield": "27–40 g",
+      "expectedTime": "40–60 s",
+      "page": "cremina-lever.html",
+      "accent": "#6b3a2a",
+      "accent2": "#bd7851",
+      "featured": false,
+      "variants": [
+        {
+          "id": "lever",
+          "label": "Cremina lever",
+          "kind": "general",
+          "file": "profile-lever.json"
+        }
+      ]
+    },
+    {
+      "id": "damians-lm-leva",
+      "folder": "damians-lm-leva",
+      "title": "Damian’s LM Leva",
+      "subtitle": "Modern specialty lever-style",
+      "origin": "Világos–közepes pörköléshez",
+      "process": "lever",
+      "notes": [
+        "tiszta",
+        "gyümölcsös",
+        "hosszú lefolyás"
+      ],
+      "grind": "recept szerint",
+      "dose": 18.5,
+      "yield": "36–45 g",
+      "expectedTime": "20–45 s",
+      "page": "damians-lm-leva.html",
+      "accent": "#365d65",
+      "accent2": "#73a0a3",
+      "featured": false,
+      "variants": [
+        {
+          "id": "leva",
+          "label": "LM Leva",
+          "kind": "general",
+          "file": "profile-lmleva.json"
+        }
+      ]
+    },
+    {
+      "id": "wangera",
+      "folder": "wangera",
+      "title": "Kenya Wangera",
+      "subtitle": "Creamy Fruit · Stable Start",
+      "origin": "Impresso · Kenya, Nyeri / Kirinyaga",
+      "process": "washed",
+      "notes": [
+        "szeder",
+        "tejszín",
+        "pomelo"
+      ],
+      "grind": "10–11",
+      "dose": 18.5,
+      "yield": "≈42 g",
+      "expectedTime": "38 s",
+      "page": "wangera.html",
+      "accent": "#4b2458",
+      "accent2": "#70406f",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale-v2",
+          "label": "Scale V2 · 94,5 °C",
+          "kind": "scale",
+          "file": "wangera-scale-v2.json",
+          "default": true
+        },
+        {
+          "id": "scale-v1",
+          "label": "Scale V1 · 94,0 °C",
+          "kind": "scale",
+          "file": "wangera-scale-v1.json"
+        },
+        {
+          "id": "manual-v2",
+          "label": "Manual V2 · 94,5 °C",
+          "kind": "manual",
+          "file": "wangera-manual-v2.json"
+        },
+        {
+          "id": "manual-v1",
+          "label": "Manual V1 · 94,0 °C",
+          "kind": "manual",
+          "file": "wangera-manual-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "burundi-mubuga",
+      "folder": "burundi-mubuga",
+      "title": "Burundi Mubuga",
+      "subtitle": "Melon Currant",
+      "origin": "Impresso · Burundi, Ngozi, Mubuga",
+      "process": "natural",
+      "notes": [
+        "sárgadinnye",
+        "alma",
+        "ribizli"
+      ],
+      "grind": "10–11",
+      "dose": 18.5,
+      "yield": "42,5 g",
+      "expectedTime": "38 s",
+      "page": "burundi-mubuga.html",
+      "accent": "#8a3c54",
+      "accent2": "#d17a57",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "burundi-mubuga-scale.json",
+          "default": true
+        },
+        {
+          "id": "manual",
+          "label": "Manual 38 s",
+          "kind": "manual",
+          "file": "burundi-mubuga-manual.json"
+        }
+      ]
+    },
+    {
+      "id": "colombia-manos-juntas",
+      "folder": "colombia-manos-juntas",
+      "title": "Colombia Manos Juntas",
+      "subtitle": "Jam Mango",
+      "origin": "Impresso · Colombia, Cauca, Manos Juntas",
+      "process": "anaerobic natural",
+      "notes": [
+        "vörösáfonya-dzsem",
+        "karamell",
+        "mangó"
+      ],
+      "grind": "10–11",
+      "dose": 18.5,
+      "yield": "43 g",
+      "expectedTime": "39 s",
+      "page": "colombia-manos-juntas.html",
+      "accent": "#8c294b",
+      "accent2": "#e29a45",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "colombia-manos-juntas-scale.json",
+          "default": true
+        },
+        {
+          "id": "manual",
+          "label": "Manual 39 s",
+          "kind": "manual",
+          "file": "colombia-manos-juntas-manual.json"
+        }
+      ]
+    },
+    {
+      "id": "kirinyaga",
+      "folder": "kirinyaga",
+      "title": "Kenya Kirinyaga PB",
+      "subtitle": "Tea Rose",
+      "origin": "Impresso · Kenya, Kirinyaga",
+      "process": "washed peaberry",
+      "notes": [
+        "hibiszkusz",
+        "csipkebogyó",
+        "fekete tea"
+      ],
+      "grind": "9–10",
+      "dose": 18.5,
+      "yield": "43 g",
+      "expectedTime": "37 s",
+      "page": "kirinyaga.html",
+      "accent": "#8c294b",
+      "accent2": "#bc5271",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "kirinyaga-scale.json",
+          "default": true
+        },
+        {
+          "id": "manual",
+          "label": "Manual 37 s",
+          "kind": "manual",
+          "file": "kirinyaga-manual.json"
+        }
+      ]
+    },
+    {
+      "id": "twenty-eight-caturron",
+      "folder": "twenty-eight-caturron",
+      "title": "Twenty Eight Caturron",
+      "subtitle": "Finca el Recreo · Flavor",
+      "origin": "Twenty Eight · Guatemala",
+      "process": "natural",
+      "notes": [
+        "meggy",
+        "konyakmeggy",
+        "bonbonos édesség"
+      ],
+      "grind": "8–10",
+      "dose": 18.5,
+      "yield": "42 g",
+      "expectedTime": "42 s",
+      "page": null,
+      "accent": "#7d2835",
+      "accent2": "#b85c45",
+      "featured": false,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "caturron-scale.json",
+          "default": true
+        },
+        {
+          "id": "manual",
+          "label": "Manual 42 s",
+          "kind": "manual",
+          "file": "caturron-manual.json"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-ochupse",
+      "folder": "el-salvador-ochupse",
+      "title": "El Salvador Ochupse",
+      "subtitle": "Grape Rose",
+      "origin": "Impresso · Apaneca-Ilamatepec",
+      "process": "natural anaerob",
+      "notes": [
+        "szőlő",
+        "csipkebogyó",
+        "sárgabarack",
+        "étcsokoládé"
+      ],
+      "grind": "10–11",
+      "dose": 18.5,
+      "yield": "41 g",
+      "expectedTime": "31 s",
+      "page": "el-salvador-ochupse.html",
+      "accent": "#6f2b55",
+      "accent2": "#bd6a4f",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "el-salvador-ochupse-scale.json",
+          "default": true
+        },
+        {
+          "id": "manual",
+          "label": "Manual 31 s",
+          "kind": "manual",
+          "file": "el-salvador-ochupse-manual.json"
+        }
+      ]
+    },
+    {
+      "id": "honduras-las-calaveras",
+      "folder": "honduras-las-calaveras",
+      "title": "Honduras Las Calaveras",
+      "subtitle": "Sangria Espresso",
+      "origin": "Impresso · Montecillos, Honduras",
+      "process": "natural anaerob",
+      "notes": [
+        "sangria",
+        "sült alma",
+        "szegfűszeg"
+      ],
+      "grind": "10–11",
+      "dose": 18.5,
+      "yield": "39 g",
+      "expectedTime": "22–28 s",
+      "page": "honduras-las-calaveras.html",
+      "accent": "#7d1d2f",
+      "accent2": "#b94a31",
+      "featured": true,
+      "variants": [
+        {
+          "id": "scale",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "honduras-las-calaveras-scale.json",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
