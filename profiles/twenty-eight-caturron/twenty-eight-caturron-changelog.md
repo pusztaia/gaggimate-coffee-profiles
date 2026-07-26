@@ -1,5 +1,28 @@
-
 # Changelog – Twenty Eight Finca el Recreo Caturron (twenty-eight-caturron)
+
+## Termékadatok és eredetleírás (2026-07-26)
+
+### Added
+
+- Származás: **Kolumbia, Huila, La Estrella / Acevedo**.
+- Termelő és farm: **Alirio Rodriguez, Finca El Recreo**.
+- Magasság: **1550 m**; fajta: **Caturron**.
+- Feldolgozás: **anaerobic natural**; 100-120 órás zárt fermentáció és 15-20 napos emelt ágyas szárítás dokumentálva.
+- Pörkölési szint: **világos**.
+- Hivatalos ízjegyekre igazított leírás: **meggy · konyak · bonbon**; karakter: édes, gyümölcsös és intenzív.
+- A HTML-oldal új „Eredet és feldolgozás” blokkot, termékoldal-linket és frissített eredetadatokat kapott.
+
+### Changed
+
+- A korábbi „konyakmeggy · piros gyümölcs · bonbonos édesség” megfogalmazás a Twenty Eight termékoldal szerinti **meggy · konyak · csokoládébonbon** profilra változott.
+- A két GaggiMate JSON ember által olvasható `description` mezője kiegészült a származással, feldolgozással és pörkölési szinttel.
+- A profilfázisok, targetek, idők, nyomás-, flow- és hőmérsékletértékek **nem változtak**.
+
+### Sources
+
+- Twenty Eight: https://twentyeight.hu/termek/finca-el-recreo-caturron/
+- Sucafina: https://sucafina.com/na/offerings/el-recreo-alirio-rodriguez-caturron-natural-ugq
+- Cuppd: https://cuppdcoffee.com/coffee/28-twenty-eight-finca-el-recreo-caturron
 
 ## Repo konzisztencia (2026-07-25)
 
@@ -26,8 +49,6 @@
 - Daráló megnevezése pontosítva: **DF64V Gen 2**.
 - RPM marad aktív receptparaméterként: **1200 RPM baseline**.
 - Dokumentálva: DF64V Gen 2 változtatható fordulatú, 800-1800 RPM tartományban.
-
-# Changelog – Twenty Eight Finca el Recreo Caturron
 
 ## 2026-06-29 – Twenty Eight brand fix + GitHub-clean verzió
 - A kávé márkája javítva: **Twenty Eight**.
