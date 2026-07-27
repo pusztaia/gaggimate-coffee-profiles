@@ -4,16 +4,47 @@
 |---|---|
 | Márka | Twenty Eight |
 | Kávé | Finca el Recreo Caturron |
-| Ízjegyek | meggy · konyakmeggy · piros gyümölcs · bonbonos édesség |
+| Származás | Kolumbia |
+| Régió | Huila |
+| Település / alrégió | La Estrella, Acevedo |
+| Termelő | Alirio Rodriguez |
+| Farm | Finca El Recreo |
+| Tengerszint feletti magasság | 1550 m |
+| Fajta | Caturron |
+| Feldolgozás | anaerobic natural |
+| Pörkölés | világos |
+| Ízjegyek | meggy · konyak · csokoládébonbon |
+| Karakter | édes · gyümölcsös · intenzív |
 | Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) |
 | Őrlőskála | 0-90, egész jelölések |
-| Verzió | 2026-06-29 – Twenty Eight brand fix, targetless 42s, GitHub-clean |
+| Verzió | 2026-07-26 – termékadatok és eredetleírás frissítve |
 
 ---
 
 ## Cél ízprofil
 
-Sűrű, tiszta, gyümölcsös espresso: **meggy · konyakmeggy · piros gyümölcs · bonbonos édesség**. Nem cél a túl hosszú, híg 45-47 g irány.
+Sűrű, tiszta és intenzíven gyümölcsös espresso: **meggy · konyak · csokoládébonbon**. A világos pörköléshez illően a cél az élénk gyümölcsösség és az édes, likőrös mélység megtartása; nem cél a túl hosszú, híg 45-47 g irány.
+
+---
+
+## Kávé eredete és feldolgozása
+
+| Adat | Érték |
+|---|---|
+| Ország | **Kolumbia** |
+| Régió | **Huila** |
+| Alrégió | **La Estrella, Acevedo** |
+| Farm / termelő | **Finca El Recreo / Alirio Rodriguez** |
+| Magasság | **1550 m** |
+| Fajta | **Caturron** |
+| Feldolgozás | **anaerobic natural** |
+| Pörkölés | **világos** |
+
+A szüretelt, érett piros cseresznyéket lezárt műanyag zsákokban **100-120 órán át anaerob módon fermentálják**, majd emelt ágyakon **15-20 napig szárítják**, rendszeres forgatással. A Caturron egy Acevedo környékéhez kötődő, ritka fajta, amely nagy cseresznyéiről, jellegzetes ízprofiljáról és kávérozsdával szembeni ellenálló képességéről ismert.
+
+A Twenty Eight termékoldala a kávét világos pörkölésű, édes, gyümölcsös és intenzív kolumbiai specialty kávéként írja le, **meggy, konyak és bonbon** ízjegyekkel.
+
+**Források:** [Twenty Eight termékoldal](https://twentyeight.hu/termek/finca-el-recreo-caturron/) · [Sucafina lot-adatok](https://sucafina.com/na/offerings/el-recreo-alirio-rodriguez-caturron-natural-ugq) · [Cuppd összefoglaló](https://cuppdcoffee.com/coffee/28-twenty-eight-finca-el-recreo-caturron)
 
 ---
 
@@ -109,7 +140,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-manual.json`). A 
 
 | Eredmény | Következő lépés |
 |---|---|
-| **40.5-43 g, meggy/konyakmeggy/bonbonos, tiszta** | A Scale V2 profil helyes, nincs teendő. |
+| **40.5-43 g, meggy/konyak/csokoládébonbon, tiszta** | A Scale V2 profil helyes, nincs teendő. |
 | **Savas, vékony, 43 g fölé fut** | stop_at_g értéket csökkentsd 41.5 g-ra, vagy menj 8 felé az őrlésen. |
 | **Nehéz, alkoholosan keserű** | stop_at_g értéket csökkentsd 40.5-41.0 g-ra, vagy próbálj 94.5 °C-ot. |
 | **Safety timeout (50 s) lép életbe** | Bluetooth megszakadt vagy flow túl lassú. |

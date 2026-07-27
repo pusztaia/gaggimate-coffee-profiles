@@ -455,11 +455,43 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
 }
 /* === END KV UNIFIED UI =================================================== */
 
+
+/* Back to the modular profile index */
+.home-link{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.42rem;
+  min-height:42px;
+  padding:.58rem .82rem;
+  border:1px solid var(--line,#ddd);
+  border-radius:999px;
+  background:var(--surface2,var(--surface,#fff));
+  color:var(--text,#222);
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:850;
+  white-space:nowrap;
+  box-shadow:var(--shadow-soft,var(--soft,none));
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease;
+}
+.home-link:hover,.home-link:focus-visible{
+  transform:translateY(-1px);
+  background:var(--surface,var(--surface2,#fff));
+  border-color:color-mix(in srgb,var(--ui-accent,var(--accent,var(--berry,#7d1d2f))) 38%,var(--line,#ddd));
+}
+.home-link svg{width:18px;height:18px;display:block;flex:none}
+@media(max-width:640px){
+  .home-link{width:42px;height:42px;min-height:42px;padding:0;border-radius:14px}
+  .home-link .home-label{display:none}
+}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Ugrás a tartalomhoz</a>
-<header class="topbar"><div class="topbar-inner"><a aria-label="Vissza az oldal tetejére" class="brand" href="#top"><span aria-hidden="true" class="brand-mark">9</span><span class="brand-copy">9 Bar Espresso<small>Classic baseline profile</small></span></a><nav aria-label="Fő navigáció" class="nav"><a href="#profile">Profil</a><a href="#character">Karakter</a><a href="#recipe">Recept</a><a href="#gallery">Grafikon</a><a href="#files">Fájlok</a><button aria-label="Téma váltása" class="icon-btn" id="theme" type="button">◐</button></nav></div></header>
+<header class="topbar"><div class="topbar-inner"><a aria-label="Vissza az oldal tetejére" class="brand" href="#top"><span aria-hidden="true" class="brand-mark">9</span><span class="brand-copy">9 Bar Espresso<small>Classic baseline profile</small></span></a><nav aria-label="Fő navigáció" class="nav"><a href="#profile">Profil</a><a href="#character">Karakter</a><a href="#recipe">Recept</a><a href="#gallery">Grafikon</a><a href="#files">Fájlok</a><button aria-label="Téma váltása" class="icon-btn" id="theme" type="button">◐</button></nav><a class="home-link" href="../../index.html" aria-label="Vissza a főoldalra" title="Főoldal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3.5 11.2 12 4.5l8.5 6.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V20h11v-9.5M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-label">Főoldal</span></a></div></header>
 <main id="main"><div class="container">
 <section class="hero" id="top"><div class="hero-grid"><div><div class="eyebrow">Klasszikus espresso · közepes / közepes-sötét pörkölés</div><h1>9 Bar<br/><span>Espresso</span></h1><p class="lead">Egyszerű, egyfázisú kontrollprofil klasszikus espresso blendekhez. Nincs preinfusion, bloom vagy csökkenő nyomású finish: a pumpa azonnal 9 barra áll, és legfeljebb 28 másodpercig fut.</p><div class="chips"><span class="chip accent">Classic baseline</span><span class="chip">18 g → 36–40 g</span><span class="chip">95 °C</span><span class="chip">9 bar</span><span class="chip">≤28 s</span></div></div><aside class="hero-card"><div><h2>Standard pressure</h2><p>Egyszerű referencia-profil összehasonlító tesztekhez.</p></div><div aria-hidden="true" class="gauge"><svg viewbox="0 0 240 240"><path d="M44 164a86 86 0 1 1 152 0" fill="none" stroke="rgba(255,255,255,.20)" stroke-linecap="round" stroke-width="22"></path><path d="M44 164a86 86 0 0 1 152 0" fill="none" stroke="#ffd29a" stroke-dasharray="238 270" stroke-linecap="round" stroke-width="22"></path><g stroke="rgba(255,255,255,.72)" stroke-linecap="round" stroke-width="4"><path d="M58 157l-12 5"></path><path d="M74 107l-10-8"></path><path d="M120 80V65"></path><path d="M166 107l10-8"></path><path d="M182 157l12 5"></path></g><path d="M120 155L170 100" stroke="#fff4e7" stroke-linecap="round" stroke-width="8"></path><circle cx="120" cy="155" fill="#fff4e7" r="14"></circle><circle cx="120" cy="155" fill="#7d1d2f" r="6"></circle></svg><div class="gauge-copy"><strong>9</strong><span>BAR</span></div></div><div class="bottom"><strong>Target stop: 40 g</strong><p>28 s safety hard cap</p></div></aside></div><div class="metrics"><article class="metric"><div class="k">Dózis</div><div class="v">18</div><div class="u">gramm</div></article><article class="metric"><div class="k">Céltartomány</div><div class="v">36–40</div><div class="u">gramm</div></article><article class="metric"><div class="k">Arány</div><div class="v">1:2–2,22</div><div class="u">brew ratio</div></article><article class="metric"><div class="k">Hőmérséklet</div><div class="v">95</div><div class="u">°C top-level</div></article><article class="metric"><div class="k">Nyomás</div><div class="v">9</div><div class="u">bar</div></article><article class="metric"><div class="k">Hard cap</div><div class="v">28</div><div class="u">másodperc</div></article></div></section>
 <section id="profile"><div class="section-head"><div><h2>Interaktív profil</h2><p>Egyetlen főzési fázis, állandó 9 baros nyomással. A fázis temperature: 0 értéke a GaggiMate logikában a profil 95 °C-os alapértékének öröklését jelenti; a 40 g-os volumetric target vagy a 28 másodperces hard cap zárja le a profilt.</p></div></div><div class="profile-layout"><div class="card chart-wrap"><div class="chart-tools"><strong>Nyomás · hőmérséklet</strong><div class="legend"><span class="pressure">Nyomás</span><span class="temp">Hőmérséklet</span></div></div><svg aria-labelledby="chartTitle chartDesc" class="profile-chart" id="profileChart" role="img" viewbox="0 0 900 440"><title id="chartTitle">9 Bar Espresso profilgrafikon</title><desc id="chartDesc">Egy 28 másodperces maximális időtartamú, 9 baros espresso fázis 95 Celsius-fokos örökölt hőmérséklettel és 40 grammos stop targettel.</desc></svg><div class="notice" id="chartNotice"><strong>Helyes hőmérséklet-értelmezés:</strong> a fázis <code>temperature: 0</code> értéke nem 0 °C-os célhőmérséklet, hanem a profil felső szintű 95 °C-os értékének öröklése.</div></div><aside class="card phase-card"><div class="phase-number">1</div><div><h3>Pump</h3><p style="color:var(--muted);margin:.45rem 0 0">Instant indulás, külön előáztatás nélkül.</p></div><div class="phase-grid"><div class="phase-line"><span>Fázistípus</span><strong>brew</strong></div><div class="phase-line"><span>Időtartam</span><strong>28 s max.</strong></div><div class="phase-line"><span>Hőmérséklet</span><strong>95 °C (örökölt)</strong></div><div class="phase-line"><span>Nyomás</span><strong>9 bar</strong></div><div class="phase-line"><span>Flow limit</span><strong>kikapcsolva (0)</strong></div><div class="phase-line"><span>Transition</span><strong>instant</strong></div><div class="phase-line"><span>Valve</span><strong>1</strong></div></div><div class="target-box"><span>Volumetric target</span><strong>≥ 40 g</strong><small>Az utolsó fázis lezárása = pumpastop</small></div></aside></div><div class="notice"><strong>GaggiMate profil-logika:</strong> nyomásvezérelt fázisban a <code>flow: 0</code> kikapcsolt soft limitet jelent, nem 0 ml/s flow setpointot. A grafikon ezért csak az aktív 9 baros nyomás-setpointot és az örökölt 95 °C-os hőmérsékletet mutatja.</div></section>

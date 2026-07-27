@@ -819,11 +819,43 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
 }
 /* === END KV UNIFIED UI =================================================== */
 
+
+/* Back to the modular profile index */
+.home-link{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.42rem;
+  min-height:42px;
+  padding:.58rem .82rem;
+  border:1px solid var(--line,#ddd);
+  border-radius:999px;
+  background:var(--surface2,var(--surface,#fff));
+  color:var(--text,#222);
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:850;
+  white-space:nowrap;
+  box-shadow:var(--shadow-soft,var(--soft,none));
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease;
+}
+.home-link:hover,.home-link:focus-visible{
+  transform:translateY(-1px);
+  background:var(--surface,var(--surface2,#fff));
+  border-color:color-mix(in srgb,var(--ui-accent,var(--accent,var(--berry,#7d1d2f))) 38%,var(--line,#ddd));
+}
+.home-link svg{width:18px;height:18px;display:block;flex:none}
+@media(max-width:640px){
+  .home-link{width:42px;height:42px;min-height:42px;padding:0;border-radius:14px}
+  .home-link .home-label{display:none}
+}
+
 </style></head><body>
 <a class="skip-link" href="#main">Ugrás a tartalomhoz</a>
 <header class="topbar"><div class="topbar-inner">
 <a aria-label="Vissza az oldal tetejére" class="brand" href="#top"><span aria-hidden="true" class="brand-mark"><svg fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M7.5 4.5h9v6.8a4.5 4.5 0 0 1-9 0V4.5Z" stroke="currentColor" stroke-width="1.8"></path><path d="M16.5 7h1.3a2.7 2.7 0 0 1 0 5.4h-1.5M5 19.5h14" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></span><span class="brand-text"><strong>Wangera</strong><span>Creamy Fruit · Scale V2</span></span></a>
-<nav aria-label="Fő navigáció" class="nav"><a href="#overview">Áttekintés</a><a href="#profile">Profil</a><a href="#recipe">Recept</a><a href="#gallery">Grafikonok</a><a href="#downloads">Fájlok</a><button aria-label="Sötét mód váltása" class="icon-button" id="themeToggle" title="Téma váltása" type="button"><svg aria-hidden="true" fill="none" height="20" id="themeIcon" viewBox="0 0 24 24" width="20"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42M7.06 16.94l-1.42 1.42" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle></svg></button></nav>
+<nav aria-label="Fő navigáció" class="nav"><a href="#overview">Áttekintés</a><a href="#profile">Profil</a><a href="#recipe">Recept</a><a href="#gallery">Grafikonok</a><a href="#downloads">Fájlok</a><button aria-label="Sötét mód váltása" class="icon-button" id="themeToggle" title="Téma váltása" type="button"><svg aria-hidden="true" fill="none" height="20" id="themeIcon" viewBox="0 0 24 24" width="20"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42M7.06 16.94l-1.42 1.42" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle></svg></button></nav><a class="home-link" href="../../index.html" aria-label="Vissza a főoldalra" title="Főoldal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3.5 11.2 12 4.5l8.5 6.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V20h11v-9.5M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-label">Főoldal</span></a>
 </div></header>
 <main id="main">
 <section class="hero" id="top"><div class="hero-shell"><div class="hero-grid"><div><div class="eyebrow">Impresso · Kenya · Stable Start</div><h1>Wangera<br><span>Creamy Fruit Espresso</span></h1><p class="lead">Impresso Kenya Wangera, Stable Start Scale V2 profillal. Krémes szeder, puha tejszínes test és friss pomelós élénkség, stabil, körülbelül 42 grammos végső hozammal.</p><div class="chips" aria-label="Legfontosabb jellemzők"><span class="chip accent">Scale V2</span><span class="chip">18.5 g → ≈42 g</span><span class="chip">94.5 °C</span><span class="chip">1200 RPM</span><span class="chip">Grind 10–11</span></div></div><aside class="hero-card" aria-label="Kávéprofil összefoglaló"><div><h2>Stable Start</h2><p>Kenya · Wangera · Scale V2</p></div><div class="cup" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><linearGradient id="heroCoffee" x1="0" x2="1"><stop stop-color="var(--ui-accent-dark)"/><stop offset="1" stop-color="var(--ui-accent2)"/></linearGradient></defs><ellipse cx="92" cy="146" rx="72" ry="18" fill="rgba(255,255,255,.16)"/><path d="M38 58h112l-10 82c-2 18-17 31-35 31H82c-18 0-33-13-35-31Z" fill="#fff4e7"/><ellipse cx="94" cy="60" rx="55" ry="16" fill="#e9d6c6"/><ellipse cx="94" cy="60" rx="48" ry="12" fill="url(#heroCoffee)"/><path d="M149 77c35-4 39 50 6 56" fill="none" stroke="#fff4e7" stroke-width="16" stroke-linecap="round"/><path d="M75 45c-13-19 9-21 0-40M104 45c-13-19 9-21 0-40" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="5" stroke-linecap="round"/></svg></div><div><strong>Pump stop: 40.5 g</strong><p>≈41.5–42.5 g final · 61 s hard cap</p></div></aside></div><div class="metrics">

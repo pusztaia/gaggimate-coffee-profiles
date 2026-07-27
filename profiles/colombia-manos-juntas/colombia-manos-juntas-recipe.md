@@ -30,7 +30,7 @@ Dzsemes vörösáfonya, mangó és karamelles édesség. A shot legyen szirupos 
 | Arány | **kb. 1:2.32** |
 | Hőmérséklet | **94.5 °C** |
 | Őrlés indulás | **10 körül** |
-| Őrlés tartomány | **10-11** |
+| Őrlés tartomány | **10** |
 | Fordulat | **1200 RPM** |
 | Kosár | **IMS B682TH24.5M** |
 | Finish indulása | **38.0 g** |
@@ -39,7 +39,7 @@ Dzsemes vörösáfonya, mangó és karamelles édesség. A shot legyen szirupos 
 
 ### Első shot
 
-**18.5 g be · grind 10 körül · 1200 RPM · 94.5 °C · 38.0 g-nál Caramel Finish · 42.0 g-nál pumpastop · várhatóan kb. 43.0 g a csészében**
+**18.5 g be · grind 10 · 1200 RPM · 94.5 °C · 38.0 g-nál Caramel Finish · 42.0 g-nál pumpastop · várhatóan kb. 43.0 g a csészében**
 
 ---
 

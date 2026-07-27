@@ -495,13 +495,45 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
 }
 /* === END KV UNIFIED UI =================================================== */
 
+
+/* Back to the modular profile index */
+.home-link{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.42rem;
+  min-height:42px;
+  padding:.58rem .82rem;
+  border:1px solid var(--line,#ddd);
+  border-radius:999px;
+  background:var(--surface2,var(--surface,#fff));
+  color:var(--text,#222);
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:850;
+  white-space:nowrap;
+  box-shadow:var(--shadow-soft,var(--soft,none));
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease;
+}
+.home-link:hover,.home-link:focus-visible{
+  transform:translateY(-1px);
+  background:var(--surface,var(--surface2,#fff));
+  border-color:color-mix(in srgb,var(--ui-accent,var(--accent,var(--berry,#7d1d2f))) 38%,var(--line,#ddd));
+}
+.home-link svg{width:18px;height:18px;display:block;flex:none}
+@media(max-width:640px){
+  .home-link{width:42px;height:42px;min-height:42px;padding:0;border-radius:14px}
+  .home-link .home-label{display:none}
+}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Ugrás a tartalomhoz</a>
 <header class="topbar"><div class="topbar-inner">
 <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M4 17h16M6 17V9c0-2 1.7-3.5 3.8-3.5h4.4C16.3 5.5 18 7 18 9v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12h8M9 9h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="brand-copy"><strong>Adaptive v2</strong><small>Universal adaptive · 38 g target</small></span></a>
-<nav class="nav" aria-label="Fő navigáció"><a href="#overview">Áttekintés</a><a href="#profile">Profil</a><a href="#logic">Logika</a><a href="#dial">Dial-in</a><a href="#downloads">Fájlok</a><button class="icon-btn" id="theme" type="button" aria-label="Téma váltása">◐</button></nav>
+<nav class="nav" aria-label="Fő navigáció"><a href="#overview">Áttekintés</a><a href="#profile">Profil</a><a href="#logic">Logika</a><a href="#dial">Dial-in</a><a href="#downloads">Fájlok</a><button class="icon-btn" id="theme" type="button" aria-label="Téma váltása">◐</button></nav><a class="home-link" href="../../index.html" aria-label="Vissza a főoldalra" title="Főoldal"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3.5 11.2 12 4.5l8.5 6.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V20h11v-9.5M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-label">Főoldal</span></a>
 </div></header>
 <main id="main">
 <section class="hero" id="top"><div class="container hero-grid">
