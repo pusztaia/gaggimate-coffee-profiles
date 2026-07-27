@@ -751,7 +751,7 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
 
 /* Responsive */
 @media(max-width:980px){
-  html.kv-unified-ui .nav a{display:none!important}
+  html.kv-unified-ui .nav a:not(.home-link){display:none!important}
   html.kv-unified-ui .hero-grid,
   html.kv-unified-ui .profile-layout,
   html.kv-unified-ui .two-col,
@@ -830,7 +830,7 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
     #liveStatus[data-state="error"] { color: #b42318; }
     .gallery .asset-loading { display:grid; place-items:center; min-height:210px; border:1px dashed var(--line); background:var(--surface); color:var(--muted); }
 
-    .home-link {
+    html.kv-unified-ui .nav a.home-link {
       display: inline-flex !important;
       align-items: center;
       justify-content: center;
@@ -840,7 +840,7 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
     }
     .home-link svg { flex: 0 0 auto; }
     @media (max-width: 640px) {
-      .nav a.home-link {
+      html.kv-unified-ui .nav a.home-link {
         display: grid !important;
         width: 42px;
         height: 42px;
