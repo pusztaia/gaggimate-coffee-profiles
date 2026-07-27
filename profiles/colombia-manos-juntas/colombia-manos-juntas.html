@@ -830,6 +830,28 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
     #liveStatus[data-state="error"] { color: #b42318; }
     .gallery .asset-loading { display:grid; place-items:center; min-height:210px; border:1px dashed var(--line); background:var(--surface); color:var(--muted); }
 
+    /* Two live profile images: equal columns, original aspect ratio, no cropping. */
+    #gallery .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      align-items: start;
+      width: 100%;
+    }
+    #gallery .gallery button {
+      width: 100%;
+      min-height: 0 !important;
+      aspect-ratio: 1920 / 1040;
+      background: #fff !important;
+    }
+    #gallery .gallery img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      background: #fff;
+    }
+    @media (max-width: 760px) {
+      #gallery .gallery { grid-template-columns: 1fr !important; }
+    }
+
     html.kv-unified-ui .nav a.home-link {
       display: inline-flex !important;
       align-items: center;
