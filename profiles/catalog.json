@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-26",
+  "updated": "2026-07-27",
   "defaults": {
     "dose": 18.5,
     "rpm": 1200,
@@ -110,9 +110,9 @@
         "karamell",
         "mangó"
       ],
-      "grind": "10-11",
+      "grind": "10",
       "dose": 18.5,
-      "yield": "42 g",
+      "yield": "43,5 g",
       "expectedTime": "47 s",
       "page": "colombia-manos-juntas.html",
       "accent": "#6b3a2a",
@@ -293,14 +293,13 @@
       "id": "twenty-eight-caturron",
       "folder": "twenty-eight-caturron",
       "title": "Twenty Eight Finca el Recreo Caturron",
-      "subtitle": "meggy · konyakmeggy",
-      "origin": "Twenty Eight",
-      "process": "profil",
+      "subtitle": "meggy · konyak",
+      "origin": "Twenty Eight · Huila",
+      "process": "anaerobic natural",
       "notes": [
         "meggy",
-        "konyakmeggy",
-        "piros gyümölcs",
-        "bonbonos édesség"
+        "konyak",
+        "csokoládébonbon"
       ],
       "grind": "8-10",
       "dose": 18.5,

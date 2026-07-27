@@ -117,7 +117,7 @@
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 43.0
+          "value": 43.5
         }
       ]
     }

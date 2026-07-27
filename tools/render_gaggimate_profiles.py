@@ -14,9 +14,13 @@ The renderer follows the GaggiMate profile schema:
   cannot be reconstructed from a static profile file.
 
 Usage:
-  python tools/render_profiles.py
-  python tools/render_profiles.py profiles/wangera/wangera-scale-v2.json
-  python tools/render_profiles.py --root /path/to/repository
+  python tools/render_gaggimate_profiles.py
+  python tools/render_gaggimate_profiles.py profiles/wangera/wangera-scale-v2.json
+  python tools/render_gaggimate_profiles.py profiles/wangera
+  python tools/render_gaggimate_profiles.py --root /path/to/repository
+
+Non-profile JSON files such as profiles/catalog.json and catalog.meta.json are
+skipped automatically. PNG output is headless-safe and works in Docker/CI.
 """
 from __future__ import annotations
 
@@ -29,6 +33,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
 
+import matplotlib
+
+# Headless-safe rendering for GitHub Actions, Docker and servers without a GUI.
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 JSONDict = Dict[str, Any]
@@ -85,17 +93,62 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
         default=160,
         help="PNG resolution in dots per inch (default: 160).",
     )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Optional output directory. By default each PNG is written beside its JSON file.",
+    )
+    parser.add_argument(
+        "--no-recipe",
+        action="store_true",
+        help="Do not read a companion *-recipe*.md file for subtitle metadata.",
+    )
+    parser.add_argument(
+        "--fail-fast",
+        action="store_true",
+        help="Stop immediately when one profile cannot be rendered.",
+    )
     return parser.parse_args(argv)
+
+
+def is_profile_json(path: Path) -> bool:
+    """Return True only for JSON objects containing a non-empty phases array."""
+    if path.name.lower().startswith("catalog") or path.name.lower().endswith(".meta.json"):
+        return False
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    return isinstance(value, dict) and isinstance(value.get("phases"), list) and bool(value["phases"])
+
+
+def expand_input(root: Path, value: str) -> List[Path]:
+    candidate = Path(value)
+    resolved = candidate.resolve() if candidate.is_absolute() else (root / candidate).resolve()
+    if resolved.is_dir():
+        return sorted(path for path in resolved.rglob("*.json") if is_profile_json(path))
+    return [resolved]
 
 
 def find_profiles(root: Path, args: Sequence[str]) -> List[Path]:
     if args:
         paths: List[Path] = []
         for value in args:
-            candidate = Path(value)
-            paths.append(candidate.resolve() if candidate.is_absolute() else (root / candidate).resolve())
-        return paths
-    return sorted((root / "profiles").glob("**/*.json"))
+            paths.extend(expand_input(root, value))
+    else:
+        search_root = root / "profiles" if (root / "profiles").is_dir() else root
+        paths = sorted(path for path in search_root.rglob("*.json") if is_profile_json(path))
+
+    # Stable de-duplication after path resolution.
+    unique: List[Path] = []
+    seen: set[Path] = set()
+    for path in paths:
+        resolved = path.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(resolved)
+    return unique
 
 
 def read_json(path: Path) -> JSONDict:
@@ -165,8 +218,41 @@ def first_value(rows: Mapping[str, str], keys: Iterable[str]) -> str:
     return ""
 
 
+def filename_tokens(path: Path, *, recipe: bool = False) -> List[str]:
+    stem = path.stem.lower()
+    stem = re.sub(r"\(\d+\)$", "", stem)
+    if recipe:
+        stem = re.sub(r"-recipe$", "", stem)
+    else:
+        # Remove technical profile suffixes while preserving origin/coffee words.
+        stem = re.sub(r"-(?:\d+s-)?(?:\d+(?:c|\.\d+c)-)?scale(?:-v\d+)?$", "", stem)
+        stem = re.sub(r"-manual(?:-v\d+)?$", "", stem)
+        stem = re.sub(r"-v\d+$", "", stem)
+    ignored = {"stable", "profile", "automatic", "adaptive", "pro", "classic"}
+    return [token for token in re.findall(r"[a-z0-9]+", stem) if token not in ignored]
+
+
+def recipe_match_score(profile_path: Path, recipe_path: Path) -> tuple[int, int, str]:
+    profile_tokens = filename_tokens(profile_path)
+    recipe_tokens = filename_tokens(recipe_path, recipe=True)
+    if not profile_tokens or not recipe_tokens:
+        return (0, 0, recipe_path.name.lower())
+
+    common = set(profile_tokens) & set(recipe_tokens)
+    prefix = 0
+    for left, right in zip(profile_tokens, recipe_tokens):
+        if left != right:
+            break
+        prefix += 1
+
+    exact = int(profile_tokens == recipe_tokens)
+    contained = int(all(token in profile_tokens for token in recipe_tokens))
+    score = exact * 1000 + contained * 200 + prefix * 20 + len(common) * 5
+    return (score, len(common), recipe_path.name.lower())
+
+
 def find_companion_recipe(profile_path: Path) -> Path | None:
-    candidates = sorted(profile_path.parent.glob("*-recipe.md"))
+    candidates = sorted(profile_path.parent.glob("*-recipe*.md"))
     if not candidates:
         return None
 
@@ -174,8 +260,14 @@ def find_companion_recipe(profile_path: Path) -> Path | None:
     if expected in candidates:
         return expected
 
-    # Stable fallback for folders whose profile JSON names do not match the recipe prefix.
-    return min(candidates, key=lambda item: (len(item.name), item.name.lower()))
+    ranked = sorted(
+        ((recipe_match_score(profile_path, candidate), candidate) for candidate in candidates),
+        key=lambda item: (item[0][0], item[0][1], item[0][2]),
+        reverse=True,
+    )
+    best_score, best = ranked[0]
+    # Never attach unrelated metadata merely because some recipe exists nearby.
+    return best if best_score[1] > 0 else None
 
 
 def load_metadata(profile_path: Path) -> ProfileMetadata:
@@ -195,10 +287,10 @@ def load_metadata(profile_path: Path) -> ProfileMetadata:
     dose = first_value(base_rows, ("Dózis", "Dose")) or first_value(all_rows, ("Dózis", "Dose"))
     target_yield = first_value(
         base_rows,
-        ("Ideális hozam", "Cél hozam", "Célhozam", "Target Yield"),
+        ("Ideális hozam", "Cél hozam", "Célhozam", "Cél végső hozam", "Automatikus stop", "Target Yield"),
     ) or first_value(
         all_rows,
-        ("Ideális hozam", "Cél hozam", "Célhozam", "Target Yield"),
+        ("Ideális hozam", "Cél hozam", "Célhozam", "Cél végső hozam", "Automatikus stop", "Target Yield"),
     )
     grind = first_value(
         base_rows,
@@ -428,7 +520,7 @@ def subtitle_for(
     return " · ".join(parts)
 
 
-def render(path: Path, dpi: int = 160) -> Path:
+def render(path: Path, dpi: int = 160, output_dir: Path | None = None, use_recipe: bool = True) -> Path:
     data = read_json(path)
     phases_raw = data.get("phases")
     if not isinstance(phases_raw, list) or not phases_raw:
@@ -439,7 +531,7 @@ def render(path: Path, dpi: int = 160) -> Path:
 
     label = str(data.get("label") or path.stem)
     profile_temperature = as_float(data.get("temperature"), 0.0)
-    metadata = load_metadata(path)
+    metadata = load_metadata(path) if use_recipe else ProfileMetadata()
     total = sum(max(0.0, as_float(phase.get("duration"), 0.0)) for phase in phases)
 
     pressure_x, pressure_y, pressure_holds, pressure_adaptive = build_setpoint_series(phases, "pressure")
@@ -568,10 +660,14 @@ def render(path: Path, dpi: int = 160) -> Path:
             linespacing=1.25,
         )
 
-    out = path.with_name(path.stem + "-profile.png")
+    if output_dir is None:
+        out = path.with_name(path.stem + "-profile.png")
+    else:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        out = output_dir / (path.stem + "-profile.png")
     bottom_margin = min(0.12, 0.025 + 0.022 * len(notes)) if notes else 0.02
     fig.tight_layout(rect=[0, bottom_margin, 1, 0.92])
-    fig.savefig(out, dpi=dpi)
+    fig.savefig(out, dpi=dpi, bbox_inches="tight")
     plt.close(fig)
     return out
 
@@ -588,22 +684,45 @@ def main(argv: Sequence[str] | None = None) -> int:
     root = options.root.resolve()
     profiles = find_profiles(root, options.profiles)
     if not profiles:
-        print(f"no profile JSON files found under {root / 'profiles'}", file=sys.stderr)
+        search_root = root / "profiles" if (root / "profiles").is_dir() else root
+        print(f"no GaggiMate profile JSON files found under {search_root}", file=sys.stderr)
         return 1
 
+    output_dir = None
+    if options.output_dir is not None:
+        output_dir = (options.output_dir if options.output_dir.is_absolute() else root / options.output_dir).resolve()
+
     outputs: List[Path] = []
+    failures: List[tuple[Path, str]] = []
     for profile in profiles:
         if not profile.exists():
-            print(f"missing: {profile}", file=sys.stderr)
-            return 1
+            failures.append((profile, "file does not exist"))
+            if options.fail_fast:
+                break
+            continue
         try:
-            outputs.append(render(profile, dpi=options.dpi))
-        except ValueError as exc:
-            print(f"error: {exc}", file=sys.stderr)
-            return 1
+            outputs.append(
+                render(
+                    profile,
+                    dpi=options.dpi,
+                    output_dir=output_dir,
+                    use_recipe=not options.no_recipe,
+                )
+            )
+        except (OSError, ValueError) as exc:
+            failures.append((profile, str(exc)))
+            if options.fail_fast:
+                break
 
     for output in outputs:
-        print(display_path(output, root))
+        print(f"written: {display_path(output, root)}")
+    for profile, message in failures:
+        print(f"error: {display_path(profile, root)}: {message}", file=sys.stderr)
+
+    print(f"rendered: {len(outputs)}", file=sys.stderr)
+    if failures:
+        print(f"failed: {len(failures)}", file=sys.stderr)
+        return 1
     return 0
 
 
