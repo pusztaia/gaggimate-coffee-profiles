@@ -1,5 +1,5 @@
 {
-  "label": "Impresso Colombia Manos Juntas 18.5g→43g, g10, 94.5C, Scale",
+  "label": "Imp Manos Juntas 18.5g 43g g10 94.5C Scale",
   "type": "pro",
   "description": "Colombia Manos Juntas Scale V2 18.5 g / finish starts at 38 g / pump stop at 42 g / expected final yield about 43 g / 94.5 C / grind 10",
   "temperature": 94.5,
@@ -117,7 +117,7 @@
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 42.0
+          "value": 43.0
         }
       ]
     }
