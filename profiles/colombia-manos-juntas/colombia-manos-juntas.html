@@ -960,14 +960,14 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
 
     <section class="section" id="gallery">
       <div class="container">
-        <div class="section-head"><div><h2>Aktuális profilgrafikonok</h2><p>A Scale és Manual PNG-ket a HTML a könyvtárból tölti be, és 10 másodpercenként automatikusan ellenőrzi. Kattints egy képre a nagyításhoz.</p></div></div>
+        <div class="section-head"><div><h2>Aktuális profilgrafikonok</h2><p>A két PNG-t a HTML a könyvtárból tölti be, és 10 másodpercenként automatikusan ellenőrzi. Kattints egy képre a nagyításhoz.</p></div></div>
         <div class="gallery" id="galleryGrid"></div>
       </div>
     </section>
 
     <section class="section" id="downloads">
       <div class="container">
-        <div class="section-head"><div><h2>Forrásfájlok</h2><p>A JSON-gombok mindig a könyvtárban lévő legfrissebb profilfájlt töltik le; a recept és a changelog továbbra is beágyazott.</p></div></div>
+        <div class="section-head"><div><h2>Forrásfájlok</h2><p>A JSON-, recipe- és changelog-gombok a könyvtárban lévő legfrissebb fájlt töltik le; a beágyazott tartalom csak biztonsági tartalék.</p></div></div>
         <div class="downloads">
           <article class="download-card"><span class="file-type">JSON</span><h3>Scale profil</h3><p>Mérlegalapú GaggiMate Pro profil, 47 s hard cappal.</p><button type="button" data-download="scale">JSON mentése</button></article>
           <article class="download-card"><span class="file-type">JSON</span><h3>Manual 39 s profil</h3><p>Az eredeti, teljesen időalapú profil az új repo-fájlnévvel.</p><button type="button" data-download="time">JSON mentése</button></article>
@@ -1012,16 +1012,175 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
         title: 'Manual · 39 s time-based profil'
       }
     };
-    const EXTRA_IMAGES = [
-      {
-        key: 'manualRecipe',
-        image: 'colombia-manos-juntas-manual-recipe-profile.png',
-        title: 'Manual · teljes recept-metaadatokkal'
-      }
-    ];
+    const EXTRA_IMAGES = [];
+    const TEXT_ASSET_CONFIG = {
+      recipe: 'colombia-manos-juntas-recipe.md',
+      changelog: 'colombia-manos-juntas-changelog.md'
+    };
     const REFRESH_INTERVAL_MS = 10000;
-    let DATA = {"scale":{"label":"Impresso Colombia Manos Juntas 18.5g→43g, g10, 94.5C, Scale","type":"pro","description":"Colombia Manos Juntas Scale 18.5 g / finish starts at 38 g / pump stop at 42 g / expected final yield about 43 g / 94.5 C / grind 10","temperature":94.5,"utility":false,"phases":[{"name":"Jam Wetting","phase":"preinfusion","valve":1,"duration":5,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"flow","pressure":0,"flow":8.0}},{"name":"Mango Saturation","phase":"preinfusion","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":2.3,"flow":4.5}},{"name":"Sweet Bloom","phase":"preinfusion","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"pressure","pressure":0.5,"flow":0}},{"name":"Soft Ramp","phase":"brew","valve":1,"duration":6,"temperature":94.5,"transition":{"type":"linear","duration":6,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.4}},{"name":"Jam Extraction","phase":"brew","valve":1,"duration":16,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.1},"targets":[{"type":"volumetric","operator":"gte","value":38.0}]},{"name":"Caramel Finish","phase":"brew","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"linear","duration":4,"adaptive":true},"pump":{"target":"pressure","pressure":5.5,"flow":1.7},"targets":[{"type":"volumetric","operator":"gte","value":42.0}]}]},"time":{"label":"Colombia Manos Juntas Jam Mango 18.5-43 39s","type":"pro","description":"Colombia Manos Juntas Jam Mango 18.5 g / 43 g / 94.5 C / grind 10","temperature":94.5,"utility":false,"phases":[{"name":"Jam Wetting","phase":"preinfusion","valve":1,"duration":5,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"flow","pressure":0,"flow":8.0}},{"name":"Mango Saturation","phase":"preinfusion","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":2.3,"flow":4.5}},{"name":"Sweet Bloom","phase":"preinfusion","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"pressure","pressure":0.5,"flow":0}},{"name":"Soft Ramp","phase":"brew","valve":1,"duration":6,"temperature":94.5,"transition":{"type":"linear","duration":6,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.4}},{"name":"Jam Extraction","phase":"brew","valve":1,"duration":12,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.1}},{"name":"Caramel Finish","phase":"brew","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"linear","duration":4,"adaptive":true},"pump":{"target":"pressure","pressure":5.5,"flow":1.7}}]}};
-    const FILES = {"recipe":{"name":"colombia-manos-juntas-recipe.md","content":"# Impresso Colombia Manos Juntas Jam Mango 18.5-43 – Scale\n\n| Mező | Érték |\n|---|---|\n| Kávé | Impresso Colombia Manos Juntas |\n| Feldolgozás | anaerobic natural |\n| Eredet | Colombia, Cauca, Manos Juntas micromill |\n| Ízjegyek | vörösáfonya dzsem · karamell · mangó |\n| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) / BOOKOO Themis Ultra |\n| Őrlőskála | 0-90, egész jelölések |\n| Fordulat | 1200 RPM baseline |\n| Stop | Bluetooth-mérleggel, kétlépcsős beverage-weight target alapján |\n| Profil | Scale – mérlegalapú, automatikus megállással |\n\n---\n\n## Cél ízprofil\n\nDzsemes vörösáfonya, mangó és karamelles édesség. A shot legyen szirupos és gyümölcsös, de ne legyen fermentáltan nehéz, alkoholos vagy száraz.\n\n---\n\n## Alap recept\n\n| Paraméter | Érték |\n|---|---:|\n| Dózis | **18.5 g** |\n| Cél végső hozam | **43.0 g** |\n| Várható tartomány | **43.0-44.0 g** |\n| Arány | **kb. 1:2.32** |\n| Hőmérséklet | **94.5 °C** |\n| Őrlés indulás | **10 körül** |\n| Őrlés tartomány | **10-11** |\n| Fordulat | **1200 RPM** |\n| Kosár | **IMS B682TH24.5M** |\n| Finish indulása | **38.0 g** |\n| Pumpa leállítása | **42.0 g** |\n| Teljes biztonsági hard cap | **47 s** |\n\n### Első shot\n\n**18.5 g be · grind 10 körül · 1200 RPM · 94.5 °C · 38.0 g-nál Caramel Finish · 42.0 g-nál pumpastop · várhatóan kb. 43.0 g a csészében**\n\n---\n\n## Miért két tömeg-target van?\n\nA GaggiMate `pro` profilban a `targets` tömb csak az aktuális fázist zárja le.\n\nHa a 43.0 g-os target kizárólag a Jam Extraction fázisban lenne:\n\n1. 43.0 g-nál lezárulna a Jam Extraction;\n2. elindulna a Caramel Finish;\n3. a gép még tovább pumpálna;\n4. a végső hozam jelentősen 43 g fölé futhatna.\n\nA javított Scale logika ezért kétlépcsős:\n\n1. **38.0 g-nál** a Jam Extraction véget ér, és elindul a Caramel Finish.\n2. **42.0 g-nál** a Caramel Finish is véget ér, ezért a pumpa leáll.\n3. A stop utáni kifolyás várhatóan **43.0-44.0 g** körüli végső hozamot ad.\n\n---\n\n## GaggiMate Pro fázisok\n\n| # | Fázis | Maximum idő | Hő | Pump target | Nyomás / Flow | Stop trigger |\n|---:|---|---:|---:|---|---:|---|\n| 1 | Jam Wetting | **5 s** | 94.5 °C | flow | 8.0 ml/s | idő |\n| 2 | Mango Saturation | **8 s** | 94.5 °C | pressure | 2.3 bar / 4.5 ml/s | idő |\n| 3 | Sweet Bloom | **4 s** | 94.5 °C | pressure | 0.5 bar / 0 ml/s | idő |\n| 4 | Soft Ramp | **6 s** | 94.5 °C | pressure | 7.3 bar / 2.4 ml/s | idő |\n| 5 | Jam Extraction | **16 s** | 94.5 °C | pressure | 7.3 bar / 2.1 ml/s | **38.0 g** |\n| 6 | Caramel Finish | **8 s** | 94.5 °C | pressure | 5.5 bar / 1.7 ml/s | **42.0 g** |\n|  | **Teljes hard cap** | **47 s** |  |  |  |  |\n\nA `duration` értékek hard capek. Aktív BOOKOO mérleggel a tömeg-targetek várhatóan hamarabb lezárják az utolsó két fázist.\n\n---\n\n## Scale profil\n\n**Profilfájl:** [`colombia-manos-juntas-scale.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json)\n\nA fájl a javított, kétlépcsős stop-logikát tartalmazza.\n\n### Stop-logika\n\n| Fázis | Target | Funkció |\n|---|---:|---|\n| Jam Extraction | **38.0 g** | átváltás az alacsonyabb nyomású Caramel Finish fázisra |\n| Caramel Finish | **42.0 g** | pumpa leállítása |\n| Stop utáni kifolyás | kb. **1.0-2.0 g** | várható végső hozam kb. 43 g |\n\n---\n\n## Dial-in logika\n\n| Eredmény | Következő lépés |\n|---|---|\n| **43.0-44.0 g, dzsemes/mangós/karamelles, szirupos** | Marad a profil és a 10 körüli őrlés. |\n| **44 g fölé fut** | A Caramel Finish targetet csökkentsd **41.5 g-ra**. |\n| **42 g alatt áll meg** | A Caramel Finish targetet emeld **42.5 g-ra**. |\n| **Túl savas, kevés mangó/édesség** | Először emeld a végső stop targetet **42.5 g-ra**; csak utána próbálj 95 °C-ot. |\n| **Túl nehéz, alkoholos vagy fermentált** | Csökkentsd a végső stop targetet **41.5 g-ra**, vagy a hőt 94.0 °C-ra. |\n| **40 g alatt marad / hard cap lép be** | Bluetooth kapcsolat, tare és puck prep ellenőrzése; ha minden stabil, menj kissé 11 felé. |\n| **Túl gyors, vékony vagy spriccel** | WDT/tamp/screen ellenőrzés; szükség esetén menj 10 felé finomabbra. |\n\n---\n\n## BOOKOO shot workflow\n\n1. Kapcsold be a BOOKOO Themis Ultra mérleget.\n2. Ellenőrizd a GaggiMate felületén, hogy a mérleg **Connected**.\n3. Tedd fel az üres csészét.\n4. Nullázd a mérleget.\n5. Töltsd be a `colombia-manos-juntas-scale.json` profilt.\n6. Indítsd el a shotot.\n7. Ellenőrizd, hogy kb. **38.0 g-nál** elindul-e a Caramel Finish.\n8. A pumpának kb. **42.0 g-nál** le kell állnia.\n9. Jegyezd fel a teljes időt, a végső tömeget és az ízt.\n\n---\n\n## Rövid menthető recept\n\n**Colombia Manos Juntas Jam Mango – Scale**\n\n**18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · finish 38.0 g · pumpastop 42.0 g · várható végső hozam kb. 43.0 g**\n","type":"text/markdown;charset=utf-8"},"changelog":{"name":"colombia-manos-juntas-changelog.md","content":"# Changelog – Colombia Manos Juntas Jam Mango\n\n## Repo konzisztencia (2026-07-25)\n\n- A JSON fájlnevek átalakítva: `colombia-manos-juntas-39s.json` → `colombia-manos-juntas-manual.json`, `colombia-manos-juntas-39s-scale-v2.json` → `colombia-manos-juntas-scale.json` (a `kirinyaga/` mintáját követve). A PNG-k újragenerálva.\n\n## Bluetooth Scale profil (2026-07-06)\n\n### Added\n\n- Bluetooth Scale support: BOOKOO Themis Ultra párosítva a GaggiMate Pro-val\n- Yield-based stop: automatikus shot stop beverage weight alapján\n- Automatic shot stop: 43.0 g beverage weight elérésekor\n- Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi\n- Új profil fájl: `colombia-manos-juntas-scale.json`\n- Safety timeout: 47 s (Bluetooth disconnect fallback)\n\n### Changed\n\n- Time stop replaced by beverage weight stop az extraction fázisban\n- A preinfusion és ramp fázisok időalapúak maradnak (firmware korlát)\n- Recipe.md frissítve a Scale profillal és a hozzá tartozó dial-in logikával\n\n## 2026-07-04 – kezdeti GaggiMate Pro profil\n- Új profil Impresso Colombia Manos Juntas kávéhoz.\n- Cél: vörösáfonya dzsem, karamell, mangó; szirupos, gyümölcsös espresso.\n- Teljes profilidő: 39 s.\n- Hőmérséklet: 94.5 °C.\n- Dózis: 18.5 g.\n- Célhozam: 42-44 g, ideálisan 43 g.\n- DF64V Gen 2 baseline: grind 10 körül, 1200 RPM.\n- BOOKOO Themis Ultra jelenleg nincs; brew-by-weight nem aktív.\n","type":"text/markdown;charset=utf-8"}};
+    let DATA = {"scale":{"label":"Imp Manos Juntas 18.5g 43g g10 94.5C Scale","type":"pro","description":"Colombia Manos Juntas Scale V2 18.5 g / finish starts at 38 g / pump stop at 42 g / expected final yield about 43 g / 94.5 C / grind 10","temperature":94.5,"utility":false,"phases":[{"name":"Jam Wetting","phase":"preinfusion","valve":1,"duration":5,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"flow","pressure":0,"flow":8.0}},{"name":"Mango Saturation","phase":"preinfusion","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":2.3,"flow":4.5}},{"name":"Sweet Bloom","phase":"preinfusion","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"pressure","pressure":0.5,"flow":0}},{"name":"Soft Ramp","phase":"brew","valve":1,"duration":6,"temperature":94.5,"transition":{"type":"linear","duration":6,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.4}},{"name":"Jam Extraction","phase":"brew","valve":1,"duration":16,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.1},"targets":[{"type":"volumetric","operator":"gte","value":38.0}]},{"name":"Caramel Finish","phase":"brew","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"linear","duration":4,"adaptive":true},"pump":{"target":"pressure","pressure":5.5,"flow":1.7},"targets":[{"type":"volumetric","operator":"gte","value":43.0}]}]},"time":{"label":"Colombia Manos Juntas Jam Mango 18.5-43 39s","type":"pro","description":"Colombia Manos Juntas Jam Mango 18.5 g / 43 g / 94.5 C / grind 10","temperature":94.5,"utility":false,"phases":[{"name":"Jam Wetting","phase":"preinfusion","valve":1,"duration":5,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"flow","pressure":0,"flow":8.0}},{"name":"Mango Saturation","phase":"preinfusion","valve":1,"duration":8,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":2.3,"flow":4.5}},{"name":"Sweet Bloom","phase":"preinfusion","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"ease-out","duration":2,"adaptive":true},"pump":{"target":"pressure","pressure":0.5,"flow":0}},{"name":"Soft Ramp","phase":"brew","valve":1,"duration":6,"temperature":94.5,"transition":{"type":"linear","duration":6,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.4}},{"name":"Jam Extraction","phase":"brew","valve":1,"duration":12,"temperature":94.5,"transition":{"type":"instant","duration":0,"adaptive":true},"pump":{"target":"pressure","pressure":7.3,"flow":2.1}},{"name":"Caramel Finish","phase":"brew","valve":1,"duration":4,"temperature":94.5,"transition":{"type":"linear","duration":4,"adaptive":true},"pump":{"target":"pressure","pressure":5.5,"flow":1.7}}]}};
+    const FILES = {"recipe":{"name":"colombia-manos-juntas-recipe.md","content":"# Impresso Colombia Manos Juntas Jam Mango 18.5-43 – Scale V2
+
+| Mező | Érték |
+|---|---|
+| Kávé | Impresso Colombia Manos Juntas |
+| Feldolgozás | anaerobic natural |
+| Eredet | Colombia, Cauca, Manos Juntas micromill |
+| Ízjegyek | vörösáfonya dzsem · karamell · mangó |
+| Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) / BOOKOO Themis Ultra |
+| Őrlőskála | 0-90, egész jelölések |
+| Fordulat | 1200 RPM baseline |
+| Stop | Bluetooth-mérleggel, kétlépcsős beverage-weight target alapján |
+| Verzió | Scale V2 – 2026-07-17, javított automatikus megállás; a V2 fájlnév változatlan |
+
+---
+
+## Cél ízprofil
+
+Dzsemes vörösáfonya, mangó és karamelles édesség. A shot legyen szirupos és gyümölcsös, de ne legyen fermentáltan nehéz, alkoholos vagy száraz.
+
+---
+
+## Alap recept
+
+| Paraméter | Érték |
+|---|---:|
+| Dózis | **18.5 g** |
+| Cél végső hozam | **43.0 g** |
+| Várható tartomány | **43.0-44.0 g** |
+| Arány | **kb. 1:2.32** |
+| Hőmérséklet | **94.5 °C** |
+| Őrlés indulás | **10 körül** |
+| Őrlés tartomány | **10** |
+| Fordulat | **1200 RPM** |
+| Kosár | **IMS B682TH24.5M** |
+| Finish indulása | **38.0 g** |
+| Pumpa leállítása | **42.0 g** |
+| Teljes biztonsági hard cap | **47 s** |
+
+### Első shot
+
+**18.5 g be · grind 10 · 1200 RPM · 94.5 °C · 38.0 g-nál Caramel Finish · 42.0 g-nál pumpastop · várhatóan kb. 43.0 g a csészében**
+
+---
+
+## Miért két tömeg-target van?
+
+A GaggiMate `pro` profilban a `targets` tömb csak az aktuális fázist zárja le.
+
+Ha a 43.0 g-os target kizárólag a Jam Extraction fázisban lenne:
+
+1. 43.0 g-nál lezárulna a Jam Extraction;
+2. elindulna a Caramel Finish;
+3. a gép még tovább pumpálna;
+4. a végső hozam jelentősen 43 g fölé futhatna.
+
+A javított Scale V2 logika ezért kétlépcsős:
+
+1. **38.0 g-nál** a Jam Extraction véget ér, és elindul a Caramel Finish.
+2. **42.0 g-nál** a Caramel Finish is véget ér, ezért a pumpa leáll.
+3. A stop utáni kifolyás várhatóan **43.0-44.0 g** körüli végső hozamot ad.
+
+---
+
+## GaggiMate Pro fázisok
+
+| # | Fázis | Maximum idő | Hő | Pump target | Nyomás / Flow | Stop trigger |
+|---:|---|---:|---:|---|---:|---|
+| 1 | Jam Wetting | **5 s** | 94.5 °C | flow | 8.0 ml/s | idő |
+| 2 | Mango Saturation | **8 s** | 94.5 °C | pressure | 2.3 bar / 4.5 ml/s | idő |
+| 3 | Sweet Bloom | **4 s** | 94.5 °C | pressure | 0.5 bar / 0 ml/s | idő |
+| 4 | Soft Ramp | **6 s** | 94.5 °C | pressure | 7.3 bar / 2.4 ml/s | idő |
+| 5 | Jam Extraction | **16 s** | 94.5 °C | pressure | 7.3 bar / 2.1 ml/s | **38.0 g** |
+| 6 | Caramel Finish | **8 s** | 94.5 °C | pressure | 5.5 bar / 1.7 ml/s | **42.0 g** |
+|  | **Teljes hard cap** | **47 s** |  |  |  |  |
+
+A `duration` értékek hard capek. Aktív BOOKOO mérleggel a tömeg-targetek várhatóan hamarabb lezárják az utolsó két fázist.
+
+---
+
+## Scale V2 profil
+
+**Profilfájl:** [`colombia-manos-juntas-scale.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json)
+
+A verziószám szándékosan **V2 maradt**. A fájl a javított, kétlépcsős stop-logikát tartalmazza.
+
+### Stop-logika
+
+| Fázis | Target | Funkció |
+|---|---:|---|
+| Jam Extraction | **38.0 g** | átváltás az alacsonyabb nyomású Caramel Finish fázisra |
+| Caramel Finish | **42.0 g** | pumpa leállítása |
+| Stop utáni kifolyás | kb. **1.0-2.0 g** | várható végső hozam kb. 43 g |
+
+---
+
+## Dial-in logika
+
+| Eredmény | Következő lépés |
+|---|---|
+| **43.0-44.0 g, dzsemes/mangós/karamelles, szirupos** | Marad a profil és a 10 körüli őrlés. |
+| **44 g fölé fut** | A Caramel Finish targetet csökkentsd **41.5 g-ra**. |
+| **42 g alatt áll meg** | A Caramel Finish targetet emeld **42.5 g-ra**. |
+| **Túl savas, kevés mangó/édesség** | Először emeld a végső stop targetet **42.5 g-ra**; csak utána próbálj 95 °C-ot. |
+| **Túl nehéz, alkoholos vagy fermentált** | Csökkentsd a végső stop targetet **41.5 g-ra**, vagy a hőt 94.0 °C-ra. |
+| **40 g alatt marad / hard cap lép be** | Bluetooth kapcsolat, tare és puck prep ellenőrzése; ha minden stabil, menj kissé 11 felé. |
+| **Túl gyors, vékony vagy spriccel** | WDT/tamp/screen ellenőrzés; szükség esetén menj 10 felé finomabbra. |
+
+---
+
+## BOOKOO shot workflow
+
+1. Kapcsold be a BOOKOO Themis Ultra mérleget.
+2. Ellenőrizd a GaggiMate felületén, hogy a mérleg **Connected**.
+3. Tedd fel az üres csészét.
+4. Nullázd a mérleget.
+5. Töltsd be a `colombia-manos-juntas-scale.json` profilt.
+6. Indítsd el a shotot.
+7. Ellenőrizd, hogy kb. **38.0 g-nál** elindul-e a Caramel Finish.
+8. A pumpának kb. **42.0 g-nál** le kell állnia.
+9. Jegyezd fel a teljes időt, a végső tömeget és az ízt.
+
+---
+
+## Rövid menthető recept
+
+**Colombia Manos Juntas Jam Mango – Scale V2**
+
+**18.5 g · grind 10 körül · 1200 RPM · 94.5 °C · finish 38.0 g · pumpastop 42.0 g · várható végső hozam kb. 43.0 g**
+","type":"text/markdown;charset=utf-8"},"changelog":{"name":"colombia-manos-juntas-changelog.md","content":"# Changelog – Colombia Manos Juntas Jam Mango
+
+## Repo konzisztencia (2026-07-25)
+
+- A JSON fájlnevek átalakítva: `colombia-manos-juntas-39s.json` → `colombia-manos-juntas-manual.json`, `colombia-manos-juntas-39s-scale-v2.json` → `colombia-manos-juntas-scale.json` (a `kirinyaga/` mintáját követve). A PNG-k újragenerálva.
+
+## V2 – Bluetooth Scale Edition (2026-07-06)
+
+### Added
+
+- Bluetooth Scale support: BOOKOO Themis Ultra párosítva a GaggiMate Pro-val
+- Yield-based stop: automatikus shot stop beverage weight alapján
+- Automatic shot stop: 43.0 g beverage weight elérésekor
+- Weight-based extraction: a GaggiMate Pro a Bluetooth mérleg jelét követi
+- Új profil fájl: `colombia-manos-juntas-scale.json`
+- Safety timeout: 47 s (Bluetooth disconnect fallback)
+
+### Changed
+
+- Time stop replaced by beverage weight stop az extraction fázisban
+- A preinfusion és ramp fázisok időalapúak maradnak (firmware korlát)
+- Recipe.md frissítve V2 szakasszal, V2 dial-in logikával
+
+## 2026-07-04 – kezdeti GaggiMate Pro profil
+- Új profil Impresso Colombia Manos Juntas kávéhoz.
+- Cél: vörösáfonya dzsem, karamell, mangó; szirupos, gyümölcsös espresso.
+- Teljes profilidő: 39 s.
+- Hőmérséklet: 94.5 °C.
+- Dózis: 18.5 g.
+- Célhozam: 42-44 g, ideálisan 43 g.
+- DF64V Gen 2 baseline: grind 10 körül, 1200 RPM.
+- BOOKOO Themis Ultra jelenleg nincs; brew-by-weight nem aktív.
+","type":"text/markdown;charset=utf-8"}};
     const assetSignatures = new Map();
     const imageState = new Map();
     let refreshRunning = false;
@@ -1200,6 +1359,16 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
           const fallback = JSON.stringify(DATA[key], null, 2) + '\n';
           downloadBlob(ASSET_CONFIG[key].json, new Blob([fallback], {type:'application/json;charset=utf-8'}));
           return;
+        }
+      }
+      if (TEXT_ASSET_CONFIG[key]) {
+        try {
+          const response = await fetch(versionedUrl(TEXT_ASSET_CONFIG[key]), {cache:'no-store'});
+          if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+          downloadBlob(TEXT_ASSET_CONFIG[key], await response.blob());
+          return;
+        } catch (error) {
+          console.warn(`A külső ${key} fájl nem tölthető be, beágyazott tartalék használata.`, error);
         }
       }
       const file = FILES[key];
