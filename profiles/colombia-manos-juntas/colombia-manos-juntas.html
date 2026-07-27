@@ -830,6 +830,26 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
     #liveStatus[data-state="error"] { color: #b42318; }
     .gallery .asset-loading { display:grid; place-items:center; min-height:210px; border:1px dashed var(--line); background:var(--surface); color:var(--muted); }
 
+    .home-link {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: .42rem;
+      background: var(--kv-surface-2, var(--surface2, var(--surface))) !important;
+      border-color: var(--kv-line, var(--line)) !important;
+    }
+    .home-link svg { flex: 0 0 auto; }
+    @media (max-width: 640px) {
+      .nav a.home-link {
+        display: grid !important;
+        width: 42px;
+        height: 42px;
+        padding: 0 !important;
+        place-items: center;
+      }
+      .home-link .home-label { display: none; }
+    }
+
 </style>
 </head>
 <body>
@@ -847,6 +867,10 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
         <button class="icon-button" id="themeToggle" type="button" aria-label="Sötét mód váltása" title="Téma váltása">
           <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42M7.06 16.94l-1.42 1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
         </button>
+        <a class="home-link" href="../../index.html" aria-label="Főoldal" title="Vissza a főoldalra">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 11 9-8 9 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 9.5V21h13V9.5M9.5 21v-6h5v6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span class="home-label">Főoldal</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -1012,7 +1036,6 @@ html.kv-unified-ui footer{color:var(--kv-muted)!important}
         title: 'Manual · 39 s time-based profil'
       }
     };
-    const EXTRA_IMAGES = [];
     const TEXT_ASSET_CONFIG = {
       recipe: 'colombia-manos-juntas-recipe.md',
       changelog: 'colombia-manos-juntas-changelog.md'
@@ -1299,8 +1322,7 @@ A verziószám szándékosan **V2 maradt**. A fájl a javított, kétlépcsős s
     function allImageEntries() {
       return [
         {key:'scale', image:ASSET_CONFIG.scale.image, title:ASSET_CONFIG.scale.title},
-        {key:'time', image:ASSET_CONFIG.time.image, title:ASSET_CONFIG.time.title},
-        ...EXTRA_IMAGES
+        {key:'time', image:ASSET_CONFIG.time.image, title:ASSET_CONFIG.time.title}
       ];
     }
 
