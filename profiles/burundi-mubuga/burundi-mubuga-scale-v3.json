@@ -1,7 +1,7 @@
 {
-  "label": "Burundi Mubuga Melon Currant Scale V2",
+  "label": "Burundi Mubuga Melon Currant Scale V3",
   "type": "pro",
-  "description": "Burundi Mubuga Melon Currant Scale V2 18.5 g / extraction stop 38 g / final stop 42.5 g volumetric / 94.5 C / grind 8-9 / two-stage weight stop",
+  "description": "Burundi Mubuga Melon Currant Scale V3 18.5 g / extraction stop 38 g / final stop 42.5 g volumetric / 94.5 C / grind 8-9 / soft pressure cap on wetting + longer bloom rest",
   "temperature": 94.5,
   "utility": false,
   "phases": [
@@ -18,7 +18,7 @@
       },
       "pump": {
         "target": "flow",
-        "pressure": 0,
+        "pressure": 3.5,
         "flow": 8
       }
     },
@@ -43,7 +43,7 @@
       "name": "Melon Bloom",
       "phase": "preinfusion",
       "valve": 1,
-      "duration": 4,
+      "duration": 7,
       "temperature": 94.5,
       "transition": {
         "type": "ease-out",
