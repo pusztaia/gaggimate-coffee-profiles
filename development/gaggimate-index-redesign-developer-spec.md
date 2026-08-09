@@ -7,6 +7,23 @@
 
 ---
 
+## 0. Implementáció állapota (2026-08-09)
+
+A `index.html`-en megvalósult egy első kör, amely a kritikus mobil-nav hibát és a spec 1. fázisát (információs hierarchia) fedi le, teljes egészében statikus HTML/CSS/JS-ben, a GitHub Pages-es (`https://pusztaia.github.io/gaggimate-coffee-profiles/`) futtatás megtartásával — build lépés vagy adatmodell-változás nélkül.
+
+**Kész:**
+- Mobil navigáció (18. szakasz): hamburger gomb + natív `<dialog id="mobileMenu">`, `aria-expanded`, Escape/backdrop zárás, fókusz-visszaadás.
+- Kompakt, egyoszlopos hero: dekoratív `.hero-card` + csésze SVG törölve, rövidebb H1/lead, a kereső és a gyorsfilterek a hero alá költöztek (7–8. szakasz).
+- A 6 metrika-kártya törölve; helyette egy összesítő sor (`#catalogSummary`) a katalógus fejlécében, plusz élő találatszámláló (`#resultCount`) keresés/szűrés közben (7., 14. szakasz).
+- Profilkártyák: a grafikon és a fázislista `<details><summary>Profil részletei</summary>` mögé került, alapból csukva; az azonosító adatok, a 4 statisztika és a CTA-k változatlanul mindig láthatók (9.2 szakasz).
+- A hero-ból kivett fejlesztői/marketing szöveg ("JSON-alapú", "GitHub Pages kompatibilis" stb.) egy mondatban átkerült a "Fejlesztőknek" szekcióba (17. szakasz szelleme).
+
+**Még nincs megvalósítva** (a lenti szakaszok továbbra is érvényes, jövőbeli teendők): Scale/Manual segmented control (11.), CTA-hierarchia / overflow menü (10.), grafikon lazy-render + `IntersectionObserver` (12., 25.), `catalog.json` adatmodell bővítése kártya-first-render mezőkkel (27.), URL state (29.), dedikált profil-route-ok (30.), dokumentáció kategorizált kompakt listája (16.), JS-modulokra bontás (26.), teljes accessibility/Lighthouse audit (37–39.).
+
+A 36. és 40. szakasz jelölőlistái lentebb frissítve jelzik, mi készült el ebből a körből.
+
+---
+
 ## 1. Vezetői összefoglaló
 
 A jelenlegi oldal vizuálisan igényes és technikailag sok hasznos funkciót tartalmaz, de az információs hierarchia fordított a valós felhasználói feladathoz képest.
@@ -1302,32 +1319,32 @@ AppShell
 
 # 36. Fokozatos megvalósítás
 
-## Phase 1 — Információs hierarchia
+## Phase 1 — Információs hierarchia ✅ kész (2026-08-09)
 
 Első commit:
 
-- hero felezése;
-- metrics eltávolítása;
-- search + filter felmozgatása;
-- profilkatalógus közvetlenül hero után;
-- setup/docs/dev hátrébb.
+- [x] hero felezése;
+- [x] metrics eltávolítása;
+- [x] search + filter felmozgatása;
+- [x] profilkatalógus közvetlenül hero után;
+- [x] setup/docs/dev hátrébb (már eredetileg is ebben a sorrendben volt).
 
-**Semmilyen backend/adatmodell változás nem szükséges.**
+**Semmilyen backend/adatmodell változás nem szükséges.** — igaz maradt, a `catalog.json` séma nem változott.
 
-## Phase 2 — Profilkártya egyszerűsítése
+## Phase 2 — Profilkártya egyszerűsítése (részben kész)
 
-- chart összecsukása;
-- fázislista összecsukása;
-- CTA-k új hierarchiája;
-- stat sor egyszerűsítése;
-- overflow menu.
+- [x] chart összecsukása;
+- [x] fázislista összecsukása;
+- [ ] CTA-k új hierarchiája;
+- [ ] stat sor egyszerűsítése;
+- [ ] overflow menu.
 
-## Phase 3 — Mobil navigation
+## Phase 3 — Mobil navigation (részben kész, előrehozva)
 
-- hamburger;
-- accessible dialog/drawer;
-- touch targetek;
-- mobil filter UX.
+- [x] hamburger;
+- [x] accessible dialog (natív `<dialog>`, Escape + backdrop zárás, fókusz-visszaadás);
+- [ ] touch targetek szisztematikus auditja (44×44 minimum minden elemen);
+- [ ] mobil filter UX (pl. "Szűrők" bottom sheet a jelenlegi mindig-látható filter-row helyett).
 
 ## Phase 4 — Performance
 
@@ -1425,27 +1442,27 @@ Külön figyelni:
 
 A redesign akkor tekinthető sikeresnek, ha:
 
-- [ ] A profilkereső az első viewportban látható.
-- [ ] Desktopon a profilkatalógus legfeljebb egy rövid hero után kezdődik.
-- [ ] Mobilon az első profil elérhető legfeljebb ~1 viewportnyi kezdő tartalom után.
-- [ ] A nagy dekoratív hero card nem tolja le a katalógust.
-- [ ] A 6 metric card nem foglal külön főoldali blokkot.
-- [ ] A kártya összecsukott állapotban csak döntéshez szükséges adatokat mutat.
-- [ ] Grafikon és fázislista alapból haladó részlet.
-- [ ] Scale/Manual váltás egyértelmű.
-- [ ] A primary CTA vizuálisan egyértelmű.
-- [ ] Mobilon van működő fő navigáció.
-- [ ] Minden fontos interaktív elem megfelelő touch targettel rendelkezik.
-- [ ] Billentyűzetes navigáció működik.
-- [ ] Modal / drawer fókuszkezelése korrekt.
-- [ ] Helyes heading hierarchy van.
-- [ ] A filterek és keresés üres / error állapota felhasználóbarát.
+- [x] A profilkereső az első viewportban látható.
+- [x] Desktopon a profilkatalógus legfeljebb egy rövid hero után kezdődik.
+- [ ] Mobilon az első profil elérhető legfeljebb ~1 viewportnyi kezdő tartalom után. *(javult a kompaktabb hero miatt, de nem mérve valós eszközön)*
+- [x] A nagy dekoratív hero card nem tolja le a katalógust. *(törölve)*
+- [x] A 6 metric card nem foglal külön főoldali blokkot. *(törölve, egy összesítő sor lett belőle)*
+- [x] A kártya összecsukott állapotban csak döntéshez szükséges adatokat mutat. *(chart + fázislista `<details>` mögé került)*
+- [x] Grafikon és fázislista alapból haladó részlet.
+- [ ] Scale/Manual váltás egyértelmű. *(marad a jelenlegi `<select>`, nincs segmented control)*
+- [ ] A primary CTA vizuálisan egyértelmű. *(a JSON/PNG/Recept/Changelog gombok még egyenrangúak)*
+- [x] Mobilon van működő fő navigáció. *(hamburger + dialog)*
+- [ ] Minden fontos interaktív elem megfelelő touch targettel rendelkezik. *(nincs szisztematikusan auditálva)*
+- [ ] Billentyűzetes navigáció működik. *(nincs manuálisan tesztelve)*
+- [ ] Modal / drawer fókuszkezelése korrekt. *(alapszintű fókusz-visszaadás megvan a mobil menünél, teljes audit nincs)*
+- [ ] Helyes heading hierarchy van. *(nem auditálva ebben a körben)*
+- [ ] A filterek és keresés üres / error állapota felhasználóbarát. *(az "Nincs a szűrésnek megfelelő profil" üzenet változatlan, nincs "Szűrők törlése" CTA)*
 - [ ] A profilok nem ugrálnak jelentősen async betöltés közben.
-- [ ] LCP cél ≤ 2.5 s.
-- [ ] INP cél ≤ 200 ms.
-- [ ] CLS cél ≤ 0.1.
-- [ ] A teljes profilkatalógus továbbra is `catalog.json`-ból épül.
-- [ ] Új profil hozzáadásakor továbbra sem kell kézzel új HTML kártyát létrehozni.
+- [ ] LCP cél ≤ 2.5 s. *(nem mérve)*
+- [ ] INP cél ≤ 200 ms. *(nem mérve)*
+- [ ] CLS cél ≤ 0.1. *(nem mérve)*
+- [x] A teljes profilkatalógus továbbra is `catalog.json`-ból épül.
+- [x] Új profil hozzáadásakor továbbra sem kell kézzel új HTML kártyát létrehozni.
 
 ---
 

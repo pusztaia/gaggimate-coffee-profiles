@@ -35,20 +35,15 @@ img{display:block;max-width:100%}
 .nav{margin-left:auto;display:flex;align-items:center;gap:.25rem}.nav a,.icon-btn{border:1px solid transparent;background:transparent;color:var(--text);text-decoration:none;border-radius:999px;padding:.5rem .72rem;cursor:pointer}
 .nav a:hover,.icon-btn:hover{background:var(--surface2);border-color:var(--line)}
 .container{max-width:var(--max);margin:auto;padding:0 1.1rem}
-.hero{padding:5.5rem 0 3.6rem}
-.hero-grid{display:grid;grid-template-columns:1.22fr .78fr;gap:2rem;align-items:stretch}
+.hero{padding:2.75rem 0 2rem}
+.hero-inner{max-width:760px}
+.hero .toolbar{margin-top:1.5rem}
+.hero .filter-row{margin-bottom:0}
 .eyebrow{color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.16em;font-size:.78rem}
-h1{font-size:clamp(2.8rem,7vw,6.4rem);line-height:.92;letter-spacing:-.07em;margin:.7rem 0 1.2rem;max-width:900px}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;letter-spacing:-.04em;margin:.6rem 0 .7rem;max-width:900px}
 h1 span{color:var(--accent)}
-.lead{font-size:clamp(1.05rem,2vw,1.28rem);max-width:760px;color:var(--muted);margin:0}
-.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.55rem .85rem;font-weight:760}.chip.accent{background:var(--accent);border-color:var(--accent);color:#fff}
-.hero-card{background:linear-gradient(150deg,var(--accent),#3e1320);color:#fff;border-radius:32px;padding:2rem;box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:400px;display:flex;flex-direction:column;justify-content:space-between}
-.hero-card:before,.hero-card:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}.hero-card:before{width:260px;height:260px;right:-70px;top:-80px}.hero-card:after{width:150px;height:150px;left:-40px;bottom:-55px}.hero-card>*{position:relative;z-index:1}
-.hero-card h2{font-size:2rem;line-height:1.08;margin:0}.hero-card p{opacity:.86;margin:.35rem 0 0}
-.cup{width:180px;height:180px;margin:1rem auto 0}.cup svg{width:100%;height:100%}
-.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:.85rem;margin-top:1.75rem}
-.metric{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.15rem;box-shadow:var(--shadow)}
-.metric .k{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:850}.metric .v{font-size:1.8rem;line-height:1.1;font-weight:950;margin:.3rem 0}.metric .u{font-size:.85rem;color:var(--muted)}
+.lead{font-size:clamp(1rem,1.6vw,1.15rem);max-width:680px;color:var(--muted);margin:0}
+.result-count{color:var(--muted);font-weight:700;font-size:.65em;text-transform:none;letter-spacing:0;margin-left:.5rem}
 section{padding:4rem 0;scroll-margin-top:78px}
 .section-head{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:1.5rem}.section-head h2{font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.045em;line-height:1.04;margin:0}.section-head p{max-width:700px;color:var(--muted);margin:.5rem 0 0}
 .toolbar{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:.75rem;margin-bottom:1rem}
@@ -68,6 +63,7 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .chart-box{padding:1rem 1rem .7rem;background:linear-gradient(180deg,color-mix(in srgb,var(--surface2) 65%,transparent),var(--surface));min-height:250px}.mini-chart{width:100%;height:230px;display:block}.chart-fallback{min-height:230px;display:grid;place-items:center;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;padding:1rem}
 .chart-legend{display:flex;gap:.8rem;flex-wrap:wrap;color:var(--muted);font-size:.72rem;padding:.3rem .2rem 0}.chart-legend i{display:inline-block;width:18px;height:3px;border-radius:99px;margin-right:.28rem;vertical-align:middle}.chart-legend .p i{background:var(--blue)}.chart-legend .f i{background:var(--flow)}.chart-legend .t i{background:var(--card-accent)}
 .phase-list{display:grid;gap:.45rem;padding:.2rem 1rem 1rem}.phase-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.55rem;align-items:center;background:var(--surface2);border:1px solid var(--line);border-radius:13px;padding:.55rem .65rem;font-size:.76rem}.phase-row strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.phase-row span{color:var(--muted)}.phase-row .target{color:var(--card-accent);font-weight:850}
+.card-details{border-top:1px solid var(--line);margin-top:.2rem}.card-details summary{cursor:pointer;list-style:none;padding:.85rem 1.1rem;font-weight:820;font-size:.85rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between}.card-details summary::-webkit-details-marker{display:none}.card-details summary::after{content:"+";font-size:1.05rem}.card-details[open] summary::after{content:"−"}.card-details[open] summary{border-bottom:1px solid var(--line)}
 .card-actions{display:flex;flex-wrap:wrap;gap:.45rem;padding:.9rem 1rem 1rem;margin-top:auto;border-top:1px solid var(--line)}.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.58rem .78rem;cursor:pointer;font-weight:820;font-size:.78rem}.btn:hover{border-color:var(--card-accent);color:var(--card-accent)}.btn.primary{background:var(--card-accent);border-color:var(--card-accent);color:#fff}.btn[hidden]{display:none}
 .empty{grid-column:1/-1;padding:3rem 1rem;text-align:center;border:1px dashed var(--line);border-radius:24px;color:var(--muted)}
 .setup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}.setup-card,.doc-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:1.1rem;box-shadow:var(--shadow-soft)}.setup-card span{display:block;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em}.setup-card strong{display:block;font-size:1.05rem;margin-top:.28rem}
@@ -75,12 +71,20 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .modular{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.code-card{background:#1f1815;color:#f8eee7;border-radius:24px;padding:1.2rem;overflow:auto;box-shadow:var(--shadow)}pre{margin:0;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}.steps{display:grid;gap:.75rem;counter-reset:step}.step{counter-increment:step;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1rem}.step:before{content:counter(step);display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--accent);color:#fff;font-weight:950}.step p{margin:.1rem 0;color:var(--muted)}.step strong{color:var(--text)}
 .notice{border-left:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 13%,var(--surface));padding:1rem 1.1rem;border-radius:0 16px 16px 0;margin-top:1rem}
 .modal-backdrop{display:none;position:fixed;inset:0;z-index:80;background:rgba(12,7,6,.76);backdrop-filter:blur(8px);padding:1rem;overflow:auto}.modal-backdrop.open{display:grid;place-items:center}.modal{width:min(920px,96vw);max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.modal-head{position:sticky;top:0;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);z-index:2}.modal-head h2{font-size:1rem;margin:0}.modal-close{border:1px solid var(--line);background:var(--surface2);color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer}.modal-body{padding:1.2rem 1.4rem 1.6rem}.modal-body h1{font-size:2rem;line-height:1.05}.modal-body h2{font-size:1.45rem;margin-top:1.7rem}.modal-body h3{font-size:1.1rem;margin-top:1.4rem}.modal-body p,.modal-body li{color:var(--muted)}.modal-body table{width:100%;border-collapse:collapse;font-size:.84rem}.modal-body th,.modal-body td{padding:.7rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.modal-body th{background:var(--surface2)}.modal-body pre{background:#1f1815;color:#f8eee7;border-radius:16px;padding:1rem;overflow:auto}.modal-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface2);padding:.08em .3em;border-radius:5px;color:var(--text)}.modal-body blockquote{border-left:4px solid var(--gold);margin:1rem 0;padding:.7rem 1rem;background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:0 12px 12px 0}.modal-body img{border-radius:16px;box-shadow:var(--shadow-soft)}
+.menu-btn{display:none}
+dialog#mobileMenu{border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;background:var(--surface);color:var(--text);box-shadow:var(--shadow);width:min(320px,86vw);margin:1rem auto auto auto}
+dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)}
+.mobile-menu-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
+.mobile-menu-links{display:grid}
+.mobile-menu-links a{padding:1rem 1.1rem;color:var(--text);text-decoration:none;font-weight:800;border-bottom:1px solid var(--line);min-height:44px;display:flex;align-items:center}
+.mobile-menu-links a:last-child{border-bottom:0}
+.mobile-menu-links a:hover{background:var(--surface2)}
 .footer-space{height:2rem}
 :focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
-@media(max-width:980px){.nav a{display:none}.hero-grid,.modular{grid-template-columns:1fr}.hero-card{min-height:330px}.metrics{grid-template-columns:repeat(3,1fr)}.profile-grid{grid-template-columns:1fr}.setup-grid{grid-template-columns:repeat(2,1fr)}.docs-grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field{grid-column:1/-1}}
-@media(max-width:640px){.hero{padding-top:3.3rem}.hero h1{font-size:3.25rem}.hero-card{min-height:300px}.cup{width:145px;height:145px}.metrics{grid-template-columns:repeat(2,1fr);margin-top:1.25rem}.setup-grid,.docs-grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.card-stats{grid-template-columns:repeat(2,1fr)}.card-stat:nth-child(2){border-right:0}.card-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.section-head{display:block}.phase-row{grid-template-columns:minmax(0,1fr) auto}.phase-row .target{grid-column:1/-1}.brand-text span{display:none}}
+@media(max-width:980px){.nav a{display:none}.menu-btn{display:grid;place-items:center}.modular{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr}.setup-grid{grid-template-columns:repeat(2,1fr)}.docs-grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field{grid-column:1/-1}}
+@media(max-width:640px){.hero{padding:1.75rem 0 1.5rem}.setup-grid,.docs-grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.card-stats{grid-template-columns:repeat(2,1fr)}.card-stat:nth-child(2){border-right:0}.card-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.section-head{display:block}.phase-row{grid-template-columns:minmax(0,1fr) auto}.phase-row .target{grid-column:1/-1}.brand-text span{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-@media print{.topbar,.toolbar,.filter-row,.card-actions,.docs-grid,.modular,.modal-backdrop{display:none!important}body{background:#fff}.profile-card,.metric,.setup-card{box-shadow:none;break-inside:avoid}.profile-grid{grid-template-columns:1fr 1fr}}
+@media print{.topbar,.toolbar,.filter-row,.card-actions,.docs-grid,.modular,.modal-backdrop,#mobileMenu{display:none!important}body{background:#fff}.profile-card,.setup-card{box-shadow:none;break-inside:avoid}.profile-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -94,7 +98,8 @@ section{padding:4rem 0;scroll-margin-top:78px}
       <span class="brand-text"><strong>GaggiMate Coffee Profiles</strong><span>Moduláris profil-katalógus</span></span>
     </a>
     <nav class="nav" aria-label="Fő navigáció">
-      <a href="#profiles">Profilok</a><a href="#setup">Setup</a><a href="#documents">Dokumentáció</a><a href="#modular">Új profil</a>
+      <a href="#profiles">Profilok</a><a href="#setup">Setup</a><a href="#documents">Dokumentáció</a><a href="#modular">Fejlesztőknek</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menü megnyitása" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMenu" title="Menü">☰</button>
       <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
     </nav>
   </div>
@@ -103,43 +108,27 @@ section{padding:4rem 0;scroll-margin-top:78px}
 <main id="main">
 <div class="container">
 <section class="hero" id="top">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow">Gaggia Classic Pro · GaggiMate Pro · BOOKOO</div>
-      <h1>Kávéprofilok<br><span>egy helyen</span></h1>
-      <p class="lead">A profilkártyákat nem kézzel tartja karban az index: a <code>profiles/catalog.json</code> és az egyes GaggiMate JSON profilok alapján építi fel őket. Új profil hozzáadásakor az index HTML-hez nem kell hozzányúlni.</p>
-      <div class="chips"><span class="chip accent">JSON-alapú</span><span class="chip">Manual + Scale</span><span class="chip">Interaktív grafikon</span><span class="chip">GitHub Pages kompatibilis</span></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Gaggia Classic Pro · GaggiMate Pro · BOOKOO Scale</div>
+    <h1>GaggiMate <span>kávéprofilok</span></h1>
+    <p class="lead">Találd meg a kávédhoz tartozó profilt, válassz Scale vagy Manual verziót, majd nyisd meg vagy töltsd le a JSON-t.</p>
+    <div class="toolbar">
+      <div class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="searchInput" type="search" placeholder="Keresés név, eredet, feldolgozás vagy ízjegy alapján…" autocomplete="off"></div>
+      <select class="select" id="processSelect" aria-label="Feldolgozás szűrése"><option value="">Minden feldolgozás</option></select>
+      <select class="select" id="sortSelect" aria-label="Rendezés"><option value="featured">Kiemeltek előre</option><option value="title">Név szerint</option><option value="temperature">Hőmérséklet szerint</option></select>
     </div>
-    <aside class="hero-card">
-      <div><h2>V2 Bluetooth Scale</h2><p>BOOKOO Themis Ultra · beverage weight stop</p></div>
-      <div class="cup" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><linearGradient id="coffee" x1="0" x2="1"><stop stop-color="#4c111b"/><stop offset="1" stop-color="#a33435"/></linearGradient></defs><ellipse cx="92" cy="146" rx="72" ry="18" fill="rgba(255,255,255,.16)"/><path d="M38 58h112l-10 82c-2 18-17 31-35 31H82c-18 0-33-13-35-31Z" fill="#fff4e7"/><ellipse cx="94" cy="60" rx="55" ry="16" fill="#e9d6c6"/><ellipse cx="94" cy="60" rx="48" ry="12" fill="url(#coffee)"/><path d="M149 77c35-4 39 50 6 56" fill="none" stroke="#fff4e7" stroke-width="16" stroke-linecap="round"/><path d="M75 45c-13-19 9-21 0-40M104 45c-13-19 9-21 0-40" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="5" stroke-linecap="round"/></svg></div>
-      <div><strong id="heroProfileCount">Profilkatalógus betöltése…</strong><p id="heroVariantCount">A JSON fájlokból élő előnézet készül.</p></div>
-    </aside>
-  </div>
-  <div class="metrics">
-    <article class="metric"><div class="k">Profilcsalád</div><div class="v" id="metricProfiles">—</div><div class="u">katalógusbejegyzés</div></article>
-    <article class="metric"><div class="k">JSON variáns</div><div class="v" id="metricVariants">—</div><div class="u">betölthető profil</div></article>
-    <article class="metric"><div class="k">Scale profil</div><div class="v" id="metricScale">—</div><div class="u">BOOKOO mód</div></article>
-    <article class="metric"><div class="k">Manual profil</div><div class="v" id="metricManual">—</div><div class="u">időalapú mód</div></article>
-    <article class="metric"><div class="k">Dózis</div><div class="v">18,5</div><div class="u">gramm baseline</div></article>
-    <article class="metric"><div class="k">RPM</div><div class="v">1200</div><div class="u">DF64V baseline</div></article>
+    <div class="filter-row" aria-label="Profiltípus szűrése">
+      <button class="filter" data-filter="all" aria-pressed="true">Összes</button>
+      <button class="filter" data-filter="coffee" aria-pressed="false">Kávéspecifikus</button>
+      <button class="filter" data-filter="general" aria-pressed="false">Általános</button>
+      <button class="filter" data-filter="scale" aria-pressed="false">Scale</button>
+      <button class="filter" data-filter="manual" aria-pressed="false">Manual</button>
+    </div>
   </div>
 </section>
 
 <section id="profiles">
-  <div class="section-head"><div><h2>Profilkatalógus</h2><p>Keresés, szűrés és variánsváltás. A kártyák fázisai, hőmérséklete és stop targetje az aktuálisan kiválasztott GaggiMate JSON-ból érkezik.</p></div></div>
-  <div class="toolbar">
-    <div class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="searchInput" type="search" placeholder="Keresés név, eredet, feldolgozás vagy ízjegy alapján…" autocomplete="off"></div>
-    <select class="select" id="processSelect" aria-label="Feldolgozás szűrése"><option value="">Minden feldolgozás</option></select>
-    <select class="select" id="sortSelect" aria-label="Rendezés"><option value="featured">Kiemeltek előre</option><option value="title">Név szerint</option><option value="temperature">Hőmérséklet szerint</option></select>
-  </div>
-  <div class="filter-row" aria-label="Profiltípus szűrése">
-    <button class="filter" data-filter="all" aria-pressed="true">Összes</button>
-    <button class="filter" data-filter="coffee" aria-pressed="false">Kávéspecifikus</button>
-    <button class="filter" data-filter="general" aria-pressed="false">Általános</button>
-    <button class="filter" data-filter="scale" aria-pressed="false">Scale</button>
-    <button class="filter" data-filter="manual" aria-pressed="false">Manual</button>
-  </div>
+  <div class="section-head"><div><h2>Profilkatalógus<span id="resultCount" class="result-count"></span></h2><p id="catalogSummary">Profilkatalógus betöltése…</p></div></div>
   <div id="catalogStatus" class="status">A profilkatalógus betöltése folyamatban…</div>
   <div id="profileGrid" class="profile-grid" aria-live="polite"></div>
 </section>
@@ -155,7 +144,7 @@ section{padding:4rem 0;scroll-margin-top:78px}
 </section>
 
 <section id="modular">
-  <div class="section-head"><div><h2>Új profil hozzáadása</h2><p>Az index kódját nem kell másolni vagy bővíteni. Egy új mappa és egy katalógusbejegyzés elegendő.</p></div></div>
+  <div class="section-head"><div><h2>Új profil hozzáadása</h2><p>Az index kódját nem kell másolni vagy bővíteni. Egy új mappa és egy katalógusbejegyzés elegendő. A katalógus JSON-alapú, interaktív grafikonokkal, és GitHub Pages-en, build lépés nélkül fut.</p></div></div>
   <div class="modular">
     <div class="steps">
       <div class="step"><p><strong>Hozd létre a profil mappáját</strong><br><code>profiles/uj-kave/</code>, a fájlelnevezési konvenció szerint.</p></div>
@@ -207,6 +196,16 @@ section{padding:4rem 0;scroll-margin-top:78px}
     <div class="modal-body" id="modalBody"></div>
   </article>
 </div>
+
+<dialog id="mobileMenu" aria-label="Fő navigáció">
+  <div class="mobile-menu-head"><strong>Menü</strong><button class="modal-close" id="mobileMenuClose" aria-label="Bezárás">×</button></div>
+  <nav class="mobile-menu-links">
+    <a href="#profiles">Profilok</a>
+    <a href="#setup">Setup</a>
+    <a href="#documents">Dokumentáció</a>
+    <a href="#modular">Fejlesztőknek</a>
+  </nav>
+</dialog>
 
 <script>
 "use strict";
@@ -282,12 +281,17 @@ function updateMetrics(){
   const variants=state.profiles.flatMap(p=>p.variants);
   const scale=variants.filter(v=>v.kind==="scale").length;
   const manual=variants.filter(v=>v.kind==="manual").length;
-  $("#metricProfiles").textContent=state.profiles.length;
-  $("#metricVariants").textContent=variants.length;
-  $("#metricScale").textContent=scale;
-  $("#metricManual").textContent=manual;
-  $("#heroProfileCount").textContent=`${state.profiles.length} profilcsalád`;
-  $("#heroVariantCount").textContent=`${variants.length} JSON variáns · ${scale} Scale · ${manual} Manual`;
+  const defaults=state.catalog?.defaults||{};
+  const parts=[`${state.profiles.length} profil`,`${variants.length} variáns (${scale} Scale · ${manual} Manual)`];
+  if(defaults.dose!=null)parts.push(`${formatNumber(defaults.dose)} g baseline`);
+  if(defaults.rpm!=null)parts.push(`${defaults.rpm} RPM`);
+  $("#catalogSummary").textContent=parts.join(" · ");
+}
+function updateResultCount(list){
+  const el=$("#resultCount");
+  if(!el)return;
+  const active=state.filter!=="all"||Boolean(state.query.trim())||Boolean(state.process);
+  el.textContent=active?`${list.length} találat`:`${list.length} profil`;
 }
 function renderSetup(defaults){
   const items=[
@@ -360,6 +364,7 @@ function phasesHTML(profile){
 
 function renderProfiles(){
   const list=filteredProfiles();
+  updateResultCount(list);
   const grid=$("#profileGrid");
   if(!list.length){grid.innerHTML='<div class="empty">Nincs a szűrésnek megfelelő profil.</div>';return;}
   grid.innerHTML=list.map(cardHTML).join("");
@@ -383,8 +388,11 @@ function cardHTML(entry){
       <div class="card-stat"><strong data-stat="temp">${esc(stats.temp)}</strong><span>Hőmérséklet</span></div>
       <div class="card-stat"><strong data-stat="time">${esc(stats.time)}</strong><span>Max idő</span></div>
     </div>
-    <div class="chart-box"><div class="chart-host" data-chart="${esc(entry.id)}"><div class="chart-fallback">A profilgrafikon betöltése…</div></div><div class="chart-legend"><span class="p"><i></i>Nyomás</span><span class="f"><i></i>Flow</span><span class="t"><i></i>Hőmérséklet</span></div></div>
-    <div class="phase-list" data-phases="${esc(entry.id)}">${phasesHTML(entry._profile)}</div>
+    <details class="card-details">
+      <summary>Profil részletei</summary>
+      <div class="chart-box"><div class="chart-host" data-chart="${esc(entry.id)}"><div class="chart-fallback">A profilgrafikon betöltése…</div></div><div class="chart-legend"><span class="p"><i></i>Nyomás</span><span class="f"><i></i>Flow</span><span class="t"><i></i>Hőmérséklet</span></div></div>
+      <div class="phase-list" data-phases="${esc(entry.id)}">${phasesHTML(entry._profile)}</div>
+    </details>
     <div class="card-actions">
       <a class="btn primary page-link" href="${esc(page)}"${page?"":" hidden"}>Profil megnyitása</a>
       <a class="btn json-link" href="${esc(pathFor(entry,variant.file))}" download>JSON</a>
@@ -531,6 +539,12 @@ $("#searchInput").addEventListener("input",event=>{state.query=event.target.valu
 $("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();});
 $("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();});
 $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+const menuBtn=$("#menuBtn"),mobileMenu=$("#mobileMenu");
+menuBtn.addEventListener("click",()=>{mobileMenu.showModal();menuBtn.setAttribute("aria-expanded","true");});
+mobileMenu.addEventListener("close",()=>{menuBtn.setAttribute("aria-expanded","false");menuBtn.focus();});
+mobileMenu.addEventListener("click",event=>{if(event.target===mobileMenu)mobileMenu.close();});
+$("#mobileMenuClose").addEventListener("click",()=>mobileMenu.close());
+$$("a",mobileMenu).forEach(a=>a.addEventListener("click",()=>mobileMenu.close()));
 $("#modalClose").addEventListener("click",closeModal);
 $("#modalBackdrop").addEventListener("click",event=>{if(event.target.id==="modalBackdrop")closeModal();});
 document.addEventListener("keydown",event=>{if(event.key==="Escape")closeModal();});
