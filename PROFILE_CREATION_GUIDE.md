@@ -540,10 +540,10 @@ for i in issues: print(i)
 
 ```bash
 # Összes profil
-python3 tools/render_profiles.py
+python3 tools/render_gaggimate_profiles.py
 
 # Egy adott profil
-python3 tools/render_profiles.py profiles/uj-kave/uj-kave-38s.json
+python3 tools/render_gaggimate_profiles.py profiles/uj-kave/uj-kave-38s.json
 ```
 
 A script a JSON neve alapján hozza létre a PNG-t: `{json-stem}-profile.png`.

@@ -136,19 +136,38 @@ A `targets` tömb **fázis szintű** — minden phase-hez külön definiálható
 
 ## Grafikonok újragenerálása
 
-A grafikonokat a `tools/render_profiles.py` generálja a JSON profilokból.
+A grafikonokat a `tools/render_gaggimate_profiles.py` generálja a JSON profilokból.
 
 ```bash
-python3 tools/render_profiles.py
+python3 tools/render_gaggimate_profiles.py
 ```
 
 Egyetlen profilhoz:
 
 ```bash
-python3 tools/render_profiles.py profiles/wangera/wangera-manual-v2.json
+python3 tools/render_gaggimate_profiles.py profiles/wangera/wangera-manual-v2.json
 ```
 
 A script minden JSON mellé létrehozza / felülírja az egyedi nevű `*-profile.png` képet. A V2 JSON profilokhoz is generál grafikont.
+
+---
+
+## Az index.html katalógusa
+
+Az `index.html` nem tartalmaz kézzel írt profilkártyákat: minden kártyát a `profiles/catalog.json`-ból épít fel futásidőben. A katalógust a `tools/build_catalog.py` generálja a `profiles/*` mappák tartalmából:
+
+```bash
+python3 tools/build_catalog.py            # profiles/catalog.json frissítése
+python3 tools/build_catalog.py --check    # csak ellenőrzés, hiba esetén exit 1
+```
+
+Ez commitkor automatikusan lefut egy git pre-commit hook-on keresztül (a hook maga nincs git alatt verziózva, friss klónozás után újra kell telepíteni):
+
+```bash
+cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+```
+
+Így egy új kávé mappa hozzáadásakor elég a JSON/PNG/recipe/changelog fájlokat elhelyezni — az `index.html`-hez nem kell hozzányúlni.
 
 ---
 

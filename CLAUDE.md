@@ -11,11 +11,23 @@ This is **not** a software application — it's a documentation/data repository 
 Regenerate profile charts from JSON (requires `matplotlib`):
 
 ```bash
-python3 tools/render_profiles.py                                   # all profiles under profiles/**/*.json
-python3 tools/render_profiles.py profiles/wangera/wangera-manual-v2.json  # single profile
+python3 tools/render_gaggimate_profiles.py                                   # all profiles under profiles/**/*.json
+python3 tools/render_gaggimate_profiles.py profiles/wangera/wangera-manual-v2.json  # single profile
 ```
 
 Output is always written next to the source JSON as `{json-stem}-profile.png` (overwrites existing).
+
+Regenerate `profiles/catalog.json` (the data file `index.html` fetches — this is what makes the gallery reflect new/changed profile folders automatically, no `index.html` edits needed):
+
+```bash
+python3 tools/build_catalog.py            # scan profiles/*, write profiles/catalog.json
+python3 tools/build_catalog.py --check    # exit 1 if catalog.json is stale, without writing
+python3 tools/build_catalog.py --dry-run  # print the generated catalog instead of writing
+```
+
+It derives variants (manual/scale/general JSON files, PNG, recipe, changelog) straight from each `profiles/{coffee-slug}/` folder's contents, and preserves curated fields (title, subtitle, notes, accent colors, featured, variant labels) from the existing `catalog.json`, optionally overridden per-folder via `profiles/{coffee-slug}/catalog.meta.json` (see the script's module docstring for the schema).
+
+This runs automatically on commit via a git pre-commit hook (not tracked by git itself — reinstall after a fresh clone with `cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`), which regenerates and re-stages `catalog.json` whenever it's out of sync. Run `build_catalog.py` manually only to preview the result before committing.
 
 Quick JSON syntax check on a new profile:
 
@@ -37,8 +49,9 @@ There is no build step, package manager, linter, or test suite in this repo (the
 
 - `profiles/{coffee-slug}/` — one directory per coffee. Each contains the GaggiMate JSON profile(s), a matching auto-generated `-profile.png` chart, a human-readable `{dir}-recipe.md`, and a `{dir}-changelog.md`. Even when a coffee has both a V1 and a V2 profile, there is still only **one** `{dir}-recipe.md` and **one** `{dir}-changelog.md` per coffee — V2-specific content goes in a `## V2 – Bluetooth Scale Edition` section within the same file, not a separate file. A coffee doesn't strictly need a V1 profile (e.g. a coffee can ship with only a `-scale.json`), but if a V1 baseline already exists it is never deleted when a V2 version is added.
 - `schema/profile.json` — **this is the JSON Schema for the profile format**, not a sample profile. It's the canonical documentation of every field GaggiMate firmware accepts, cross-referenced to firmware source lines (`src/display/models/profile.h`, `src/display/core/process/BrewProcess.h`, etc.). When in doubt about what a field does or what values are valid, read the `description` text in this file rather than inferring from an example profile — per its own `$comment`, if the schema and the real firmware parser ever disagree, the parser wins.
-- `tools/render_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
-- `index.html` — single-file static gallery: hardcoded cards linking to each profile's JSON/PNG, plus a tab section that `fetch()`s each coffee's recipe/changelog Markdown at runtime and renders it client-side (see the `file:` entries and the `fetch(entry.file, ...)` call near the end of the file). Adding a new profile means updating both the profile's own directory *and* the corresponding card/entry in `index.html`.
+- `tools/render_gaggimate_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
+- `tools/build_catalog.py` — regenerates `profiles/catalog.json` from the `profiles/*` directory tree; this is what `index.html` actually renders (see below).
+- `index.html` — single-file static gallery. It has **no hardcoded profile cards** — at load time it `fetch()`es `profiles/catalog.json` and builds every card, variant selector, mini chart, and phase list from that plus the referenced GaggiMate JSON files, and `fetch()`es each coffee's recipe/changelog Markdown on demand for the modal viewer. Adding a new profile means only adding files under `profiles/{coffee-slug}/` — `catalog.json` (and therefore `index.html`) updates itself via `tools/build_catalog.py` (see Commands), which runs automatically on commit through the pre-commit hook.
 - `templates/` — starter Markdown templates (`recipe-template.md`, `changelog-template.md`, `shot-log-template.md`) for documenting a new coffee.
 - `README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`, `FILE_NAMING.md`, `PROFILE_CREATION_GUIDE.md`, `BREW_GUIDELINES.md`, `BLUETOOTH_SCALE_WORKFLOW.md`, `CHANGELOG.md` — all human documentation; several are effectively views over the same profile data (index, gallery, naming rules, dial-in guidance, scale workflow) and must be kept in sync manually when profiles change.
 
@@ -72,4 +85,4 @@ All names: lowercase, hyphen-separated, no accents/spaces/punctuation (except th
 
 ## Adding a new coffee profile
 
-Follow the step-by-step process in `PROFILE_CREATION_GUIDE.md` (setup reference, JSON templates for V1 and V2, recipe/changelog content requirements). In short: pick the closest existing profile as a starting point based on processing method (washed/natural/honey/anaerobic — see the guide's mapping table), create the profile directory, JSON, recipe, and changelog following the naming convention above, regenerate the PNG with `render_profiles.py`, and add corresponding entries to `README.md` and `index.html`.
+Follow the step-by-step process in `PROFILE_CREATION_GUIDE.md` (setup reference, JSON templates for V1 and V2, recipe/changelog content requirements). In short: pick the closest existing profile as a starting point based on processing method (washed/natural/honey/anaerobic — see the guide's mapping table), create the profile directory, JSON, recipe, and changelog following the naming convention above, regenerate the PNG with `render_gaggimate_profiles.py`, and add a corresponding entry to `README.md`. `index.html`/`catalog.json` need no manual edit — the pre-commit hook (or a manual `tools/build_catalog.py` run) picks up the new folder automatically; use a `catalog.meta.json` in the new folder if you need to curate title/notes/accent/featured beyond what's inferred from the recipe.

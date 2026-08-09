@@ -67,7 +67,7 @@ Ha egy kávénak több manual vagy több scale változata is van (pl. eltérő h
 
 ## PNG grafikonok
 
-A `tools/render_profiles.py` script generálja őket a JSON fájlokból. A PNG neve mindig a JSON nevéből képződik:
+A `tools/render_gaggimate_profiles.py` script generálja őket a JSON fájlokból. A PNG neve mindig a JSON nevéből képződik:
 
 ```
 {json-fájlnév-kiterjesztés-nélkül}-profile.png

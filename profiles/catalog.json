@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-27",
+  "updated": "2026-08-09",
   "defaults": {
     "dose": 18.5,
     "rpm": 1200,
@@ -74,21 +74,27 @@
         "alma",
         "ribizli"
       ],
-      "grind": "10-11",
+      "grind": "8-9",
       "dose": 18.5,
       "yield": "42.5 g",
-      "expectedTime": "37-39 s",
+      "expectedTime": "~42 s (shot #134)",
       "page": "burundi-mubuga.html",
       "accent": "#7a4d20",
       "accent2": "#c28a43",
       "featured": false,
       "variants": [
         {
+          "id": "scale-v3",
+          "label": "Scale V3 · 94,5 °C",
+          "kind": "scale",
+          "file": "burundi-mubuga-scale-v3.json",
+          "default": true
+        },
+        {
           "id": "scale",
           "label": "Scale V2",
           "kind": "scale",
-          "file": "burundi-mubuga-scale.json",
-          "default": true
+          "file": "burundi-mubuga-scale.json"
         },
         {
           "id": "manual",
