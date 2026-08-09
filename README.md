@@ -183,6 +183,7 @@ cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-c
 | [`CHANGELOG.md`](CHANGELOG.md) | Projekt szintű változásnapló |
 | [`speciality_kave_feldolgozasok.md`](speciality_kave_feldolgozasok.md) | Kávé feldolgozási módszerek |
 | [`equipment/setup.md`](equipment/setup.md) | Gép és daráló beállítások |
+| [`kaveviz-5l-epsom-bikarbonat.md`](kaveviz-5l-epsom-bikarbonat.md) | Kávévíz recept 5 literes desztillált vízhez (Epsom-só + szódabikarbóna) |
 
 ---
 
