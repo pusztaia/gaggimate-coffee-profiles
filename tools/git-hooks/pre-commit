@@ -1,0 +1,15 @@
+#!/bin/sh
+# Keeps profiles/catalog.json (which drives index.html) in sync with the
+# profiles/ directory on every commit. Install with:
+#   cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+set -e
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+python3 tools/build_catalog.py --verbose
+
+if ! git diff --quiet -- profiles/catalog.json; then
+  git add profiles/catalog.json
+  echo "pre-commit: profiles/catalog.json regenerated and staged"
+fi
