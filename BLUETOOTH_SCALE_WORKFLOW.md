@@ -176,6 +176,6 @@
 | Burundi Mubuga | 42.5 g | 45 s |
 | Colombia Manos Juntas | 43.0 g | 47 s |
 | Kenya Kirinyaga PB | 43.0 g | 45 s |
-| Twenty Eight Caturron | 42.0 g | 50 s |
+| 28 Caturron | 42.0 g | 50 s |
 
 A `stop_at_g` és `safety_timeout_s` értékeket a JSON profilban módosíthatod, ha a dial-in eltérő hozamot kíván.

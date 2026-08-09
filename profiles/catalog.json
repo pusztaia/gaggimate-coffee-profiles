@@ -65,7 +65,7 @@
     {
       "id": "burundi-mubuga",
       "folder": "burundi-mubuga",
-      "title": "Impresso Burundi Mubuga",
+      "title": "Impresso - Burundi Mubuga",
       "subtitle": "sárgadinnye · alma",
       "origin": "Burundi, Ngozi, Mubuga",
       "process": "natural",
@@ -107,7 +107,7 @@
     {
       "id": "colombia-manos-juntas",
       "folder": "colombia-manos-juntas",
-      "title": "Impresso Colombia Manos Juntas",
+      "title": "Impresso - Colombia Manos Juntas",
       "subtitle": "vörösáfonya dzsem · karamell",
       "origin": "Colombia, Cauca, Manos Juntas micromill",
       "process": "anaerobic natural",
@@ -195,9 +195,9 @@
     {
       "id": "el-salvador-ochupse",
       "folder": "el-salvador-ochupse",
-      "title": "Impresso Micro Roastery El Salvador Ochupse",
+      "title": "Impresso - El Salvador Ochupse",
       "subtitle": "szőlő · csipkebogyó",
-      "origin": "Impresso Micro Roastery · Apaneca-Ilamatepec",
+      "origin": "Impresso · Apaneca-Ilamatepec",
       "process": "natural anaerob, 60 óra",
       "notes": [
         "szőlő",
@@ -232,7 +232,7 @@
     {
       "id": "honduras-las-calaveras",
       "folder": "honduras-las-calaveras",
-      "title": "Impresso Honduras Las Calaveras",
+      "title": "Impresso - Honduras Las Calaveras",
       "subtitle": "sangria · sült alma",
       "origin": "Montecillos, Honduras · 1650 masl",
       "process": "natural anaerob",
@@ -262,7 +262,7 @@
     {
       "id": "kirinyaga",
       "folder": "kirinyaga",
-      "title": "Impresso Kenya Kirinyaga PB",
+      "title": "Impresso - Kenya Kirinyaga PB",
       "subtitle": "hibiszkusz · csipkebogyó",
       "origin": "Kenya, Kirinyaga",
       "process": "washed",
@@ -298,9 +298,9 @@
     {
       "id": "twenty-eight-caturron",
       "folder": "twenty-eight-caturron",
-      "title": "Twenty Eight Finca el Recreo Caturron",
+      "title": "28 - Finca el Recreo Caturron",
       "subtitle": "meggy · konyak",
-      "origin": "Twenty Eight · Huila",
+      "origin": "28 · Huila",
       "process": "anaerobic natural",
       "notes": [
         "meggy",
@@ -334,7 +334,7 @@
     {
       "id": "wangera",
       "folder": "wangera",
-      "title": "Impresso Kenya Wangera",
+      "title": "Impresso - Kenya Wangera",
       "subtitle": "szeder · tejszín",
       "origin": "Általános espresso profil",
       "process": "profil",

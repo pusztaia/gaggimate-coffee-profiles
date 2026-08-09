@@ -35,7 +35,7 @@ Ha dózist változtatsz, a `stop_at_g` értéket és az arányokat is igazítsd 
 | Burundi Mubuga | 18.5 g | 42.5 g | 1:2.30 |
 | Colombia Manos Juntas | 18.5 g | 43.0 g | 1:2.32 |
 | Kenya Kirinyaga PB | 18.5 g | 43.0 g | 1:2.32 |
-| Twenty Eight Caturron | 18.5 g | 42.0 g | 1:2.27 |
+| 28 Caturron | 18.5 g | 42.0 g | 1:2.27 |
 
 ### Arány hatása az ízre
 
@@ -106,7 +106,7 @@ Ha RPM-et változtatsz, az egész profilon újra kell dial-in-elni.
 | Burundi Mubuga | 94.5 °C |
 | Colombia Manos Juntas | 94.5 °C |
 | Kenya Kirinyaga PB | 94.5 °C |
-| Twenty Eight Caturron | 95.0 °C |
+| 28 Caturron | 95.0 °C |
 
 ### Hőmérséklet hatása
 

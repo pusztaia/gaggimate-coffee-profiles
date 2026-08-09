@@ -1,8 +1,8 @@
-# Twenty Eight Finca el Recreo Caturron Flavor 18.5-42 – GaggiMate Pro recept
+# 28 - Finca el Recreo Caturron Flavor 18.5-42 – GaggiMate Pro recept
 
 | Mező | Érték |
 |---|---|
-| Márka | Twenty Eight |
+| Márka | 28 |
 | Kávé | Finca el Recreo Caturron |
 | Származás | Kolumbia |
 | Régió | Huila |
@@ -42,9 +42,9 @@ Sűrű, tiszta és intenzíven gyümölcsös espresso: **meggy · konyak · csok
 
 A szüretelt, érett piros cseresznyéket lezárt műanyag zsákokban **100-120 órán át anaerob módon fermentálják**, majd emelt ágyakon **15-20 napig szárítják**, rendszeres forgatással. A Caturron egy Acevedo környékéhez kötődő, ritka fajta, amely nagy cseresznyéiről, jellegzetes ízprofiljáról és kávérozsdával szembeni ellenálló képességéről ismert.
 
-A Twenty Eight termékoldala a kávét világos pörkölésű, édes, gyümölcsös és intenzív kolumbiai specialty kávéként írja le, **meggy, konyak és bonbon** ízjegyekkel.
+A 28 termékoldala a kávét világos pörkölésű, édes, gyümölcsös és intenzív kolumbiai specialty kávéként írja le, **meggy, konyak és bonbon** ízjegyekkel.
 
-**Források:** [Twenty Eight termékoldal](https://twentyeight.hu/termek/finca-el-recreo-caturron/) · [Sucafina lot-adatok](https://sucafina.com/na/offerings/el-recreo-alirio-rodriguez-caturron-natural-ugq) · [Cuppd összefoglaló](https://cuppdcoffee.com/coffee/28-twenty-eight-finca-el-recreo-caturron)
+**Források:** [28 termékoldal](https://twentyeight.hu/termek/finca-el-recreo-caturron/) · [Sucafina lot-adatok](https://sucafina.com/na/offerings/el-recreo-alirio-rodriguez-caturron-natural-ugq) · [Cuppd összefoglaló](https://cuppdcoffee.com/coffee/28-twenty-eight-finca-el-recreo-caturron)
 
 ---
 
@@ -149,7 +149,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`caturron-manual.json`). A 
 
 ## Rövid menthető recept
 
-**Twenty Eight Finca el Recreo Caturron Flavor**
+**28 - Finca el Recreo Caturron Flavor**
 
 **V1 (időalapú):** 18.5 g · grind 9 · 1200 RPM · 95 °C · 42 s · 42 g out cél
 

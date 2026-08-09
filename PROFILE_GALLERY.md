@@ -40,9 +40,9 @@ Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot 
 
 ![Kirinyaga PB Tea Rose 37s](profiles/kirinyaga/kirinyaga-profile.png)
 
-### Twenty Eight Finca el Recreo Caturron Flavor 42s – Time Based
+### 28 - Finca el Recreo Caturron Flavor 42s – Time Based
 
-![Twenty Eight Finca el Recreo Caturron Flavor 42s](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
+![28 - Finca el Recreo Caturron Flavor 42s](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
 
 ### El Salvador Ochupse Grape Rose 31s 93C – Time Based
 
@@ -74,9 +74,9 @@ Ezek a profilok BOOKOO Themis Ultra Bluetooth mérleggel automatikusan megállna
 
 ![Kirinyaga Scale V2](profiles/kirinyaga/kirinyaga-scale-profile.png)
 
-### Twenty Eight Finca el Recreo Caturron Flavor – Scale V2
+### 28 - Finca el Recreo Caturron Flavor – Scale V2
 
-![Twenty Eight Caturron Scale V2](profiles/twenty-eight-caturron/caturron-scale-profile.png)
+![28 Caturron Scale V2](profiles/twenty-eight-caturron/caturron-scale-profile.png)
 
 ### El Salvador Ochupse Grape Rose – Scale V2
 

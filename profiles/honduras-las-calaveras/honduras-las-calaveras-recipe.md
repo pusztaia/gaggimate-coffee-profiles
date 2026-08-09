@@ -2,7 +2,7 @@
 
 | Mező | Érték |
 |---|---|
-| Kávé | Impresso Honduras Las Calaveras |
+| Kávé | Impresso - Honduras Las Calaveras |
 | Ízjegyek | sangria · sült alma · szegfűszeg |
 | Variáns | Catuai, Pacas |
 | Feldolgozás | natural anaerob |

@@ -6,7 +6,7 @@
 
 ## V2 – Initial BOOKOO Scale Profile (2026-07-23)
 
-- Első BOOKOO Themis Ultra kompatibilis profil az Impresso El Salvador Ochupse kávéhoz (`el-salvador-ochupse-scale.json`).
+- Első BOOKOO Themis Ultra kompatibilis profil az Impresso - El Salvador Ochupse kávéhoz (`el-salvador-ochupse-scale.json`).
 - Dózis: **18.5 g**. Célhozam: **41.0 g**. Hőmérséklet: **93 °C**.
 - Daráló baseline: **DF64V Gen 2, 1200 RPM**. Ajánlott induló őrlés: **10–11 között, elsőre inkább 10 felé**.
 - A profil első **10 másodperce** időalapú előáztatás, ezt **5 másodperces gentle ramp** követi.
@@ -17,7 +17,7 @@
 
 ## V1 – Grape Rose 31s 93C (2026-07-23)
 
-- Első GaggiMate Pro profil az Impresso El Salvador Ochupse kávéhoz (`el-salvador-ochupse-manual.json`).
+- Első GaggiMate Pro profil az Impresso - El Salvador Ochupse kávéhoz (`el-salvador-ochupse-manual.json`).
 - A pörkölő ajánlásából indult: 18 g be, 40 g ki, 93 °C, 10 s előáztatás, 29 s teljes idő.
 - A felhasználó 18.5 g-os IMS kosarához a célhozam **41 g** lett.
 - 10 másodperces előáztatás: 4 s flow wetting + 6 s 2.2 bar saturation.

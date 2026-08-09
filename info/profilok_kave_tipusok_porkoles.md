@@ -137,7 +137,7 @@ Ez áll legközelebb a mostani gyümölcsös profiljaidhoz, például:
 - Kirinyaga PB Tea Rose,
 - Burundi Mubuga,
 - Colombia Manos Juntas,
-- Twenty Eight Finca el Recreo Caturron.
+- 28 - Finca el Recreo Caturron.
 
 A saját **Wangera Stable Start 38s 94.5C** profilod még célzottabb, mert már a te gépedhez, darálódhoz és kosaradhoz lett hangolva, de általános irányként az LM Leva profil passzol legjobban a specialty kávéidhoz.
 
@@ -209,7 +209,7 @@ A három profil közül:
 - **9 Bar Espresso**: egyszerű, klasszikus baseline, főleg közepes és közepes-sötét pörköléshez.
 - **Damian's LM Leva**: legjobb modern specialty irány, főleg világos-közepes és közepes pörköléshez.
 
-A te eddigi gyümölcsös Impresso / Twenty Eight kávéidhoz a **Damian's LM Leva irány** vagy a saját, kávéra optimalizált **Stable Start** profilok illenek legjobban.
+A te eddigi gyümölcsös Impresso / 28 kávéidhoz a **Damian's LM Leva irány** vagy a saját, kávéra optimalizált **Stable Start** profilok illenek legjobban.
 
 ---
 

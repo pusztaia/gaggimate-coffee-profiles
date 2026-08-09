@@ -1,4 +1,4 @@
-# Changelog – Twenty Eight Finca el Recreo Caturron (twenty-eight-caturron)
+# Changelog – 28 - Finca el Recreo Caturron (twenty-eight-caturron)
 
 ## Termékadatok és eredetleírás (2026-07-26)
 
@@ -14,13 +14,13 @@
 
 ### Changed
 
-- A korábbi „konyakmeggy · piros gyümölcs · bonbonos édesség” megfogalmazás a Twenty Eight termékoldal szerinti **meggy · konyak · csokoládébonbon** profilra változott.
+- A korábbi „konyakmeggy · piros gyümölcs · bonbonos édesség” megfogalmazás a 28 termékoldal szerinti **meggy · konyak · csokoládébonbon** profilra változott.
 - A két GaggiMate JSON ember által olvasható `description` mezője kiegészült a származással, feldolgozással és pörkölési szinttel.
 - A profilfázisok, targetek, idők, nyomás-, flow- és hőmérsékletértékek **nem változtak**.
 
 ### Sources
 
-- Twenty Eight: https://twentyeight.hu/termek/finca-el-recreo-caturron/
+- 28: https://twentyeight.hu/termek/finca-el-recreo-caturron/
 - Sucafina: https://sucafina.com/na/offerings/el-recreo-alirio-rodriguez-caturron-natural-ugq
 - Cuppd: https://cuppdcoffee.com/coffee/28-twenty-eight-finca-el-recreo-caturron
 
@@ -50,8 +50,8 @@
 - RPM marad aktív receptparaméterként: **1200 RPM baseline**.
 - Dokumentálva: DF64V Gen 2 változtatható fordulatú, 800-1800 RPM tartományban.
 
-## 2026-06-29 – Twenty Eight brand fix + GitHub-clean verzió
-- A kávé márkája javítva: **Twenty Eight**.
+## 2026-06-29 – 28 brand fix + GitHub-clean verzió
+- A kávé márkája javítva: **28**.
 - Profilnév és fájlnév frissítve, hogy tartalmazza a márkát és a kávé nevét.
 - Setup egységesítve: Gaggia Classic Pro 2025 + GaggiMate Pro, DF64V Gen 2, SSP Sweet Lab Espresso V3, IMS B682TH24.5M.
 - DF64V Gen 2 0-90 egész jelöléses őrléslogika.

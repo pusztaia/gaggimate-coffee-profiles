@@ -85,8 +85,8 @@ A `targets` tömb **fázis szintű** a GaggiMate 1.8.1 firmware-ben. A V2 JSON p
 
 ### Added
 
-- Impresso Burundi Mubuga Melon Currant 38s profil – új kávé
-- Impresso Colombia Manos Juntas Jam Mango 39s profil – új kávé
+- Impresso - Burundi Mubuga Melon Currant 38s profil – új kávé
+- Impresso - Colombia Manos Juntas Jam Mango 39s profil – új kávé
 
 ---
 
@@ -94,9 +94,9 @@ A `targets` tömb **fázis szintű** a GaggiMate 1.8.1 firmware-ben. A V2 JSON p
 
 ### Added
 
-- Impresso Kenya Wangera Stable Start 38s profil
-- Impresso Kenya Kirinyaga PB Tea Rose 37s profil
-- Twenty Eight Finca el Recreo Caturron Flavor 42s profil
+- Impresso - Kenya Wangera Stable Start 38s profil
+- Impresso - Kenya Kirinyaga PB Tea Rose 37s profil
+- 28 - Finca el Recreo Caturron Flavor 42s profil
 - `tools/render_profiles.py` – JSON → PNG grafikon generáló script
 - `equipment/setup.md` – gép és daráló dokumentáció
 - `speciality_kave_feldolgozasok.md` – kávé feldolgozási módszerek leírása

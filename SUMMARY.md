@@ -20,7 +20,7 @@
 | Burundi Mubuga | 42.5 g | 1:2.30 | 94.5 °C | 45 s | [burundi-mubuga-scale.json](profiles/burundi-mubuga/burundi-mubuga-scale.json) |
 | Colombia Manos Juntas | 43.0 g | 1:2.32 | 94.5 °C | 47 s | [colombia-manos-juntas-scale.json](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json) |
 | Kenya Kirinyaga PB | 43.0 g | 1:2.32 | 94.5 °C | 45 s | [kirinyaga-scale.json](profiles/kirinyaga/kirinyaga-scale.json) |
-| Twenty Eight Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-scale.json](profiles/twenty-eight-caturron/caturron-scale.json) |
+| 28 Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-scale.json](profiles/twenty-eight-caturron/caturron-scale.json) |
 | El Salvador Ochupse | 41.0 g | 1:2.22 | 93.0 °C | 45 s | [el-salvador-ochupse-scale.json](profiles/el-salvador-ochupse/el-salvador-ochupse-scale.json) |
 | Honduras Las Calaveras | 39.0 g | 1:2.11 | 92.0 °C | 33 s | [honduras-las-calaveras-scale.json](profiles/honduras-las-calaveras/honduras-las-calaveras-scale.json) |
 
@@ -45,7 +45,7 @@
 | Burundi Mubuga | Melon Currant | 38 s | 94.5 °C | 18.5 g | 42.5 g | 10-11 | [burundi-mubuga-manual.json](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [burundi-mubuga-recipe.md](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
 | Colombia Manos Juntas | Jam Mango | 39 s | 94.5 °C | 18.5 g | 43 g | 10-11 | [colombia-manos-juntas-manual.json](profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json) | [colombia-manos-juntas-recipe.md](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
 | Kenya Kirinyaga PB | Tea Rose | 37 s | 94.5 °C | 18.5 g | 43 g | 9-10 | [kirinyaga-manual.json](profiles/kirinyaga/kirinyaga-manual.json) | [kirinyaga-recipe.md](profiles/kirinyaga/kirinyaga-recipe.md) |
-| Twenty Eight Caturron | Flavor | 42 s | 95 °C | 18.5 g | 42 g | 8-10 | [caturron-manual.json](profiles/twenty-eight-caturron/caturron-manual.json) | [twenty-eight-caturron-recipe.md](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
+| 28 Caturron | Flavor | 42 s | 95 °C | 18.5 g | 42 g | 8-10 | [caturron-manual.json](profiles/twenty-eight-caturron/caturron-manual.json) | [twenty-eight-caturron-recipe.md](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
 | El Salvador Ochupse | Grape Rose | 31 s | 93 °C | 18.5 g | 41 g | 10-11 | [el-salvador-ochupse-manual.json](profiles/el-salvador-ochupse/el-salvador-ochupse-manual.json) | [el-salvador-ochupse-recipe.md](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
 
 ---
@@ -58,7 +58,7 @@
 | Burundi Mubuga | natural | sárgadinnye · alma · ribizli |
 | Colombia Manos Juntas | anaerobic natural | vörösáfonya dzsem · karamell · mangó |
 | Kenya Kirinyaga PB | washed | hibiszkusz · csipkebogyó · fekete tea |
-| Twenty Eight Caturron | natural | meggy · konyakmeggy · piros gyümölcs · bonbonos édesség |
+| 28 Caturron | natural | meggy · konyakmeggy · piros gyümölcs · bonbonos édesség |
 | El Salvador Ochupse | natural anaerob | szőlő · csipkebogyó · sárgabarack · étcsokoládé |
 | Honduras Las Calaveras | natural anaerob | sangria · sült alma · szegfűszeg |
 
@@ -102,9 +102,9 @@
 
 ![Kirinyaga](profiles/kirinyaga/kirinyaga-profile.png)
 
-### Twenty Eight Caturron – Flavor 42s
+### 28 Caturron – Flavor 42s
 
-![Twenty Eight Caturron](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
+![28 Caturron](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
 
 ### El Salvador Ochupse – Grape Rose 31s 93C
 

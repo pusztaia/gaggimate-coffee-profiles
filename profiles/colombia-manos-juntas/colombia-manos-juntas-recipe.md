@@ -1,8 +1,8 @@
-# Impresso Colombia Manos Juntas Jam Mango 18.5-43 – Scale V2
+# Impresso - Colombia Manos Juntas Jam Mango 18.5-43 – Scale V2
 
 | Mező | Érték |
 |---|---|
-| Kávé | Impresso Colombia Manos Juntas |
+| Kávé | Impresso - Colombia Manos Juntas |
 | Feldolgozás | anaerobic natural |
 | Eredet | Colombia, Cauca, Manos Juntas micromill |
 | Ízjegyek | vörösáfonya dzsem · karamell · mangó |

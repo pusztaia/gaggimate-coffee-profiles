@@ -4,7 +4,7 @@
 
 ### Added
 
-- Első GaggiMate Pro profil az Impresso Honduras Las Calaveras kávéhoz.
+- Első GaggiMate Pro profil az Impresso - Honduras Las Calaveras kávéhoz.
 - BOOKOO Themis Ultra alapú automatikus stop **39.0 g** italnál.
 - **18.5 g** dózis, **92 °C**, **8 s** előáztatás.
 - Kiinduló őrlési zóna: **10–11**, elsőre inkább **10 felé**.

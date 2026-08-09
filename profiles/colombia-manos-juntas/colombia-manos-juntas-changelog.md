@@ -22,7 +22,7 @@
 - Recipe.md frissítve V2 szakasszal, V2 dial-in logikával
 
 ## 2026-07-04 – kezdeti GaggiMate Pro profil
-- Új profil Impresso Colombia Manos Juntas kávéhoz.
+- Új profil Impresso - Colombia Manos Juntas kávéhoz.
 - Cél: vörösáfonya dzsem, karamell, mangó; szirupos, gyümölcsös espresso.
 - Teljes profilidő: 39 s.
 - Hőmérséklet: 94.5 °C.

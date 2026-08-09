@@ -16,11 +16,11 @@ Minden kávénak saját könyvtára van. A könyvtár neve a kávé rövid, URL-
 
 | Könyvtár | Kávé |
 |---|---|
-| `wangera/` | Impresso Kenya Wangera |
-| `burundi-mubuga/` | Impresso Burundi Mubuga |
-| `colombia-manos-juntas/` | Impresso Colombia Manos Juntas |
-| `kirinyaga/` | Impresso Kenya Kirinyaga PB |
-| `twenty-eight-caturron/` | Twenty Eight Finca el Recreo Caturron |
+| `wangera/` | Impresso - Kenya Wangera |
+| `burundi-mubuga/` | Impresso - Burundi Mubuga |
+| `colombia-manos-juntas/` | Impresso - Colombia Manos Juntas |
+| `kirinyaga/` | Impresso - Kenya Kirinyaga PB |
+| `twenty-eight-caturron/` | 28 - Finca el Recreo Caturron |
 
 **Szabályok:**
 - csak kisbetű
@@ -52,7 +52,7 @@ Ha egy kávénak több manual vagy több scale változata is van (pl. eltérő h
 | `kirinyaga-manual.json` / `kirinyaga-scale.json` | Kirinyaga — a minta: egy manual + egy scale profil |
 | `burundi-mubuga-manual.json` / `burundi-mubuga-scale.json` | Burundi Mubuga — szintén egy-egy profil |
 | `colombia-manos-juntas-manual.json` / `colombia-manos-juntas-scale.json` | Colombia Manos Juntas |
-| `caturron-manual.json` / `caturron-scale.json` | Twenty Eight Caturron (a könyvtárnévnél rövidebb `caturron` azonosítóval) |
+| `caturron-manual.json` / `caturron-scale.json` | 28 Caturron (a könyvtárnévnél rövidebb `caturron` azonosítóval) |
 | `wangera-manual-v1.json` / `wangera-manual-v2.json` | Wangera, két hőmérséklet-variáns (94.0 °C / 94.5 °C), időalapú |
 | `wangera-scale-v1.json` / `wangera-scale-v2.json` | Wangera, ugyanaz a két variáns, scale-alapú — a `-v1`/`-v2` sorszám a manual és a scale oldalon ugyanazt a variánst jelöli |
 | `honduras-las-calaveras-scale.json` | Honduras Las Calaveras — csak scale profil létezik, nincs manual változat |
@@ -104,7 +104,7 @@ Az olvasható recept, dial-in logika és fázistáblázat:
 | `burundi-mubuga-recipe.md` | Burundi Mubuga recept |
 | `colombia-manos-juntas-recipe.md` | Colombia Manos Juntas recept |
 | `kirinyaga-recipe.md` | Kirinyaga PB Tea Rose recept |
-| `twenty-eight-caturron-recipe.md` | Twenty Eight Caturron Flavor recept |
+| `twenty-eight-caturron-recipe.md` | 28 Caturron Flavor recept |
 
 ---
 

@@ -95,7 +95,7 @@ Az alábbi értékek **1200 RPM, 18.5 g dózis és az IMS B682TH24.5M kosár** m
 | Burundi Mubuga | natural | 10–11 |
 | Colombia Manos Juntas | anaerobic natural | 10–11 |
 | Kenya Kirinyaga PB | washed | 9–10 |
-| Twenty Eight Caturron | natural | 8–10 |
+| 28 Caturron | natural | 8–10 |
 
 Ezek nem végleges értékek. A kávé öregedése, a levegő páratartalma, a kés állapota és a puck prep miatt a megfelelő beállítás változhat.
 

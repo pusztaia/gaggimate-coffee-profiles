@@ -72,7 +72,7 @@
 
 ## 2026-07-04 – kezdeti GaggiMate Pro profil
 
-- Új profil Impresso Burundi Mubuga kávéhoz.
+- Új profil Impresso - Burundi Mubuga kávéhoz.
 - Cél: sárgadinnye, alma, ribizli; tiszta, lédús, nem száraz espresso.
 - Teljes Manual profilidő: **38 s**.
 - Hőmérséklet: **94.5 °C**.

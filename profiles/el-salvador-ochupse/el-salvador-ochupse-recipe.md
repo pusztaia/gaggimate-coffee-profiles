@@ -2,7 +2,7 @@
 
 | Mező | Érték |
 |---|---|
-| Pörkölő | Impresso Micro Roastery |
+| Pörkölő | Impresso |
 | Kávé | El Salvador Ochupse |
 | Régió | Apaneca-Ilamatepec |
 | Farm | Ochupse, Santa Ana parcella |

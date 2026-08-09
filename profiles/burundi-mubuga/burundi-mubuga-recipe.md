@@ -1,8 +1,8 @@
-# Impresso Burundi Mubuga Melon Currant — Scale V3 dial-in
+# Impresso - Burundi Mubuga Melon Currant — Scale V3 dial-in
 
 | Mező | Érték |
 |---|---|
-| Kávé | Impresso Burundi Mubuga |
+| Kávé | Impresso - Burundi Mubuga |
 | Feldolgozás | natural |
 | Eredet | Burundi, Ngozi, Mubuga |
 | Ízjegyek | sárgadinnye · alma · ribizli |

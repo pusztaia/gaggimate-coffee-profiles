@@ -2,7 +2,7 @@
 
 | Mező | Érték |
 |---|---|
-| Kávé | Impresso Kenya Kirinyaga PB |
+| Kávé | Impresso - Kenya Kirinyaga PB |
 | Ízjegyek | hibiszkusz · csipkebogyó · fekete tea |
 | Feldolgozás | washed |
 | Eredet | Kenya, Kirinyaga |
