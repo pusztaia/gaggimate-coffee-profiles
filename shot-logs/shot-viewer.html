@@ -85,7 +85,6 @@ details.card .card-body{padding:0 1.1rem 1.1rem}
 table.phase-table{width:100%;border-collapse:collapse;font-size:.82rem}
 table.phase-table th,table.phase-table td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left}
 table.phase-table th{color:var(--muted);font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
-pre.notes{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;background:var(--surface2);border-radius:14px;padding:.8rem;font-size:.8rem;margin:0}
 .empty-hint{color:var(--muted);text-align:center;padding:3rem 1rem;border:1px dashed var(--line);border-radius:var(--radius-lg)}
 @media(max-width:900px){.viewer-layout{grid-template-columns:1fr}.shot-list-panel{position:static;max-height:280px}}
 </style>
@@ -208,7 +207,6 @@ function shotSummaries(){
     durationS:d.shot.duration_s,
     finalWeightG:d.shot.final_weight_g,
     rating:d.index_entry?.rating||0,
-    hasNotes:!!d.notes,
   })).sort((a,b)=>b.id-a.id);
 }
 
@@ -225,7 +223,7 @@ function renderShotList(){
       </span>
       <span class="meta-row">
         <span class="stars">${s.rating?"★".repeat(s.rating)+"☆".repeat(Math.max(0,5-s.rating)):"nincs értékelés"}</span>
-        <span>${s.finalWeightG?fmt(s.finalWeightG,1)+" g":""}${s.hasNotes?" · 📝":""}</span>
+        <span>${s.finalWeightG?fmt(s.finalWeightG,1)+" g":""}</span>
       </span>
     </button>`).join("")||`<div class="empty-hint">Nincs találat.</div>`;
   $("#shotList").querySelectorAll(".shot-item").forEach(btn=>btn.addEventListener("click",()=>selectShot(Number(btn.dataset.id))));
@@ -428,11 +426,10 @@ function renderShotDetail(data){
       <div class="chart-head"><h3>Mérleg tömeg</h3><div class="legend" id="weightLegend"></div></div>
       <div class="chart-wrap"><svg class="chart-svg" id="weightChart" data-h="180"></svg><div class="chart-tooltip" id="weightTooltip" hidden></div></div>
     </div>
-    <details class="card">
+    <details class="card" open>
       <summary>Fázisváltások (${(data.phase_transitions||[]).length})</summary>
       <div class="card-body">${renderPhaseTable(data.phase_transitions||[])}</div>
     </details>
-    ${data.notes?`<details class="card" open><summary>Shot notes</summary><div class="card-body"><pre class="notes">${esc(JSON.stringify(data.notes,null,2))}</pre></div></details>`:""}
   `;
 
   const total=s.duration_s||(data.samples.at(-1)?.time_s??0);
