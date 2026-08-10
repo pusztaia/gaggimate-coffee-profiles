@@ -1,0 +1,13 @@
+{
+  "expectedTime": "~40 s (V4 dial-in)",
+  "variants": {
+    "burundi-mubuga-scale-v4-fruity.json": {
+      "label": "Scale V4 Fruity · 94 °C",
+      "default": true
+    },
+    "burundi-mubuga-scale-v3.json": {
+      "label": "Scale V3 · 94,5 °C",
+      "default": false
+    }
+  }
+}
