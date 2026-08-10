@@ -1,8 +1,8 @@
 {
-  "label": "Burundi Mubuga Melon Currant – Scale V3",
+  "label": "Burundi Mubuga Melon Currant Scale V4 Fruity",
   "type": "pro",
-  "description": "Burundi Mubuga Melon Currant Scale V3 – 18.5 g / extraction stop 38 g / final stop 42.5 g volumetric / 94.5 C / grind 8-9 / soft pressure cap on wetting + longer bloom rest",
-  "temperature": 94.5,
+  "description": "Burundi Mubuga Melon Currant Scale V4 Fruity 18.5 g / extraction stop 38 g / final stop 42.5 g volumetric / 94.0 C / grind 9 / 1200 RPM / reduced early water for brighter fruit",
+  "temperature": 94.0,
   "utility": false,
   "phases": [
     {
@@ -10,7 +10,7 @@
       "phase": "preinfusion",
       "valve": 1,
       "duration": 5,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "ease-out",
         "duration": 2,
@@ -19,7 +19,7 @@
       "pump": {
         "target": "flow",
         "pressure": 3.5,
-        "flow": 8
+        "flow": 6.8
       }
     },
     {
@@ -27,7 +27,7 @@
       "phase": "preinfusion",
       "valve": 1,
       "duration": 8,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "instant",
         "duration": 0,
@@ -36,7 +36,7 @@
       "pump": {
         "target": "pressure",
         "pressure": 2.2,
-        "flow": 4.5
+        "flow": 3.8
       }
     },
     {
@@ -44,7 +44,7 @@
       "phase": "preinfusion",
       "valve": 1,
       "duration": 7,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "ease-out",
         "duration": 2,
@@ -61,7 +61,7 @@
       "phase": "brew",
       "valve": 1,
       "duration": 6,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "linear",
         "duration": 6,
@@ -78,7 +78,7 @@
       "phase": "brew",
       "valve": 1,
       "duration": 30,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "instant",
         "duration": 0,
@@ -102,7 +102,7 @@
       "phase": "brew",
       "valve": 1,
       "duration": 8,
-      "temperature": 94.5,
+      "temperature": 94.0,
       "transition": {
         "type": "linear",
         "duration": 4,
