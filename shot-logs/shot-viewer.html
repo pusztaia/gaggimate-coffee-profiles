@@ -140,7 +140,6 @@ table.stats-table .flag-note{display:block;color:var(--muted);font-size:.68rem;m
 .flag-yes,.flag-no{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:.7rem;font-weight:900}
 .flag-yes{background:color-mix(in srgb,var(--teal) 22%,var(--surface2));color:var(--teal)}
 .flag-no{background:color-mix(in srgb,var(--danger) 14%,var(--surface2));color:var(--danger)}
-.table-note{color:var(--muted);font-size:.76rem;margin:.8rem 0 0;padding-top:.7rem;border-top:1px dashed var(--line)}
 .table-card[data-density="compact"] table.stats-table th,.table-card[data-density="compact"] table.stats-table td{padding:.32rem .5rem;font-size:.76rem}
 .empty-hint{color:var(--muted);text-align:center;padding:3rem 1rem;border:1px dashed var(--line);border-radius:var(--radius-lg)}
 @media(max-width:900px){.viewer-layout{grid-template-columns:1fr}.shot-list-panel{position:static;max-height:280px}}
@@ -341,6 +340,34 @@ const STOP_LABELS={
   aborted:"ABORTED",
 };
 
+const BADGE_FONT="800 9px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+let __measureCtx=null;
+function textWidth(text){
+  if(!__measureCtx)__measureCtx=document.createElement("canvas").getContext("2d");
+  __measureCtx.font=BADGE_FONT;
+  return __measureCtx.measureText(text).width;
+}
+
+function badgeStackHeight(phases,showPhaseNames,showStops,finalExitReasonName){
+  if(!showPhaseNames&&!showStops)return 0;
+  const badgeH=t=>textWidth(t)+4*2+2;
+  let max=0;
+  (phases||[]).forEach((tr,i)=>{
+    let h=0;
+    if(showStops&&i>0){
+      const reason=phases[i]?.transition_reason_name;
+      if(reason&&reason!=="none")h+=badgeH(STOP_LABELS[reason]||reason.toUpperCase())+2;
+    }
+    if(showPhaseNames&&tr.phase_name)h+=badgeH(`${i+1}. ${tr.phase_name}`);
+    max=Math.max(max,h);
+  });
+  if(showStops&&finalExitReasonName&&finalExitReasonName!=="none"){
+    max=Math.max(max,badgeH(STOP_LABELS[finalExitReasonName]||finalExitReasonName.toUpperCase()));
+  }
+  return max;
+}
+
+// text grows downward (rotate 90) from yTop so it stays inside the SVG canvas above the plot area
 function badge(parent,x,yTop,text,bg,fg){
   const g=el("g");
   const t=el("text",{x:0,y:0,"text-anchor":"start","font-size":9,"font-weight":800,fill:fg});
@@ -351,7 +378,7 @@ function badge(parent,x,yTop,text,bg,fg){
   const padX=4,padY=2;
   const rect=el("rect",{x:box.x-padX,y:box.y-padY,width:box.width+padX*2,height:box.height+padY*2,rx:3,fill:bg});
   g.insertBefore(rect,t);
-  g.setAttribute("transform",`translate(${x} ${yTop}) rotate(-90)`);
+  g.setAttribute("transform",`translate(${x} ${yTop}) rotate(90)`);
   return box.width+padY*2+4;
 }
 
@@ -366,7 +393,8 @@ function tightRange(values){
 // series: [{key, label, color, dashed, axis:'left'|'right', unit, panel}]
 function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,leftLabel,rightLabel,showPhaseNames,showStops,finalExitReasonName,leftAxisMode}){
   const W=1000,H=svg.dataset.h?Number(svg.dataset.h):340;
-  const pad={l:52,r:rightLabel?52:20,t:18,b:32};
+  const badgeSpace=badgeStackHeight(phases,showPhaseNames,showStops,finalExitReasonName);
+  const pad={l:52,r:rightLabel?52:20,t:badgeSpace?badgeSpace+14:18,b:32};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
   svg.innerHTML="";
 
@@ -407,7 +435,7 @@ function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,left
     svg.appendChild(badgeG);
     (phases||[]).forEach((tr,i)=>{
       const x=xs(tr.time_s);
-      let yTop=pad.t+2;
+      let yTop=6;
       if(showStops&&i>0){
         const reason=phases[i]?.transition_reason_name;
         if(reason&&reason!=="none"){
@@ -419,7 +447,7 @@ function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,left
       }
     });
     if(showStops&&finalExitReasonName&&finalExitReasonName!=="none"){
-      badge(badgeG,xs(total),pad.t+2,STOP_LABELS[finalExitReasonName]||finalExitReasonName.toUpperCase(),"var(--danger)","#fff");
+      badge(badgeG,xs(total),6,STOP_LABELS[finalExitReasonName]||finalExitReasonName.toUpperCase(),"var(--danger)","#fff");
     }
   }
 
@@ -581,7 +609,7 @@ function renderShotDetail(data){
       <div class="legend" id="chartLegend"></div>
       <div class="chart-panel">
         <div class="chart-panel-label">Nyomás · Flow · Tömeg</div>
-        <div class="chart-wrap"><svg class="chart-svg" id="mainChart" data-h="340"></svg><div class="chart-tooltip" id="mainTooltip" hidden></div></div>
+        <div class="chart-wrap"><svg class="chart-svg" id="mainChart" data-h="400"></svg><div class="chart-tooltip" id="mainTooltip" hidden></div></div>
       </div>
       <div class="chart-panel">
         <div class="chart-panel-label">Hőmérséklet</div>
@@ -832,7 +860,6 @@ function aggHeader(label,unit,mode){
 
 function renderStandardTable(data,phaseStats,aggMode,currentPhase){
   if(!phaseStats.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
-  const anyStop=phaseStats.some(p=>p.endReason&&p.endReason!=="none");
   const rows=phaseStats.map(p=>{
     const weightDelta=p.weightEnd-p.weightStart;
     const estDelta=p.estEnd-p.estStart;
@@ -853,12 +880,11 @@ function renderStandardTable(data,phaseStats,aggMode,currentPhase){
   }).join("");
   const totals=totalRowStandard(data,phaseStats.at(-1).end,aggMode);
   const totalRow=`<tr><td></td><td><strong>Total</strong></td><td>${fmt(totals.time,1)} s</td><td>${fmt(totals.waterMl,1)} ml</td><td>${totals.weight?fmt(totals.weight,1)+" g":"–"}</td><td>${aggCell(totals.pressure,aggMode)}</td><td>${aggCell(totals.flow,aggMode)}</td><td>${aggCell(totals.puckFlow,aggMode)}</td><td>${fmt(totals.temp.avg,1)}°</td></tr>`;
-  const note=anyStop?"":`<p class="table-note">A "VIA …" leállási ok jelenleg a legtöbb GaggiMate firmware-verzióban mindig üres marad (a fázis-átmenet oka nincs megbízhatóan kitöltve a shot logban) – amint a firmware ezt helyesen rögzíti, itt automatikusan megjelenik.</p>`;
   return `<table class="stats-table">
     <thead><tr><th>#</th><th>Fázis</th><th>Idő</th><th>Víz</th><th>Tömeg (g)</th><th>${aggHeader("Nyomás","bar",aggMode)}</th><th>${aggHeader("Flow","ml/s",aggMode)}</th><th>${aggHeader("Puck Flow","ml/s",aggMode)}</th><th>°C Avg</th></tr></thead>
     <tbody>${rows}</tbody>
     <tfoot>${totalRow}</tfoot>
-  </table>${note}`;
+  </table>`;
 }
 
 function flagCell(flag){
