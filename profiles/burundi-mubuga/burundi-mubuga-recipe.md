@@ -1,4 +1,4 @@
-# Impresso - Burundi Mubuga Melon Currant — Scale V3 dial-in
+# Impresso - Burundi Mubuga Melon Currant — Scale V4 Fruity dial-in
 
 | Mező | Érték |
 |---|---|
@@ -8,42 +8,79 @@
 | Ízjegyek | sárgadinnye · alma · ribizli |
 | Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) |
 | Őrlőskála | 0–90, egész jelölések |
-| Fordulat | 1200 RPM baseline |
 | Mérleg | BOOKOO Themis Ultra, Bluetooth brew-by-weight |
-| Aktuális profil | **Scale V3** |
-| Státusz | **stop-logika validálva; őrlés dial-in folyamatban** |
-| Frissítve | **2026-08-09 · shot #134 alapján** |
+| Aktuális profil | **Scale V4 Fruity** |
+| Státusz | **gyümölcsösség-optimalizálás; korai vízbevitel csökkentve** |
+| Frissítve | **2026-08-10 · 19 g / grind 9 / 1400 RPM teszt után** |
 
 ---
 
 ## Cél ízprofil
 
-Lédús sárgadinnye-édesség, friss alma és élénk ribizli; tiszta, vibráló csésze, de ne legyen vékony vagy héjasan száraz.
+Lédús sárgadinnye-édesség, friss alma és élénk ribizli; tiszta, vibráló csésze, de ne legyen vékony vagy héjasan száraz. A következő fejlesztési cél nem a 7.2 bar mindenáron történő elérése, hanem a **gyümölcsös aromák és a tisztaság visszahozása**.
 
 ---
 
-## Aktuális következő baseline
+## Aktuális következő baseline — V4 Fruity
 
-A 2026-08-09-i első Scale V3 shot alapján a **10-es őrlés túl durva** ehhez a kávéhoz. A mérleges leállítás pontosan működött, ezért a profil stop-targetjeit most nem módosítjuk; először az őrlést kell finomabbra venni.
+A grind 8-as 18.5 g-os shot technikailag stabil volt, de kevésbé hozta a gyümölcsös jegyeket. A következő 19.0 g / grind 9 / 1400 RPM teszt sem lett gyümölcsösebb, miközben a Gentle Ramp végére már **21.2 g** volt a csészében. Ez arra utal, hogy a profil túl sok vizet visz be a fő extrakció előtt.
 
-| Paraméter | Következő érték |
+A V4 ezért **nem a főnyomást emeli**, hanem a korai vízbevitelt csökkenti.
+
+| Paraméter | V4 Fruity következő érték |
 |---|---:|
 | Dózis | **18.5 g** |
 | Végső célhozam | **42.5 g** |
 | Arány | **1:2.30** |
-| Hőmérséklet | **94.5 °C** |
-| Őrlés indulás | **8** |
-| Előzetes dial-in tartomány | **8–9** |
+| Hőmérséklet | **94.0 °C** |
+| Őrlés | **9** |
 | Fordulat | **1200 RPM** |
-| Profil | **burundi-mubuga-scale-v3.json** |
+| Profil | **burundi-mubuga-scale-v4-fruity.json** |
+| Fruit Wetting | **6.8 ml/s · 3.5 bar soft cap · 5 s** |
+| Currant Saturation | **2.2 bar / 3.8 ml/s · 8 s** |
+| Melon Bloom | **0.5 bar · 7 s** |
 | Juicy Extraction váltás | **38.0 g** |
 | Végső pumpastop | **42.5 g** |
 
 ### Következő shot
 
-**18.5 g be · grind 8 · 1200 RPM · 94.5 °C · Scale V3 · 38.0 g-nál Clean Finish · 42.5 g-nál végső stop**
+**18.5 g be · grind 9 · 1200 RPM · 94.0 °C · Scale V4 Fruity · 38.0 g-nál Clean Finish · 42.5 g-nál végső stop**
 
-A következő shot fő célja, hogy a Gentle Ramp / Juicy Extraction alatt a puck már tényleges ellenállást adjon, és a nyomás közelebb kerüljön a 7.2 baros profilcélhoz. Első körben **6–7 bar körüli tényleges főnyomás** már jó irány.
+**Elsődleges megfigyelési pont:** a Gentle Ramp végére lehetőleg csak kb. **14–17 g** legyen a csészében. Ha az íz gyümölcsösebb és tisztább, a V4 irány jó. A tényleges nyomás másodlagos diagnosztikai adat; nem cél önmagában a 7.2 bar elérése.
+
+---
+
+## 2026-08-10 — 19 g / grind 9 / 1400 RPM teszt
+
+**Beállítás:** 19.0 g · grind 9 · 1400 RPM · 94.5 °C · Scale V3  
+**Eredmény:** **42.6 g / 39.8 s**
+
+| Megfigyelés | Érték / jelentés |
+|---|---|
+| Gentle Ramp végére | **21.2 g** már a csészében — erősen front-loaded |
+| Fő extrakció tényleges nyomása | kb. **2.5–2.7 bar** |
+| Végső tömeg | **42.6 g**, a mérleges stop továbbra is pontos |
+| Íz | **nem lett gyümölcsösebb** |
+
+### Következtetés
+
+- A **19 g** nem adott érzékelhető ízelőnyt.
+- A **1400 RPM** sem hozta vissza a gyümölcsösséget.
+- A nagyobb dózis + magasabb RPM ágat egyelőre lezárjuk.
+- Visszaállás: **18.5 g / grind 9 / 1200 RPM**.
+- Profiloldali változás: kisebb korai flow, hogy több extrakció maradjon a kontrollált Juicy szakaszra.
+
+---
+
+## Shot #135 — grind 8 referencia
+
+**Beállítás:** 18.5 g · grind 8 · 1200 RPM · 94.5 °C · Scale V3  
+**Eredmény:** kb. **42.4 g / 41.7 s**
+
+- A stop-logika pontos maradt.
+- A főnyomás továbbra is kb. **2.4–2.6 bar** körül alakult.
+- A csésze technikailag rendben volt, de **kevésbé jöttek ki a gyümölcsös jegyek**.
+- Emiatt nem mentünk tovább finomabb őrlés felé.
 
 ---
 
@@ -53,97 +90,60 @@ A következő shot fő célja, hogy a Gentle Ramp / Juicy Extraction alatt a puc
 **Beállítás:** 18.5 g · grind 10 · 1200 RPM · 94.5 °C · Scale V3  
 **Eredmény:** **42.6 g / 42.0 s**
 
-| Megfigyelés | Érték / jelentés |
-|---|---|
-| Gentle Ramp végére | **17.9 g** már a csészében — túl gyors puck |
-| Juicy Extraction | **11.0 s**, weight stop működött |
-| Juicy végén | **36.5 g mérleg / 38.2 g kalkulált**, majd Clean Finish |
-| Clean Finish | **6.0 s**, weight stop működött |
-| Végső tömeg | **42.6 g**, a 42.5 g célhoz képest +0.1 g |
-| Fő extrakció tényleges nyomása | kb. **2.4–2.6 bar**, miközben a profil 7.2 bart kér |
-| Hőmérséklet | beállítás 94.5 °C; shot átlag kb. **93.3 °C**, fő extrakcióban kb. 92.8 °C |
-
-### Diagnózis
-
-- **A kétlépcsős mérleges stop jó:** a végső 42.6 g gyakorlatilag telitalálat.
-- **A 10-es őrlés túl durva:** a puck nem épített elegendő ellenállást, ezért a gép a 7.2 baros cél közelébe sem jutott.
-- A fő profilt egyelőre **nem módosítjuk**. A következő változó kizárólag az őrlés: **10 → 8**.
-- A hőmérséklet-esést érdemes a következő shoton is figyelni, de őrlés-dial-in előtt emiatt még nem változtatunk a 94.5 °C-os setpointon.
+- Gentle Ramp végére **17.9 g** volt a csészében.
+- Juicy Extraction kb. **11.0 s** után weight stop-pal váltott.
+- Clean Finish kb. **6.0 s** után weight stop-pal zárt.
+- Fő extrakció tényleges nyomása csak kb. **2.4–2.6 bar** volt.
+- A kétlépcsős **38.0 g → 42.5 g** stop-logika validálva lett.
 
 ---
 
-## Scale V3 — aktuális GaggiMate Pro fázisok
+## Scale V4 Fruity — GaggiMate Pro fázisok
 
 | # | Fázis | Hard cap | Hő | Pump target | Nyomás / Flow | Stop trigger |
 |---:|---|---:|---:|---|---:|---|
-| 1 | Fruit Wetting | **5 s** | 94.5 °C | flow | 8.0 ml/s · 3.5 bar soft cap | idő |
-| 2 | Currant Saturation | **8 s** | 94.5 °C | pressure | 2.2 bar / 4.5 ml/s | idő |
-| 3 | Melon Bloom | **7 s** | 94.5 °C | pressure | 0.5 bar / 0 ml/s | idő |
-| 4 | Gentle Ramp | **6 s** | 94.5 °C | pressure | 7.2 bar / 2.4 ml/s | idő |
-| 5 | Juicy Extraction | **30 s** | 94.5 °C | pressure | 7.2 bar / 2.1 ml/s | **≥ 38.0 g** |
-| 6 | Clean Finish | **8 s** | 94.5 °C | pressure | 5.4 bar / 1.7 ml/s | **≥ 42.5 g** |
+| 1 | Fruit Wetting | **5 s** | 94.0 °C | flow | **6.8 ml/s · 3.5 bar soft cap** | idő |
+| 2 | Currant Saturation | **8 s** | 94.0 °C | pressure | **2.2 bar / 3.8 ml/s** | idő |
+| 3 | Melon Bloom | **7 s** | 94.0 °C | pressure | 0.5 bar / 0 ml/s | idő |
+| 4 | Gentle Ramp | **6 s** | 94.0 °C | pressure | 7.2 bar / 2.4 ml/s | idő |
+| 5 | Juicy Extraction | **30 s** | 94.0 °C | pressure | 7.2 bar / 2.1 ml/s | **≥ 38.0 g** |
+| 6 | Clean Finish | **8 s** | 94.0 °C | pressure | 5.4 bar / 1.7 ml/s | **≥ 42.5 g** |
 |  | **JSON maximum** | **64 s** |  |  |  |  |
 
-A tényleges shotidőt a mérleg targetjei rövidítik. A `duration` értékek fázisonkénti hard capek, nem kötelezően végigfutó idők.
+### Mi változott V3 → V4 Fruity?
 
-### Miért kétlépcsős a stop?
-
-A GaggiMate `pro` profilban a `targets` tömb az **aktuális fázist** zárja le. Ezért:
-
-1. **38.0 g-nál** a Juicy Extraction lezárul és elindul a Clean Finish.
-2. **42.5 g-nál** a Clean Finish is lezárul, így a pumpa leáll.
-3. Shot #134-ben ez **42.6 g végső tömeget** adott, tehát a jelenlegi stop-logika jól kompenzálja a rendszer késését / kifolyását.
+- Fruit Wetting flow: **8.0 → 6.8 ml/s**.
+- Currant Saturation flow ceiling: **4.5 → 3.8 ml/s**.
+- Setpoint: **94.5 → 94.0 °C**.
+- A 7 s bloom, a Gentle Ramp, a fő extrakció és a kétlépcsős mérleges stop **változatlan**.
+- A cél: kevesebb korai ital, több kontrollált fő extrakció, nyitottabb savasság és több gyümölcsösség.
 
 ---
 
-## Scale V2 — kompatibilitási profil
+## Kompatibilitási profilok
 
-A `burundi-mubuga-scale.json` továbbra is megtartott V2 változat. A stop-logika ugyanúgy kétlépcsős (**38.0 g → 42.5 g**), de a V3-hoz képest:
-
-- Fruit Wetting alatt nincs 3.5 baros soft pressure cap;
-- a Melon Bloom **4 s** a V3 **7 s**-ával szemben;
-- a JSON fázis-hard-cap maximuma **61 s**.
-
-Az aktuális dial-inhez **V3 az elsődleges**.
+- **Scale V3:** eredeti 8.0 / 4.5 ml/s korai flow, 94.5 °C, 7 s bloom, 38.0 → 42.5 g stop.
+- **Scale V2:** 4 s bloom, nincs 3.5 baros wetting soft cap, ugyanaz a 38.0 → 42.5 g stop.
+- **Manual 38 s:** teljesen időalapú fallback profil.
 
 ---
 
-## Manual 38 s profil
-
-A `burundi-mubuga-manual.json` továbbra is teljesen időalapú fallback profil.
-
-| # | Fázis | Idő | Pump target |
-|---:|---|---:|---|
-| 1 | Fruit Wetting | 5 s | 8.0 ml/s |
-| 2 | Currant Saturation | 8 s | 2.2 bar / 4.5 ml/s |
-| 3 | Melon Bloom | 4 s | 0.5 bar |
-| 4 | Gentle Ramp | 6 s | 7.2 bar / 2.4 ml/s |
-| 5 | Juicy Extraction | 11 s | 7.2 bar / 2.1 ml/s |
-| 6 | Clean Finish | 4 s | 5.4 bar / 1.7 ml/s |
-|  | **Összesen** | **38 s** |  |
-
-A Manual profilnál a célhozamot külön mérlegen kell figyelni és szükség esetén kézzel megállítani.
-
----
-
-## Dial-in logika — Scale V3
+## V4 Fruity dial-in logika
 
 | Eredmény | Következő lépés |
 |---|---|
-| **42–43 g, főnyomás kb. 6–7+ bar, lédús és tiszta** | marad az aktuális őrlés és a V3 profil |
-| **Tényleges főnyomás 4 bar alatt, gyors tömegépülés** | túl durva: menj **finomabbra / kisebb szám felé** |
-| **Grind 8 mellett is 4–5 bar alatt marad** | következő próbán **7**; előtte WDT/tamp/screen ellenőrzés |
-| **Nagyon lassú, 7.2 baron ül, target későn jön** | menj **9 felé / durvábbra** |
-| **Spriccelés, oldalirányú stream vagy ingadozás** | puck prep ellenőrzés; csak stabil prep után módosíts őrlést |
-| **42.5 g körül jó, de lapos / kevés gyümölcs** | előbb őrlést stabilizáld; utána lehet 95.0 °C vagy 43.0 g próbát tenni |
-| **42.5 g körül száraz / héjas** | előbb őrlést stabilizáld; utána 94.0 °C vagy 42.0 g végső target |
-| **38 g-nál nem vált Clean Finishre** | BOOKOO kapcsolat, tare és brew-by-weight / volumetric target ellenőrzése |
-| **42.5 g-nál nem áll meg** | Clean Finish target és mérlegadat ellenőrzése; a fázis 8 s hard capre fog kifutni |
+| **Gentle Ramp végén 14–17 g, tiszta és gyümölcsös** | marad a V4 és grind 9 |
+| **Még mindig 19–21+ g a Gentle Ramp végén** | először prep ellenőrzés; utána Fruit Wetting **6.2–6.5 ml/s** teszt |
+| **Savanyú / vékony / zöld** | vissza **94.5 °C-ra**, vagy grind 8 felé egy lépés |
+| **Édes, de még tompa** | külön tesztként végsúly **43.5–44.0 g**; csak a V4 stabilizálása után |
+| **Száraz / héjas** | marad 94.0 °C, szükség esetén végsúly **42.0 g** |
+| **38 g-nál nem vált Clean Finishre** | BOOKOO kapcsolat, tare és volumetric target ellenőrzése |
+| **42.5 g-nál nem áll meg** | Clean Finish target és mérlegadat ellenőrzése |
 
 ---
 
 ## Rövid menthető recept
 
-**Burundi Mubuga Melon Currant — Scale V3**
+**Burundi Mubuga Melon Currant — Scale V4 Fruity**
 
-**18.5 g · grind 8 következő próba (8–9 dial-in zóna) · 1200 RPM · 94.5 °C · 38.0 g-nál Clean Finish · 42.5 g-nál pumpastop · shot #134 validálta a stopot 42.6 g végsúllyal**
+**18.5 g · grind 9 · 1200 RPM · 94.0 °C · Fruit Wetting 6.8 ml/s · Currant Saturation 2.2 bar / 3.8 ml/s · 7 s bloom · 38.0 g-nál Clean Finish · 42.5 g-nál pumpastop**

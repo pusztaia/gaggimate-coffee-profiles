@@ -1,5 +1,33 @@
 # Changelog – Burundi Mubuga Melon Currant
 
+## 2026-08-10 – Scale V4 Fruity: kisebb korai vízbevitel
+
+### Előzmény
+
+- Shot #135: **18.5 g / grind 8 / 1200 RPM / 42.4 g körül**, technikailag stabil, de kevésbé gyümölcsös.
+- Következő teszt: **19.0 g / grind 9 / 1400 RPM / 42.6 g / 39.8 s**.
+- A Gentle Ramp végére már **21.2 g** volt a csészében.
+- A tényleges főnyomás továbbra is csak kb. **2.5–2.7 bar** volt.
+- Ízben a 19 g + 1400 RPM kombináció **nem lett gyümölcsösebb**.
+
+### V4 Fruity változás
+
+- Új elsődleges profil: `burundi-mubuga-scale-v4-fruity.json`.
+- Dózis vissza: **18.5 g**.
+- Őrlés: **9**.
+- RPM vissza: **1200**.
+- Hőmérséklet: **94.5 → 94.0 °C**.
+- Fruit Wetting flow: **8.0 → 6.8 ml/s**; 3.5 bar soft cap marad.
+- Currant Saturation flow: **4.5 → 3.8 ml/s**; 2.2 bar target marad.
+- Melon Bloom: **7 s**, változatlan.
+- Gentle Ramp / Juicy Extraction / Clean Finish nyomás- és flow-targetjei változatlanok.
+- Kétlépcsős mérleges stop változatlan: **38.0 g → 42.5 g**.
+- Hard-cap maximum: **64 s**.
+
+### V4 cél
+
+A Gentle Ramp végére a korábbi 17.9–21.2 g helyett lehetőleg **14–17 g** legyen a csészében. A prioritás a tisztább, élénkebb sárgadinnye–alma–ribizli karakter; a 7.2 bar elérése nem önálló cél.
+
 ## 2026-08-09 – Shot #134, Scale V3 stop-validálás és őrléskorrekció
 
 ### Shot eredmény
