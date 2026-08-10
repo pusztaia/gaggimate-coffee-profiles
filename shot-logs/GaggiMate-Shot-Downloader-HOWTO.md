@@ -1,6 +1,6 @@
 # GaggiMate shot logok letöltése és JSON konvertálása
 
-Ez a HOWTO a `gaggimate_download_192_168_50_68.py` script használatát írja le.
+Ez a HOWTO a `gaggimate_shots_to_json.py` script használatát írja le.
 
 A script alapértelmezett GaggiMate címe:
 
@@ -29,8 +29,8 @@ GaggiMate
           v
 gaggimate-shots/
   +-- index.json
-  +-- shot-135.json
-  +-- shot-136.json
+  +-- shot-000135.json
+  +-- shot-000136.json
   +-- ...
 ```
 
@@ -44,7 +44,7 @@ A jelenlegi shot log formátum v5, 512 bájtos fejléccel és 26 bájtos minták
 - A számítógép vagy Raspberry Pi ugyanazon a hálózaton legyen, mint a GaggiMate
 - A GaggiMate címe elérhető legyen: `192.168.50.68`
 - A script fájl:
-  `gaggimate_download_192_168_50_68.py`
+  `gaggimate_shots_to_json.py`
 
 Külső Python csomag nem szükséges. A script csak a Python standard library moduljait használja.
 
@@ -99,7 +99,7 @@ Python 3 szükséges.
 Tedd a következő fájlt egy tetszőleges könyvtárba:
 
 ```text
-gaggimate_download_192_168_50_68.py
+gaggimate_shots_to_json.py
 ```
 
 Például Raspberry Pi-n:
@@ -127,13 +127,13 @@ A GaggiMate IP-címe már be van állítva a scriptben, ezért nem kell paramét
 ### Linux / Raspberry Pi / macOS
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py
+python3 gaggimate_shots_to_json.py
 ```
 
 ### Windows
 
 ```powershell
-py gaggimate_download_192_168_50_68.py
+py gaggimate_shots_to_json.py
 ```
 
 A script először letölti:
@@ -164,19 +164,21 @@ Például:
 ```text
 gaggimate-shots/
 ├── index.json
-├── shot-1.json
-├── shot-2.json
+├── shot-000001.json
+├── shot-000002.json
 ├── ...
-├── shot-135.json
-├── shot-136.json
-└── shot-137.json
+├── shot-000135.json
+├── shot-000136.json
+└── shot-000137.json
 ```
+
+A `shot-<id>.json` fájlnevekben a shot ID mindig 6 számjegyre nullákkal kiegészítve szerepel (pl. `shot-000006.json`), így a fájlok ábécé szerint is a helyes sorrendben rendeződnek.
 
 Az `index.json` az összes indexbejegyzést tartalmazza.
 
 A letöltött `shot-<id>.json` fájlokat grafikusan a `shot-viewer.html` oldallal nézheted meg (lásd a 19. pontot).
 
-Egy `shot-135.json` többek között a következő adatokat tartalmazhatja:
+Egy `shot-000135.json` többek között a következő adatokat tartalmazhatja:
 
 - shot ID
 - dátum/idő
@@ -205,7 +207,7 @@ Egy `shot-135.json` többek között a következő adatokat tartalmazhatja:
 Normál futtatásnál a már létező
 
 ```text
-shot-135.json
+shot-000135.json
 ```
 
 fájlokat a script nem írja felül.
@@ -213,7 +215,7 @@ fájlokat a script nem írja felül.
 Ezért ugyanazt a parancsot később újra lefuttathatod:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py
+python3 gaggimate_shots_to_json.py
 ```
 
 és jellemzően csak az új shotok készülnek el.
@@ -223,13 +225,13 @@ python3 gaggimate_download_192_168_50_68.py
 Ha a meglévő JSON fájlokat is felül akarod írni:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --force
+python3 gaggimate_shots_to_json.py --force
 ```
 
 Windows:
 
 ```powershell
-py gaggimate_download_192_168_50_68.py --force
+py gaggimate_shots_to_json.py --force
 ```
 
 ## 8. Az eredeti `.slog` fájlok megtartása
@@ -237,7 +239,7 @@ py gaggimate_download_192_168_50_68.py --force
 Ha a JSON mellett az eredeti GaggiMate bináris logokat is szeretnéd eltárolni:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --keep-slog
+python3 gaggimate_shots_to_json.py --keep-slog
 ```
 
 Ekkor létrejön például:
@@ -245,7 +247,7 @@ Ekkor létrejön például:
 ```text
 gaggimate-shots/
 ├── index.json
-├── shot-135.json
+├── shot-000135.json
 └── raw/
     ├── 000135.slog
     ├── 000136.slog
@@ -255,7 +257,7 @@ gaggimate-shots/
 ## 9. Az eredeti `index.bin` megtartása
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --keep-index-bin
+python3 gaggimate_shots_to_json.py --keep-index-bin
 ```
 
 Eredmény:
@@ -267,7 +269,7 @@ gaggimate-shots/raw/index.bin
 A két opció együtt:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --keep-slog --keep-index-bin
+python3 gaggimate_shots_to_json.py --keep-slog --keep-index-bin
 ```
 
 Backup készítéshez ez az ajánlott mód.
@@ -285,7 +287,7 @@ Például:
 Ha ezt nem szeretnéd:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --no-notes
+python3 gaggimate_shots_to_json.py --no-notes
 ```
 
 ## 11. Csak bizonyos shot ID-k letöltése
@@ -293,19 +295,19 @@ python3 gaggimate_download_192_168_50_68.py --no-notes
 Csak a 135-ös shottól:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --start-id 135
+python3 gaggimate_shots_to_json.py --start-id 135
 ```
 
 Csak 135 és 150 között:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --start-id 135 --end-id 150
+python3 gaggimate_shots_to_json.py --start-id 135 --end-id 150
 ```
 
 Csak 150-ig:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --end-id 150
+python3 gaggimate_shots_to_json.py --end-id 150
 ```
 
 ## 12. Másik célkönyvtár
@@ -313,13 +315,13 @@ python3 gaggimate_download_192_168_50_68.py --end-id 150
 Például:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py -o ~/gaggimate-backup
+python3 gaggimate_shots_to_json.py -o ~/gaggimate-backup
 ```
 
 Windows:
 
 ```powershell
-py gaggimate_download_192_168_50_68.py -o C:\gaggimate-backup
+py gaggimate_shots_to_json.py -o C:\gaggimate-backup
 ```
 
 ## 13. Haladó hálózati beállítások
@@ -333,7 +335,7 @@ Alapértelmezett HTTP timeout:
 Növelés:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --timeout 30
+python3 gaggimate_shots_to_json.py --timeout 30
 ```
 
 Alapértelmezett próbálkozások száma:
@@ -345,7 +347,7 @@ Alapértelmezett próbálkozások száma:
 Például 5 próbálkozás:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --retries 5
+python3 gaggimate_shots_to_json.py --retries 5
 ```
 
 A shotok között alapból 0,05 másodperc szünet van.
@@ -353,7 +355,7 @@ A shotok között alapból 0,05 másodperc szünet van.
 Például 0,2 másodperc:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --delay 0.2
+python3 gaggimate_shots_to_json.py --delay 0.2
 ```
 
 ## 14. Minden opció megjelenítése
@@ -361,13 +363,13 @@ python3 gaggimate_download_192_168_50_68.py --delay 0.2
 Linux / Raspberry Pi / macOS:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --help
+python3 gaggimate_shots_to_json.py --help
 ```
 
 Windows:
 
 ```powershell
-py gaggimate_download_192_168_50_68.py --help
+py gaggimate_shots_to_json.py --help
 ```
 
 A jelenlegi opciók:
@@ -391,7 +393,7 @@ A jelenlegi opciók:
 Ha teljes backupot szeretnél JSON + eredeti bináris fájlokkal:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --keep-slog --keep-index-bin
+python3 gaggimate_shots_to_json.py --keep-slog --keep-index-bin
 ```
 
 A következő futtatáskor a meglévő JSON fájlokat kihagyja, és az új shotokat tölti le.
@@ -423,7 +425,7 @@ http://192.168.50.68
 Ha a hálózat lassú:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --timeout 30 --retries 5
+python3 gaggimate_shots_to_json.py --timeout 30 --retries 5
 ```
 
 ### `index.bin` 404
@@ -498,25 +500,25 @@ A GaggiMate a shot fájlokat a belső `/h/` könyvtárban `.slog` kiterjesztéss
 Normál használat:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py
+python3 gaggimate_shots_to_json.py
 ```
 
 Teljes backup:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --keep-slog --keep-index-bin
+python3 gaggimate_shots_to_json.py --keep-slog --keep-index-bin
 ```
 
 Mindent újragenerál:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --force --keep-slog --keep-index-bin
+python3 gaggimate_shots_to_json.py --force --keep-slog --keep-index-bin
 ```
 
 Csak a 135-ös shottól:
 
 ```bash
-python3 gaggimate_download_192_168_50_68.py --start-id 135
+python3 gaggimate_shots_to_json.py --start-id 135
 ```
 
 Kimenet:
@@ -525,7 +527,7 @@ Kimenet:
 gaggimate-shots/
 ```
 
-A JSON fájlok:
+A JSON fájlok (a shot ID mindig 6 számjegyre nullákkal kiegészítve):
 
 ```text
 shot-<ID>.json
@@ -534,7 +536,7 @@ shot-<ID>.json
 például:
 
 ```text
-shot-135.json
+shot-000135.json
 ```
 
 ## 19. Grafikus megtekintés (shot-viewer.html)

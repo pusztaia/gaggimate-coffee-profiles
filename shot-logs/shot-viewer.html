@@ -20,10 +20,13 @@ html[data-theme="dark"]{
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0;min-width:320px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--accent2) 14%,transparent),transparent 34%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--accent2) 14%,transparent),transparent 34%),radial-gradient(circle at 0% 20%,color-mix(in srgb,var(--gold) 10%,transparent),transparent 30%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 button,input,select,a{font:inherit}
 button,a{-webkit-tap-highlight-color:transparent}
 a{color:inherit}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
 .topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:1rem}
 .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;min-width:0}
@@ -41,50 +44,68 @@ a{color:inherit}
 h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;letter-spacing:-.03em;margin:.5rem 0 .6rem}
 h1 span{color:var(--accent)}
 .lead{font-size:1rem;max-width:720px;color:var(--muted);margin:0 0 1.4rem}
-.loader{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;border:1.5px dashed var(--line);border-radius:var(--radius-md);padding:1.1rem;background:var(--surface)}
-.loader.drag{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
-.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.62rem .95rem;cursor:pointer;font-weight:820;font-size:.86rem;display:inline-flex;align-items:center;gap:.4rem}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.primary:hover{color:#fff;opacity:.92}
+.loader{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;border:1.5px dashed var(--line);border-radius:var(--radius-lg);padding:1.3rem;background:var(--surface);box-shadow:var(--shadow-soft);transition:border-color .2s ease,background-color .2s ease,transform .2s ease}
+.loader.drag{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface));transform:scale(1.01)}
+.loader-icon{flex:0 0 auto;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--surface2)),color-mix(in srgb,var(--gold) 16%,var(--surface2)));color:var(--accent)}
+.loader-actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;flex:1 1 auto}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.68rem 1.05rem;cursor:pointer;font-weight:820;font-size:.86rem;display:inline-flex;align-items:center;gap:.45rem;transition:transform .16s ease,border-color .16s ease,color .16s ease,background-color .16s ease,box-shadow .16s ease}
+.btn svg{flex:0 0 auto}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:var(--accent);color:#fff;box-shadow:var(--shadow-soft)}
+.btn.primary:hover{color:#fff;opacity:.94;box-shadow:var(--shadow)}
 .status-inline{color:var(--muted);font-size:.84rem}
-.status-inline.error{color:var(--accent)}
+.status-inline.error{color:var(--accent);font-weight:800}
 #viewerSection{padding-top:.5rem}
-.viewer-layout{display:grid;grid-template-columns:300px 1fr;gap:1.1rem;align-items:start}
-.shot-list-panel{position:sticky;top:74px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:.9rem;max-height:calc(100vh - 100px);display:flex;flex-direction:column;gap:.7rem}
-.search{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:999px;padding:.6rem .9rem}
-.shot-list{overflow:auto;display:flex;flex-direction:column;gap:.4rem}
-.shot-item{text-align:left;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:.55rem .7rem;cursor:pointer;color:var(--text)}
-.shot-item:hover{border-color:var(--accent)}
-.shot-item[aria-selected="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface2))}
+.viewer-layout{display:grid;grid-template-columns:310px 1fr;gap:1.1rem;align-items:start}
+.shot-list-panel{position:sticky;top:74px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem;max-height:calc(100vh - 100px);display:flex;flex-direction:column;gap:.7rem;box-shadow:var(--shadow-soft)}
+.search{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:999px;padding:.65rem 1rem;transition:border-color .16s ease,box-shadow .16s ease}
+.search:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.shot-list{overflow:auto;display:flex;flex-direction:column;gap:.5rem;padding:.1rem}
+.shot-item{position:relative;text-align:left;border:1px solid var(--line);background:var(--surface2);border-radius:16px;padding:.65rem .75rem .65rem .95rem;cursor:pointer;color:var(--text);transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+.shot-item:before{content:"";position:absolute;left:0;top:.5rem;bottom:.5rem;width:4px;border-radius:99px;background:var(--line);transition:background-color .14s ease}
+.shot-item:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));transform:translateX(2px);box-shadow:var(--shadow-soft)}
+.shot-item[aria-selected="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface2));box-shadow:var(--shadow-soft)}
+.shot-item[aria-selected="true"]:before{background:linear-gradient(var(--accent),var(--gold))}
 .shot-item strong{display:block;font-size:.86rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.shot-item .meta-row{display:flex;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.72rem;margin-top:.2rem}
+.shot-item .meta-row{display:flex;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.72rem;margin-top:.25rem}
 .shot-item .stars{color:var(--gold);letter-spacing:1px}
-.shot-count{color:var(--muted);font-size:.78rem}
-.shot-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem}
-.meta-stat{padding:.3rem 0}.meta-stat span{display:block;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}.meta-stat strong{display:block;font-size:1.02rem;margin-top:.15rem}
+.shot-count{color:var(--muted);font-size:.78rem;font-weight:700}
+.shot-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:1.1rem;box-shadow:var(--shadow-soft);animation:riseIn .3s ease both}
+.meta-stat{display:flex;align-items:flex-start;gap:.55rem;padding:.3rem 0}
+.meta-stat-icon{flex:0 0 auto;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,var(--surface2));color:var(--accent)}
+.meta-stat-text{min-width:0}
+.meta-stat-text>span{display:block;color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em}
+.meta-stat-text>strong{display:block;font-size:1rem;margin-top:.12rem;line-height:1.25;text-transform:none}
+.meta-stat.warn .meta-stat-icon{background:color-mix(in srgb,var(--accent) 22%,var(--surface2))}
 .meta-stat.warn strong{color:var(--accent)}
-.shot-title{grid-column:1/-1;font-size:1.2rem;font-weight:900;margin-bottom:.1rem}
-.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem 1.1rem 1.2rem;margin-bottom:1.1rem}
-.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.5rem}
-.chart-head h3{margin:0;font-size:1rem}
+.shot-title{grid-column:1/-1;font-size:1.25rem;font-weight:900;margin-bottom:.15rem;letter-spacing:-.01em}
+.chart-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.1rem 1.2rem 1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow-soft);overflow:hidden;animation:riseIn .32s ease both}
+.chart-card:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold))}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.chart-head h3{margin:0;font-size:1.02rem;font-weight:850;letter-spacing:-.01em}
 .legend{display:flex;flex-wrap:wrap;gap:.85rem;font-size:.76rem;color:var(--muted)}
-.legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.32rem;vertical-align:middle}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.32rem;vertical-align:middle;border-radius:99px}
 .legend i.dashed{border-top-style:dashed}
-.chart-wrap{position:relative}
+.chart-wrap{position:relative;border-radius:16px;overflow:hidden}
 .chart-svg{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
-.chart-tooltip{position:absolute;pointer-events:none;background:var(--text);color:var(--bg);border-radius:12px;padding:.5rem .65rem;font-size:.74rem;line-height:1.45;box-shadow:var(--shadow);white-space:nowrap;transform:translate(-50%,-108%);z-index:5}
-.chart-tooltip b{display:block;font-size:.8rem;margin-bottom:.15rem}
+.chart-tooltip{position:absolute;pointer-events:none;background:var(--text);color:var(--bg);border-radius:12px;padding:.55rem .7rem;font-size:.74rem;line-height:1.45;box-shadow:var(--shadow);white-space:nowrap;transform:translate(-50%,-112%);z-index:5;transition:opacity .1s ease}
+.chart-tooltip b{display:block;font-size:.8rem;margin-bottom:.2rem;color:color-mix(in srgb,var(--bg) 85%,var(--gold))}
 .chart-tooltip .row{display:flex;gap:.5rem;justify-content:space-between}
 .chart-tooltip .row i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.35rem;vertical-align:middle}
-details.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;margin-bottom:1rem;overflow:hidden}
-details.card summary{cursor:pointer;list-style:none;padding:.9rem 1.1rem;font-weight:820;font-size:.9rem;color:var(--text);display:flex;justify-content:space-between}
+details.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-soft);animation:riseIn .34s ease both}
+details.card summary{cursor:pointer;list-style:none;padding:1rem 1.1rem;font-weight:820;font-size:.9rem;color:var(--text);display:flex;justify-content:space-between;align-items:center;transition:background-color .14s ease}
+details.card summary:hover{background:var(--surface2)}
 details.card summary::-webkit-details-marker{display:none}
-details.card summary::after{content:"+"}details.card[open] summary::after{content:"\2212"}
+details.card summary::after{content:"";width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .18s ease;margin-left:.6rem}
+details.card[open] summary::after{transform:rotate(45deg)}
 details.card .card-body{padding:0 1.1rem 1.1rem}
 table.phase-table{width:100%;border-collapse:collapse;font-size:.82rem}
-table.phase-table th,table.phase-table td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left}
+table.phase-table th,table.phase-table td{padding:.55rem .6rem;border-bottom:1px solid var(--line);text-align:left}
 table.phase-table th{color:var(--muted);font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+table.phase-table tbody tr{transition:background-color .12s ease}
+table.phase-table tbody tr:hover{background:var(--surface2)}
 .empty-hint{color:var(--muted);text-align:center;padding:3rem 1rem;border:1px dashed var(--line);border-radius:var(--radius-lg)}
 @media(max-width:900px){.viewer-layout{grid-template-columns:1fr}.shot-list-panel{position:static;max-height:280px}}
 </style>
@@ -114,13 +135,22 @@ table.phase-table th{color:var(--muted);font-weight:800;font-size:.72rem;text-tr
     <h1>Shot log <span>viewer</span></h1>
     <p class="lead">Töltsd be a letöltő script által generált <code>shot-&lt;id&gt;.json</code> fájlokat (vagy egyben a <code>gaggimate-shots</code> mappát), és nézd meg a nyomás/flow/hőmérséklet és a mérleg tömeg görbéjét fázishatárokkal, cél- és mért értékekkel. Minden feldolgozás a böngészőben, helyben történik – a fájlok nem kerülnek fel sehova.</p>
     <div class="loader" id="loader">
-      <label class="btn primary" for="fileInput">Shot JSON fájlok megnyitása
-        <input id="fileInput" type="file" accept="application/json,.json" multiple hidden>
-      </label>
-      <label class="btn" for="dirInput">Teljes mappa megnyitása
-        <input id="dirInput" type="file" webkitdirectory multiple hidden>
-      </label>
-      <span class="status-inline" id="loadStatus">Húzz ide fájlokat, vagy válassz egy gombbal.</span>
+      <span class="loader-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 15V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 15v3a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <div class="loader-actions">
+        <label class="btn primary" for="fileInput">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5L14.5 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 4v4.5h4.5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Shot JSON fájlok megnyitása
+          <input id="fileInput" type="file" accept="application/json,.json" multiple hidden>
+        </label>
+        <label class="btn" for="dirInput">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3.5 7.5a1.5 1.5 0 0 1 1.5-1.5h4l1.6 2h8.4A1.5 1.5 0 0 1 20.5 9.5v8a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5v-10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Teljes mappa megnyitása
+          <input id="dirInput" type="file" webkitdirectory multiple hidden>
+        </label>
+        <span class="status-inline" id="loadStatus">Húzz ide fájlokat, vagy válassz egy gombbal.</span>
+      </div>
     </div>
   </section>
 
@@ -401,6 +431,18 @@ function wireSyncedHover(charts){
 // Shot detail rendering
 // ---------------------------------------------------------------------------
 
+const META_ICONS={
+  calendar:'<path d="M7 3v3M17 3v3M4 8.5h16M5.5 5h13A1.5 1.5 0 0 1 20 6.5v13A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5v-13A1.5 1.5 0 0 1 5.5 5Z"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  scale:'<path d="M12 3v3m0 15v-3M5 8l3 2-3 2m14-4-3 2 3 2M6.5 6.5l3.5 3.5m4-3.5-3.5 3.5"/><path d="M4 8.5h16"/><circle cx="12" cy="12" r="8.5"/>',
+  timer:'<path d="M10 2h4M12 6v0M12 6a7.5 7.5 0 1 1-5.3 2.2" stroke-linecap="round"/><path d="M12 8v4.5l3 2"/>',
+  samples:'<path d="M5 19h14M7 16V9m5 7V5m5 11v-5" stroke-linecap="round"/>',
+  alert:'<path d="M12 3.5 21 19.5H3L12 3.5Z" stroke-linejoin="round"/><path d="M12 9.5v4M12 16.5v.01" stroke-linecap="round"/>',
+  star:'<path d="M12 3.5l2.4 5.2 5.6.6-4.2 3.9 1.1 5.7L12 16.1l-4.9 2.8 1.1-5.7-4.2-3.9 5.6-.6L12 3.5Z" stroke-linejoin="round"/>',
+  tag:'<path d="M12.6 3H6a1 1 0 0 0-1 1v6.6a1 1 0 0 0 .3.7l9 9a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-9-9a1 1 0 0 0-.4-.3Z"/><circle cx="8.5" cy="8.5" r="1.2"/>',
+};
+function statIcon(name){return `<span class="meta-stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${META_ICONS[name]}</svg></span>`;}
+
 function renderShotDetail(data){
   const host=$("#shotDetail");
   if(!data){host.innerHTML=`<div class="empty-hint">Válassz egy shotot a listából.</div>`;return;}
@@ -409,14 +451,14 @@ function renderShotDetail(data){
   host.innerHTML=`
     <div class="shot-meta">
       <div class="shot-title">#${s.id} · ${esc(s.profile_name||"(névtelen profil)")}</div>
-      <div class="meta-stat"><span>Dátum</span><strong>${s.timestamp_iso_utc?new Date(s.timestamp_iso_utc).toLocaleString():"ismeretlen"}</strong></div>
-      <div class="meta-stat"><span>Időtartam</span><strong>${fmt(s.duration_s,1)} s</strong></div>
-      <div class="meta-stat"><span>Végső tömeg</span><strong>${s.final_weight_g?fmt(s.final_weight_g,1)+" g":"nincs mérve"}</strong></div>
-      <div class="meta-stat"><span>Brew delay</span><strong>${fmt(s.brew_delay_ms/1000,2)} s</strong></div>
-      <div class="meta-stat"><span>Minták</span><strong>${s.sample_count_parsed}${s.incomplete_header?" (hiányos fejléc)":""}</strong></div>
-      <div class="meta-stat ${s.final_exit_reason_name==='none'?'':'warn'}"><span>Kilépési ok</span><strong>${esc(s.final_exit_reason_name)}</strong></div>
-      <div class="meta-stat"><span>Értékelés</span><strong>${rating?"★".repeat(rating)+"☆".repeat(5-rating):"nincs"}</strong></div>
-      <div class="meta-stat"><span>Profil ID</span><strong style="font-weight:600;font-size:.78rem">${esc(s.profile_id)}</strong></div>
+      <div class="meta-stat">${statIcon("calendar")}<span class="meta-stat-text"><span>Dátum</span><strong>${s.timestamp_iso_utc?new Date(s.timestamp_iso_utc).toLocaleString():"ismeretlen"}</strong></span></div>
+      <div class="meta-stat">${statIcon("clock")}<span class="meta-stat-text"><span>Időtartam</span><strong>${fmt(s.duration_s,1)} s</strong></span></div>
+      <div class="meta-stat">${statIcon("scale")}<span class="meta-stat-text"><span>Végső tömeg</span><strong>${s.final_weight_g?fmt(s.final_weight_g,1)+" g":"nincs mérve"}</strong></span></div>
+      <div class="meta-stat">${statIcon("timer")}<span class="meta-stat-text"><span>Brew delay</span><strong>${fmt(s.brew_delay_ms/1000,2)} s</strong></span></div>
+      <div class="meta-stat">${statIcon("samples")}<span class="meta-stat-text"><span>Minták</span><strong>${s.sample_count_parsed}${s.incomplete_header?" (hiányos fejléc)":""}</strong></span></div>
+      <div class="meta-stat ${s.final_exit_reason_name==='none'?'':'warn'}">${statIcon("alert")}<span class="meta-stat-text"><span>Kilépési ok</span><strong>${esc(s.final_exit_reason_name)}</strong></span></div>
+      <div class="meta-stat">${statIcon("star")}<span class="meta-stat-text"><span>Értékelés</span><strong>${rating?"★".repeat(rating)+"☆".repeat(5-rating):"nincs"}</strong></span></div>
+      <div class="meta-stat">${statIcon("tag")}<span class="meta-stat-text"><span>Profil ID</span><strong style="font-weight:600;font-size:.78rem">${esc(s.profile_id)}</strong></span></div>
     </div>
     <div class="chart-card">
       <div class="chart-head"><h3>Nyomás · Flow · Hőmérséklet</h3><div class="legend" id="mainLegend"></div></div>

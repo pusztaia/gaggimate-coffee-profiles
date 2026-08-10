@@ -649,7 +649,7 @@ def main() -> int:
     for position, entry in enumerate(active_entries, start=1):
         shot_id = entry.shot_id
         padded = f"{shot_id:06d}"
-        json_path = output_dir / f"shot-{shot_id}.json"
+        json_path = output_dir / f"shot-{padded}.json"
 
         prefix = f"[{position:>4}/{len(active_entries):<4}] shot {shot_id}"
 
