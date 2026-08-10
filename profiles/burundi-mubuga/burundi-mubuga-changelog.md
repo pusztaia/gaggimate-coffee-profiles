@@ -1,5 +1,14 @@
 # Changelog – Burundi Mubuga Melon Currant
 
+## 2026-08-10 – Shot #139: V4 stop-fix, verzió marad V4
+
+- Shot #139: a profil **Scale V4 Fruity**, a BOOKOO csatlakozott, de `shotStartedVolumetric: false` volt.
+- A 38.0 g-os volumetric target nem tüzelhetett; a Juicy Extraction nem váltott Clean Finishre és a shot **64.9 g**-ig futott.
+- A V4 verziószám változatlan marad.
+- Juicy Extraction targetek most: **volumetric ≥ 38.0 g OR pumped ≥ 28 ml**.
+- Clean Finish targetek most: **volumetric ≥ 42.5 g OR pumped ≥ 6 ml**.
+- Aktív brew-by-weight esetén a mérleges stop az elsődleges; a pumped target csak biztonsági fallback.
+
 ## 2026-08-10 – Scale V4 Fruity: kisebb korai vízbevitel
 
 ### Előzmény

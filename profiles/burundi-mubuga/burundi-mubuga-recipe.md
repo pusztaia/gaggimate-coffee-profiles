@@ -98,6 +98,18 @@ A V4 ezért **nem a főnyomást emeli**, hanem a korai vízbevitelt csökkenti.
 
 ---
 
+
+## 2026-08-10 – Shot #139 / V4 stop-fix
+
+A #139 shotnál a BOOKOO csatlakozott és a tömegadat érkezett, de a shot `shotStartedVolumetric: false` állapotban indult, ezért a `volumetric` target nem tüzelhetett. A Juicy Extraction 38 g fölött is tovább futott, és a shot 64.9 g-ig ment.
+
+A profil neve és verziója **Scale V4 Fruity** marad. A V4 most kettős stop-biztonságot használ:
+
+- Juicy Extraction: **volumetric >= 38.0 g OR pumped >= 28 ml**
+- Clean Finish: **volumetric >= 42.5 g OR pumped >= 6 ml**
+
+Normál, aktív brew-by-weight esetén továbbra is a mérleg targetje tüzel elsőként. Ha a brew-by-weight mód nem aktiválódik, a `pumped` target megakadályozza a 30 s-os Juicy hard capig tartó túlfutást. A `pumped` fallback biztonsági becslés, ezért ilyen shotnál a végső tömeg nem lesz olyan pontos, mint aktív mérleges stopnál.
+
 ## Scale V4 Fruity — GaggiMate Pro fázisok
 
 | # | Fázis | Hard cap | Hő | Pump target | Nyomás / Flow | Stop trigger |
@@ -106,8 +118,8 @@ A V4 ezért **nem a főnyomást emeli**, hanem a korai vízbevitelt csökkenti.
 | 2 | Currant Saturation | **8 s** | 94.0 °C | pressure | **2.2 bar / 3.8 ml/s** | idő |
 | 3 | Melon Bloom | **7 s** | 94.0 °C | pressure | 0.5 bar / 0 ml/s | idő |
 | 4 | Gentle Ramp | **6 s** | 94.0 °C | pressure | 7.2 bar / 2.4 ml/s | idő |
-| 5 | Juicy Extraction | **30 s** | 94.0 °C | pressure | 7.2 bar / 2.1 ml/s | **≥ 38.0 g** |
-| 6 | Clean Finish | **8 s** | 94.0 °C | pressure | 5.4 bar / 1.7 ml/s | **≥ 42.5 g** |
+| 5 | Juicy Extraction | **30 s** | 94.0 °C | pressure | 7.2 bar / 2.1 ml/s | **≥ 38.0 g OR pumped ≥ 28 ml** |
+| 6 | Clean Finish | **8 s** | 94.0 °C | pressure | 5.4 bar / 1.7 ml/s | **≥ 42.5 g OR pumped ≥ 6 ml** |
 |  | **JSON maximum** | **64 s** |  |  |  |  |
 
 ### Mi változott V3 → V4 Fruity?
