@@ -89,16 +89,13 @@ h1 span{color:var(--accent)}
 .icon-btn-sm:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 .icon-btn-sm[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .legend{display:flex;flex-wrap:wrap;gap:.4rem;font-size:.76rem;color:var(--muted);margin-bottom:.7rem}
-.legend span{display:inline-flex;align-items:center}
-.legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.32rem;vertical-align:middle;border-radius:99px}
-.legend i.dashed{border-top-style:dashed}
-.legend-toggle{display:inline-flex;align-items:center;gap:.32rem;border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:.3rem .62rem;font-size:.72rem;font-weight:750;cursor:pointer;transition:opacity .14s ease,border-color .14s ease,background-color .14s ease}
+.legend-toggle{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:.32rem .68rem;font-size:.72rem;font-weight:750;cursor:pointer;transition:opacity .14s ease,border-color .14s ease,background-color .14s ease}
 .legend-toggle:hover{border-color:var(--accent)}
 .legend-toggle[aria-pressed="true"]{background:var(--surface);color:var(--text);border-color:color-mix(in srgb,var(--line) 40%,currentColor)}
-.legend-toggle[aria-pressed="false"]{opacity:.5}
-.legend-toggle i{display:inline-block;width:14px;height:0;border-top-width:3px;border-top-style:solid;border-radius:99px}
-.legend-toggle i.dashed{border-top-style:dashed}
+.legend-toggle[aria-pressed="false"]{opacity:.45}
+.legend-icon{display:inline-flex;color:var(--muted)}
 .legend-toggle.utility[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+.legend-toggle.utility[aria-pressed="true"] .legend-icon{color:var(--accent)}
 .chart-panel-label{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin:.7rem 0 .3rem}
 .chart-panel:first-child .chart-panel-label{margin-top:0}
 .chart-wrap{position:relative;border-radius:16px;overflow:hidden}
@@ -128,6 +125,9 @@ h1 span{color:var(--accent)}
 table.stats-table{width:100%;border-collapse:collapse;font-size:.82rem;white-space:nowrap}
 table.stats-table th,table.stats-table td{padding:.55rem .6rem;border-bottom:1px solid var(--line);text-align:left}
 table.stats-table th{color:var(--muted);font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0;background:var(--surface)}
+table.stats-table th.num,table.stats-table td.num{text-align:right}
+table.stats-table th.num{white-space:nowrap}
+table.stats-table th.num svg{vertical-align:-2px;margin-right:.3rem;color:var(--muted)}
 table.stats-table tbody tr{transition:background-color .12s ease;scroll-margin-top:2.5rem}
 table.stats-table tbody tr:hover{background:var(--surface2)}
 table.stats-table tbody tr.current-phase{background:color-mix(in srgb,var(--accent) 10%,var(--surface2));box-shadow:inset 3px 0 0 var(--accent)}
@@ -391,12 +391,18 @@ function tightRange(values){
 }
 
 // series: [{key, label, color, dashed, axis:'left'|'right', unit, panel}]
-function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,leftLabel,rightLabel,showPhaseNames,showStops,finalExitReasonName,leftAxisMode}){
+function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,leftLabel,rightLabel,showPhaseNames,showStops,finalExitReasonName,leftAxisMode,leftAxisColor,rightAxisColor}){
   const W=1000,H=svg.dataset.h?Number(svg.dataset.h):340;
   const badgeSpace=badgeStackHeight(phases,showPhaseNames,showStops,finalExitReasonName);
   const pad={l:52,r:rightLabel?52:20,t:badgeSpace?badgeSpace+14:18,b:32};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
   svg.innerHTML="";
+
+  const defs=el("defs");
+  const hatch=el("pattern",{id:"diagHatch",width:6,height:6,patternTransform:"rotate(45)",patternUnits:"userSpaceOnUse"});
+  hatch.appendChild(el("line",{x1:0,y1:0,x2:0,y2:6,stroke:"currentColor","stroke-width":1,opacity:.18}));
+  defs.appendChild(hatch);
+  svg.appendChild(defs);
 
   const activeSeries=seriesDefs.filter(s=>visible.has(s.key));
   const xs=scaleLinear([0,Math.max(total,0.1)],[pad.l,W-pad.r]);
@@ -422,7 +428,9 @@ function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,left
     const x=xs(tr.time_s);
     if(i%2){
       const next=phases[i+1]?xs(phases[i+1].time_s):xs(total);
-      phaseG.appendChild(el("rect",{x,y:pad.t,width:Math.max(0,next-x),height:H-pad.t-pad.b,fill:"currentColor",opacity:.05}));
+      const w=Math.max(0,next-x);
+      phaseG.appendChild(el("rect",{x,y:pad.t,width:w,height:H-pad.t-pad.b,fill:"currentColor",opacity:.05}));
+      phaseG.appendChild(el("rect",{x,y:pad.t,width:w,height:H-pad.t-pad.b,fill:"url(#diagHatch)",color:"var(--muted)"}));
     }
     phaseG.appendChild(el("line",{x1:x,y1:pad.t,x2:x,y2:H-pad.b,stroke:"currentColor",opacity:.35}));
   });
@@ -470,11 +478,15 @@ function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,left
   const axisG=el("g",{fill:"var(--muted)","font-size":11});
   axisG.appendChild(Object.assign(el("text",{x:pad.l,y:H-8}),{textContent:"0 s"}));
   axisG.appendChild(Object.assign(el("text",{x:W-pad.r,y:H-8,"text-anchor":"end"}),{textContent:`${total.toFixed(1)} s`}));
-  axisG.appendChild(Object.assign(el("text",{x:10,y:pad.t+9}),{textContent:leftLabel?`${lMax.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
-  axisG.appendChild(Object.assign(el("text",{x:10,y:H-pad.b}),{textContent:leftLabel?`${lMin.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
+  const leftAxisG=el("g",{fill:leftAxisColor||"var(--muted)","font-weight":700});
+  leftAxisG.appendChild(Object.assign(el("text",{x:10,y:pad.t+9}),{textContent:leftLabel?`${lMax.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
+  leftAxisG.appendChild(Object.assign(el("text",{x:10,y:H-pad.b}),{textContent:leftLabel?`${lMin.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
+  axisG.appendChild(leftAxisG);
   if(rightSeries.length){
-    axisG.appendChild(Object.assign(el("text",{x:W-6,y:pad.t+9,"text-anchor":"end"}),{textContent:`${rMax.toFixed(1)}`}));
-    axisG.appendChild(Object.assign(el("text",{x:W-6,y:H-pad.b,"text-anchor":"end"}),{textContent:`${rMin.toFixed(1)}`}));
+    const rightAxisG=el("g",{fill:rightAxisColor||"var(--muted)","font-weight":700});
+    rightAxisG.appendChild(Object.assign(el("text",{x:W-6,y:pad.t+9,"text-anchor":"end"}),{textContent:`${rMax.toFixed(1)}`}));
+    rightAxisG.appendChild(Object.assign(el("text",{x:W-6,y:H-pad.b,"text-anchor":"end"}),{textContent:`${rMin.toFixed(1)}`}));
+    axisG.appendChild(rightAxisG);
   }
   svg.appendChild(axisG);
 
@@ -549,21 +561,30 @@ const META_ICONS={
   alert:'<path d="M12 3.5 21 19.5H3L12 3.5Z" stroke-linejoin="round"/><path d="M12 9.5v4M12 16.5v.01" stroke-linecap="round"/>',
   star:'<path d="M12 3.5l2.4 5.2 5.6.6-4.2 3.9 1.1 5.7L12 16.1l-4.9 2.8 1.1-5.7-4.2-3.9 5.6-.6L12 3.5Z" stroke-linejoin="round"/>',
   tag:'<path d="M12.6 3H6a1 1 0 0 0-1 1v6.6a1 1 0 0 0 .3.7l9 9a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-9-9a1 1 0 0 0-.4-.3Z"/><circle cx="8.5" cy="8.5" r="1.2"/>',
+  stop:'<rect x="4" y="4" width="16" height="16" rx="3"/>',
+  gauge:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/>',
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/>',
+  wind:'<path d="M3 10h11.5a2.75 2.75 0 1 0-2.6-3.7M3 14h14.5a2.75 2.75 0 1 1-2.6 3.7" stroke-linecap="round"/>',
+  funnel:'<path d="M4 4.5h16l-6.2 8v6l-3.6 2v-8L4 4.5Z" stroke-linejoin="round"/>',
+  thermometer:'<path d="M12 14.3V5.2a2.2 2.2 0 1 0-4.4 0v9.1a4.2 4.2 0 1 0 4.4 0Z"/><path d="M9.8 6.5v6.6"/>',
+  droplet:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>',
 };
-function statIcon(name){return `<span class="meta-stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${META_ICONS[name]}</svg></span>`;}
+function iconSvg(name,size=14){return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${META_ICONS[name]}</svg>`;}
+function statIcon(name){return `<span class="meta-stat-icon" aria-hidden="true">${iconSvg(name,16)}</span>`;}
 
 const MAIN_SERIES_DEFS=[
-  {key:"pressure_bar",label:"Nyomás (mért)",color:"var(--blue)",unit:"bar",panel:"main"},
-  {key:"target_pressure_bar",label:"Nyomás (cél)",color:"var(--blue)",unit:"bar",dashed:true,panel:"main"},
-  {key:"pump_flow_ml_s",label:"Flow (mért)",color:"var(--flow)",unit:"ml/s",panel:"main"},
-  {key:"target_flow_ml_s",label:"Flow (cél)",color:"var(--flow)",unit:"ml/s",dashed:true,panel:"main"},
-  {key:"puck_flow_ml_s",label:"Puck Flow",color:"var(--gold)",unit:"ml/s",panel:"main"},
-  {key:"scale_flow_ml_s",label:"Mérleg Flow",color:"var(--teal)",unit:"ml/s",dashed:true,panel:"main"},
-  {key:"scale_weight_g",label:"Tömeg",color:"var(--accent2)",unit:"g",axis:"right",panel:"main"},
+  {key:"pressure_bar",label:"Nyomás (mért)",color:"var(--blue)",unit:"bar",panel:"main",icon:"gauge"},
+  {key:"target_pressure_bar",label:"Nyomás (cél)",color:"var(--blue)",unit:"bar",dashed:true,panel:"main",icon:"target"},
+  {key:"pump_flow_ml_s",label:"Flow (mért)",color:"var(--flow)",unit:"ml/s",panel:"main",icon:"wind"},
+  {key:"target_flow_ml_s",label:"Flow (cél)",color:"var(--flow)",unit:"ml/s",dashed:true,panel:"main",icon:"target"},
+  {key:"puck_flow_ml_s",label:"Puck Flow",color:"var(--gold)",unit:"ml/s",panel:"main",icon:"funnel"},
+  {key:"scale_flow_ml_s",label:"Mérleg Flow",color:"var(--teal)",unit:"ml/s",dashed:true,panel:"main",icon:"scale"},
+  {key:"scale_weight_g",label:"Tömeg",color:"var(--accent2)",unit:"g",axis:"right",panel:"main",icon:"scale"},
 ];
 const TEMP_SERIES_DEFS=[
-  {key:"temperature_c",label:"Hőmérséklet (mért)",color:"var(--accent)",unit:"°C",panel:"temp"},
-  {key:"target_temperature_c",label:"Hőmérséklet (cél)",color:"var(--accent)",unit:"°C",dashed:true,panel:"temp"},
+  {key:"temperature_c",label:"Hőmérséklet (mért)",color:"var(--accent)",unit:"°C",panel:"temp",icon:"thermometer"},
+  {key:"target_temperature_c",label:"Hőmérséklet (cél)",color:"var(--accent)",unit:"°C",dashed:true,panel:"temp",icon:"target"},
 ];
 const ALL_SERIES_DEFS=[...MAIN_SERIES_DEFS,...TEMP_SERIES_DEFS];
 
@@ -649,8 +670,8 @@ function renderShotDetail(data){
   let charts=[];
 
   function redrawCharts(){
-    const mainApi=drawTimeChart({svg:mainSvg,tooltip:$("#mainTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:MAIN_SERIES_DEFS,visible:view.visible,leftLabel:"bar / ml/s",rightLabel:"g",showPhaseNames:view.showPhaseNames,showStops:view.showStops,finalExitReasonName:s.final_exit_reason_name});
-    const tempApi=drawTimeChart({svg:tempSvg,tooltip:$("#tempTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:TEMP_SERIES_DEFS,visible:view.visible,leftLabel:"°C",rightLabel:null,showPhaseNames:false,showStops:false,leftAxisMode:"tight"});
+    const mainApi=drawTimeChart({svg:mainSvg,tooltip:$("#mainTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:MAIN_SERIES_DEFS,visible:view.visible,leftLabel:"bar / ml/s",rightLabel:"g",showPhaseNames:view.showPhaseNames,showStops:view.showStops,finalExitReasonName:s.final_exit_reason_name,leftAxisColor:"var(--blue)",rightAxisColor:"var(--accent2)"});
+    const tempApi=drawTimeChart({svg:tempSvg,tooltip:$("#tempTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:TEMP_SERIES_DEFS,visible:view.visible,leftLabel:"°C",rightLabel:null,showPhaseNames:false,showStops:false,leftAxisMode:"tight",leftAxisColor:"var(--accent)"});
     charts=[{svg:mainSvg,api:mainApi,hasRight:true},{svg:tempSvg,api:tempApi,hasRight:false}];
     wireSyncedHover(charts,onTime);
     renderLegend();
@@ -664,13 +685,13 @@ function renderShotDetail(data){
 
   function renderLegend(){
     const utilityToggles=[
-      {key:"__phase",label:"Fázisnevek",active:view.showPhaseNames},
-      {key:"__stops",label:"Leállások",active:view.showStops},
+      {key:"__phase",label:"Fázisnevek",active:view.showPhaseNames,icon:"tag"},
+      {key:"__stops",label:"Leállások",active:view.showStops,icon:"stop"},
     ];
-    const utilityHtml=utilityToggles.map(t=>`<button class="legend-toggle utility" type="button" data-toggle="${t.key}" aria-pressed="${t.active}">${esc(t.label)}</button>`).join("");
+    const utilityHtml=utilityToggles.map(t=>`<button class="legend-toggle utility" type="button" data-toggle="${t.key}" aria-pressed="${t.active}"><span class="legend-icon">${iconSvg(t.icon,13)}</span>${esc(t.label)}</button>`).join("");
     const seriesHtml=ALL_SERIES_DEFS.map(d=>{
       const active=view.visible.has(d.key);
-      return `<button class="legend-toggle" type="button" data-series="${d.key}" aria-pressed="${active}"><i class="${d.dashed?"dashed":""}" style="border-color:${d.color}"></i>${esc(d.label)}</button>`;
+      return `<button class="legend-toggle" type="button" data-series="${d.key}" aria-pressed="${active}"><span class="legend-icon" style="color:${d.color}">${iconSvg(d.icon,13)}</span>${esc(d.label)}</button>`;
     }).join("");
     $("#chartLegend").innerHTML=utilityHtml+seriesHtml;
     $("#chartLegend").querySelectorAll("[data-series]").forEach(btn=>btn.addEventListener("click",()=>{
@@ -857,6 +878,7 @@ function aggHeader(label,unit,mode){
   const suffix=mode==="avg"?"Avg":mode==="range"?"Tartomány":"S/E";
   return `${label} (${unit}) ${suffix}`;
 }
+function thIcon(icon,text){return `<th class="num">${iconSvg(icon,12)}${esc(text)}</th>`;}
 
 function renderStandardTable(data,phaseStats,aggMode,currentPhase){
   if(!phaseStats.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
@@ -869,19 +891,19 @@ function renderStandardTable(data,phaseStats,aggMode,currentPhase){
     return `<tr data-phase="${p.index}" class="${p.index===currentPhase?"current-phase":""}">
       <td>${p.index+1}</td>
       <td><strong>${esc(p.name)}</strong>${via}${brewTag}</td>
-      <td>${fmt(p.end-p.start,1)} s</td>
-      <td>${fmt(p.waterMl,1)} ml</td>
-      <td>${fmt(weightDelta,1)} g${showCalc?`<span class="calc">Calc: ${fmt(estDelta,1)} g</span>`:""}</td>
-      <td>${aggCell(p.pressure,aggMode)}</td>
-      <td>${aggCell(p.flow,aggMode)}</td>
-      <td>${aggCell(p.puckFlow,aggMode)}</td>
-      <td>${fmt(p.temp.avg,1)}°</td>
+      <td class="num">${fmt(p.end-p.start,1)} s</td>
+      <td class="num">${fmt(p.waterMl,1)} ml</td>
+      <td class="num">${fmt(weightDelta,1)} g${showCalc?`<span class="calc">Calc: ${fmt(estDelta,1)} g</span>`:""}</td>
+      <td class="num">${aggCell(p.pressure,aggMode)}</td>
+      <td class="num">${aggCell(p.flow,aggMode)}</td>
+      <td class="num">${aggCell(p.puckFlow,aggMode)}</td>
+      <td class="num">${fmt(p.temp.avg,1)}°</td>
     </tr>`;
   }).join("");
   const totals=totalRowStandard(data,phaseStats.at(-1).end,aggMode);
-  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td>${fmt(totals.time,1)} s</td><td>${fmt(totals.waterMl,1)} ml</td><td>${totals.weight?fmt(totals.weight,1)+" g":"–"}</td><td>${aggCell(totals.pressure,aggMode)}</td><td>${aggCell(totals.flow,aggMode)}</td><td>${aggCell(totals.puckFlow,aggMode)}</td><td>${fmt(totals.temp.avg,1)}°</td></tr>`;
+  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td class="num">${fmt(totals.time,1)} s</td><td class="num">${fmt(totals.waterMl,1)} ml</td><td class="num">${totals.weight?fmt(totals.weight,1)+" g":"–"}</td><td class="num">${aggCell(totals.pressure,aggMode)}</td><td class="num">${aggCell(totals.flow,aggMode)}</td><td class="num">${aggCell(totals.puckFlow,aggMode)}</td><td class="num">${fmt(totals.temp.avg,1)}°</td></tr>`;
   return `<table class="stats-table">
-    <thead><tr><th>#</th><th>Fázis</th><th>Idő</th><th>Víz</th><th>Tömeg (g)</th><th>${aggHeader("Nyomás","bar",aggMode)}</th><th>${aggHeader("Flow","ml/s",aggMode)}</th><th>${aggHeader("Puck Flow","ml/s",aggMode)}</th><th>°C Avg</th></tr></thead>
+    <thead><tr><th>#</th><th>Fázis</th>${thIcon("clock","Idő")}${thIcon("droplet","Víz")}${thIcon("scale","Tömeg (g)")}${thIcon("gauge",aggHeader("Nyomás","bar",aggMode))}${thIcon("wind",aggHeader("Flow","ml/s",aggMode))}${thIcon("funnel",aggHeader("Puck Flow","ml/s",aggMode))}${thIcon("thermometer","°C Avg")}</tr></thead>
     <tbody>${rows}</tbody>
     <tfoot>${totalRow}</tfoot>
   </table>`;
@@ -890,7 +912,7 @@ function renderStandardTable(data,phaseStats,aggMode,currentPhase){
 function flagCell(flag){
   const icon=flag.value?`<span class="flag-yes">✓</span>`:`<span class="flag-no">✗</span>`;
   const note=flag.flip?`<span class="flag-note">Sample ${flag.flip.sampleInPhase} (${flag.flip.rawIndex}) → ${flag.flip.value}</span>`:"";
-  return `<td>${icon}${note}</td>`;
+  return `<td class="num">${icon}${note}</td>`;
 }
 
 function renderSystemInfoTable(data,phaseStats,currentPhase){
@@ -898,14 +920,14 @@ function renderSystemInfoTable(data,phaseStats,currentPhase){
   const rows=phaseStats.map(p=>`<tr data-phase="${p.index}" class="${p.index===currentPhase?"current-phase":""}">
     <td>${p.index+1}</td>
     <td><strong>${esc(p.name)}</strong></td>
-    <td>${p.sampleCount}</td>
+    <td class="num">${p.sampleCount}</td>
     ${SYSTEM_INFO_FLAGS.map(f=>flagCell(p.flags[f.key])).join("")}
   </tr>`).join("");
   const samples=data.samples||[];
   const totalFlags=SYSTEM_INFO_FLAGS.map(f=>({key:f.key,value:samples.every(s=>s.system_info?.[f.key]===true),flip:null}));
-  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td>${samples.length}</td>${totalFlags.map(f=>flagCell(f)).join("")}</tr>`;
+  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td class="num">${samples.length}</td>${totalFlags.map(f=>flagCell(f)).join("")}</tr>`;
   return `<table class="stats-table">
-    <thead><tr><th>#</th><th>Fázis</th><th>Minták</th>${SYSTEM_INFO_FLAGS.map(f=>`<th>${esc(f.label)}</th>`).join("")}</tr></thead>
+    <thead><tr><th>#</th><th>Fázis</th>${thIcon("samples","Minták")}${SYSTEM_INFO_FLAGS.map(f=>`<th class="num">${iconSvg("gear",12)}${esc(f.label)}</th>`).join("")}</tr></thead>
     <tbody>${rows}</tbody>
     <tfoot>${totalRow}</tfoot>
   </table>`;
