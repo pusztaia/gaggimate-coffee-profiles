@@ -10,13 +10,13 @@
 :root{
   --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
   --line:#dfd1c1;--accent:#7d1d2f;--accent2:#b94a31;--gold:#d59842;--blue:#1677b8;
-  --flow:#ef7622;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
+  --flow:#ef7622;--teal:#2f8f7a;--danger:#c23b3b;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
   --radius-lg:24px;--radius-md:18px;--max:1280px;color-scheme:light;
 }
 html[data-theme="dark"]{
   --bg:#171210;--surface:#211a17;--surface2:#2b211d;--text:#f7eee7;--muted:#c3b4a9;
   --line:#45372f;--accent:#ef7189;--accent2:#ff8b69;--gold:#efb864;--blue:#78b8e6;
-  --flow:#ff9b54;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
+  --flow:#ff9b54;--teal:#5fd4b8;--danger:#ff6b6b;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -82,30 +82,66 @@ h1 span{color:var(--accent)}
 .shot-title{grid-column:1/-1;font-size:1.25rem;font-weight:900;margin-bottom:.15rem;letter-spacing:-.01em}
 .chart-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.1rem 1.2rem 1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow-soft);overflow:hidden;animation:riseIn .32s ease both}
 .chart-card:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold))}
-.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.5rem}
 .chart-head h3{margin:0;font-size:1.02rem;font-weight:850;letter-spacing:-.01em}
-.legend{display:flex;flex-wrap:wrap;gap:.85rem;font-size:.76rem;color:var(--muted)}
+.chart-toolbar{display:flex;gap:.35rem;align-items:center;margin-left:auto}
+.icon-btn-sm{border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:10px;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;transition:transform .14s ease,border-color .14s ease,color .14s ease,background-color .14s ease}
+.icon-btn-sm:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.icon-btn-sm[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem;font-size:.76rem;color:var(--muted);margin-bottom:.7rem}
 .legend span{display:inline-flex;align-items:center}
 .legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.32rem;vertical-align:middle;border-radius:99px}
 .legend i.dashed{border-top-style:dashed}
+.legend-toggle{display:inline-flex;align-items:center;gap:.32rem;border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:.3rem .62rem;font-size:.72rem;font-weight:750;cursor:pointer;transition:opacity .14s ease,border-color .14s ease,background-color .14s ease}
+.legend-toggle:hover{border-color:var(--accent)}
+.legend-toggle[aria-pressed="true"]{background:var(--surface);color:var(--text);border-color:color-mix(in srgb,var(--line) 40%,currentColor)}
+.legend-toggle[aria-pressed="false"]{opacity:.5}
+.legend-toggle i{display:inline-block;width:14px;height:0;border-top-width:3px;border-top-style:solid;border-radius:99px}
+.legend-toggle i.dashed{border-top-style:dashed}
+.legend-toggle.utility[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+.chart-panel-label{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin:.7rem 0 .3rem}
+.chart-panel:first-child .chart-panel-label{margin-top:0}
 .chart-wrap{position:relative;border-radius:16px;overflow:hidden}
 .chart-svg{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.chart-card:fullscreen{padding:1.5rem 1.8rem;overflow:auto;background:var(--bg)}
+.phase-chip-row{display:flex;justify-content:center;margin:-.4rem 0 1.1rem}
+.phase-chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:.45rem .95rem;font-size:.78rem;font-weight:800;cursor:pointer;box-shadow:var(--shadow-soft);transition:transform .14s ease,border-color .14s ease}
+.phase-chip:hover{border-color:var(--accent);transform:translateY(-1px)}
 .chart-tooltip{position:absolute;pointer-events:none;background:var(--text);color:var(--bg);border-radius:12px;padding:.55rem .7rem;font-size:.74rem;line-height:1.45;box-shadow:var(--shadow);white-space:nowrap;transform:translate(-50%,-112%);z-index:5;transition:opacity .1s ease}
 .chart-tooltip b{display:block;font-size:.8rem;margin-bottom:.2rem;color:color-mix(in srgb,var(--bg) 85%,var(--gold))}
 .chart-tooltip .row{display:flex;gap:.5rem;justify-content:space-between}
 .chart-tooltip .row i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.35rem;vertical-align:middle}
-details.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-soft);animation:riseIn .34s ease both}
-details.card summary{cursor:pointer;list-style:none;padding:1rem 1.1rem;font-weight:820;font-size:.9rem;color:var(--text);display:flex;justify-content:space-between;align-items:center;transition:background-color .14s ease}
-details.card summary:hover{background:var(--surface2)}
-details.card summary::-webkit-details-marker{display:none}
-details.card summary::after{content:"";width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .18s ease;margin-left:.6rem}
-details.card[open] summary::after{transform:rotate(45deg)}
-details.card .card-body{padding:0 1.1rem 1.1rem}
-table.phase-table{width:100%;border-collapse:collapse;font-size:.82rem}
-table.phase-table th,table.phase-table td{padding:.55rem .6rem;border-bottom:1px solid var(--line);text-align:left}
-table.phase-table th{color:var(--muted);font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
-table.phase-table tbody tr{transition:background-color .12s ease}
-table.phase-table tbody tr:hover{background:var(--surface2)}
+.table-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.1rem 1.2rem 1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow-soft);animation:riseIn .34s ease both}
+.table-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.table-head h3{margin:0;font-size:1.02rem;font-weight:850;letter-spacing:-.01em}
+.table-controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.view-select{border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:999px;padding:.45rem .8rem;font-size:.78rem;font-weight:800;cursor:pointer}
+.agg-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.agg-toggle button{border:0;background:var(--surface2);color:var(--muted);padding:.45rem .7rem;font-size:.74rem;font-weight:800;cursor:pointer;transition:background-color .14s ease,color .14s ease}
+.agg-toggle button+button{border-left:1px solid var(--line)}
+.agg-toggle button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.zoom-group,.nav-group{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.zoom-group button,.nav-group button{border:0;background:var(--surface2);color:var(--text);width:30px;height:30px;display:grid;place-items:center;cursor:pointer;font-weight:900}
+.zoom-group button+button,.nav-group button+button{border-left:1px solid var(--line)}
+.zoom-group button:hover,.nav-group button:hover{color:var(--accent)}
+.table-scroll{overflow:auto;border-radius:14px}
+table.stats-table{width:100%;border-collapse:collapse;font-size:.82rem;white-space:nowrap}
+table.stats-table th,table.stats-table td{padding:.55rem .6rem;border-bottom:1px solid var(--line);text-align:left}
+table.stats-table th{color:var(--muted);font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0;background:var(--surface)}
+table.stats-table tbody tr{transition:background-color .12s ease;scroll-margin-top:2.5rem}
+table.stats-table tbody tr:hover{background:var(--surface2)}
+table.stats-table tbody tr.current-phase{background:color-mix(in srgb,var(--accent) 10%,var(--surface2));box-shadow:inset 3px 0 0 var(--accent)}
+table.stats-table tfoot td{font-weight:850;border-bottom:none;border-top:2px solid var(--line);background:var(--surface2)}
+table.stats-table .via{display:block;color:var(--danger);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-top:.15rem}
+table.stats-table .calc{display:block;color:var(--danger);font-size:.7rem;margin-top:.1rem}
+table.stats-table .brew-tag{display:inline-block;margin-top:.2rem;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+table.stats-table .sub{display:block;color:var(--muted);font-size:.72rem;margin-top:.1rem}
+table.stats-table .flag-note{display:block;color:var(--muted);font-size:.68rem;margin-top:.1rem;white-space:normal}
+.flag-yes,.flag-no{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:.7rem;font-weight:900}
+.flag-yes{background:color-mix(in srgb,var(--teal) 22%,var(--surface2));color:var(--teal)}
+.flag-no{background:color-mix(in srgb,var(--danger) 14%,var(--surface2));color:var(--danger)}
+.table-note{color:var(--muted);font-size:.76rem;margin:.8rem 0 0;padding-top:.7rem;border-top:1px dashed var(--line)}
+.table-card[data-density="compact"] table.stats-table th,.table-card[data-density="compact"] table.stats-table td{padding:.32rem .5rem;font-size:.76rem}
 .empty-hint{color:var(--muted);text-align:center;padding:3rem 1rem;border:1px dashed var(--line);border-radius:var(--radius-lg)}
 @media(max-width:900px){.viewer-layout{grid-template-columns:1fr}.shot-list-panel{position:static;max-height:280px}}
 </style>
@@ -295,25 +331,53 @@ function niceMax(values,floor){
   return Math.max(floor,...(finite.length?finite:[floor]));
 }
 
-// series: [{key, label, color, dashed, axis:'left'|'right', unit}]
-function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftLabel,rightLabel}){
+const STOP_LABELS={
+  duration:"TIME LIMIT",
+  target_volumetric:"WEIGHT STOP",
+  target_pressure:"PRESSURE STOP",
+  target_flow:"FLOW STOP",
+  target_pumped:"VOLUME STOP",
+  safety:"SAFETY STOP",
+  aborted:"ABORTED",
+};
+
+function badge(parent,x,yTop,text,bg,fg){
+  const g=el("g");
+  const t=el("text",{x:0,y:0,"text-anchor":"start","font-size":9,"font-weight":800,fill:fg});
+  t.textContent=text;
+  g.appendChild(t);
+  parent.appendChild(g);
+  const box=t.getBBox();
+  const padX=4,padY=2;
+  const rect=el("rect",{x:box.x-padX,y:box.y-padY,width:box.width+padX*2,height:box.height+padY*2,rx:3,fill:bg});
+  g.insertBefore(rect,t);
+  g.setAttribute("transform",`translate(${x} ${yTop}) rotate(-90)`);
+  return box.width+padY*2+4;
+}
+
+function tightRange(values){
+  const finite=values.filter(Number.isFinite);
+  const min=finite.length?Math.min(...finite):0;
+  const max=finite.length?Math.max(...finite):1;
+  const pad=min===max?1:Math.max(0.6,(max-min)*0.25);
+  return [min-pad,max+pad];
+}
+
+// series: [{key, label, color, dashed, axis:'left'|'right', unit, panel}]
+function drawTimeChart({svg,tooltip,samples,phases,total,seriesDefs,visible,leftLabel,rightLabel,showPhaseNames,showStops,finalExitReasonName,leftAxisMode}){
   const W=1000,H=svg.dataset.h?Number(svg.dataset.h):340;
   const pad={l:52,r:rightLabel?52:20,t:18,b:32};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
   svg.innerHTML="";
 
+  const activeSeries=seriesDefs.filter(s=>visible.has(s.key));
   const xs=scaleLinear([0,Math.max(total,0.1)],[pad.l,W-pad.r]);
-  const leftSeries=seriesDefs.filter(s=>s.axis!=="right");
-  const rightSeries=seriesDefs.filter(s=>s.axis==="right");
-  const leftMax=niceMax(leftSeries.flatMap(s=>samples.map(p=>p[s.key])),10);
-  let rMin=0,rMax=1;
-  if(rightSeries.length){
-    const rVals=rightSeries.flatMap(s=>samples.map(p=>p[s.key])).filter(Number.isFinite);
-    rMin=rVals.length?Math.min(...rVals):0;rMax=rVals.length?Math.max(...rVals):1;
-    const rPad=rMin===rMax?1:Math.max(0.6,(rMax-rMin)*0.25);
-    rMin-=rPad;rMax+=rPad;
-  }
-  const ys=scaleLinear([0,leftMax],[H-pad.b,pad.t]);
+  const leftSeries=activeSeries.filter(s=>s.axis!=="right");
+  const rightSeries=activeSeries.filter(s=>s.axis==="right");
+  let lMin=0,lMax=niceMax(leftSeries.flatMap(s=>samples.map(p=>p[s.key])),10);
+  if(leftAxisMode==="tight")[lMin,lMax]=tightRange(leftSeries.flatMap(s=>samples.map(p=>p[s.key])));
+  let rMin=0,rMax=niceMax(rightSeries.flatMap(s=>samples.map(p=>p[s.key])),10);
+  const ys=scaleLinear([lMin,lMax],[H-pad.b,pad.t]);
   const yr=scaleLinear([rMin,rMax],[H-pad.b,pad.t]);
 
   const bg=el("g");
@@ -324,7 +388,7 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
   }
   svg.appendChild(bg);
 
-  // phase bands + boundary lines + labels
+  // phase bands + boundary lines
   const phaseG=el("g");
   (phases||[]).forEach((tr,i)=>{
     const x=xs(tr.time_s);
@@ -333,17 +397,36 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
       phaseG.appendChild(el("rect",{x,y:pad.t,width:Math.max(0,next-x),height:H-pad.t-pad.b,fill:"currentColor",opacity:.05}));
     }
     phaseG.appendChild(el("line",{x1:x,y1:pad.t,x2:x,y2:H-pad.b,stroke:"currentColor",opacity:.35}));
-    const label=el("text",{x,y:pad.t+2,transform:`rotate(-90 ${x} ${pad.t+2})`,fill:"var(--muted)","font-size":9,"text-anchor":"start"});
-    label.textContent=`${i+1}. ${tr.phase_name||""}`;
-    phaseG.appendChild(label);
   });
   phaseG.appendChild(el("line",{x1:xs(total),y1:pad.t,x2:xs(total),y2:H-pad.b,stroke:"currentColor",opacity:.35}));
   svg.appendChild(phaseG);
 
+  // phase-name / stop-reason badges (top panel only)
+  if(showPhaseNames||showStops){
+    const badgeG=el("g");
+    svg.appendChild(badgeG);
+    (phases||[]).forEach((tr,i)=>{
+      const x=xs(tr.time_s);
+      let yTop=pad.t+2;
+      if(showStops&&i>0){
+        const reason=phases[i]?.transition_reason_name;
+        if(reason&&reason!=="none"){
+          yTop+=badge(badgeG,x,yTop,STOP_LABELS[reason]||reason.toUpperCase(),"var(--danger)","#fff")+2;
+        }
+      }
+      if(showPhaseNames&&tr.phase_name){
+        badge(badgeG,x,yTop,`${i+1}. ${tr.phase_name}`,"var(--muted)","#fff");
+      }
+    });
+    if(showStops&&finalExitReasonName&&finalExitReasonName!=="none"){
+      badge(badgeG,xs(total),pad.t+2,STOP_LABELS[finalExitReasonName]||finalExitReasonName.toUpperCase(),"var(--danger)","#fff");
+    }
+  }
+
   // series paths
   const pathsG=el("g");
   const cursorNodes={};
-  for(const s of seriesDefs){
+  for(const s of activeSeries){
     const scale=s.axis==="right"?yr:ys;
     const points=samples.map(p=>({x:p.time_s,y:p[s.key]}));
     const path=el("path",{d:pathFor(points,xs,scale),fill:"none",stroke:s.color,"stroke-width":s.dashed?1.6:2.4,"stroke-linejoin":"round","stroke-linecap":"round"});
@@ -359,8 +442,8 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
   const axisG=el("g",{fill:"var(--muted)","font-size":11});
   axisG.appendChild(Object.assign(el("text",{x:pad.l,y:H-8}),{textContent:"0 s"}));
   axisG.appendChild(Object.assign(el("text",{x:W-pad.r,y:H-8,"text-anchor":"end"}),{textContent:`${total.toFixed(1)} s`}));
-  axisG.appendChild(Object.assign(el("text",{x:10,y:pad.t+9}),{textContent:leftLabel?`${leftMax.toFixed(0)}`:""}));
-  axisG.appendChild(Object.assign(el("text",{x:10,y:H-pad.b}),{textContent:leftLabel?"0":""}));
+  axisG.appendChild(Object.assign(el("text",{x:10,y:pad.t+9}),{textContent:leftLabel?`${lMax.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
+  axisG.appendChild(Object.assign(el("text",{x:10,y:H-pad.b}),{textContent:leftLabel?`${lMin.toFixed(leftAxisMode==="tight"?1:0)}`:""}));
   if(rightSeries.length){
     axisG.appendChild(Object.assign(el("text",{x:W-6,y:pad.t+9,"text-anchor":"end"}),{textContent:`${rMax.toFixed(1)}`}));
     axisG.appendChild(Object.assign(el("text",{x:W-6,y:H-pad.b,"text-anchor":"end"}),{textContent:`${rMin.toFixed(1)}`}));
@@ -369,9 +452,6 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
 
   const crosshair=el("line",{x1:0,y1:pad.t,x2:0,y2:H-pad.b,stroke:"var(--text)",opacity:0,"stroke-width":1});
   svg.appendChild(crosshair);
-
-  // legend
-  legend.innerHTML=seriesDefs.map(s=>`<span><i class="${s.dashed?"dashed":""}" style="border-color:${s.color}"></i>${esc(s.label)}</span>`).join("");
 
   function findNearest(timeS){
     let lo=0,hi=samples.length-1;
@@ -386,11 +466,11 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
 
   function showAt(timeS){
     const sample=findNearest(timeS);
-    if(!sample)return;
+    if(!sample)return null;
     const x=xs(sample.time_s);
     crosshair.setAttribute("x1",x);crosshair.setAttribute("x2",x);crosshair.setAttribute("opacity",.5);
     let rows="";
-    for(const s of seriesDefs){
+    for(const s of activeSeries){
       const v=sample[s.key];
       const scale=s.axis==="right"?yr:ys;
       const dot=cursorNodes[s.key];
@@ -406,20 +486,21 @@ function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftL
     const px=(x-0)/W*rect.width;
     tooltip.style.left=`${px}px`;
     tooltip.style.top=`${(scaleLinear([0,H],[0,rect.height]))(pad.t)}px`;
-    return sample.time_s;
+    return sample;
   }
   function hide(){crosshair.setAttribute("opacity",0);Object.values(cursorNodes).forEach(d=>d.setAttribute("visibility","hidden"));tooltip.hidden=true;}
 
   return {showAt,hide,xs,W,total};
 }
 
-function wireSyncedHover(charts){
+function wireSyncedHover(charts,onTime){
   function move(chart,evt){
     const rect=chart.svg.getBoundingClientRect();
     const relX=(evt.clientX-rect.left)/rect.width*chart.api.W;
     const invert=(relX-52)/(chart.api.W-52-(chart.hasRight?52:20));
     const timeS=Math.min(chart.api.total,Math.max(0,invert*chart.api.total));
     charts.forEach(c=>c.api.showAt(timeS));
+    onTime?.(timeS);
   }
   charts.forEach(chart=>{
     chart.svg.addEventListener("pointermove",e=>move(chart,e));
@@ -443,11 +524,39 @@ const META_ICONS={
 };
 function statIcon(name){return `<span class="meta-stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${META_ICONS[name]}</svg></span>`;}
 
+const MAIN_SERIES_DEFS=[
+  {key:"pressure_bar",label:"Nyomás (mért)",color:"var(--blue)",unit:"bar",panel:"main"},
+  {key:"target_pressure_bar",label:"Nyomás (cél)",color:"var(--blue)",unit:"bar",dashed:true,panel:"main"},
+  {key:"pump_flow_ml_s",label:"Flow (mért)",color:"var(--flow)",unit:"ml/s",panel:"main"},
+  {key:"target_flow_ml_s",label:"Flow (cél)",color:"var(--flow)",unit:"ml/s",dashed:true,panel:"main"},
+  {key:"puck_flow_ml_s",label:"Puck Flow",color:"var(--gold)",unit:"ml/s",panel:"main"},
+  {key:"scale_flow_ml_s",label:"Mérleg Flow",color:"var(--teal)",unit:"ml/s",dashed:true,panel:"main"},
+  {key:"scale_weight_g",label:"Tömeg",color:"var(--accent2)",unit:"g",axis:"right",panel:"main"},
+];
+const TEMP_SERIES_DEFS=[
+  {key:"temperature_c",label:"Hőmérséklet (mért)",color:"var(--accent)",unit:"°C",panel:"temp"},
+  {key:"target_temperature_c",label:"Hőmérséklet (cél)",color:"var(--accent)",unit:"°C",dashed:true,panel:"temp"},
+];
+const ALL_SERIES_DEFS=[...MAIN_SERIES_DEFS,...TEMP_SERIES_DEFS];
+
 function renderShotDetail(data){
   const host=$("#shotDetail");
   if(!data){host.innerHTML=`<div class="empty-hint">Válassz egy shotot a listából.</div>`;return;}
   const s=data.shot,idx=data.index_entry||{};
   const rating=idx.rating||0;
+  const total=s.duration_s||(data.samples.at(-1)?.time_s??0);
+
+  const view={
+    visible:new Set(ALL_SERIES_DEFS.map(d=>d.key)),
+    showPhaseNames:true,
+    showStops:true,
+    tableView:"standard",
+    aggMode:"se",
+    density:"comfortable",
+    currentPhase:0,
+    playing:false,
+  };
+
   host.innerHTML=`
     <div class="shot-meta">
       <div class="shot-title">#${s.id} · ${esc(s.profile_name||"(névtelen profil)")}</div>
@@ -460,48 +569,320 @@ function renderShotDetail(data){
       <div class="meta-stat">${statIcon("star")}<span class="meta-stat-text"><span>Értékelés</span><strong>${rating?"★".repeat(rating)+"☆".repeat(5-rating):"nincs"}</strong></span></div>
       <div class="meta-stat">${statIcon("tag")}<span class="meta-stat-text"><span>Profil ID</span><strong style="font-weight:600;font-size:.78rem">${esc(s.profile_id)}</strong></span></div>
     </div>
-    <div class="chart-card">
-      <div class="chart-head"><h3>Nyomás · Flow · Hőmérséklet</h3><div class="legend" id="mainLegend"></div></div>
-      <div class="chart-wrap"><svg class="chart-svg" id="mainChart" data-h="340"></svg><div class="chart-tooltip" id="mainTooltip" hidden></div></div>
+    <div class="chart-card" id="shotChartCard">
+      <div class="chart-head">
+        <h3>Shot grafikon</h3>
+        <div class="chart-toolbar">
+          <button class="icon-btn-sm" id="playBtn" title="Lejátszás" aria-label="Lejátszás">▶</button>
+          <button class="icon-btn-sm" id="stopBtn" title="Leállítás" aria-label="Leállítás">⏹</button>
+          <button class="icon-btn-sm" id="fullscreenBtn" title="Teljes képernyő" aria-label="Teljes képernyő">⛶</button>
+        </div>
+      </div>
+      <div class="legend" id="chartLegend"></div>
+      <div class="chart-panel">
+        <div class="chart-panel-label">Nyomás · Flow · Tömeg</div>
+        <div class="chart-wrap"><svg class="chart-svg" id="mainChart" data-h="340"></svg><div class="chart-tooltip" id="mainTooltip" hidden></div></div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-panel-label">Hőmérséklet</div>
+        <div class="chart-wrap"><svg class="chart-svg" id="tempChart" data-h="130"></svg><div class="chart-tooltip" id="tempTooltip" hidden></div></div>
+      </div>
     </div>
-    <div class="chart-card">
-      <div class="chart-head"><h3>Mérleg tömeg</h3><div class="legend" id="weightLegend"></div></div>
-      <div class="chart-wrap"><svg class="chart-svg" id="weightChart" data-h="180"></svg><div class="chart-tooltip" id="weightTooltip" hidden></div></div>
+    <div class="phase-chip-row"><button class="phase-chip" id="phaseChip">Fázis: –</button></div>
+    <div class="table-card" id="tableCard">
+      <div class="table-head">
+        <h3>Fázis elemzés</h3>
+        <div class="table-controls">
+          <select class="view-select" id="tableViewSelect">
+            <option value="standard">Standard</option>
+            <option value="system">System Info</option>
+          </select>
+          <div class="agg-toggle" id="aggToggle" role="group" aria-label="Aggregáció módja">
+            <button data-mode="se" aria-pressed="true">Kezdet/Vég</button>
+            <button data-mode="avg" aria-pressed="false">Avg</button>
+            <button data-mode="range" aria-pressed="false">Min/Max</button>
+          </div>
+          <div class="zoom-group" role="group" aria-label="Táblázat sűrűsége">
+            <button id="zoomOut" title="Kompakt nézet" aria-label="Kompakt nézet">–</button>
+            <button id="zoomIn" title="Kényelmes nézet" aria-label="Kényelmes nézet">+</button>
+          </div>
+          <div class="nav-group" role="group" aria-label="Fázis navigáció">
+            <button id="phasePrev" title="Előző fázis" aria-label="Előző fázis">‹</button>
+            <button id="phaseNext" title="Következő fázis" aria-label="Következő fázis">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-scroll" id="tableScroll"></div>
     </div>
-    <details class="card" open>
-      <summary>Fázisváltások (${(data.phase_transitions||[]).length})</summary>
-      <div class="card-body">${renderPhaseTable(data.phase_transitions||[])}</div>
-    </details>
   `;
 
-  const total=s.duration_s||(data.samples.at(-1)?.time_s??0);
-  const mainSeries=[
-    {key:"pressure_bar",label:"Nyomás (mért)",color:"var(--blue)",unit:"bar"},
-    {key:"target_pressure_bar",label:"Nyomás (cél)",color:"var(--blue)",unit:"bar",dashed:true},
-    {key:"pump_flow_ml_s",label:"Flow (mért)",color:"var(--flow)",unit:"ml/s"},
-    {key:"target_flow_ml_s",label:"Flow (cél)",color:"var(--flow)",unit:"ml/s",dashed:true},
-    {key:"temperature_c",label:"Hőmérséklet (mért)",color:"var(--accent)",unit:"°C",axis:"right"},
-    {key:"target_temperature_c",label:"Hőmérséklet (cél)",color:"var(--accent)",unit:"°C",axis:"right",dashed:true},
-  ];
-  const weightSeries=[
-    {key:"scale_weight_g",label:"Mérleg tömeg",color:"var(--accent2)",unit:"g"},
-    {key:"estimated_weight_g",label:"Becsült tömeg",color:"var(--muted)",unit:"g",dashed:true},
-  ];
+  const mainSvg=$("#mainChart"),tempSvg=$("#tempChart");
+  const phaseStats=computePhaseStats(data,total);
+  let charts=[];
 
-  const mainSvg=$("#mainChart"),weightSvg=$("#weightChart");
-  const mainApi=drawTimeChart({svg:mainSvg,tooltip:$("#mainTooltip"),legend:$("#mainLegend"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:mainSeries,leftLabel:"bar / ml/s",rightLabel:"°C"});
-  const weightApi=drawTimeChart({svg:weightSvg,tooltip:$("#weightTooltip"),legend:$("#weightLegend"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:weightSeries,leftLabel:"g",rightLabel:null});
+  function redrawCharts(){
+    const mainApi=drawTimeChart({svg:mainSvg,tooltip:$("#mainTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:MAIN_SERIES_DEFS,visible:view.visible,leftLabel:"bar / ml/s",rightLabel:"g",showPhaseNames:view.showPhaseNames,showStops:view.showStops,finalExitReasonName:s.final_exit_reason_name});
+    const tempApi=drawTimeChart({svg:tempSvg,tooltip:$("#tempTooltip"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:TEMP_SERIES_DEFS,visible:view.visible,leftLabel:"°C",rightLabel:null,showPhaseNames:false,showStops:false,leftAxisMode:"tight"});
+    charts=[{svg:mainSvg,api:mainApi,hasRight:true},{svg:tempSvg,api:tempApi,hasRight:false}];
+    wireSyncedHover(charts,onTime);
+    renderLegend();
+  }
 
-  wireSyncedHover([
-    {svg:mainSvg,api:mainApi,hasRight:true},
-    {svg:weightSvg,api:weightApi,hasRight:false},
-  ]);
+  function onTime(timeS){
+    const idx=phaseStats.findIndex(p=>timeS>=p.start&&timeS<p.end);
+    const phase=phaseStats[idx===-1?phaseStats.length-1:idx];
+    if(phase){$("#phaseChip").textContent=`Fázis: ${phase.index+1}. ${phase.name}`;view.currentPhase=phase.index;}
+  }
+
+  function renderLegend(){
+    const utilityToggles=[
+      {key:"__phase",label:"Fázisnevek",active:view.showPhaseNames},
+      {key:"__stops",label:"Leállások",active:view.showStops},
+    ];
+    const utilityHtml=utilityToggles.map(t=>`<button class="legend-toggle utility" type="button" data-toggle="${t.key}" aria-pressed="${t.active}">${esc(t.label)}</button>`).join("");
+    const seriesHtml=ALL_SERIES_DEFS.map(d=>{
+      const active=view.visible.has(d.key);
+      return `<button class="legend-toggle" type="button" data-series="${d.key}" aria-pressed="${active}"><i class="${d.dashed?"dashed":""}" style="border-color:${d.color}"></i>${esc(d.label)}</button>`;
+    }).join("");
+    $("#chartLegend").innerHTML=utilityHtml+seriesHtml;
+    $("#chartLegend").querySelectorAll("[data-series]").forEach(btn=>btn.addEventListener("click",()=>{
+      const key=btn.dataset.series;
+      if(view.visible.has(key))view.visible.delete(key);else view.visible.add(key);
+      redrawCharts();
+    }));
+    $("#chartLegend").querySelectorAll("[data-toggle]").forEach(btn=>btn.addEventListener("click",()=>{
+      if(btn.dataset.toggle==="__phase")view.showPhaseNames=!view.showPhaseNames;
+      if(btn.dataset.toggle==="__stops")view.showStops=!view.showStops;
+      redrawCharts();
+    }));
+  }
+
+  redrawCharts();
+
+  // --- Playback -------------------------------------------------------
+  let rafId=null;
+  function stopPlayback(){
+    if(rafId)cancelAnimationFrame(rafId);
+    rafId=null;
+    $("#playBtn").setAttribute("aria-pressed","false");
+  }
+  function startPlayback(){
+    stopPlayback();
+    const startWall=performance.now();
+    $("#playBtn").setAttribute("aria-pressed","true");
+    function frame(now){
+      const elapsed=(now-startWall)/1000;
+      if(elapsed>=total){
+        charts.forEach(c=>c.api.showAt(total));
+        onTime(total);
+        stopPlayback();
+        return;
+      }
+      charts.forEach(c=>c.api.showAt(elapsed));
+      onTime(elapsed);
+      rafId=requestAnimationFrame(frame);
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+  $("#playBtn").addEventListener("click",startPlayback);
+  $("#stopBtn").addEventListener("click",()=>{stopPlayback();charts.forEach(c=>c.api.hide());});
+  $("#fullscreenBtn").addEventListener("click",()=>{
+    const card=$("#shotChartCard");
+    if(document.fullscreenElement)document.exitFullscreen();
+    else card.requestFullscreen?.().catch(()=>{});
+  });
+  $("#fullscreenBtn").setAttribute("aria-pressed","false");
+  document.addEventListener("fullscreenchange",()=>{
+    $("#fullscreenBtn")?.setAttribute("aria-pressed",String(document.fullscreenElement===$("#shotChartCard")));
+  });
+
+  $("#phaseChip").addEventListener("click",()=>{
+    const row=$(`#tableScroll tr[data-phase="${view.currentPhase}"]`);
+    row?.scrollIntoView({block:"center",behavior:"smooth"});
+  });
+
+  // --- Table ------------------------------------------------------------
+  function jumpToPhase(i){
+    const phase=phaseStats[i];
+    if(!phase)return;
+    charts.forEach(c=>c.api.showAt(phase.start));
+    onTime(phase.start);
+    renderTable();
+    $(`#tableScroll tr[data-phase="${i}"]`)?.scrollIntoView({block:"center",behavior:"smooth"});
+  }
+
+  function renderTable(){
+    $("#tableCard").dataset.density=view.density;
+    $("#tableScroll").innerHTML=view.tableView==="standard"
+      ?renderStandardTable(data,phaseStats,view.aggMode,view.currentPhase)
+      :renderSystemInfoTable(data,phaseStats,view.currentPhase);
+    $("#tableScroll").querySelectorAll("tbody tr[data-phase]").forEach(tr=>{
+      tr.addEventListener("click",()=>jumpToPhase(Number(tr.dataset.phase)));
+    });
+  }
+
+  $("#tableViewSelect").addEventListener("change",e=>{view.tableView=e.target.value;renderTable();});
+  $("#aggToggle").addEventListener("click",e=>{
+    const btn=e.target.closest("button[data-mode]");
+    if(!btn)return;
+    view.aggMode=btn.dataset.mode;
+    $("#aggToggle").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
+    renderTable();
+  });
+  $("#zoomOut").addEventListener("click",()=>{view.density="compact";renderTable();});
+  $("#zoomIn").addEventListener("click",()=>{view.density="comfortable";renderTable();});
+  $("#phasePrev").addEventListener("click",()=>jumpToPhase(Math.max(0,view.currentPhase-1)));
+  $("#phaseNext").addEventListener("click",()=>jumpToPhase(Math.min(phaseStats.length-1,view.currentPhase+1)));
+
+  renderTable();
+  onTime(0);
 }
 
-function renderPhaseTable(transitions){
-  if(!transitions.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
-  const rows=transitions.map((t,i)=>`<tr><td>${i+1}</td><td>${esc(t.phase_name)}</td><td>${fmt(t.time_s,2)} s</td><td>${esc(t.transition_reason_name)}</td></tr>`).join("");
-  return `<table class="phase-table"><thead><tr><th>#</th><th>Fázis</th><th>Kezdet</th><th>Ok</th></tr></thead><tbody>${rows}</tbody></table>`;
+// ---------------------------------------------------------------------------
+// Per-phase statistics
+// ---------------------------------------------------------------------------
+
+const SYSTEM_INFO_FLAGS=[
+  {key:"shot_started_volumetric",label:"Start Volumetric"},
+  {key:"currently_volumetric",label:"Currently Volumetric"},
+  {key:"bluetooth_scale_connected",label:"BT Scale Connected"},
+  {key:"volumetric_available",label:"Volumetric Avail."},
+  {key:"extended_recording",label:"Extended Record"},
+];
+
+function seriesSummary(values){
+  const finite=values.filter(Number.isFinite);
+  if(!finite.length)return{start:null,end:null,avg:null,min:null,max:null};
+  return{
+    start:finite[0],
+    end:finite[finite.length-1],
+    avg:finite.reduce((a,v)=>a+v,0)/finite.length,
+    min:Math.min(...finite),
+    max:Math.max(...finite),
+  };
+}
+
+function computePhaseStats(data,total){
+  const samples=data.samples||[];
+  const transitions=data.phase_transitions||[];
+  const intervalS=(data.format?.sample_interval_ms||250)/1000;
+  let lastKnownWeight=0,lastKnownEstimate=0;
+
+  return transitions.map((t,i)=>{
+    const start=t.time_s;
+    const end=i<transitions.length-1?transitions[i+1].time_s:total;
+    const endReason=i<transitions.length-1?transitions[i+1].transition_reason_name:data.shot.final_exit_reason_name;
+    const ps=samples.filter(p=>p.time_s>=start&&(i===transitions.length-1?p.time_s<=end:p.time_s<end));
+
+    const pressure=seriesSummary(ps.map(p=>p.pressure_bar));
+    const flow=seriesSummary(ps.map(p=>p.pump_flow_ml_s));
+    const puckFlow=seriesSummary(ps.map(p=>p.puck_flow_ml_s));
+    const temp=seriesSummary(ps.map(p=>p.temperature_c));
+    const waterMl=ps.reduce((a,p)=>a+(Number.isFinite(p.pump_flow_ml_s)?p.pump_flow_ml_s:0)*intervalS,0);
+
+    const weightVals=ps.map(p=>p.scale_weight_g).filter(Number.isFinite);
+    const estVals=ps.map(p=>p.estimated_weight_g).filter(Number.isFinite);
+    const weightStart=lastKnownWeight,weightEnd=weightVals.length?weightVals[weightVals.length-1]:lastKnownWeight;
+    const estStart=lastKnownEstimate,estEnd=estVals.length?estVals[estVals.length-1]:lastKnownEstimate;
+    lastKnownWeight=weightEnd;lastKnownEstimate=estEnd;
+
+    const isLast=i===transitions.length-1;
+    const brewByWeight=isLast&&ps.some(p=>p.system_info?.currently_volumetric===true);
+
+    const flags={};
+    for(const flag of SYSTEM_INFO_FLAGS){
+      const vals=ps.map(p=>!!p.system_info?.[flag.key]);
+      const first=vals[0]??false;
+      let flip=null;
+      for(let j=1;j<vals.length;j++){
+        if(vals[j]!==vals[0]){flip={sampleInPhase:j+1,rawIndex:ps[j].sample_index,value:vals[j]};break;}
+      }
+      flags[flag.key]={value:first,flip};
+    }
+
+    return{
+      index:i,name:t.phase_name||`Fázis ${i+1}`,start,end,endReason,brewByWeight,
+      sampleCount:ps.length,pressure,flow,puckFlow,temp,waterMl,
+      weightStart,weightEnd,estStart,estEnd,flags,
+    };
+  });
+}
+
+function totalRowStandard(data,total,aggMode){
+  const samples=data.samples||[];
+  const intervalS=(data.format?.sample_interval_ms||250)/1000;
+  const pressure=seriesSummary(samples.map(p=>p.pressure_bar));
+  const flow=seriesSummary(samples.map(p=>p.pump_flow_ml_s));
+  const puckFlow=seriesSummary(samples.map(p=>p.puck_flow_ml_s));
+  const temp=seriesSummary(samples.map(p=>p.temperature_c));
+  const waterMl=samples.reduce((a,p)=>a+(Number.isFinite(p.pump_flow_ml_s)?p.pump_flow_ml_s:0)*intervalS,0);
+  return{time:total,waterMl,weight:data.shot.final_weight_g,pressure,flow,puckFlow,temp};
+}
+
+function aggCell(stat,mode,digits=1){
+  if(!stat||stat.start===null)return "–";
+  if(mode==="avg")return fmt(stat.avg,digits);
+  if(mode==="range")return `${fmt(stat.min,digits)}/${fmt(stat.max,digits)}`;
+  return `${fmt(stat.start,digits)}/${fmt(stat.end,digits)}`;
+}
+function aggHeader(label,unit,mode){
+  const suffix=mode==="avg"?"Avg":mode==="range"?"Tartomány":"S/E";
+  return `${label} (${unit}) ${suffix}`;
+}
+
+function renderStandardTable(data,phaseStats,aggMode,currentPhase){
+  if(!phaseStats.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
+  const anyStop=phaseStats.some(p=>p.endReason&&p.endReason!=="none");
+  const rows=phaseStats.map(p=>{
+    const weightDelta=p.weightEnd-p.weightStart;
+    const estDelta=p.estEnd-p.estStart;
+    const showCalc=Math.abs(estDelta-weightDelta)>0.05;
+    const via=p.endReason&&p.endReason!=="none"?`<span class="via">VIA ${esc(STOP_LABELS[p.endReason]||p.endReason)}</span>`:"";
+    const brewTag=p.brewByWeight?`<span class="brew-tag">Brew by Weight</span>`:"";
+    return `<tr data-phase="${p.index}" class="${p.index===currentPhase?"current-phase":""}">
+      <td>${p.index+1}</td>
+      <td><strong>${esc(p.name)}</strong>${via}${brewTag}</td>
+      <td>${fmt(p.end-p.start,1)} s</td>
+      <td>${fmt(p.waterMl,1)} ml</td>
+      <td>${fmt(weightDelta,1)} g${showCalc?`<span class="calc">Calc: ${fmt(estDelta,1)} g</span>`:""}</td>
+      <td>${aggCell(p.pressure,aggMode)}</td>
+      <td>${aggCell(p.flow,aggMode)}</td>
+      <td>${aggCell(p.puckFlow,aggMode)}</td>
+      <td>${fmt(p.temp.avg,1)}°</td>
+    </tr>`;
+  }).join("");
+  const totals=totalRowStandard(data,phaseStats.at(-1).end,aggMode);
+  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td>${fmt(totals.time,1)} s</td><td>${fmt(totals.waterMl,1)} ml</td><td>${totals.weight?fmt(totals.weight,1)+" g":"–"}</td><td>${aggCell(totals.pressure,aggMode)}</td><td>${aggCell(totals.flow,aggMode)}</td><td>${aggCell(totals.puckFlow,aggMode)}</td><td>${fmt(totals.temp.avg,1)}°</td></tr>`;
+  const note=anyStop?"":`<p class="table-note">A "VIA …" leállási ok jelenleg a legtöbb GaggiMate firmware-verzióban mindig üres marad (a fázis-átmenet oka nincs megbízhatóan kitöltve a shot logban) – amint a firmware ezt helyesen rögzíti, itt automatikusan megjelenik.</p>`;
+  return `<table class="stats-table">
+    <thead><tr><th>#</th><th>Fázis</th><th>Idő</th><th>Víz</th><th>Tömeg (g)</th><th>${aggHeader("Nyomás","bar",aggMode)}</th><th>${aggHeader("Flow","ml/s",aggMode)}</th><th>${aggHeader("Puck Flow","ml/s",aggMode)}</th><th>°C Avg</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot>${totalRow}</tfoot>
+  </table>${note}`;
+}
+
+function flagCell(flag){
+  const icon=flag.value?`<span class="flag-yes">✓</span>`:`<span class="flag-no">✗</span>`;
+  const note=flag.flip?`<span class="flag-note">Sample ${flag.flip.sampleInPhase} (${flag.flip.rawIndex}) → ${flag.flip.value}</span>`:"";
+  return `<td>${icon}${note}</td>`;
+}
+
+function renderSystemInfoTable(data,phaseStats,currentPhase){
+  if(!phaseStats.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
+  const rows=phaseStats.map(p=>`<tr data-phase="${p.index}" class="${p.index===currentPhase?"current-phase":""}">
+    <td>${p.index+1}</td>
+    <td><strong>${esc(p.name)}</strong></td>
+    <td>${p.sampleCount}</td>
+    ${SYSTEM_INFO_FLAGS.map(f=>flagCell(p.flags[f.key])).join("")}
+  </tr>`).join("");
+  const samples=data.samples||[];
+  const totalFlags=SYSTEM_INFO_FLAGS.map(f=>({key:f.key,value:samples.every(s=>s.system_info?.[f.key]===true),flip:null}));
+  const totalRow=`<tr><td></td><td><strong>Total</strong></td><td>${samples.length}</td>${totalFlags.map(f=>flagCell(f)).join("")}</tr>`;
+  return `<table class="stats-table">
+    <thead><tr><th>#</th><th>Fázis</th><th>Minták</th>${SYSTEM_INFO_FLAGS.map(f=>`<th>${esc(f.label)}</th>`).join("")}</tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot>${totalRow}</tfoot>
+  </table>`;
 }
 </script>
 </body>
