@@ -2,14 +2,14 @@
   "source": {
     "gaggimate": "http://192.168.50.68",
     "endpoint": "/api/history/index.bin",
-    "downloaded_at_utc": "2026-08-10T09:30:16.402084Z"
+    "downloaded_at_utc": "2026-08-10T11:19:53.794773Z"
   },
   "index": {
     "magic": "SIDX",
     "version": 1,
     "entry_size": 128,
-    "entry_count": 137,
-    "next_id": 138
+    "entry_count": 138,
+    "next_id": 139
   },
   "entries": [
     {
@@ -2467,6 +2467,24 @@
       "duration_ms": 43149,
       "duration_s": 43.149,
       "final_weight_g": 42.4,
+      "rating": 0,
+      "flags": 1,
+      "completed": true,
+      "deleted": false,
+      "has_notes": false,
+      "profile_id": "pNVuCPkEXW",
+      "profile_name": "Burundi Mubuga Melon Currant Scale V3",
+      "avg_temp_c": null,
+      "max_pressure_bar": null,
+      "avg_flow_ml_s": null
+    },
+    {
+      "id": 138,
+      "timestamp": 1786360418,
+      "timestamp_iso_utc": "2026-08-10T11:13:38Z",
+      "duration_ms": 41168,
+      "duration_s": 41.168,
+      "final_weight_g": 42.6,
       "rating": 0,
       "flags": 1,
       "completed": true,
