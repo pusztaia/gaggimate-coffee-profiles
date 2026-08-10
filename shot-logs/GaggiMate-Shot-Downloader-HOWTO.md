@@ -174,6 +174,8 @@ gaggimate-shots/
 
 Az `index.json` az összes indexbejegyzést tartalmazza.
 
+A letöltött `shot-<id>.json` fájlokat grafikusan a `shot-viewer.html` oldallal nézheted meg (lásd a 19. pontot).
+
 Egy `shot-135.json` többek között a következő adatokat tartalmazhatja:
 
 - shot ID
@@ -534,3 +536,24 @@ például:
 ```text
 shot-135.json
 ```
+
+## 19. Grafikus megtekintés (shot-viewer.html)
+
+A `shot-logs/shot-viewer.html` egy önálló, szerver nélkül is működő HTML oldal, amivel a letöltött `shot-<id>.json` fájlokat grafikusan lehet megnézni: nyomás/flow/hőmérséklet (mért és cél érték), fázishatárok, valamint a mérleg tömeggörbéje.
+
+Megnyitás böngészőben:
+
+```text
+shot-logs/shot-viewer.html
+```
+
+(dupla kattintással, `file://` protokollal is működik, mert minden feldolgozás a böngészőben, helyben történik – a fájlok nem kerülnek fel sehova.)
+
+Használat:
+
+1. Nyisd meg a `shot-viewer.html` fájlt egy böngészőben.
+2. A **"Shot JSON fájlok megnyitása"** gombbal válassz ki egy vagy több `shot-<id>.json` fájlt, vagy a **"Teljes mappa megnyitása"** gombbal egyben a teljes `gaggimate-shots` mappát (fájlok húzása/drag-and-drop is működik).
+3. A bal oldali listában keress ID vagy profilnév alapján, majd válassz ki egy shotot.
+4. A jobb oldalon megjelenik a shot metaadata (dátum, időtartam, végső tömeg, brew delay, minták száma, kilépési ok, értékelés), a nyomás/flow/hőmérséklet grafikon, a mérleg tömeggörbéje, a fázisváltások táblázata, és – ha van – a shot notes tartalma.
+
+Az `index.json` fájlt a viewer nem használja (nincs szüksége rá); csak az egyes `shot-<id>.json` fájlokat dolgozza fel.

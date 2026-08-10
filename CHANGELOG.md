@@ -2,6 +2,18 @@
 
 ---
 
+## Shot Log Viewer (2026-08-10)
+
+### Added
+
+- **`shot-logs/shot-viewer.html`** – önálló, szerver nélkül is működő HTML oldal a `gaggimate_shots_to_json.py` script által letöltött `shot-<id>.json` fájlok grafikus megjelenítésére: nyomás/flow/hőmérséklet (mért és cél érték), fázishatárok és a mérleg tömeggörbéje, szinkronizált crosshairrel és tooltippel. Fájl(ok) vagy a teljes `gaggimate-shots` mappa drag-and-droppal vagy fájlválasztóval tölthető be, minden feldolgozás a böngészőben történik.
+- **`index.html`** – új "Shot Log Viewer" kártya a Dokumentáció szekcióban, ami a `shot-viewer.html`-t új lapon nyitja meg (nem a Markdown-modálon keresztül, mivel nem `.md` fájl).
+- **`shot-logs/GaggiMate-Shot-Downloader-HOWTO.md`** – új 19. szakasz a `shot-viewer.html` használatáról; `README.md` Dokumentumok táblázata kiegészítve.
+
+### Changed
+
+- **`shot-logs/shot-viewer.html`** – "Főoldal" gomb a topbarban, ugyanazzal a `.home-link` mintával, mint a `profiles/*/*.html` profil leíró oldalakon.
+
 ## JSON fájlnevek egységesítése: manual/scale minta (2026-07-25)
 
 ### Changed

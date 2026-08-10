@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7d1d2f">
+<meta name="description" content="GaggiMate shot log viewer – nyomás, flow, hőmérséklet és tömeg görbék egy vagy több letöltött shot JSON fájlból.">
+<title>GaggiMate Shot Viewer</title>
+<style>
+:root{
+  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
+  --line:#dfd1c1;--accent:#7d1d2f;--accent2:#b94a31;--gold:#d59842;--blue:#1677b8;
+  --flow:#ef7622;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
+  --radius-lg:24px;--radius-md:18px;--max:1280px;color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#171210;--surface:#211a17;--surface2:#2b211d;--text:#f7eee7;--muted:#c3b4a9;
+  --line:#45372f;--accent:#ef7189;--accent2:#ff8b69;--gold:#efb864;--blue:#78b8e6;
+  --flow:#ff9b54;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--accent2) 14%,transparent),transparent 34%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,a{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:1rem}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;min-width:0}
+.brand-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--gold));color:#fff;box-shadow:var(--shadow-soft);flex:0 0 auto}
+.brand-text strong{display:block;font-size:.95rem}.brand-text span{display:block;font-size:.72rem;color:var(--muted)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:.25rem}.nav a,.icon-btn{border:1px solid transparent;background:transparent;color:var(--text);text-decoration:none;border-radius:999px;padding:.5rem .72rem;cursor:pointer}
+.nav a:hover,.icon-btn:hover{background:var(--surface2);border-color:var(--line)}
+.home-link{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:.42rem;min-height:42px;padding:.58rem .82rem;border:1px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--text);text-decoration:none;font-size:.82rem;font-weight:850;white-space:nowrap;box-shadow:var(--shadow-soft);transition:transform .18s ease,background-color .18s ease,border-color .18s ease}
+.home-link:hover,.home-link:focus-visible{transform:translateY(-1px);background:var(--surface);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+.home-link svg{width:18px;height:18px;display:block;flex:none}
+@media(max-width:640px){.home-link{width:42px;height:42px;min-height:42px;padding:0;border-radius:14px}.home-link .home-label{display:none}}
+.container{max-width:var(--max);margin:auto;padding:0 1.1rem 3rem}
+.hero{padding:2.25rem 0 1.5rem}
+.eyebrow{color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.16em;font-size:.78rem}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;letter-spacing:-.03em;margin:.5rem 0 .6rem}
+h1 span{color:var(--accent)}
+.lead{font-size:1rem;max-width:720px;color:var(--muted);margin:0 0 1.4rem}
+.loader{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;border:1.5px dashed var(--line);border-radius:var(--radius-md);padding:1.1rem;background:var(--surface)}
+.loader.drag{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.62rem .95rem;cursor:pointer;font-weight:820;font-size:.86rem;display:inline-flex;align-items:center;gap:.4rem}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{color:#fff;opacity:.92}
+.status-inline{color:var(--muted);font-size:.84rem}
+.status-inline.error{color:var(--accent)}
+#viewerSection{padding-top:.5rem}
+.viewer-layout{display:grid;grid-template-columns:300px 1fr;gap:1.1rem;align-items:start}
+.shot-list-panel{position:sticky;top:74px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:.9rem;max-height:calc(100vh - 100px);display:flex;flex-direction:column;gap:.7rem}
+.search{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:999px;padding:.6rem .9rem}
+.shot-list{overflow:auto;display:flex;flex-direction:column;gap:.4rem}
+.shot-item{text-align:left;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:.55rem .7rem;cursor:pointer;color:var(--text)}
+.shot-item:hover{border-color:var(--accent)}
+.shot-item[aria-selected="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface2))}
+.shot-item strong{display:block;font-size:.86rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shot-item .meta-row{display:flex;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.72rem;margin-top:.2rem}
+.shot-item .stars{color:var(--gold);letter-spacing:1px}
+.shot-count{color:var(--muted);font-size:.78rem}
+.shot-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem}
+.meta-stat{padding:.3rem 0}.meta-stat span{display:block;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}.meta-stat strong{display:block;font-size:1.02rem;margin-top:.15rem}
+.meta-stat.warn strong{color:var(--accent)}
+.shot-title{grid-column:1/-1;font-size:1.2rem;font-weight:900;margin-bottom:.1rem}
+.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem 1.1rem 1.2rem;margin-bottom:1.1rem}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.chart-head h3{margin:0;font-size:1rem}
+.legend{display:flex;flex-wrap:wrap;gap:.85rem;font-size:.76rem;color:var(--muted)}
+.legend i{display:inline-block;width:16px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.32rem;vertical-align:middle}
+.legend i.dashed{border-top-style:dashed}
+.chart-wrap{position:relative}
+.chart-svg{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.chart-tooltip{position:absolute;pointer-events:none;background:var(--text);color:var(--bg);border-radius:12px;padding:.5rem .65rem;font-size:.74rem;line-height:1.45;box-shadow:var(--shadow);white-space:nowrap;transform:translate(-50%,-108%);z-index:5}
+.chart-tooltip b{display:block;font-size:.8rem;margin-bottom:.15rem}
+.chart-tooltip .row{display:flex;gap:.5rem;justify-content:space-between}
+.chart-tooltip .row i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.35rem;vertical-align:middle}
+details.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;margin-bottom:1rem;overflow:hidden}
+details.card summary{cursor:pointer;list-style:none;padding:.9rem 1.1rem;font-weight:820;font-size:.9rem;color:var(--text);display:flex;justify-content:space-between}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+"}details.card[open] summary::after{content:"\2212"}
+details.card .card-body{padding:0 1.1rem 1.1rem}
+table.phase-table{width:100%;border-collapse:collapse;font-size:.82rem}
+table.phase-table th,table.phase-table td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left}
+table.phase-table th{color:var(--muted);font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+pre.notes{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;background:var(--surface2);border-radius:14px;padding:.8rem;font-size:.8rem;margin:0}
+.empty-hint{color:var(--muted);text-align:center;padding:3rem 1rem;border:1px dashed var(--line);border-radius:var(--radius-lg)}
+@media(max-width:900px){.viewer-layout{grid-template-columns:1fr}.shot-list-panel{position:static;max-height:280px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7.5 4.5h9v6.8a4.5 4.5 0 0 1-9 0V4.5Z" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 7h1.3a2.7 2.7 0 0 1 0 5.4h-1.5M5 19.5h14" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+      </span>
+      <span class="brand-text"><strong>GaggiMate Shot Viewer</strong><span>gaggimate-coffee-profiles</span></span>
+    </a>
+    <nav class="nav" aria-label="Fő navigáció">
+      <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </nav>
+    <a class="home-link" href="../index.html" aria-label="Vissza a főoldalra" title="Főoldal">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3.5 11.2 12 4.5l8.5 6.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V20h11v-9.5M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="home-label">Főoldal</span>
+    </a>
+  </div>
+</header>
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">gaggimate_shots_to_json.py kimenete</div>
+    <h1>Shot log <span>viewer</span></h1>
+    <p class="lead">Töltsd be a letöltő script által generált <code>shot-&lt;id&gt;.json</code> fájlokat (vagy egyben a <code>gaggimate-shots</code> mappát), és nézd meg a nyomás/flow/hőmérséklet és a mérleg tömeg görbéjét fázishatárokkal, cél- és mért értékekkel. Minden feldolgozás a böngészőben, helyben történik – a fájlok nem kerülnek fel sehova.</p>
+    <div class="loader" id="loader">
+      <label class="btn primary" for="fileInput">Shot JSON fájlok megnyitása
+        <input id="fileInput" type="file" accept="application/json,.json" multiple hidden>
+      </label>
+      <label class="btn" for="dirInput">Teljes mappa megnyitása
+        <input id="dirInput" type="file" webkitdirectory multiple hidden>
+      </label>
+      <span class="status-inline" id="loadStatus">Húzz ide fájlokat, vagy válassz egy gombbal.</span>
+    </div>
+  </section>
+
+  <section id="viewerSection" hidden>
+    <div class="viewer-layout">
+      <aside class="shot-list-panel">
+        <input class="search" id="shotSearch" placeholder="Keresés ID vagy profilnév alapján…">
+        <div class="shot-count" id="shotCount"></div>
+        <div class="shot-list" id="shotList" role="listbox" aria-label="Betöltött shotok"></div>
+      </aside>
+      <div class="shot-detail" id="shotDetail">
+        <div class="empty-hint">Válassz egy shotot a listából.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="emptyState">
+    <p class="empty-hint">Még nincs betöltött shot. A fájlokat a <code>shot-logs/gaggimate-shots/</code> mappában találod a letöltő script futtatása után (lásd <code>GaggiMate-Shot-Downloader-HOWTO.md</code>).</p>
+  </section>
+</div>
+</main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=(v,d=1)=>Number.isFinite(v)?v.toFixed(d):"–";
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+setTheme(localStorage.getItem("gaggimate-theme")||"light");
+
+// ---------------------------------------------------------------------------
+// State + file loading
+// ---------------------------------------------------------------------------
+
+const state={shots:new Map(),activeId:null};
+
+function isShotLog(obj){
+  return obj&&typeof obj==="object"&&obj.shot&&typeof obj.shot==="object"&&Array.isArray(obj.samples);
+}
+
+async function loadFiles(fileList){
+  const files=[...fileList].filter(f=>/\.json$/i.test(f.name)&&!/^index\.json$/i.test(f.name));
+  const statusEl=$("#loadStatus");
+  let added=0,skipped=0;
+  for(const file of files){
+    try{
+      const text=await file.text();
+      const data=JSON.parse(text);
+      if(!isShotLog(data)){skipped++;continue;}
+      state.shots.set(data.shot.id,data);
+      added++;
+    }catch(err){skipped++;}
+  }
+  if(added===0&&skipped===0){statusEl.textContent="Nem található shot JSON a kiválasztásban.";statusEl.className="status-inline error";return;}
+  statusEl.className="status-inline";
+  statusEl.textContent=`${added} shot betöltve${skipped?`, ${skipped} fájl kihagyva (nem shot log)`:""}. Összesen: ${state.shots.size}.`;
+  $("#emptyState").hidden=state.shots.size>0;
+  $("#viewerSection").hidden=state.shots.size===0;
+  renderShotList();
+  if(state.activeId===null&&state.shots.size){
+    const firstId=[...state.shots.keys()].sort((a,b)=>b-a)[0];
+    selectShot(firstId);
+  }
+}
+
+$("#fileInput").addEventListener("change",e=>loadFiles(e.target.files));
+$("#dirInput").addEventListener("change",e=>loadFiles(e.target.files));
+
+const loaderEl=$("#loader");
+["dragenter","dragover"].forEach(evt=>loaderEl.addEventListener(evt,e=>{e.preventDefault();loaderEl.classList.add("drag");}));
+["dragleave","drop"].forEach(evt=>loaderEl.addEventListener(evt,e=>{e.preventDefault();loaderEl.classList.remove("drag");}));
+loaderEl.addEventListener("drop",e=>{if(e.dataTransfer?.files?.length)loadFiles(e.dataTransfer.files);});
+
+// ---------------------------------------------------------------------------
+// Shot list sidebar
+// ---------------------------------------------------------------------------
+
+function shotSummaries(){
+  return [...state.shots.values()].map(d=>({
+    id:d.shot.id,
+    profileName:d.shot.profile_name||"(névtelen profil)",
+    dateIso:d.shot.timestamp_iso_utc,
+    durationS:d.shot.duration_s,
+    finalWeightG:d.shot.final_weight_g,
+    rating:d.index_entry?.rating||0,
+    hasNotes:!!d.notes,
+  })).sort((a,b)=>b.id-a.id);
+}
+
+function renderShotList(){
+  const q=($("#shotSearch").value||"").trim().toLowerCase();
+  const items=shotSummaries().filter(s=>!q||String(s.id).includes(q)||s.profileName.toLowerCase().includes(q));
+  $("#shotCount").textContent=`${items.length} / ${state.shots.size} shot`;
+  $("#shotList").innerHTML=items.map(s=>`
+    <button class="shot-item" role="option" aria-selected="${s.id===state.activeId}" data-id="${s.id}">
+      <strong>#${s.id} · ${esc(s.profileName)}</strong>
+      <span class="meta-row">
+        <span>${s.dateIso?new Date(s.dateIso).toLocaleString():"ismeretlen dátum"}</span>
+        <span>${fmt(s.durationS,1)} s</span>
+      </span>
+      <span class="meta-row">
+        <span class="stars">${s.rating?"★".repeat(s.rating)+"☆".repeat(Math.max(0,5-s.rating)):"nincs értékelés"}</span>
+        <span>${s.finalWeightG?fmt(s.finalWeightG,1)+" g":""}${s.hasNotes?" · 📝":""}</span>
+      </span>
+    </button>`).join("")||`<div class="empty-hint">Nincs találat.</div>`;
+  $("#shotList").querySelectorAll(".shot-item").forEach(btn=>btn.addEventListener("click",()=>selectShot(Number(btn.dataset.id))));
+}
+$("#shotSearch").addEventListener("input",renderShotList);
+
+function selectShot(id){
+  state.activeId=id;
+  renderShotList();
+  renderShotDetail(state.shots.get(id));
+}
+
+// ---------------------------------------------------------------------------
+// SVG chart engine
+// ---------------------------------------------------------------------------
+
+const SVGNS="http://www.w3.org/2000/svg";
+function el(name,attrs={}){
+  const node=document.createElementNS(SVGNS,name);
+  for(const [k,v] of Object.entries(attrs))node.setAttribute(k,v);
+  return node;
+}
+function scaleLinear([d0,d1],[r0,r1]){
+  const span=d1-d0||1;
+  return v=>r0+((v-d0)/span)*(r1-r0);
+}
+function pathFor(points,xs,ys){
+  let d="",open=false;
+  for(const p of points){
+    const y=p.y;
+    if(y===null||y===undefined||!Number.isFinite(y)){open=false;continue;}
+    d+=(open?"L":"M")+xs(p.x).toFixed(1)+" "+ys(y).toFixed(1)+" ";
+    open=true;
+  }
+  return d.trim();
+}
+function niceMax(values,floor){
+  const finite=values.filter(Number.isFinite);
+  return Math.max(floor,...(finite.length?finite:[floor]));
+}
+
+// series: [{key, label, color, dashed, axis:'left'|'right', unit}]
+function drawTimeChart({svg,tooltip,legend,samples,phases,total,seriesDefs,leftLabel,rightLabel}){
+  const W=1000,H=svg.dataset.h?Number(svg.dataset.h):340;
+  const pad={l:52,r:rightLabel?52:20,t:18,b:32};
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  svg.innerHTML="";
+
+  const xs=scaleLinear([0,Math.max(total,0.1)],[pad.l,W-pad.r]);
+  const leftSeries=seriesDefs.filter(s=>s.axis!=="right");
+  const rightSeries=seriesDefs.filter(s=>s.axis==="right");
+  const leftMax=niceMax(leftSeries.flatMap(s=>samples.map(p=>p[s.key])),10);
+  let rMin=0,rMax=1;
+  if(rightSeries.length){
+    const rVals=rightSeries.flatMap(s=>samples.map(p=>p[s.key])).filter(Number.isFinite);
+    rMin=rVals.length?Math.min(...rVals):0;rMax=rVals.length?Math.max(...rVals):1;
+    const rPad=rMin===rMax?1:Math.max(0.6,(rMax-rMin)*0.25);
+    rMin-=rPad;rMax+=rPad;
+  }
+  const ys=scaleLinear([0,leftMax],[H-pad.b,pad.t]);
+  const yr=scaleLinear([rMin,rMax],[H-pad.b,pad.t]);
+
+  const bg=el("g");
+  bg.appendChild(el("rect",{x:pad.l,y:pad.t,width:Math.max(0,W-pad.l-pad.r),height:Math.max(0,H-pad.t-pad.b),rx:14,fill:"var(--surface2)"}));
+  for(const fr of [0,.25,.5,.75,1]){
+    const gy=pad.t+(H-pad.t-pad.b)*fr;
+    bg.appendChild(el("line",{x1:pad.l,y1:gy,x2:W-pad.r,y2:gy,stroke:"currentColor",opacity:.1}));
+  }
+  svg.appendChild(bg);
+
+  // phase bands + boundary lines + labels
+  const phaseG=el("g");
+  (phases||[]).forEach((tr,i)=>{
+    const x=xs(tr.time_s);
+    if(i%2){
+      const next=phases[i+1]?xs(phases[i+1].time_s):xs(total);
+      phaseG.appendChild(el("rect",{x,y:pad.t,width:Math.max(0,next-x),height:H-pad.t-pad.b,fill:"currentColor",opacity:.05}));
+    }
+    phaseG.appendChild(el("line",{x1:x,y1:pad.t,x2:x,y2:H-pad.b,stroke:"currentColor",opacity:.35}));
+    const label=el("text",{x,y:pad.t+2,transform:`rotate(-90 ${x} ${pad.t+2})`,fill:"var(--muted)","font-size":9,"text-anchor":"start"});
+    label.textContent=`${i+1}. ${tr.phase_name||""}`;
+    phaseG.appendChild(label);
+  });
+  phaseG.appendChild(el("line",{x1:xs(total),y1:pad.t,x2:xs(total),y2:H-pad.b,stroke:"currentColor",opacity:.35}));
+  svg.appendChild(phaseG);
+
+  // series paths
+  const pathsG=el("g");
+  const cursorNodes={};
+  for(const s of seriesDefs){
+    const scale=s.axis==="right"?yr:ys;
+    const points=samples.map(p=>({x:p.time_s,y:p[s.key]}));
+    const path=el("path",{d:pathFor(points,xs,scale),fill:"none",stroke:s.color,"stroke-width":s.dashed?1.6:2.4,"stroke-linejoin":"round","stroke-linecap":"round"});
+    if(s.dashed)path.setAttribute("stroke-dasharray","6 5");
+    pathsG.appendChild(path);
+    const dot=el("circle",{r:4,fill:s.color,stroke:"var(--surface)","stroke-width":1.5,visibility:"hidden"});
+    pathsG.appendChild(dot);
+    cursorNodes[s.key]=dot;
+  }
+  svg.appendChild(pathsG);
+
+  // axis labels
+  const axisG=el("g",{fill:"var(--muted)","font-size":11});
+  axisG.appendChild(Object.assign(el("text",{x:pad.l,y:H-8}),{textContent:"0 s"}));
+  axisG.appendChild(Object.assign(el("text",{x:W-pad.r,y:H-8,"text-anchor":"end"}),{textContent:`${total.toFixed(1)} s`}));
+  axisG.appendChild(Object.assign(el("text",{x:10,y:pad.t+9}),{textContent:leftLabel?`${leftMax.toFixed(0)}`:""}));
+  axisG.appendChild(Object.assign(el("text",{x:10,y:H-pad.b}),{textContent:leftLabel?"0":""}));
+  if(rightSeries.length){
+    axisG.appendChild(Object.assign(el("text",{x:W-6,y:pad.t+9,"text-anchor":"end"}),{textContent:`${rMax.toFixed(1)}`}));
+    axisG.appendChild(Object.assign(el("text",{x:W-6,y:H-pad.b,"text-anchor":"end"}),{textContent:`${rMin.toFixed(1)}`}));
+  }
+  svg.appendChild(axisG);
+
+  const crosshair=el("line",{x1:0,y1:pad.t,x2:0,y2:H-pad.b,stroke:"var(--text)",opacity:0,"stroke-width":1});
+  svg.appendChild(crosshair);
+
+  // legend
+  legend.innerHTML=seriesDefs.map(s=>`<span><i class="${s.dashed?"dashed":""}" style="border-color:${s.color}"></i>${esc(s.label)}</span>`).join("");
+
+  function findNearest(timeS){
+    let lo=0,hi=samples.length-1;
+    if(hi<0)return null;
+    while(lo<hi){
+      const mid=(lo+hi)>>1;
+      if(samples[mid].time_s<timeS)lo=mid+1;else hi=mid;
+    }
+    if(lo>0&&Math.abs(samples[lo-1].time_s-timeS)<Math.abs(samples[lo].time_s-timeS))lo--;
+    return samples[lo];
+  }
+
+  function showAt(timeS){
+    const sample=findNearest(timeS);
+    if(!sample)return;
+    const x=xs(sample.time_s);
+    crosshair.setAttribute("x1",x);crosshair.setAttribute("x2",x);crosshair.setAttribute("opacity",.5);
+    let rows="";
+    for(const s of seriesDefs){
+      const v=sample[s.key];
+      const scale=s.axis==="right"?yr:ys;
+      const dot=cursorNodes[s.key];
+      if(Number.isFinite(v)){
+        dot.setAttribute("cx",x);dot.setAttribute("cy",scale(v));dot.setAttribute("visibility","visible");
+        rows+=`<div class="row"><span><i style="background:${s.color}"></i>${esc(s.label)}</span><span>${fmt(v,1)}${s.unit?" "+s.unit:""}</span></div>`;
+      }else{dot.setAttribute("visibility","hidden");}
+    }
+    const phaseName=sample.phase_name?` · ${esc(sample.phase_name)}`:"";
+    tooltip.innerHTML=`<b>${fmt(sample.time_s,2)} s${phaseName}</b>${rows}`;
+    tooltip.hidden=false;
+    const rect=svg.getBoundingClientRect();
+    const px=(x-0)/W*rect.width;
+    tooltip.style.left=`${px}px`;
+    tooltip.style.top=`${(scaleLinear([0,H],[0,rect.height]))(pad.t)}px`;
+    return sample.time_s;
+  }
+  function hide(){crosshair.setAttribute("opacity",0);Object.values(cursorNodes).forEach(d=>d.setAttribute("visibility","hidden"));tooltip.hidden=true;}
+
+  return {showAt,hide,xs,W,total};
+}
+
+function wireSyncedHover(charts){
+  function move(chart,evt){
+    const rect=chart.svg.getBoundingClientRect();
+    const relX=(evt.clientX-rect.left)/rect.width*chart.api.W;
+    const invert=(relX-52)/(chart.api.W-52-(chart.hasRight?52:20));
+    const timeS=Math.min(chart.api.total,Math.max(0,invert*chart.api.total));
+    charts.forEach(c=>c.api.showAt(timeS));
+  }
+  charts.forEach(chart=>{
+    chart.svg.addEventListener("pointermove",e=>move(chart,e));
+    chart.svg.addEventListener("pointerleave",()=>charts.forEach(c=>c.api.hide()));
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Shot detail rendering
+// ---------------------------------------------------------------------------
+
+function renderShotDetail(data){
+  const host=$("#shotDetail");
+  if(!data){host.innerHTML=`<div class="empty-hint">Válassz egy shotot a listából.</div>`;return;}
+  const s=data.shot,idx=data.index_entry||{};
+  const rating=idx.rating||0;
+  host.innerHTML=`
+    <div class="shot-meta">
+      <div class="shot-title">#${s.id} · ${esc(s.profile_name||"(névtelen profil)")}</div>
+      <div class="meta-stat"><span>Dátum</span><strong>${s.timestamp_iso_utc?new Date(s.timestamp_iso_utc).toLocaleString():"ismeretlen"}</strong></div>
+      <div class="meta-stat"><span>Időtartam</span><strong>${fmt(s.duration_s,1)} s</strong></div>
+      <div class="meta-stat"><span>Végső tömeg</span><strong>${s.final_weight_g?fmt(s.final_weight_g,1)+" g":"nincs mérve"}</strong></div>
+      <div class="meta-stat"><span>Brew delay</span><strong>${fmt(s.brew_delay_ms/1000,2)} s</strong></div>
+      <div class="meta-stat"><span>Minták</span><strong>${s.sample_count_parsed}${s.incomplete_header?" (hiányos fejléc)":""}</strong></div>
+      <div class="meta-stat ${s.final_exit_reason_name==='none'?'':'warn'}"><span>Kilépési ok</span><strong>${esc(s.final_exit_reason_name)}</strong></div>
+      <div class="meta-stat"><span>Értékelés</span><strong>${rating?"★".repeat(rating)+"☆".repeat(5-rating):"nincs"}</strong></div>
+      <div class="meta-stat"><span>Profil ID</span><strong style="font-weight:600;font-size:.78rem">${esc(s.profile_id)}</strong></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head"><h3>Nyomás · Flow · Hőmérséklet</h3><div class="legend" id="mainLegend"></div></div>
+      <div class="chart-wrap"><svg class="chart-svg" id="mainChart" data-h="340"></svg><div class="chart-tooltip" id="mainTooltip" hidden></div></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head"><h3>Mérleg tömeg</h3><div class="legend" id="weightLegend"></div></div>
+      <div class="chart-wrap"><svg class="chart-svg" id="weightChart" data-h="180"></svg><div class="chart-tooltip" id="weightTooltip" hidden></div></div>
+    </div>
+    <details class="card">
+      <summary>Fázisváltások (${(data.phase_transitions||[]).length})</summary>
+      <div class="card-body">${renderPhaseTable(data.phase_transitions||[])}</div>
+    </details>
+    ${data.notes?`<details class="card" open><summary>Shot notes</summary><div class="card-body"><pre class="notes">${esc(JSON.stringify(data.notes,null,2))}</pre></div></details>`:""}
+  `;
+
+  const total=s.duration_s||(data.samples.at(-1)?.time_s??0);
+  const mainSeries=[
+    {key:"pressure_bar",label:"Nyomás (mért)",color:"var(--blue)",unit:"bar"},
+    {key:"target_pressure_bar",label:"Nyomás (cél)",color:"var(--blue)",unit:"bar",dashed:true},
+    {key:"pump_flow_ml_s",label:"Flow (mért)",color:"var(--flow)",unit:"ml/s"},
+    {key:"target_flow_ml_s",label:"Flow (cél)",color:"var(--flow)",unit:"ml/s",dashed:true},
+    {key:"temperature_c",label:"Hőmérséklet (mért)",color:"var(--accent)",unit:"°C",axis:"right"},
+    {key:"target_temperature_c",label:"Hőmérséklet (cél)",color:"var(--accent)",unit:"°C",axis:"right",dashed:true},
+  ];
+  const weightSeries=[
+    {key:"scale_weight_g",label:"Mérleg tömeg",color:"var(--accent2)",unit:"g"},
+    {key:"estimated_weight_g",label:"Becsült tömeg",color:"var(--muted)",unit:"g",dashed:true},
+  ];
+
+  const mainSvg=$("#mainChart"),weightSvg=$("#weightChart");
+  const mainApi=drawTimeChart({svg:mainSvg,tooltip:$("#mainTooltip"),legend:$("#mainLegend"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:mainSeries,leftLabel:"bar / ml/s",rightLabel:"°C"});
+  const weightApi=drawTimeChart({svg:weightSvg,tooltip:$("#weightTooltip"),legend:$("#weightLegend"),samples:data.samples,phases:data.phase_transitions,total,seriesDefs:weightSeries,leftLabel:"g",rightLabel:null});
+
+  wireSyncedHover([
+    {svg:mainSvg,api:mainApi,hasRight:true},
+    {svg:weightSvg,api:weightApi,hasRight:false},
+  ]);
+}
+
+function renderPhaseTable(transitions){
+  if(!transitions.length)return `<p class="empty-hint">Nincs rögzített fázisváltás.</p>`;
+  const rows=transitions.map((t,i)=>`<tr><td>${i+1}</td><td>${esc(t.phase_name)}</td><td>${fmt(t.time_s,2)} s</td><td>${esc(t.transition_reason_name)}</td></tr>`).join("");
+  return `<table class="phase-table"><thead><tr><th>#</th><th>Fázis</th><th>Kezdet</th><th>Ok</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+</script>
+</body>
+</html>

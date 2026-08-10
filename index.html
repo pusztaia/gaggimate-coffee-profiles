@@ -139,7 +139,7 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
 </section>
 
 <section id="documents">
-  <div class="section-head"><div><h2>Dokumentáció</h2><p>A Markdown fájlok az oldalon belül, HTML-formázással nyílnak meg.</p></div></div>
+  <div class="section-head"><div><h2>Dokumentáció</h2><p>A Markdown fájlok az oldalon belül, HTML-formázással nyílnak meg. Az interaktív eszközök új lapon.</p></div></div>
   <div class="docs-grid" id="docsGrid"></div>
 </section>
 
@@ -221,7 +221,8 @@ const DOCS = [
   {title:"Profile Gallery",file:"PROFILE_GALLERY.md",description:"Manual és Scale profilgrafikonok.",icon:'<rect x="3.5" y="4.5" width="17" height="14" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 16.5 5-4.5 3.5 3 3-2.5L20 16"/>'},
   {title:"Projekt changelog",file:"CHANGELOG.md",description:"Repository-szintű változások.",icon:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'},
   {title:"Feldolgozások",file:"speciality_kave_feldolgozasok.md",description:"Washed, natural, honey, anaerob és carbonic.",icon:'<path d="M19 5c-8 0-13 5-13 13 8 0 13-5 13-13Z"/><path d="M7 17c3-3 6-6 11-11"/>'},
-  {title:"Kávévíz recept",file:"kaveviz-5l-epsom-bikarbonat.md",description:"5 literes vízprofilok Epsom-sóval és szódabikarbónával.",icon:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>'}
+  {title:"Kávévíz recept",file:"kaveviz-5l-epsom-bikarbonat.md",description:"5 literes vízprofilok Epsom-sóval és szódabikarbónával.",icon:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>'},
+  {title:"Shot Log Viewer",file:"shot-logs/shot-viewer.html",description:"Letöltött GaggiMate shot logok grafikus megjelenítése – nyomás, flow, hőmérséklet és mérleg görbék.",icon:'<path d="M4 19h16M7 16V9m5 7V5m5 11v-5"/>',external:true}
 ];
 
 const state={catalog:null,profiles:[],filter:"all",query:"",process:"",sort:"featured",loaded:new Map()};
@@ -307,7 +308,7 @@ function renderSetup(defaults){
   $("#setupGrid").innerHTML=items.map(([k,v])=>`<article class="setup-card"><span>${esc(k)}</span><strong>${esc(v)}</strong></article>`).join("");
 }
 function renderDocuments(){
-  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${doc.icon}</svg></div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p><button class="btn doc-open" data-doc="${index}">Megnyitás</button></article>`).join("");
+  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${doc.icon}</svg></div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p>${doc.external?`<a class="btn" href="${esc(doc.file)}" target="_blank" rel="noopener">Megnyitás új lapon</a>`:`<button class="btn doc-open" data-doc="${index}">Megnyitás</button>`}</article>`).join("");
 }
 
 function filteredProfiles(){
