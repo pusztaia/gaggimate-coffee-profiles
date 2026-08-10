@@ -30,7 +30,7 @@ Ezek a profilok időalapúak. A shot a beállított másodpercig fut; a hozamot 
 
 ### Burundi Mubuga Melon Currant 38s – Time Based
 
-![Burundi Mubuga Melon Currant 38s](profiles/burundi-mubuga/burundi-mubuga-profile.png)
+![Burundi Mubuga Melon Currant 38s](profiles/burundi-mubuga/burundi-mubuga-manual-profile.png)
 
 ### Colombia Manos Juntas Jam Mango 39s – Time Based
 
@@ -61,6 +61,14 @@ Ezek a profilok BOOKOO Themis Ultra Bluetooth mérleggel automatikusan megállna
 ### Wangera Stable Start 94.0C – Scale V2
 
 ![Wangera Scale V2 94.0C](profiles/wangera/wangera-scale-v1-profile.png)
+
+### Burundi Mubuga Melon Currant – Scale V4 Fruity (aktuális)
+
+![Burundi Mubuga Scale V4 Fruity](profiles/burundi-mubuga/burundi-mubuga-scale-v4-fruity-profile.png)
+
+### Burundi Mubuga Melon Currant – Scale V3
+
+![Burundi Mubuga Scale V3](profiles/burundi-mubuga/burundi-mubuga-scale-v3-profile.png)
 
 ### Burundi Mubuga Melon Currant – Scale V2
 

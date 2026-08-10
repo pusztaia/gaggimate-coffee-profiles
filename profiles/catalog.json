@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "defaults": {
     "dose": 18.5,
     "rpm": 1200,
@@ -77,7 +77,7 @@
       "grind": "8-9",
       "dose": 18.5,
       "yield": "42.5 g",
-      "expectedTime": "~42 s (shot #134)",
+      "expectedTime": "~40 s (V4 dial-in)",
       "page": "burundi-mubuga.html",
       "accent": "#7a4d20",
       "accent2": "#c28a43",
@@ -88,6 +88,13 @@
           "label": "Scale V3 · 94,5 °C",
           "kind": "scale",
           "file": "burundi-mubuga-scale-v3.json",
+          "default": false
+        },
+        {
+          "id": "scale-v4-fruity",
+          "label": "Scale V4 Fruity · 94 °C",
+          "kind": "scale",
+          "file": "burundi-mubuga-scale-v4-fruity.json",
           "default": true
         },
         {

@@ -17,7 +17,7 @@
 |---|---:|---|---:|---:|---|
 | Kenya Wangera | 42.0 g | 1:2.27 | 94.5 °C | 45 s | [wangera-scale-v2.json](profiles/wangera/wangera-scale-v2.json) |
 | Kenya Wangera (94C) | 42.0 g | 1:2.27 | 94.0 °C | 45 s | [wangera-scale-v1.json](profiles/wangera/wangera-scale-v1.json) |
-| Burundi Mubuga | 42.5 g | 1:2.30 | 94.5 °C | 45 s | [burundi-mubuga-scale.json](profiles/burundi-mubuga/burundi-mubuga-scale.json) |
+| Burundi Mubuga | 42.5 g | 1:2.30 | 94.0 °C | 64 s | [burundi-mubuga-scale-v4-fruity.json](profiles/burundi-mubuga/burundi-mubuga-scale-v4-fruity.json) |
 | Colombia Manos Juntas | 43.0 g | 1:2.32 | 94.5 °C | 47 s | [colombia-manos-juntas-scale.json](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json) |
 | Kenya Kirinyaga PB | 43.0 g | 1:2.32 | 94.5 °C | 45 s | [kirinyaga-scale.json](profiles/kirinyaga/kirinyaga-scale.json) |
 | 28 Caturron | 42.0 g | 1:2.27 | 95.0 °C | 50 s | [caturron-scale.json](profiles/twenty-eight-caturron/caturron-scale.json) |
@@ -42,7 +42,7 @@
 | Kávé | Profil | Idő | Hő | Dózis | Célhozam | Őrlés | JSON | Recept |
 |---|---|---:|---:|---:|---:|---:|---|---|
 | Kenya Wangera | Stable Start | 38 s | 94.5 °C | 18.5 g | 42 g | 10-11 | [wangera-manual-v2.json](profiles/wangera/wangera-manual-v2.json) | [wangera-recipe.md](profiles/wangera/wangera-recipe.md) |
-| Burundi Mubuga | Melon Currant | 38 s | 94.5 °C | 18.5 g | 42.5 g | 10-11 | [burundi-mubuga-manual.json](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [burundi-mubuga-recipe.md](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
+| Burundi Mubuga | Melon Currant | 38 s | 94.5 °C | 18.5 g | 42.5 g | 8-9 | [burundi-mubuga-manual.json](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [burundi-mubuga-recipe.md](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
 | Colombia Manos Juntas | Jam Mango | 39 s | 94.5 °C | 18.5 g | 43 g | 10-11 | [colombia-manos-juntas-manual.json](profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json) | [colombia-manos-juntas-recipe.md](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
 | Kenya Kirinyaga PB | Tea Rose | 37 s | 94.5 °C | 18.5 g | 43 g | 9-10 | [kirinyaga-manual.json](profiles/kirinyaga/kirinyaga-manual.json) | [kirinyaga-recipe.md](profiles/kirinyaga/kirinyaga-recipe.md) |
 | 28 Caturron | Flavor | 42 s | 95 °C | 18.5 g | 42 g | 8-10 | [caturron-manual.json](profiles/twenty-eight-caturron/caturron-manual.json) | [twenty-eight-caturron-recipe.md](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
@@ -92,7 +92,7 @@
 
 ### Burundi Mubuga – Melon Currant 38s
 
-![Burundi Mubuga](profiles/burundi-mubuga/burundi-mubuga-profile.png)
+![Burundi Mubuga](profiles/burundi-mubuga/burundi-mubuga-manual-profile.png)
 
 ### Colombia Manos Juntas – Jam Mango 39s
 
