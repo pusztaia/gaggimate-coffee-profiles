@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-10",
+  "updated": "2026-09-12",
   "defaults": {
     "dose": 18.5,
     "rpm": 1200,
@@ -222,11 +222,17 @@
       "featured": false,
       "variants": [
         {
+          "id": "scale-v3",
+          "label": "Scale V3 · 93 °C",
+          "kind": "scale",
+          "file": "el-salvador-ochupse-93c-scale-v3.json",
+          "default": true
+        },
+        {
           "id": "scale",
           "label": "Scale V2",
           "kind": "scale",
-          "file": "el-salvador-ochupse-scale.json",
-          "default": true
+          "file": "el-salvador-ochupse-scale.json"
         },
         {
           "id": "manual",
