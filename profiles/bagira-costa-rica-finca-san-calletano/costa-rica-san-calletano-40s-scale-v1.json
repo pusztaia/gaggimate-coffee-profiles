@@ -1,0 +1,125 @@
+{
+  "label": "Costa Rica San Calletano - Scale V1",
+  "type": "pro",
+  "description": "19 g / 42.5 g target / pump stop 41.0 g / 93.5 C / grind 11",
+  "temperature": 93.5,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Cherry Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 93.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 5.5
+      }
+    },
+    {
+      "name": "Gentle Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 7,
+      "temperature": 93.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.2,
+        "flow": 3.8
+      }
+    },
+    {
+      "name": "Soft Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 93.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 0.6,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 93.5,
+      "transition": {
+        "type": "linear",
+        "duration": 5,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6.8,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Cherry Chocolate Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 17,
+      "temperature": 93.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6.8,
+        "flow": 2.2
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 39.5
+        }
+      ]
+    },
+    {
+      "name": "Creamy Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 93.5,
+      "transition": {
+        "type": "linear",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.0,
+        "flow": 1.7
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 41.0
+        }
+      ]
+    }
+  ]
+}

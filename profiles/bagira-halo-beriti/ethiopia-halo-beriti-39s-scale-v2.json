@@ -1,0 +1,125 @@
+{
+  "label": "Ethiopia Halo Beriti - Scale V2",
+  "type": "pro",
+  "description": "19 g / 43.5 g target / pump stop 42.0 g / 94.0 C / grind 11",
+  "temperature": 94.0,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Gentle Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 94.0,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 4.5
+      }
+    },
+    {
+      "name": "Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 7,
+      "temperature": 94.0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.0,
+        "flow": 3.5
+      }
+    },
+    {
+      "name": "Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 94.0,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 0.5,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Smooth Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 94.0,
+      "transition": {
+        "type": "linear",
+        "duration": 5,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6.8,
+        "flow": 2.3
+      }
+    },
+    {
+      "name": "Main Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 17,
+      "temperature": 94.0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.0,
+        "flow": 2.1
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 39.5
+        }
+      ]
+    },
+    {
+      "name": "Clean Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 94.0,
+      "transition": {
+        "type": "linear",
+        "duration": 4,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.0,
+        "flow": 1.6
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42.0
+        }
+      ]
+    }
+  ]
+}
