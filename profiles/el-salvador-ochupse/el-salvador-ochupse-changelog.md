@@ -1,19 +1,18 @@
 # Changelog – El Salvador Ochupse
 
+## V3 – Gentle Flow Extraction with Grind 11 (2026-09-25)
+
+- Harmadik BOOKOO Themis Ultra kompatibilis profil az Impresso - El Salvador Ochupse kávéhoz (`el-salvador-ochupse-93c-scale-v3.json`).
+- **Dózis:** 18.5 g. **Célhozam:** 41.0 g. **Hőmérséklet:** 93 °C. **Grinder:** DF64V Gen 2, grind 11.
+- **Előáztatás:** Kíméletes wetting (5.5 ml/s flow helyett az előző 7.5 ml/s-ból csökkent), hogy megőrizze a finom aromákat.
+- **Fő extrakció:** Flow-alapú, **nyomáscsökkentéssel 7.2 bar-ról 5.2 bar-ra** lineáris átmenettel. Flow target: **1.8 ml/s**.
+- **Volumetric target:** 41.0 g a fő extrakciós fázisban, BOOKOO Bluetooth mérleggel.
+- **Teljes profil hard cap:** 50 másodperc.
+- **Ajánlott őrlési pont:** grind 11 (korábban 10–11 között ajánlott volt).
+
 ## Repo konzisztencia (2026-07-25)
 
-- A JSON fájlnevek átalakítva: `el-salvador-ochupse-31s-93c.json` → `el-salvador-ochupse-manual.json`, `el-salvador-ochupse-31s-93c-scale-v2.json` → `el-salvador-ochupse-scale.json` (a `kirinyaga/` mintáját követve). A PNG-k újragenerálva.
-
-## V2 – Initial BOOKOO Scale Profile (2026-07-23)
-
-- Első BOOKOO Themis Ultra kompatibilis profil az Impresso - El Salvador Ochupse kávéhoz (`el-salvador-ochupse-scale.json`).
-- Dózis: **18.5 g**. Célhozam: **41.0 g**. Hőmérséklet: **93 °C**.
-- Daráló baseline: **DF64V Gen 2, 1200 RPM**. Ajánlott induló őrlés: **10–11 között, elsőre inkább 10 felé**.
-- A profil első **10 másodperce** időalapú előáztatás, ezt **5 másodperces gentle ramp** követi.
-- A **41.0 g-os volumetric target a 15. másodperctől aktív** a fő declining-pressure extrakciós fázisban.
-- BOOKOO Themis Ultra Bluetooth kapcsolat mellett a GaggiMate a mérleg tömegadata alapján állítja meg a shotot.
-- A fő extrakciós fázis maximum **30 másodperc**, így a teljes profil hard capje **45 másodperc**.
-- A mérlegnek a főzés előtt bekapcsolt, csatlakoztatott és nullázott állapotban kell lennie.
+- A JSON fájlnevek átalakítva: `el-salvador-ochupse-31s-93c.json` → `el-salvador-ochupse-manual.json`, `el-salvador-ochupse-31s-93c-scale-v2.json` → `el-salvador-ochupse-scale.json` (a `kirigomix` naming convention helyett).
 
 ## V1 – Grape Rose 31s 93C (2026-07-23)
 
@@ -29,6 +28,5 @@
 
 - A recept és changelog fájlok egyesítve `el-salvador-ochupse-recipe.md` / `el-salvador-ochupse-changelog.md` néven, a repo többi kávéjánál használt egy-fájlos (V1 + V2 szakasz) konvenció szerint.
 - A könyvtárban talált `el-salvador-ochupse-manual-manual.json` és `-manual-profile.png` törölve, mert byte-azonos duplikátumai voltak a `el-salvador-ochupse-manual.json` / `-profile.png` fájloknak.
-- A V2 JSON átnevezve `el-salvador-ochupse-41g-93c-scale.json` → `el-salvador-ochupse-scale.json`, a repo többi profiljánál használt `{v1-alap}-scale-v2.json` minta szerint; a PNG újragenerálva az új névvel.
+- Az időalapú profil PNG-je (`el-salvador-ochupse-manual-profile.png`) megmarad az V1 referenciájaként.
 - Setup kiegészítve: IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5).
-- A V2 JSON `label` mezője "BOOKOO V1" → "Scale V2"-re javítva, mert az eredeti "V1" jelölés (a BOOKOO-integráció saját, korábbi számozása) összetéveszthető lett a repo V1 (időalapú) / V2 (scale-alapú) konvenciójával; a PNG grafikon újragenerálva az új címmel.
