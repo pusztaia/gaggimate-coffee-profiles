@@ -1,0 +1,125 @@
+{
+  "label": "Kirinyaga PB Tea Rose - B702 Scale V3",
+  "type": "pro",
+  "description": "19 g / B702 / grind 9.5 / 1200 RPM / 94.5 C / final 42.2 g (1:2.22)",
+  "temperature": 94.5,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Tea Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 94.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 7.5
+      }
+    },
+    {
+      "name": "Even Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6,
+      "temperature": 94.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2.1,
+        "flow": 4.5
+      }
+    },
+    {
+      "name": "Hibiscus Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 94.5,
+      "transition": {
+        "type": "ease-out",
+        "duration": 2,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 0.5,
+        "flow": 0
+      }
+    },
+    {
+      "name": "Gentle Ramp",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 94.5,
+      "transition": {
+        "type": "linear",
+        "duration": 5,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.6,
+        "flow": 2.4
+      }
+    },
+    {
+      "name": "Black Tea Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 94.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7.6,
+        "flow": 2.1
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 40.5
+        }
+      ]
+    },
+    {
+      "name": "Rosehip Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 8,
+      "temperature": 94.5,
+      "transition": {
+        "type": "linear",
+        "duration": 7,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.6,
+        "flow": 1.8
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 41.5
+        }
+      ]
+    }
+  ]
+}

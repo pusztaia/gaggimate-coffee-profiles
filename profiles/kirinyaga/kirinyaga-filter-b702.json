@@ -1,0 +1,62 @@
+{
+  "label": "Kirinyaga Filter B702",
+  "type": "pro",
+  "description": "B702 / 19 g / 95 C / grind 12 start / 1200 RPM / target final ~95 g",
+  "temperature": 95.0,
+  "phases": [
+    {
+      "name": "Gentle Wetting",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6.0,
+      "temperature": 95.0,
+      "pump": {"target": "flow", "flow": 3.5, "pressure": 3.0},
+      "transition": {"type": "ease-in", "duration": 2.0, "adaptive": true},
+      "targets": []
+    },
+    {
+      "name": "Low Pressure Saturation",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 8.0,
+      "temperature": 95.0,
+      "pump": {"target": "pressure", "pressure": 2.2, "flow": 2.0},
+      "transition": {"type": "ease-in-out", "duration": 2.0, "adaptive": true},
+      "targets": []
+    },
+    {
+      "name": "Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 6.0,
+      "temperature": 95.0,
+      "pump": {"target": "flow", "flow": 0.3, "pressure": 1.0},
+      "transition": {"type": "ease-out", "duration": 1.0, "adaptive": true},
+      "targets": []
+    },
+    {
+      "name": "Filter Extraction",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 35.0,
+      "temperature": 95.0,
+      "pump": {"target": "flow", "flow": 2.8, "pressure": 4.0},
+      "transition": {"type": "ease-in", "duration": 3.0, "adaptive": true},
+      "targets": [
+        {"type": "volumetric", "operator": "gte", "value": 86.0}
+      ]
+    },
+    {
+      "name": "Clean Finish",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 8.0,
+      "temperature": 95.0,
+      "pump": {"target": "flow", "flow": 1.8, "pressure": 3.0},
+      "transition": {"type": "ease-out", "duration": 2.0, "adaptive": true},
+      "targets": [
+        {"type": "volumetric", "operator": "gte", "value": 93.5}
+      ]
+    }
+  ]
+}
