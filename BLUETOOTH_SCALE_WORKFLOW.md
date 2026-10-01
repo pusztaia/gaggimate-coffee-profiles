@@ -74,7 +74,7 @@
 9. **Automatikus stop** – a GaggiMate megáll, amikor a beverage weight eléri a `stop_at_g` értéket
 10. **Hozam ellenőrzése** – a mérleg mutatja a végső értéket; rögzítsd a shot log-ban
 
-### V2 profil stop logika (GaggiMate 1.8.1 firmware)
+### V2 profil stop logika (GaggiMate 1.9.0 firmware)
 
 | Fázis | Stop trigger | Megjegyzés |
 |---|---|---|

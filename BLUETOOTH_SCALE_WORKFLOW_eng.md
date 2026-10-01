@@ -74,7 +74,7 @@
 9. **Automatic stop** – the GaggiMate stops when the beverage weight reaches the `stop_at_g` value
 10. **Yield check** – the scale displays the final value; record it in the shot log
 
-### V2 profile stop logic (GaggiMate 1.8.1 firmware)
+### V2 profile stop logic (GaggiMate 1.9.0 firmware)
 
 | Phase | Stop trigger | Notes |
 |---|---|---|

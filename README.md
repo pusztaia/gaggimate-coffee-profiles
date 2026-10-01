@@ -47,6 +47,9 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 | 28 - Finca el Recreo Caturron | [`caturron-scale.json`](profiles/twenty-eight-caturron/caturron-scale.json) | 42.0 g | 50 s |
 | Impresso - El Salvador Ochupse | [`el-salvador-ochupse-scale.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-scale.json) | 41.0 g | 45 s |
 | Impresso - Honduras Las Calaveras | [`honduras-las-calaveras-scale.json`](profiles/honduras-las-calaveras/honduras-las-calaveras-scale.json) | 39.0 g | 33 s |
+| Bagira - Costa Rica Finca San Calletano | [`costa-rica-san-calletano-40s-scale-v1.json`](profiles/bagira-costa-rica-finca-san-calletano/costa-rica-san-calletano-40s-scale-v1.json) | 42.0 g | 40 s |
+| Bagira - Ethiopia Halo Beriti | [`ethiopia-halo-beriti-39s-scale-v2.json`](profiles/bagira-halo-beriti/ethiopia-halo-beriti-39s-scale-v2.json) | 43.5 g | 39 s |
+| Bagira - Kenya Kainamui AA | [`kenya-kii-aa-40s-scale-v1.json`](profiles/bagira-kenya-kainamui-aa/kenya-kii-aa-40s-scale-v1.json) | 43.0 g | 40 s |
 
 ---
 
@@ -99,7 +102,7 @@ A V2 profilok beverage weight alapján állítják meg a shotot:
 
 Részletes workflow: [`BLUETOOTH_SCALE_WORKFLOW.md`](BLUETOOTH_SCALE_WORKFLOW.md)
 
-### Firmware viselkedés (GaggiMate 1.8.1)
+### Firmware viselkedés (GaggiMate 1.9.0)
 
 A `targets` tömb **fázis szintű** — minden phase-hez külön definiálható. A V2 profilok az extraction fázisba helyezik a `volumetric` target-et:
 

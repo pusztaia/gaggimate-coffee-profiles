@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-12",
+  "updated": "2026-10-01",
   "defaults": {
     "dose": 18.5,
     "rpm": 1200,
@@ -58,6 +58,96 @@
           "label": "Adaptive v2",
           "kind": "general",
           "file": "profile-adapt.json",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "bagira-costa-rica-finca-san-calletano",
+      "folder": "bagira-costa-rica-finca-san-calletano",
+      "title": "Bagira - Costa Rica Finca San Calletano",
+      "subtitle": "cseresznyebefőtt · csokoládé",
+      "origin": "Általános espresso profil",
+      "process": "profil",
+      "notes": [
+        "cseresznyebefőtt",
+        "csokoládé",
+        "krémes"
+      ],
+      "grind": "11",
+      "dose": 19.0,
+      "yield": "42 g",
+      "expectedTime": "kb. 40 s",
+      "page": "bagira-costa-rica-finca-san-calletano.html",
+      "accent": "#6f2b55",
+      "accent2": "#bd6a4f",
+      "featured": false,
+      "variants": [
+        {
+          "id": "scale-v1",
+          "label": "Scale V1",
+          "kind": "scale",
+          "file": "costa-rica-san-calletano-40s-scale-v1.json",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "bagira-halo-beriti",
+      "folder": "bagira-halo-beriti",
+      "title": "Bagira - Ethiopia Halo Beriti",
+      "subtitle": "virágos · citrusos",
+      "origin": "Általános espresso profil",
+      "process": "profil",
+      "notes": [
+        "virágos",
+        "citrusos",
+        "tiszta"
+      ],
+      "grind": "11",
+      "dose": 19.0,
+      "yield": "43.5 g",
+      "expectedTime": "kb. 39 s",
+      "page": "bagira-halo-beriti.html",
+      "accent": "#485c35",
+      "accent2": "#879b61",
+      "featured": false,
+      "variants": [
+        {
+          "id": "scale-v2",
+          "label": "Scale V2",
+          "kind": "scale",
+          "file": "ethiopia-halo-beriti-39s-scale-v2.json",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "bagira-kenya-kainamui-aa",
+      "folder": "bagira-kenya-kainamui-aa",
+      "title": "Bagira - Kenya Kainamui AA",
+      "subtitle": "feketeribizli · bogyós gyümölcs",
+      "origin": "Általános espresso profil",
+      "process": "profil",
+      "notes": [
+        "feketeribizli",
+        "bogyós gyümölcs",
+        "tea"
+      ],
+      "grind": "11",
+      "dose": 19.0,
+      "yield": "43 g",
+      "expectedTime": "kb. 40 s",
+      "page": "bagira-kenya-kainamui-aa.html",
+      "accent": "#8c294b",
+      "accent2": "#bc5271",
+      "featured": false,
+      "variants": [
+        {
+          "id": "scale-v1",
+          "label": "Scale V1",
+          "kind": "scale",
+          "file": "kenya-kii-aa-40s-scale-v1.json",
           "default": true
         }
       ]
@@ -294,6 +384,12 @@
       "featured": false,
       "variants": [
         {
+          "id": "scale-v2-fixed",
+          "label": "Scale V2 · 94,5 °C",
+          "kind": "scale",
+          "file": "kirinyaga-scale-v2-fixed.json"
+        },
+        {
           "id": "scale",
           "label": "Scale V2",
           "kind": "scale",
@@ -305,6 +401,24 @@
           "label": "Manual 37 s",
           "kind": "manual",
           "file": "kirinyaga-manual.json"
+        },
+        {
+          "id": "kirinyaga-37s-b702",
+          "label": "Kirinyaga PB Tea Rose - B702 Scale V3",
+          "kind": "general",
+          "file": "kirinyaga-37s-b702.json"
+        },
+        {
+          "id": "kirinyaga-filter-b702",
+          "label": "Kirinyaga Filter B702",
+          "kind": "general",
+          "file": "kirinyaga-filter-b702.json"
+        },
+        {
+          "id": "kirinyaga-v4-b702",
+          "label": "Kirinyaga PB Tea Rose - B702 Scale V4",
+          "kind": "general",
+          "file": "kirinyaga-v4-b702.json"
         }
       ]
     },
