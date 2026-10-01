@@ -13,6 +13,21 @@
 | Őrlőskála | 0-90, egész jelölések |
 | Mérleg | BOOKOO Themis Ultra (Bluetooth, aktív) |
 
+## IMS B682TH24.5M Specifikációk
+
+| Paraméter | Érték |
+|---|---|
+| Típus | Precision espresso filter basket |
+| Külső átmérő | 70 mm |
+| Belső átmérő (alap) | 60 mm |
+| Magasság | 24.5 mm |
+| Lyukak | 641 lyuk, Ø 0.30 mm, egyenletes körméretben elrendezve |
+| Anyag | AISI 304 rozsdamentes acél, elektropulírozott |
+| Ajánlott dózis | 18–20 g |
+| Kapacitás | 18–22 g (az őrlésvastagsággal és tömörítéssel változó) |
+| Kompatibilitás | 58mm portafilter (E61-group, La Marzocco, standard gépek) |
+| Link | https://www.imsfiltri.com/filters/B682TH24.5M.html |
+
 ## IMS B702TH28-ONE (E&B Lab All-In-One 2T) Specifikációk
 
 | Paraméter | Érték |
@@ -27,6 +42,17 @@
 | Kimenet | Double espresso vagy filtered drink |
 | Kompatibilitás | E61-group és modern 58mm espresso gépek; folyamat-profiling/áramlásvezérlő gépekhez tervezve |
 | Link | https://www.imsfiltri.com/filters/E&BLABALLINONE2T–B70.html |
+
+## Kosarak közötti különbségek
+
+| Paraméter | B682TH24.5M | B702TH28-ONE |
+|---|---|---|
+| Lyukak száma | 641 | 257 |
+| Lyuk átmérő | 0.30 mm | 150 µm szűrőmembrán |
+| Magasság | 24.5 mm | 28 mm |
+| Dózis tartomány | 18–20 g | 17–21 g |
+| Szűrés típusa | Klasszikus precisziós | All-In-One / szűrőmembrán |
+| Speciális cél | Klasszikus espresso | Áramlásvezérlés, profiling |
 
 ## Fontos szabályok
 
