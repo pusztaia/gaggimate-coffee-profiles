@@ -6,6 +6,7 @@
 | Daráló | DF64V Gen 2 |
 | Kések | SSP Sweet Lab Espresso V3 |
 | Kosár | IMS B682TH24.5M |
+| Alternatív kosár | IMS B702TH28-ONE (E&B Lab All-In-One 2T) |
 | Puck screen | IMS E&B Lab puck diffuser screen, Ø 2.4 mm, 253 lyuk (DS58.5) |
 | RPM | 1200 baseline |
 | RPM tartomány | 800-1800 RPM, változtatható |
