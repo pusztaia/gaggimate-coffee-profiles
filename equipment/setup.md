@@ -20,4 +20,5 @@
 - Az MD fájlokban nincs beágyazott JSON blokk.
 - Shot logot minden érdemi tesztről érdemes felvenni.
 - Puck screen használatakor a screen legyen tiszta és száraz.
+- A B702TH28-ONE használatakor külön ellenőrizni kell a tömörítést és az áramlást, mert a kosár formája és belső térfogata eltér a B682TH24.5M-től.
 - A célhozamot jelenleg külön mérlegen figyeld; automatikus BOOKOO / Bluetooth mérleges stop később opcionális.
