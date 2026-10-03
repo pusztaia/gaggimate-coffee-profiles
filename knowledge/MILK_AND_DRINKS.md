@@ -1,6 +1,6 @@
 # Milk & Drink Preparation
 
-Steaming technique, temperature thresholds, drink specs, and single-boiler workflow for home baristas.
+Steaming technique, oat-milk temperature targets, drink specs, and single-boiler workflow for home baristas.
 
 > *For deep reference — milk chemistry, foam science, latte art, detailed drink descriptions, iced drinks — see [`reference/MILK_AND_DRINKS_REFERENCE.md`](reference/MILK_AND_DRINKS_REFERENCE.md).*
 
@@ -10,18 +10,21 @@ Steaming technique, temperature thresholds, drink specs, and single-boiler workf
 
 ### Temperature Effects on Milk
 
-| Temperature | What Happens | Flavor Effect | Texture Effect |
-|-------------|-------------|---------------|----------------|
-| < 50°C | Proteins intact, fats liquid | Mild, raw taste | Thin, won't hold foam well |
-| 50-60°C | Whey proteins begin unfolding | Sweetness emerging | Foam starts stabilizing |
-| 60-65°C | Protein denaturation begins; lactose perception increases | Sweet, clean | Ideal microfoam window opens |
-| 65-70°C | Peak lactose sweetness; proteins fully denatured | Maximum natural sweetness | Best microfoam — silky, glossy |
-| > 70°C | Maillard browning begins; proteins aggregate | Scalded, flat, bitter | Foam breaks down, becomes bubbly |
+| Temperature | Dairy Milk | Oat Milk | Practical Effect |
+|-------------|-------------|----------|------------------|
+| < 55°C | Foam still developing | Sweetness/body developing | Usually too cool for a finished hot milk drink |
+| 55-60°C | Good protein stabilization begins | Good texture development | Clean, relatively light result |
+| 60-65°C | Excellent microfoam zone | **Preferred oat-milk zone** | Sweet, creamy, glossy; good latte-art texture |
+| 65-68°C | Very sweet | Upper end for oat milk | More sweetness/body, but oat texture can become heavier |
+| > 68-70°C | Quality starts degrading | **Avoid** | Scalded flavor, weaker texture, higher separation/curdling risk |
+
+**Oat-milk target:** **63-65°C** in the pitcher for a hot espresso drink. Alpro's Hungarian Barista guidance specifically recommends **65°C** for oat milk. citeturn370871search0
 
 **Key thresholds to remember:**
-- **60°C** — Protein denaturation begins. This is when foam starts getting good.
-- **65-70°C** — The sweet spot. Lactose is most perceptible, microfoam is most stable.
-- **70°C** — The danger line. Above here, quality degrades rapidly.
+- **60°C** — texture is established and sweetness starts to round out.
+- **63-65°C** — practical target for Oatly Barista and Alpro Barista Oatmilk.
+- **65°C** — use as the default stop point for Alpro Barista Oatmilk.
+- **> 68-70°C** — avoid; heat can flatten flavor and damage foam quality.
 
 ### Steaming Technique
 
@@ -30,55 +33,86 @@ Steaming has three distinct phases. Each has a different wand position, sound, a
 **Steaming Phases**
 
 | Phase | Goal | Wand Position | Duration | Sound |
-|-------|------|--------------|----------|-------|
-| **Stretching** | Introduce air | Tip just below surface (~5mm) | 3-5 sec | Gentle "tsss" — paper tearing |
-| **Rolling** | Create vortex, break bubbles | Tip submerged ~1cm, angled | Until 55°C | Quiet hum — no hissing |
-| **Polishing** | Integrate texture | Same position, let heat finish | Until 65°C | Near-silent |
+|-------|------|---------------|----------|-------|
+| **Stretching** | Introduce air | Tip just below surface (~5mm) | 2-4 sec | Gentle "tsss" |
+| **Rolling** | Create vortex, break bubbles | Tip submerged ~1cm, angled | Until ~55°C | Quiet hum |
+| **Polishing** | Integrate texture | Same position | Until 63-65°C | Near-silent |
 
 **Step-by-step:**
 
-1. **Start cold.** Always begin with cold milk (ideally 4°C). Cold milk gives you more time in the stretching phase.
-2. **Purge the wand.** Clear condensation before inserting into milk.
-3. **Stretch (3-5 seconds).** Position the steam tip just below the surface. Gentle "tsss" sound. For microfoam drinks (flat white, cortado), stretch less (2-3 seconds). For cappuccino, stretch more (4-6 seconds).
-4. **Submerge and roll.** Drop the tip ~1cm below the surface and angle the pitcher to create a vortex. Quiet hum — if you hear hissing, the tip is too high.
-5. **Polish to temperature.** Hold position until 65°C. The pitcher should feel "too hot to hold comfortably."
-6. **Stop and swirl.** Turn off steam, remove wand, purge immediately. Tap on counter (pops surface bubbles) and swirl to maintain glossy texture.
+1. **Start cold.** Use refrigerated oat milk, ideally straight from the fridge.
+2. **Purge the wand.** Clear condensation before inserting into the pitcher.
+3. **Stretch briefly.** For flat white or cortado, start with **2-3 seconds** of gentle air intake. Oat milk usually needs less aggressive stretching than a cappuccino-style dairy foam.
+4. **Submerge and roll.** Lower the tip and create a strong vortex. The surface should look smooth rather than bubbly.
+5. **Polish to 63-65°C.** Stop at **65°C maximum** as the default. Do not chase a higher temperature to compensate for a cool cup.
+6. **Stop and swirl.** Turn off steam, remove the wand, purge immediately, then swirl until the milk is glossy and uniform.
 
-**Common Steaming Problems**
+**Visual target for oat milk:** glossy, paint-like microfoam with very small bubbles. The milk should pour as one continuous, creamy texture rather than as separate liquid + foam layers.
+
+### Common Steaming Problems
 
 | Problem | Cause | Fix |
 |---------|-------|-----|
 | Large, visible bubbles | Too much air / tip too high | Reduce stretching time; keep tip just below surface |
-| Scalded / burnt taste | Milk over 70°C | Stop earlier; use a thermometer until you calibrate by touch |
-| Screaming / screeching | Tip too deep + full steam pressure | Raise tip slightly; ensure vortex is established |
-| Foam too stiff / dry | Over-stretched, too much air introduced | Shorten stretching phase; more rolling time |
-| No foam at all | Tip too deep during stretch phase | Raise tip until you hear the "tsss" |
-| Foam separates quickly | Low-protein milk or overheated | Switch to barista-edition alt-milk; don't exceed 65°C |
+| Scalded / burnt taste | Milk overheated | Stop at 63-65°C |
+| Screaming / screeching | Tip too deep + full steam pressure | Raise tip slightly; re-establish vortex |
+| Foam too stiff / dry | Over-stretched | Shorten stretching to 2-3 sec |
+| No foam at all | Tip too deep during stretch | Raise tip until you hear a gentle "tsss" |
+| Foam separates quickly | Overheating / poor vortex / unsuitable product | Improve vortex; use Barista oat milk; keep below ~65-68°C |
+| Oat milk looks thick and gluey | Excessive stretching or overheating | Use less air and stop earlier |
 
-### Milk Types & Alternatives
+### Oat Milk Types & Alternatives
 
-**Performance Matrix**
+#### Preferred Oat Milks
 
-| Milk Type | Fat (%) | Protein (%) | Sweetness | Foam Quality | Latte Art | Notes |
-|-----------|---------|-------------|-----------|--------------|-----------|-------|
-| Whole dairy | 3.25 | 3.4 | Medium | Excellent | Excellent | The gold standard |
-| 2% dairy | 2.0 | 3.4 | Medium | Very good | Very good | Slightly less body |
-| Skim dairy | 0.1 | 3.5 | Low | Stiff/dry | Fair | Foam is stable but unpleasant texture |
-| Oat (Barista) | 3.0 | 1.0 | High | Very good | Good | Best dairy alternative overall |
-| Soy (Barista) | 2.0 | 3.5 | Low | Good | Fair | High protein but acid-sensitive |
-| Almond | 1.5 | 0.5 | Low | Poor | Poor | Low protein = unstable foam |
-| Coconut | 2.0 | 0.2 | Medium | Fair | Poor | Creamy body but foam collapses |
+| Product | Typical Fat | Typical Protein | Sweetness | Foam | Flavor / Use |
+|---------|-------------|-----------------|-----------|------|--------------|
+| **Oatly Barista Edition** | 3.0% | 1.1% | High | Very good | Rich, creamy, coffee-friendly; strong all-rounder |
+| **Alpro Barista Oat / Barista Gluten-Free Oat** | ~3.1% | ~0.3% on the current HU gluten-free formula | Medium-high | Very good | Lighter, clean oat character; easy to foam |
 
-**Why oat milk works:** Barista-edition oat milks contain added fats (usually rapeseed/canola oil) and beta-glucans — soluble fibers from the oats that mimic the stabilizing role of dairy proteins.
+**Oatly Barista Edition:** the current Oatly product page lists water, 10% oats and rapeseed oil as the main ingredients, with **3.0 g fat** and **1.1 g protein per 100 ml**. citeturn360755search1
 
-**Preventing curdling with plant milks:**
-- Use barista-edition milks (formulated with stabilizers and added calcium)
-- Steam to 60-65°C, not higher — lower temperature reduces curdling risk
-- Pour milk into espresso (not espresso into milk) — gradual pH change is gentler
-- Choose medium roasts over very light roasts for plant-milk drinks (lower acidity)
-- Temper the milk: add a small splash of cold milk to the espresso first, then pour the steamed milk
+**Alpro Barista Oat:** Alpro's current UK product information lists oat base, sunflower oil, chicory-root fibre and pea protein; the Hungarian site currently presents the Barista oat product as **Barista gluténmentes zabital**, with **3.1 g fat** and **0.3 g protein per 100 ml**. citeturn360755search9turn370871search2
 
-### Gaggia Classic Pro Single Boiler Workflow
+> **Important:** formulations can vary by market and can change over time. Use the carton label as the final reference for the exact product you have.
+
+### Why Oat Milk Works in Coffee
+
+Barista oat drinks are formulated for coffee use. Their combination of oat solids, fats, fibers and stabilizing ingredients helps produce a creamy texture and more stable foam than standard oat drinks.
+
+Oatly Barista uses rapeseed oil and oat solids; Alpro's current Barista oat formulation uses sunflower oil and additional structuring ingredients. citeturn360755search1turn360755search9
+
+### Preventing Oat-Milk Curdling / Separation
+
+- Use a **Barista** oat drink rather than a standard oat drink.
+- Steam to **63-65°C**; avoid overheating.
+- Make a smooth vortex and avoid large bubbles.
+- Pour the **oat milk into the espresso**, not the other way around.
+- Very bright, high-acidity espresso can be more difficult with plant milk; a sweeter, lower-acidity shot usually integrates more easily.
+- Pour soon after steaming while the microfoam is still uniform.
+- If the coffee is especially acidic, a slightly cooler milk target around **60-63°C** can help preserve a clean texture.
+
+---
+
+## Oatly Barista vs Alpro Barista Oatmilk
+
+Both work well for espresso-based milk drinks, but they do not taste or texture exactly the same.
+
+| Factor | Oatly Barista | Alpro Barista Oat |
+|--------|---------------|-------------------|
+| Oat character | Richer, more pronounced | Lighter, cleaner |
+| Perceived sweetness | Higher | Medium-high |
+| Body | Creamy / fuller | Creamy but lighter |
+| Foam texture | Dense, silky | Light, stable, easy to pour |
+| Latte art | Very good | Very good |
+| Recommended steam target | **63-65°C** | **63-65°C**; Alpro explicitly recommends 65°C |
+| Best match | Fruity espresso when you still want body; chocolate/nutty shots when a creamy result is desired | Delicate, clean espresso drinks where you want the coffee to remain more visible |
+
+These are practical brewing observations rather than a manufacturer-defined ranking. Exact behavior depends on the carton formulation, freshness, steaming power and espresso acidity.
+
+---
+
+## Gaggia Classic Pro Single Boiler Workflow
 
 Single boiler machines can't brew and steam simultaneously. You need to manage timing and temperature.
 
@@ -86,47 +120,58 @@ Single boiler machines can't brew and steam simultaneously. You need to manage t
 
 | Step | Shot First (Recommended) | Steam First |
 |------|-------------------------|-------------|
-| 1 | Pull espresso shot | Steam milk, set aside |
+| 1 | Pull espresso shot | Steam oat milk, set aside |
 | 2 | Switch to steam mode | Purge boiler, switch to brew mode |
-| 3 | Wait for steam ready (~30s) | Wait for brew temp to stabilize |
-| 4 | Purge, then steam milk | Pull espresso shot |
-| 5 | Purge wand, combine | Combine (milk may have degraded) |
-| **Pros** | Fresh steamed milk; better texture | Espresso is freshest possible |
-| **Cons** | Espresso sits ~60s while you steam | Steamed milk degrades while waiting |
-| **Best for** | Most drinks (milk quality matters more) | Straight espresso with a splash |
+| 3 | Wait for steam ready (~30s) | Wait for brew temperature to stabilize |
+| 4 | Purge, then steam oat milk | Pull espresso shot |
+| 5 | Purge wand, combine | Combine |
+| **Pros** | Freshly steamed oat milk; better texture | Espresso is freshest possible |
+| **Cons** | Espresso sits briefly while steaming | Oat microfoam degrades while waiting |
+| **Best for** | Most milk drinks | Straight espresso with a splash |
 
-**Recommended sequence:** Shot first. Espresso degrades more gracefully than steamed milk — a 60-second-old shot still tastes good, but microfoam starts separating after 30 seconds.
+**Recommended sequence:** Shot first. Steam the oat milk immediately after the shot and pour without delay. Oat microfoam is at its best when it is still glossy and fully integrated.
 
-**Tip:** Start heating your milk pitcher (fill with hot water, dump before use) so cold milk doesn't steal heat from your steaming process.
+**Tip:** Pre-heat the cup with hot water before pulling the shot. This is preferable to overheating the oat milk to compensate for a cold cup.
 
 ---
 
-## Espresso Drinks
+## Espresso Drinks with Oat Milk
 
 ### Coffee First, Drink Second
 
-Extract for the bean's best expression, then match the right drink format. Never adjust grind, ratio, pressure, or temperature to "make the shot work in milk."
+Extract the espresso for the bean's best expression, then choose the drink format. Do not change grind, ratio, pressure or temperature simply to compensate for the milk.
 
-**Drink Format Recommendations**
+**Drink Format Recommendations for Oat Milk**
 
-| Shot Character | Recommended Format | Milk Volume | Why |
-|----------------|-------------------|-------------|-----|
-| Bright, fruity, delicate | Cortado or piccolo | 60-90 ml | Small milk volume preserves acidity and fruit |
-| Sweet, balanced, medium body | Cappuccino or flat white | 120-180 ml | Enough milk to complement without drowning |
-| Intense, heavy body, bold | Latte (if desired) | 240-300 ml | More milk balances intensity |
-| Clarity-focused (turbo/allongé) | Cortado or piccolo | 60-90 ml | Lighter body gets lost in large drinks |
+| Shot Character | Recommended Format | Oat Milk | Why |
+|----------------|-------------------|----------|-----|
+| Bright, fruity, delicate | Cortado / piccolo | 60-90 ml | Keeps fruit and acidity visible |
+| Sweet, balanced, medium body | Flat white | 100-120 ml | Good coffee-to-oat balance |
+| Intense, heavy body, chocolate/nutty | Cappuccino | 120-150 ml | Oat sweetness and texture complement body |
+| Very intense / roast-forward | Latte | 180-240 ml | More milk softens intensity |
 
 ### Drink Specifications
 
-| Drink | Espresso | Milk | Foam | Total Volume | Espresso:Milk | Vessel |
-|-------|----------|------|------|-------------|---------------|--------|
-| Macchiato | 30 ml (single) | 15 ml | Dollop of foam | ~60 ml | 1:0.5 | 60-90 ml demitasse |
-| Cortado | 60 ml (double) | 60 ml | Thin microfoam | ~120 ml | 1:1 | 120 ml glass (Gibraltar) |
+| Drink | Espresso | Oat Milk | Foam | Total Volume | Espresso:Milk | Vessel |
+|-------|----------|----------|------|--------------|---------------|--------|
+| Macchiato | 30 ml (single) | 15 ml | Small dollop | ~60 ml | 1:0.5 | 60-90 ml demitasse |
+| Cortado | 60 ml (double) | 60 ml | Thin microfoam | ~120 ml | 1:1 | 120 ml glass |
 | Piccolo | 30 ml (single ristretto) | 60-90 ml | Thin microfoam | ~105 ml | 1:2.5 | 90-120 ml glass |
-| Cappuccino (traditional) | 60 ml (double) | 60 ml | 60 ml stiff foam | ~180 ml | 1:1:1 | 150-180 ml ceramic |
-| Cappuccino (modern) | 60 ml (double) | 120 ml | Microfoam throughout | ~180 ml | 1:2 | 180 ml ceramic |
-| Flat white | 60 ml (double) | 120 ml | Very thin microfoam | ~180 ml | 1:2 | 150-180 ml ceramic |
-| Latte | 60 ml (double) | 240-300 ml | Thin foam layer | ~300-360 ml | 1:4-5 | 240-360 ml glass or ceramic |
+| Cappuccino | 60 ml (double) | 120 ml | Microfoam | ~180 ml | 1:2 | 180 ml ceramic |
+| Flat white | 60 ml (double) | 100-120 ml | Very thin microfoam | ~160-180 ml | ~1:1.7-2 | 150-180 ml ceramic |
+| Latte | 60 ml (double) | 180-240 ml | Thin foam layer | ~240-300 ml | 1:3-4 | 240-360 ml vessel |
+
+### Oat Milk Tasting Guide
+
+When tasting an espresso with oat milk, evaluate the drink in this order:
+
+1. **Sweetness** — Does the oat drink add pleasant cereal/caramel sweetness, or does it dominate the coffee?
+2. **Coffee identity** — Can you still identify the bean's fruit, florals or chocolate?
+3. **Acidity** — Is the acidity lively and clean, or does the combination taste sharp/curdled?
+4. **Body** — Does the oat milk add useful creaminess or make the drink too heavy?
+5. **Finish** — Does the aftertaste stay sweet and clean, or become drying/bitter?
+
+For fruity specialty coffees, a **cortado or flat white with 60-120 ml oat milk** usually preserves more coffee character than a large latte.
 
 ---
 
@@ -134,14 +179,15 @@ Extract for the bean's best expression, then match the right drink format. Never
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| Oat milk curdling | Acidity + heat > 70°C | Steam cooler (60-65°C); pour milk into espresso; use barista edition |
-| Scalded / burnt taste | Milk overheated past 70°C | Stop at 65°C; use a thermometer until calibrated by touch |
-| No latte art contrast | Milk too thin or too thick | Adjust stretching time; ensure glossy microfoam texture |
-| Foam too thick / dry | Over-stretched (too much air) | Reduce stretching phase to 2-3 seconds for microfoam drinks |
-| Coffee flavor lost in drink | Too much milk for the shot | Move to a smaller format: latte → cappuccino → cortado |
-| Foam separates quickly | Overheated or low-protein milk | Steam to 65°C max; use whole dairy or barista-edition alt-milk |
-| Espresso and milk don't integrate | Poured too slowly or from too high | Pour faster; bring spout close to surface earlier |
-| Drink lukewarm | Cold cup absorbing heat | Pre-heat cups with hot water; steam milk slightly hotter (68°C) |
+| Oat milk curdling | High coffee acidity + excessive heat | Steam to 60-65°C; pour oat milk into espresso; use Barista formula |
+| Scalded / burnt oat taste | Milk overheated | Stop at 63-65°C |
+| No latte-art contrast | Foam too thin or too thick | Reduce/increase stretching slightly; keep a strong vortex |
+| Foam too thick / dry | Too much air | Limit stretching to ~2-3 sec for flat white/cortado |
+| Coffee flavor lost | Too much oat milk | Reduce milk volume; use cortado/flat white |
+| Foam separates quickly | Overheated or weakly integrated foam | Stop at 65°C; swirl immediately; pour promptly |
+| Oat milk tastes too sweet | Too much milk or naturally sweet oat formulation | Use smaller milk volume or a cleaner espresso profile |
+| Espresso tastes sharper with oat milk | Coffee acidity is accentuated | Use a slightly lower-acidity shot / slightly shorter extraction, while keeping the bean's intended profile in mind |
+| Drink lukewarm | Cold cup / insufficient milk volume | Pre-heat cup; do **not** compensate by overheating oat milk |
 
 ---
 
