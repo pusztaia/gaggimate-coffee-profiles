@@ -77,7 +77,8 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .card-actions{display:flex;flex-wrap:wrap;gap:.45rem;padding:.9rem 1rem 1rem;margin-top:auto;border-top:1px solid var(--line)}.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.58rem .78rem;cursor:pointer;font-weight:820;font-size:.78rem}.btn:hover{border-color:var(--card-accent);color:var(--card-accent)}.btn.primary{background:var(--card-accent);border-color:var(--card-accent);color:#fff}.btn[hidden]{display:none}
 .empty{grid-column:1/-1;padding:3rem 1rem;text-align:center;border:1px dashed var(--line);border-radius:24px;color:var(--muted)}
 .setup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}.setup-card,.doc-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:1.1rem;box-shadow:var(--shadow-soft)}.setup-card span{display:block;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em}.setup-card strong{display:block;font-size:1.05rem;margin-top:.28rem}
-.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.doc-card{display:flex;flex-direction:column;min-height:190px}.doc-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent)}.doc-card h3{font-size:1.1rem;margin:.8rem 0 .25rem}.doc-card p{color:var(--muted);font-size:.84rem;margin:0 0 1rem}.doc-card .btn{margin-top:auto;align-self:flex-start}
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.doc-card{display:flex;flex-direction:column;min-height:190px}.doc-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent)}.doc-card h3{font-size:1.1rem;margin:.8rem 0 .25rem}.doc-card p{color:var(--muted);font-size:.84rem;margin:0 0 1rem}.doc-card .btn{align-self:flex-start}
+.doc-card-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:.5rem}
 .kb-group{margin-bottom:1.75rem}.kb-group:last-child{margin-bottom:0}.kb-group h3{font-size:1.15rem;margin:0 0 .9rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 .modular{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.code-card{background:#1f1815;color:#f8eee7;border-radius:24px;padding:1.2rem;overflow:auto;box-shadow:var(--shadow)}pre{margin:0;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}.steps{display:grid;gap:.75rem;counter-reset:step}.step{counter-increment:step;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1rem}.step:before{content:counter(step);display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--accent);color:#fff;font-weight:950}.step p{margin:.1rem 0;color:var(--muted)}.step strong{color:var(--text)}
 .notice{border-left:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 13%,var(--surface));padding:1rem 1.1rem;border-radius:0 16px 16px 0;margin-top:1rem}
@@ -269,20 +270,20 @@ const KB_GRINDER_ICON='<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4
 const KB_REF_ICON='<circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.35-4.35"/>';
 const KNOWLEDGE=[
   {group:"Alapok",items:[
-    {title:"Kosarak",file:"knowledge/BASKETS.md",description:"Kosarak hatása az extrakcióra – gyors referencia dialing közben.",icon:KB_BOOK_ICON},
-    {title:"Kávé frissesség és tárolás",file:"knowledge/BEAN_FRESHNESS_AND_STORAGE.md",description:"Frissességi ablakok, ultra-friss kávé kezelése, vizuális jelek.",icon:KB_BOOK_ICON},
-    {title:"Espresso brewing alapok",file:"knowledge/ESPRESSO_BREWING_BASICS.md",description:"Alapváltozók, hangolási stratégiák és diagnosztika dialing közben.",icon:KB_BOOK_ICON},
-    {title:"Kóstolási útmutató",file:"knowledge/ESPRESSO_TASTING_GUIDE.md",description:"Shot értékelése és visszajelzés adása kóstoláskor.",icon:KB_BOOK_ICON},
-    {title:"Extrakciótudomány",file:"knowledge/EXTRACTION_SCIENCE.md",description:"Daráló-profil összefüggés, channeling megelőzés, pre-infúzió, vizuális diagnózis.",icon:KB_BOOK_ICON},
-    {title:"GaggiMate profilkészítési útmutató",file:"knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md",description:"GaggiMate profil JSON séma, pumpa módok, stop feltételek, példák.",icon:KB_BOOK_ICON},
-    {title:"Tej és tejes italok",file:"knowledge/MILK_AND_DRINKS.md",description:"Gőzölési technika, hőmérséklet küszöbök, italreceptek, single-boiler workflow.",icon:KB_BOOK_ICON},
-    {title:"Nyomás útmutató",file:"knowledge/PRESSURE_GUIDE.md",description:"Nyomás hatása az ízre, pörkölési fok és feldolgozás szerint.",icon:KB_BOOK_ICON},
-    {title:"Profilkönyvtár",file:"knowledge/PROFILE_LIBRARY.md",description:"Kész, általános GaggiMate Pro extrakciós profilsablonok.",icon:KB_BOOK_ICON},
-    {title:"Puck screenek",file:"knowledge/PUCK_SCREENS.md",description:"Puck screen hatása az extrakcióra – gyors referencia.",icon:KB_BOOK_ICON},
-    {title:"Speciális kategóriák",file:"knowledge/SPECIAL_CATEGORIES.md",description:"Decaf és blendek extrakciós stratégiái.",icon:KB_BOOK_ICON}
+    {title:"Kosarak",file:"knowledge/BASKETS.md",fileHu:"knowledge/hu/BASKETS.md",description:"Kosarak hatása az extrakcióra – gyors referencia dialing közben.",icon:KB_BOOK_ICON},
+    {title:"Kávé frissesség és tárolás",file:"knowledge/BEAN_FRESHNESS_AND_STORAGE.md",fileHu:"knowledge/hu/BEAN_FRESHNESS_AND_STORAGE.md",description:"Frissességi ablakok, ultra-friss kávé kezelése, vizuális jelek.",icon:KB_BOOK_ICON},
+    {title:"Espresso brewing alapok",file:"knowledge/ESPRESSO_BREWING_BASICS.md",fileHu:"knowledge/hu/ESPRESSO_BREWING_BASICS.md",description:"Alapváltozók, hangolási stratégiák és diagnosztika dialing közben.",icon:KB_BOOK_ICON},
+    {title:"Kóstolási útmutató",file:"knowledge/ESPRESSO_TASTING_GUIDE.md",fileHu:"knowledge/hu/ESPRESSO_TASTING_GUIDE.md",description:"Shot értékelése és visszajelzés adása kóstoláskor.",icon:KB_BOOK_ICON},
+    {title:"Extrakciótudomány",file:"knowledge/EXTRACTION_SCIENCE.md",fileHu:"knowledge/hu/EXTRACTION_SCIENCE.md",description:"Daráló-profil összefüggés, channeling megelőzés, pre-infúzió, vizuális diagnózis.",icon:KB_BOOK_ICON},
+    {title:"GaggiMate profilkészítési útmutató",file:"knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md",fileHu:"knowledge/hu/GAGGIMATE_PROFILE_CREATION_GUIDE.md",description:"GaggiMate profil JSON séma, pumpa módok, stop feltételek, példák.",icon:KB_BOOK_ICON},
+    {title:"Tej és tejes italok",file:"knowledge/MILK_AND_DRINKS.md",fileHu:"knowledge/hu/MILK_AND_DRINKS.md",description:"Gőzölési technika, hőmérséklet küszöbök, italreceptek, single-boiler workflow.",icon:KB_BOOK_ICON},
+    {title:"Nyomás útmutató",file:"knowledge/PRESSURE_GUIDE.md",fileHu:"knowledge/hu/PRESSURE_GUIDE.md",description:"Nyomás hatása az ízre, pörkölési fok és feldolgozás szerint.",icon:KB_BOOK_ICON},
+    {title:"Profilkönyvtár",file:"knowledge/PROFILE_LIBRARY.md",fileHu:"knowledge/hu/PROFILE_LIBRARY.md",description:"Kész, általános GaggiMate Pro extrakciós profilsablonok.",icon:KB_BOOK_ICON},
+    {title:"Puck screenek",file:"knowledge/PUCK_SCREENS.md",fileHu:"knowledge/hu/PUCK_SCREENS.md",description:"Puck screen hatása az extrakcióra – gyors referencia.",icon:KB_BOOK_ICON},
+    {title:"Speciális kategóriák",file:"knowledge/SPECIAL_CATEGORIES.md",fileHu:"knowledge/hu/SPECIAL_CATEGORIES.md",description:"Decaf és blendek extrakciós stratégiái.",icon:KB_BOOK_ICON}
   ]},
   {group:"Darálók",items:[
-    {title:"DF64V referencia",file:"knowledge/grinders/DF64V.md",description:"DF64V Gen-3 + SSP Cast Lab Sweet V3 Red Speed daráló beállítási referencia.",icon:KB_GRINDER_ICON}
+    {title:"DF64V referencia",file:"knowledge/grinders/DF64V.md",fileHu:"knowledge/hu/grinders/DF64V.md",description:"DF64V Gen-3 + SSP Cast Lab Sweet V3 Red Speed daráló beállítási referencia.",icon:KB_GRINDER_ICON}
   ]},
   {group:"Mélyreferencia",items:[
     {title:"Kosarak – mélyreferencia",file:"knowledge/reference/BASKETS_REFERENCE.md",description:"Részletes kosárspecifikációk, összehasonlítás és geometria.",icon:KB_REF_ICON},
@@ -445,11 +446,12 @@ function renderSetup(defaults){
   $("#setupGrid").innerHTML=items.map(([k,v])=>`<article class="setup-card"><span>${esc(k)}</span><strong>${esc(v)}</strong></article>`).join("");
 }
 function renderDocuments(){
-  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${doc.icon}</svg></div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p>${doc.external?`<a class="btn" href="${esc(doc.file)}" target="_blank" rel="noopener">Megnyitás új lapon</a>`:`<button class="btn doc-open" data-doc="${index}">Megnyitás</button>`}</article>`).join("");
+  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${doc.icon}</svg></div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p><div class="doc-card-actions">${doc.external?`<a class="btn" href="${esc(doc.file)}" target="_blank" rel="noopener">Megnyitás új lapon</a>`:`<button class="btn doc-open" data-doc="${index}">Megnyitás</button>`}</div></article>`).join("");
 }
 function knowledgeCardHTML(item){
   const index=KB_ITEMS.indexOf(item);
-  return `<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><button class="btn kb-open" data-kb="${index}">Megnyitás</button></article>`;
+  const huBtn=item.fileHu?`<button class="btn kb-open-lang" data-kb="${index}" data-lang="hu">Magyarul</button>`:"";
+  return `<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="doc-card-actions"><button class="btn kb-open" data-kb="${index}">Megnyitás (EN)</button>${huBtn}</div></article>`;
 }
 function renderKnowledge(query){
   const q=(query||"").trim().toLocaleLowerCase("hu-HU");
@@ -737,6 +739,7 @@ document.addEventListener("click",event=>{
   const md=event.target.closest(".md-open");if(md){const entry=state.profiles.find(p=>p.id===md.dataset.entry);if(!entry)return;const kind=md.dataset.kind;openMarkdown(pathFor(entry,kind==="recipe"?recipeFile(entry):changelogFile(entry)),`${entry.title} – ${kind==="recipe"?"Recept":"Changelog"}`);return;}
   const doc=event.target.closest(".doc-open");if(doc){const item=DOCS[Number(doc.dataset.doc)];if(item)openMarkdown(item.file,item.title);return;}
   const kb=event.target.closest(".kb-open");if(kb){const item=KB_ITEMS[Number(kb.dataset.kb)];if(item)openMarkdown(item.file,item.title);return;}
+  const kbHu=event.target.closest(".kb-open-lang");if(kbHu){const item=KB_ITEMS[Number(kbHu.dataset.kb)];if(item&&item.fileHu)openMarkdown(item.fileHu,`${item.title} (magyarul)`);return;}
   const nested=event.target.closest(".nested-md");if(nested){event.preventDefault();openMarkdown(resolveRelativePath(state.docBase,nested.dataset.file),nested.textContent.trim());}
 });
 $("#searchInput").addEventListener("input",event=>{state.query=event.target.value;renderProfiles();syncURL();});
