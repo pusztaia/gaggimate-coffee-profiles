@@ -54,6 +54,10 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .search,.select{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:.78rem 1rem}.search{padding-left:2.7rem}.select{cursor:pointer}
 .filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}.filter{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.55rem .85rem;cursor:pointer;font-weight:800}.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.filter-clear{border-style:dashed;color:var(--accent)}
 #tasteRow[hidden]{display:none}
+#tasteRow{flex-direction:column;align-items:flex-start;gap:.7rem}
+.taste-category{width:100%}
+.taste-category-label{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.taste-category-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 .taste-toggle{border:0;background:none;color:var(--accent);font-weight:800;font-size:.82rem;cursor:pointer;padding:.3rem 0;margin-bottom:.75rem;display:inline-flex;align-items:center;gap:.3rem}
 .taste-toggle:hover{text-decoration:underline}
 .status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted);margin-bottom:1rem}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}
@@ -246,6 +250,20 @@ const DOCS = [
   {title:"Shot Log Viewer",file:"shot-logs/shot-viewer.html",description:"Letöltött GaggiMate shot logok grafikus megjelenítése – nyomás, flow, hőmérséklet és mérleg görbék.",icon:'<path d="M4 19h16M7 16V9m5 7V5m5 11v-5"/>',external:true}
 ];
 
+const TASTE_CATEGORIES=[
+  {key:"fruity",label:"Gyümölcsös",icon:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>',tags:["alma","cseresznyebefőtt","csipkebogyó","mangó","meggy","sárgabarack","sárgadinnye","sült alma","szőlő"]},
+  {key:"berry",label:"Bogyós",icon:'<circle cx="8.5" cy="9" r="2.6"/><circle cx="14.5" cy="8" r="2.2"/><circle cx="11.5" cy="14" r="2.8"/>',tags:["bogyós gyümölcs","feketeribizli","ribizli","szeder","vörösáfonya dzsem"]},
+  {key:"citrus",label:"Citrusos",icon:'<circle cx="12" cy="12" r="7.5"/><path d="M12 4.5v15M4.5 12h15M6.6 6.6l10.8 10.8M17.4 6.6 6.6 17.4"/>',tags:["citrusos","pomelo"]},
+  {key:"floral",label:"Virágos",icon:'<path d="M12 12a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm0 0a3 3 0 1 1 3 3 3 3 0 0 1-3-3Zm0 0a3 3 0 1 0 3 3 3 3 0 0 0-3-3Zm0 0a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z"/><circle cx="12" cy="12" r="1.3"/>',tags:["hibiszkusz","virágos"]},
+  {key:"chocolate",label:"Csokoládés",icon:'<rect x="4.5" y="6.5" width="15" height="11" rx="1.6"/><path d="M4.5 12h15M9.5 6.5v11M14.5 6.5v11"/>',tags:["csokoládé","csokoládébonbon","étcsokoládé"]},
+  {key:"sweet",label:"Édes",icon:'<path d="M12 4.5c3 3 6 6.3 6 9.8a6 6 0 0 1-12 0c0-3.5 3-6.8 6-9.8Z"/><path d="M9.5 15.5c.6.9 1.5 1.3 2.5 1.3"/>',tags:["karamell","krémes","tejszín"]},
+  {key:"spice",label:"Fűszeres",icon:'<path d="M12 3.5v2.2M12 18.3v2.2M4.9 7.1l1.9 1.1M17.2 15.8l1.9 1.1M4.9 16.9l1.9-1.1M17.2 8.2l1.9-1.1"/><circle cx="12" cy="12" r="3"/>',tags:["szegfűszeg"]},
+  {key:"other",label:"Egyéb",icon:'<path d="M12 6.5c-1.7-1-4-1.3-6-1v12c2 0 4.3.3 6 1.3 1.7-1 4-1.3 6-1.3V5.5c-2-.3-4.3 0-6 1Z"/><path d="M12 6.5v12"/>',tags:["fekete tea","konyak","sangria","tea","tiszta"]}
+];
+function tasteCategoryFor(tag){
+  const found=TASTE_CATEGORIES.find(c=>c.tags.includes(tag));
+  return found?found.key:"other";
+}
 const KB_BOOK_ICON='<path d="M12 6.5c-1.7-1-4-1.3-6-1v12c2 0 4.3.3 6 1.3 1.7-1 4-1.3 6-1.3V5.5c-2-.3-4.3 0-6 1Z"/><path d="M12 6.5v12"/>';
 const KB_GRINDER_ICON='<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>';
 const KB_REF_ICON='<circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.35-4.35"/>';
@@ -340,8 +358,20 @@ function populateControls(){
   const values=[...new Set(state.profiles.map(p=>p.process).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"hu"));
   $("#processSelect").innerHTML='<option value="">Minden feldolgozás</option>'+values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join("");
   $("#processSelect").value=state.process;
-  const tastes=[...new Set(state.profiles.flatMap(p=>p.notes||[]))].sort((a,b)=>a.localeCompare(b,"hu"));
-  $("#tasteRow").innerHTML=tastes.map(t=>`<button class="filter" data-taste="${esc(t)}" aria-pressed="${state.taste.has(t)}">${esc(t)}</button>`).join("");
+  const tastes=[...new Set(state.profiles.flatMap(p=>p.notes||[]))];
+  const byCategory=new Map();
+  tastes.forEach(t=>{
+    const key=tasteCategoryFor(t);
+    if(!byCategory.has(key))byCategory.set(key,[]);
+    byCategory.get(key).push(t);
+  });
+  $("#tasteRow").innerHTML=TASTE_CATEGORIES.filter(cat=>byCategory.has(cat.key)).map(cat=>{
+    const tags=byCategory.get(cat.key).sort((a,b)=>a.localeCompare(b,"hu"));
+    return `<div class="taste-category">
+      <div class="taste-category-label"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${cat.icon}</svg>${esc(cat.label)}</div>
+      <div class="taste-category-tags">${tags.map(t=>`<button class="filter" data-taste="${esc(t)}" aria-pressed="${state.taste.has(t)}">${esc(t)}</button>`).join("")}</div>
+    </div>`;
+  }).join("");
   setTasteExpanded(state.taste.size>0);
 }
 function setTasteExpanded(expanded){
