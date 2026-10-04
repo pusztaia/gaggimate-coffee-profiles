@@ -266,10 +266,14 @@ function renderOverlay(a,b){
     ${line(b.model.pressure,y,"var(--blue)",true)}
     ${line(b.model.flow,y,"var(--flow)",true)}
     ${line(b.model.temperature,yt,"var(--gold)",true)}
-    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s</text></g>
+    <g fill="var(--muted)" font-size="12">
+      <text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s</text>
+      <text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar·ml/s</text><text x="18" y="${H-pad.b}">0</text>
+      <text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text>
+    </g>
   </svg>`;
   $("#legendHost").innerHTML=[
-    ["var(--blue)","Nyomás",false],["var(--flow)","Flow",false],["var(--accent)","Hőmérséklet (A)",false],
+    ["var(--blue)","Nyomás (bar)",false],["var(--flow)","Flow (ml/s)",false],["var(--accent)","Hőmérséklet (°C) · A",false],
     ["var(--blue)","Nyomás (B)",true],["var(--flow)","Flow (B)",true],["var(--gold)","Hőmérséklet (B)",true]
   ].map(([color,label,dash])=>`<span><i style="border-top-color:${color};${dash?"border-top-style:dashed":""}"></i>${esc(label)}</span>`).join("");
 }

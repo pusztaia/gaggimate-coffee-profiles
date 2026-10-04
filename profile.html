@@ -176,9 +176,9 @@ dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
       <h2>Profilgrafikon</h2>
       <div class="card chart-box">
         <div class="chart-toggles" role="group" aria-label="Megjelenített mértékek">
-          <label><input type="checkbox" data-toggle="pressure" checked> Nyomás</label>
-          <label><input type="checkbox" data-toggle="flow" checked> Flow</label>
-          <label><input type="checkbox" data-toggle="temperature" checked> Hőmérséklet</label>
+          <label><input type="checkbox" data-toggle="pressure" checked> Nyomás (bar)</label>
+          <label><input type="checkbox" data-toggle="flow" checked> Flow (ml/s)</label>
+          <label><input type="checkbox" data-toggle="temperature" checked> Hőmérséklet (°C)</label>
         </div>
         <div id="chartHost" class="chart-host"></div>
         <div class="chart-tooltip" id="chartTooltip" hidden role="status" aria-live="polite"></div>
@@ -415,7 +415,11 @@ function renderChart(){
     ${v.flow?`<path d="${pathData(model.flow,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`:""}
     ${v.temperature?`<path d="${pathData(model.temperature,x,yt)}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>`:""}
     <line id="crosshair" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" stroke="currentColor" opacity="0"/>
-    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text></g>
+    <g fill="var(--muted)" font-size="12">
+      <text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text>
+      ${(v.pressure||v.flow)?`<text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar · ml/s</text><text x="18" y="${H-pad.b}">0</text>`:""}
+      ${v.temperature?`<text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text>`:""}
+    </g>
     <rect id="chartOverlay" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent"/>
   </svg>`;
   attachChartInteraction(W,pad,total,model,x);

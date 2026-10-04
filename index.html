@@ -546,7 +546,7 @@ function cardHTML(entry){
     </div>
     <details class="card-details">
       <summary>Profil részletei</summary>
-      <div class="chart-box"><div class="chart-host" data-chart="${esc(entry.id)}"><div class="chart-fallback">A profilgrafikon betöltése…</div></div><div class="chart-legend"><span class="p"><i></i>Nyomás</span><span class="f"><i></i>Flow</span><span class="t"><i></i>Hőmérséklet</span></div></div>
+      <div class="chart-box"><div class="chart-host" data-chart="${esc(entry.id)}"><div class="chart-fallback">A profilgrafikon betöltése…</div></div><div class="chart-legend"><span class="p"><i></i>Nyomás (bar)</span><span class="f"><i></i>Flow (ml/s)</span><span class="t"><i></i>Hőmérséklet (°C)</span></div></div>
       <div class="phase-list" data-phases="${esc(entry.id)}">${phasesHTML(entry._profile)}</div>
     </details>
     <div class="card-actions">
@@ -628,7 +628,7 @@ function renderMiniChart(profile,entry){
     <path d="${pathData(p,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
     <path d="${pathData(f,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
     <path d="${pathData(temp,x,yt)}" fill="none" stroke="var(--card-accent)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>
-    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text><text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)}</text><text x="18" y="${H-pad.b}">0</text><text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text></g>
+    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text><text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar·ml/s</text><text x="18" y="${H-pad.b}">0</text><text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text></g>
   </svg>`;
 }
 
