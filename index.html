@@ -53,6 +53,8 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .field{position:relative}.field svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--muted)}
 .search,.select{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:.78rem 1rem}.search{padding-left:2.7rem}.select{cursor:pointer}
 .filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}.filter{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.55rem .85rem;cursor:pointer;font-weight:800}.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.filter-clear{border-style:dashed;color:var(--accent)}
+.taste-toggle{border:0;background:none;color:var(--accent);font-weight:800;font-size:.82rem;cursor:pointer;padding:.3rem 0;margin-bottom:.75rem;display:inline-flex;align-items:center;gap:.3rem}
+.taste-toggle:hover{text-decoration:underline}
 .status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted);margin-bottom:1rem}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}
 .profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 .profile-card{--card-accent:var(--accent);--card-accent2:var(--accent2);background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;min-width:0}
@@ -130,7 +132,8 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
       <button class="filter" data-filter="manual" aria-pressed="false">Manual</button>
       <button class="filter filter-clear" id="clearFilters" type="button" hidden>Szűrők törlése ×</button>
     </div>
-    <div class="filter-row" id="tasteRow" aria-label="Ízjegy szűrése"></div>
+    <button class="taste-toggle" id="tasteToggle" type="button" aria-expanded="false" aria-controls="tasteRow">+ Ízjegy szerinti szűrés</button>
+    <div class="filter-row" id="tasteRow" aria-label="Ízjegy szűrése" hidden></div>
   </div>
 </section>
 
@@ -338,6 +341,12 @@ function populateControls(){
   $("#processSelect").value=state.process;
   const tastes=[...new Set(state.profiles.flatMap(p=>p.notes||[]))].sort((a,b)=>a.localeCompare(b,"hu"));
   $("#tasteRow").innerHTML=tastes.map(t=>`<button class="filter" data-taste="${esc(t)}" aria-pressed="${state.taste.has(t)}">${esc(t)}</button>`).join("");
+  setTasteExpanded(state.taste.size>0);
+}
+function setTasteExpanded(expanded){
+  $("#tasteRow").hidden=!expanded;
+  $("#tasteToggle").setAttribute("aria-expanded",String(expanded));
+  $("#tasteToggle").textContent=expanded?"− Ízjegyek elrejtése":"+ Ízjegy szerinti szűrés";
 }
 function activeFilterCount(){
   return (state.filter!=="all"?1:0)+(state.query.trim()?1:0)+(state.process?1:0)+state.taste.size;
@@ -703,6 +712,7 @@ $("#searchInput").addEventListener("input",event=>{state.query=event.target.valu
 $("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();syncURL();});
 $("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();syncURL();});
 $("#kbSearchInput").addEventListener("input",event=>renderKnowledge(event.target.value));
+$("#tasteToggle").addEventListener("click",()=>setTasteExpanded($("#tasteRow").hidden));
 $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
 const menuBtn=$("#menuBtn"),mobileMenu=$("#mobileMenu");
 menuBtn.addEventListener("click",()=>{mobileMenu.showModal();menuBtn.setAttribute("aria-expanded","true");});
