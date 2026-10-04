@@ -13,3 +13,6 @@ if ! git diff --quiet -- profiles/catalog.json; then
   git add profiles/catalog.json
   echo "pre-commit: profiles/catalog.json regenerated and staged"
 fi
+
+echo "pre-commit: running release-hardening checks (tools/validate_repo.py)"
+python3 tools/validate_repo.py

@@ -19,8 +19,7 @@ Ezt a blokkot érdemes minden prompt elejére bemásolni.
 You are a senior frontend engineer and product designer working on the
 GaggiMate Coffee Profiles project.
 
-Project:
-https://pusztaia.github.io/gaggimate-coffee-profiles/
+Project: This folder
 
 Main goals:
 - Preserve all currently working profiles and downloads.
@@ -39,6 +38,10 @@ Main goals:
 - Do not rename or modify existing GaggiMate JSON schema fields unless required.
 - Before changing code, inspect the current repository structure and reuse existing
   utilities where reasonable.
+- Target GaggiMate firmware v1.9.0+ for any new profile-field support (e.g. the
+  `phases[].transition.target` enum: `time` | `volumetric` | `pumped`, added in
+  v1.9.0). Check `schema/profile.json` for the current canonical field list before
+  assuming a field exists or is missing.
 
 UX principle:
 Coffee → Recipe → Profile → Brew → Taste → Adjust
@@ -69,7 +72,7 @@ Audit the current GaggiMate Coffee Profiles repository before making architectur
 changes.
 
 Repository/site:
-https://pusztaia.github.io/gaggimate-coffee-profiles/
+this folder
 
 Your task is to inspect the project and produce a concrete technical redesign plan.
 
@@ -510,6 +513,9 @@ Visualize all data that can be reliably derived, such as:
 - expected or stop weight, when meaningful
 - phase boundaries
 - time
+- ramp/transition shape at the start of each phase, including whether the ramp is
+  driven by time, measured volume, or pumped volume (`transition.target`,
+  firmware v1.9.0+) rather than assuming every ramp is time-based
 
 Provide toggles:
 
@@ -609,19 +615,28 @@ Then:
 Requirements:
 
 1. Inspect current GaggiMate documentation/source and determine the supported API
-   or upload endpoint for profile import.
+   or upload endpoint for profile import. Re-check this against the firmware version
+   actually running on the target device (surfaced via the API/websocket status if
+   available) — e.g. firmware v1.9.0 added a `wp` (water pumped) field to the
+   WebSocketHandler status response and gear-pump / positive-displacement-pump
+   tuning parameters, which may affect what device info is available or how a
+   profile validates on upload.
 
 2. Do not invent an API.
 
-3. If browser security, CORS, HTTPS mixed-content rules or GaggiMate firmware
+3. If the connected device reports a firmware version older than what a profile
+   field requires (e.g. `transition.target` needs v1.9.0+), warn the user instead
+   of silently uploading a profile the device may not fully support.
+
+4. If browser security, CORS, HTTPS mixed-content rules or GaggiMate firmware
    prevent direct upload, explain the limitation in the UI and implement the best
    technically valid fallback.
 
-4. Store the preferred GaggiMate address locally in the browser, not on a server.
+5. Store the preferred GaggiMate address locally in the browser, not on a server.
 
-5. Validate the JSON profile before sending.
+6. Validate the JSON profile before sending.
 
-6. Show clear states:
+7. Show clear states:
    - testing
    - connected
    - connection failed
@@ -629,11 +644,11 @@ Requirements:
    - installed
    - rejected
 
-7. Never silently overwrite an existing profile without user awareness.
+8. Never silently overwrite an existing profile without user awareness.
 
-8. Keep normal "Download JSON" available as fallback.
+9. Keep normal "Download JSON" available as fallback.
 
-9. Support IP addresses as well as local hostnames.
+10. Support IP addresses as well as local hostnames.
 
 Example flow:
 
@@ -802,6 +817,10 @@ v4: 2.3 bar / 8 s
 Finish
 v3: 2.1 ml/s
 v4: 1.8 ml/s
+
+Transition (if `transition.target` differs between versions)
+v3: time-based ramp
+v4: volumetric-based ramp
 
 4. Human-readable summary
 

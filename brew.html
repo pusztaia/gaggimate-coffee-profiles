@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="hu" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#171210">
+<meta name="description" content="GaggiMate Brew Mode – nagyméretű, gép melletti kivonat recept és profil adatokból.">
+<title>Brew mode</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<style>
+:root{
+  --bg:#121014;--surface:#1b181d;--surface2:#242027;--text:#f8f5f2;--muted:#ad9fa8;
+  --line:#352f36;--accent:#ff8fa3;--gold:#f0b94c;--ok:#6fcf97;--shadow:0 18px 50px rgba(0,0,0,.4);
+  --radius-xl:30px;--radius-lg:22px;color-scheme:dark;
+}
+html[data-theme="light"]{
+  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
+  --line:#dfd1c1;--accent:#7d1d2f;--gold:#b5781f;--ok:#2e7d4f;--shadow:0 18px 50px rgba(66,38,27,.12);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
+.topbar a{text-decoration:none;font-weight:800;padding:.5rem .8rem;border-radius:999px;border:1px solid var(--line)}
+.icon-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.5rem .8rem;cursor:pointer}
+.container{max-width:520px;margin:auto;padding:1.2rem 1.1rem 3rem;text-align:center}
+.coffee-name{font-size:clamp(1.6rem,7vw,2.3rem);font-weight:900;letter-spacing:-.02em;margin:.8rem 0 .2rem;text-transform:uppercase}
+.coffee-sub{color:var(--muted);font-weight:700;margin:0 0 1.4rem}
+.dose-flow{display:flex;align-items:center;justify-content:center;gap:1rem;font-size:clamp(2.2rem,11vw,3.4rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.dose-flow .arrow{font-size:.5em;color:var(--accent)}
+.ratio{color:var(--gold);font-weight:800;font-size:1.3rem;margin:.5rem 0 1.3rem}
+.stat-row{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.stat-chip{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:.9rem 1.2rem;min-width:110px}
+.stat-chip strong{display:block;font-size:1.4rem}
+.stat-chip span{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;margin-top:.2rem}
+.grinder-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem;margin-bottom:1.6rem;font-size:1.15rem;font-weight:800}
+.grinder-card span{display:block;color:var(--muted);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.phase-timeline{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem 1.2rem;margin-bottom:1.6rem}
+.phase-timeline h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .8rem}
+.phase-timeline ol{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.phase-timeline li{display:flex;justify-content:space-between;gap:.8rem;font-size:1.05rem;font-weight:700}
+.phase-timeline li span{color:var(--muted);font-weight:700;font-size:.92rem}
+.checklist{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem 1.2rem;margin-bottom:1.6rem}
+.checklist h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .7rem}
+.checklist label{display:flex;align-items:center;gap:.7rem;padding:.6rem 0;font-size:1.1rem;font-weight:700;border-bottom:1px solid var(--line)}
+.checklist label:last-child{border-bottom:0}
+.checklist input{width:22px;height:22px;accent-color:var(--accent)}
+.btn-row{display:flex;flex-direction:column;gap:.7rem}
+.btn-big{display:block;width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);text-decoration:none;border-radius:999px;padding:1rem;font-weight:900;font-size:1.05rem;cursor:pointer}
+.btn-big.primary{background:var(--accent);border-color:var(--accent);color:#1a0f12}
+.status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-lg);padding:1rem 1.1rem;color:var(--muted)}.status.error{border-color:#c06a68}
+.wake-note{color:var(--muted);font-size:.75rem;margin-top:1rem}
+@media(orientation:landscape) and (max-height:500px){.container{max-width:760px}.dose-flow{font-size:clamp(1.8rem,7vw,2.6rem)}}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a id="backLink" href="index.html">← Profil</a>
+  <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+</header>
+<main class="container">
+  <div id="status" class="status">Betöltés…</div>
+  <div id="brewBody" hidden>
+    <div class="coffee-name" id="coffeeName"></div>
+    <p class="coffee-sub" id="coffeeSub"></p>
+
+    <div class="dose-flow"><span id="doseVal">—</span><span class="arrow">↓</span><span id="yieldVal">—</span></div>
+    <p class="ratio" id="ratioVal"></p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><strong id="tempVal">—</strong><span>Hőmérséklet</span></div>
+      <div class="stat-chip"><strong id="timeVal">—</strong><span>Max idő</span></div>
+    </div>
+
+    <div class="grinder-card">
+      <span>Daráló</span>
+      <div id="grinderVal">—</div>
+    </div>
+
+    <div class="phase-timeline">
+      <h2>Várható profil</h2>
+      <ol id="phaseTimeline"></ol>
+    </div>
+
+    <div class="checklist" id="checklistCard">
+      <h2>Előkészítés</h2>
+      <div id="checklistItems"></div>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn-big primary" id="graphLink" href="#">Profilgrafikon megnyitása</a>
+      <a class="btn-big" id="exitLink" href="index.html">Kilépés a teljes profilhoz</a>
+    </div>
+    <p class="wake-note" id="wakeNote"></p>
+  </div>
+</main>
+<script src="assets/js/profile-common.js"></script>
+<script>
+"use strict";
+const $=(sel,root=document)=>root.querySelector(sel);
+const CHECKLIST_ITEMS=["Kosár száraz","Pontos dózis kimérve","WDT elvégezve","Tamp egyenletes","Puck screen a helyén","Mérleg csatlakoztatva és nullázva"];
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
+setTheme(localStorage.getItem("gaggimate-theme")||"dark");
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+
+let wakeLock=null;
+async function requestWakeLock(){
+  if(!("wakeLock" in navigator))return;
+  try{
+    wakeLock=await navigator.wakeLock.request("screen");
+    $("#wakeNote").textContent="A képernyő ébren marad brewing közben.";
+    wakeLock.addEventListener("release",()=>{$("#wakeNote").textContent="";});
+  }catch(error){
+    $("#wakeNote").textContent="";
+  }
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&!wakeLock)requestWakeLock();});
+
+function renderChecklist(id){
+  const key=`gaggimate-brew-checklist-${id}`;
+  const saved=JSON.parse(localStorage.getItem(key)||"[]");
+  $("#checklistItems").innerHTML=CHECKLIST_ITEMS.map((label,i)=>`<label><input type="checkbox" data-idx="${i}" ${saved[i]?"checked":""}>${esc(label)}</label>`).join("");
+  $("#checklistItems").addEventListener("change",event=>{
+    const checks=CHECKLIST_ITEMS.map((_,i)=>{
+      const box=$(`[data-idx="${i}"]`,$("#checklistItems"));
+      return box?box.checked:false;
+    });
+    localStorage.setItem(key,JSON.stringify(checks));
+  });
+}
+
+async function init(){
+  const params=new URLSearchParams(location.search);
+  const id=params.get("id");
+  const status=$("#status");
+  if(!id){status.className="status error";status.textContent="Hiányzó profil-azonosító (?id=...).";return;}
+  try{
+    const catalog=await fetchJSON("profiles/catalog.json");
+    const entry=(catalog.profiles||[]).find(p=>p.id===id);
+    if(!entry)throw new Error(`Nincs ilyen profil a katalógusban: ${id}`);
+    const variant=defaultVariant(entry);
+    const profile=await fetchJSON(pathFor(entry,variant.file));
+    document.title=`${entry.title} · Brew mode`;
+    $("#backLink").href=`profile.html?id=${encodeURIComponent(entry.id)}`;
+    $("#graphLink").href=`profile.html?id=${encodeURIComponent(entry.id)}`;
+    $("#coffeeName").textContent=entry.title;
+    $("#coffeeSub").textContent=[entry.process,entry.subtitle].filter(Boolean).join(" · ");
+    const target=lastWeightTarget(profile);
+    const yieldText=target?`${formatNumber(target)} g`:(entry.yield||"—");
+    $("#doseVal").textContent=entry.dose?`${String(entry.dose).replace(".",",")} g`:"—";
+    $("#yieldVal").textContent=yieldText;
+    const yieldNum=target||parseFloat(String(entry.yield||"").replace(",","."));
+    if(entry.dose&&Number.isFinite(yieldNum)&&entry.dose>0){
+      $("#ratioVal").textContent=`1:${(yieldNum/entry.dose).toFixed(2)}`;
+    }else{
+      $("#ratioVal").textContent="";
+    }
+    $("#tempVal").textContent=Number.isFinite(Number(profile.temperature))?`${formatNumber(profile.temperature)} °C`:"—";
+    $("#timeVal").textContent=`${formatNumber(totalDuration(profile),0)} s`;
+    const rpm=catalog.defaults?.rpm;
+    $("#grinderVal").textContent=[entry.grind,rpm?`${rpm} RPM`:null].filter(Boolean).join(" @ ")||catalog.defaults?.grinder||"—";
+    const model=buildChartModel(profile);
+    $("#phaseTimeline").innerHTML=model.phases.map(p=>`<li><strong>${esc(p.name)}</strong><span>${formatNumber(p.start,0)}–${formatNumber(p.end,0)} s</span></li>`).join("");
+    renderChecklist(entry.id);
+    status.hidden=true;
+    $("#brewBody").hidden=false;
+    requestWakeLock();
+  }catch(error){
+    status.className="status error";
+    status.innerHTML=`<strong>Nem sikerült betölteni a brew móddal.</strong><br>${esc(error.message)}`;
+  }
+}
+if(location.protocol==="file:"){$("#status").className="status error";$("#status").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
+else init();
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>

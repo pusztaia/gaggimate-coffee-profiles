@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#7d1d2f">
 <meta name="description" content="Moduláris GaggiMate Coffee Profiles katalógus JSON-alapú profilkártyákkal.">
 <title>GaggiMate Coffee Profiles</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
 <style>
 :root{
   --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
@@ -49,7 +52,7 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .toolbar{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:.75rem;margin-bottom:1rem}
 .field{position:relative}.field svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--muted)}
 .search,.select{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:.78rem 1rem}.search{padding-left:2.7rem}.select{cursor:pointer}
-.filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}.filter{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.55rem .85rem;cursor:pointer;font-weight:800}.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}.filter{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.55rem .85rem;cursor:pointer;font-weight:800}.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.filter-clear{border-style:dashed;color:var(--accent)}
 .status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted);margin-bottom:1rem}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}
 .profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 .profile-card{--card-accent:var(--accent);--card-accent2:var(--accent2);background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;min-width:0}
@@ -72,6 +75,7 @@ section{padding:4rem 0;scroll-margin-top:78px}
 .modular{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}.code-card{background:#1f1815;color:#f8eee7;border-radius:24px;padding:1.2rem;overflow:auto;box-shadow:var(--shadow)}pre{margin:0;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}.steps{display:grid;gap:.75rem;counter-reset:step}.step{counter-increment:step;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1rem}.step:before{content:counter(step);display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--accent);color:#fff;font-weight:950}.step p{margin:.1rem 0;color:var(--muted)}.step strong{color:var(--text)}
 .notice{border-left:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 13%,var(--surface));padding:1rem 1.1rem;border-radius:0 16px 16px 0;margin-top:1rem}
 .modal-backdrop{display:none;position:fixed;inset:0;z-index:80;background:rgba(12,7,6,.76);backdrop-filter:blur(8px);padding:1rem;overflow:auto}.modal-backdrop.open{display:grid;place-items:center}.modal{width:min(920px,96vw);max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.modal-head{position:sticky;top:0;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line);z-index:2}.modal-head h2{font-size:1rem;margin:0}.modal-close{border:1px solid var(--line);background:var(--surface2);color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer}.modal-body{padding:1.2rem 1.4rem 1.6rem}.modal-body h1{font-size:2rem;line-height:1.05}.modal-body h2{font-size:1.45rem;margin-top:1.7rem}.modal-body h3{font-size:1.1rem;margin-top:1.4rem}.modal-body p,.modal-body li{color:var(--muted)}.modal-body table{width:100%;border-collapse:collapse;font-size:.84rem}.modal-body th,.modal-body td{padding:.7rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.modal-body th{background:var(--surface2)}.modal-body pre{background:#1f1815;color:#f8eee7;border-radius:16px;padding:1rem;overflow:auto}.modal-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface2);padding:.08em .3em;border-radius:5px;color:var(--text)}.modal-body blockquote{border-left:4px solid var(--gold);margin:1rem 0;padding:.7rem 1rem;background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:0 12px 12px 0}.modal-body img{border-radius:16px;box-shadow:var(--shadow-soft)}
+.md-toc{border:1px solid var(--line);background:var(--surface2);border-radius:16px;padding:.9rem 1.1rem;margin-bottom:1.3rem;font-size:.86rem}.md-toc strong{display:block;margin-bottom:.4rem;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.md-toc ul{margin:0;padding-left:1.1rem;list-style:none}.md-toc li{margin-bottom:.25rem}.md-toc a{color:var(--accent);text-decoration:none}.md-toc a:hover{text-decoration:underline}.md-toc .toc-level-2{margin-left:.9rem}.md-toc .toc-level-3{margin-left:1.8rem}
 .menu-btn{display:none}
 dialog#mobileMenu{border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;background:var(--surface);color:var(--text);box-shadow:var(--shadow);width:min(320px,86vw);margin:1rem auto auto auto}
 dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)}
@@ -99,7 +103,7 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
       <span class="brand-text"><strong>GaggiMate Coffee Profiles</strong><span>Moduláris profil-katalógus</span></span>
     </a>
     <nav class="nav" aria-label="Fő navigáció">
-      <a href="#profiles">Profilok</a><a href="#setup">Setup</a><a href="#documents">Dokumentáció</a><a href="#knowledge">Tudásbázis</a><a href="#modular">Fejlesztőknek</a>
+      <a href="#profiles">Profilok</a><a href="finder.html">Profile Finder</a><a href="compare.html">Összehasonlítás</a><a href="#setup">Setup</a><a href="#documents">Dokumentáció</a><a href="#knowledge">Tudásbázis</a><a href="#modular">Fejlesztőknek</a>
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menü megnyitása" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMenu" title="Menü">☰</button>
       <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
     </nav>
@@ -116,7 +120,7 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
     <div class="toolbar">
       <div class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="searchInput" type="search" placeholder="Keresés név, eredet, feldolgozás vagy ízjegy alapján…" autocomplete="off"></div>
       <select class="select" id="processSelect" aria-label="Feldolgozás szűrése"><option value="">Minden feldolgozás</option></select>
-      <select class="select" id="sortSelect" aria-label="Rendezés"><option value="featured">Kiemeltek előre</option><option value="title">Név szerint</option><option value="temperature">Hőmérséklet szerint</option></select>
+      <select class="select" id="sortSelect" aria-label="Rendezés"><option value="featured">Kiemeltek előre</option><option value="title">Név szerint</option><option value="origin">Eredet szerint</option><option value="temperature">Hőmérséklet szerint</option></select>
     </div>
     <div class="filter-row" aria-label="Profiltípus szűrése">
       <button class="filter" data-filter="all" aria-pressed="true">Összes</button>
@@ -124,7 +128,9 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
       <button class="filter" data-filter="general" aria-pressed="false">Általános</button>
       <button class="filter" data-filter="scale" aria-pressed="false">Scale</button>
       <button class="filter" data-filter="manual" aria-pressed="false">Manual</button>
+      <button class="filter filter-clear" id="clearFilters" type="button" hidden>Szűrők törlése ×</button>
     </div>
+    <div class="filter-row" id="tasteRow" aria-label="Ízjegy szűrése"></div>
   </div>
 </section>
 
@@ -145,7 +151,8 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
 </section>
 
 <section id="knowledge">
-  <div class="section-head"><div><h2>Tudásbázis</h2><p>Espresso dial-in tudásanyag: alapok, daráló-referenciák és mélyreferenciák. A fájlok az oldalon belül nyílnak meg, a köztük lévő kereszthivatkozásokkal együtt.</p></div></div>
+  <div class="section-head"><div><h2>Tudásbázis<span id="kbResultCount" class="result-count"></span></h2><p>Espresso dial-in tudásanyag: alapok, daráló-referenciák és mélyreferenciák. A fájlok az oldalon belül nyílnak meg, a köztük lévő kereszthivatkozásokkal együtt.</p></div></div>
+  <div class="field" style="margin-bottom:1.25rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="kbSearchInput" type="search" placeholder="Keresés a tudásbázisban…" autocomplete="off"></div>
   <div id="knowledgeGroups"></div>
 </section>
 
@@ -207,6 +214,8 @@ dialog#mobileMenu::backdrop{background:rgba(12,7,6,.5);backdrop-filter:blur(4px)
   <div class="mobile-menu-head"><strong>Menü</strong><button class="modal-close" id="mobileMenuClose" aria-label="Bezárás">×</button></div>
   <nav class="mobile-menu-links">
     <a href="#profiles">Profilok</a>
+    <a href="finder.html">Profile Finder</a>
+    <a href="compare.html">Összehasonlítás</a>
     <a href="#setup">Setup</a>
     <a href="#documents">Dokumentáció</a>
     <a href="#knowledge">Tudásbázis</a>
@@ -222,6 +231,7 @@ const DOCS = [
   {title:"Összefoglaló",file:"SUMMARY.md",description:"Aktuális profilok, ízjegyek és könyvtárszerkezet.",icon:'<path d="M8 6h10M8 12h10M8 18h10"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>'},
   {title:"Brew Guidelines",file:"BREW_GUIDELINES.md",description:"Dózis, hozam, őrlés, puck prep és dial-in.",icon:'<path d="M7.5 4.5h9v6.8a4.5 4.5 0 0 1-9 0V4.5Z"/><path d="M16.5 7h1.3a2.7 2.7 0 0 1 0 5.4h-1.5M5 19.5h14"/>'},
   {title:"Darálási útmutató",file:"GRINDER_GUIDELINES.md",description:"DF64V Gen 2 és SSP Sweet Lab Espresso V3.",icon:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>'},
+  {title:"Setup / berendezés",file:"equipment/setup.md",description:"Gép és daráló dokumentáció: Gaggia Classic Pro 2025, GaggiMate Pro, DF64V, kosár-összehasonlítás.",icon:'<rect x="4" y="3.5" width="16" height="13" rx="2"/><path d="M9 20.5h6M12 16.5v4"/>'},
   {title:"Bluetooth Scale Workflow",file:"BLUETOOTH_SCALE_WORKFLOW.md",description:"BOOKOO párosítás, kalibráció és hibakeresés.",icon:'<path d="M7 7l10 10L12 22V2l5 5L7 17"/>'},
   {title:"Profilkészítési útmutató",file:"PROFILE_CREATION_GUIDE.md",description:"GaggiMate JSON séma, fázisok és új profil készítése.",icon:'<path d="M14.5 6.5a3.5 3.5 0 0 1-4.6 4.6L5 16l3 3 4.9-4.9a3.5 3.5 0 0 1 4.6-4.6l-2.3 2.3-2-2 2.3-2.3Z"/>'},
   {title:"Fájlelnevezés",file:"FILE_NAMING.md",description:"Mappa-, JSON-, PNG-, recipe- és changelog-nevek.",icon:'<path d="M12.6 3H6a1 1 0 0 0-1 1v6.6a1 1 0 0 0 .3.7l9 9a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-9-9a1 1 0 0 0-.4-.3Z"/><circle cx="8.5" cy="8.5" r="1.2"/>'},
@@ -269,7 +279,7 @@ const KNOWLEDGE=[
 ];
 const KB_ITEMS=KNOWLEDGE.flatMap(g=>g.items);
 
-const state={catalog:null,profiles:[],filter:"all",query:"",process:"",sort:"featured",loaded:new Map()};
+const state={catalog:null,profiles:[],filter:"all",query:"",process:"",taste:new Set(),sort:"featured",loaded:new Map()};
 const $=(sel,root=document)=>root.querySelector(sel);
 const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
 
@@ -306,6 +316,10 @@ async function loadCatalog(){
     state.catalog=catalog;
     state.profiles=catalog.profiles.map((entry,index)=>({...entry,_index:index,_variant:defaultVariant(entry),_profile:null,_error:null}));
     status.hidden=true;
+    stateFromURL();
+    $("#searchInput").value=state.query;
+    $("#sortSelect").value=state.sort;
+    $$(".filter[data-filter]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.filter===state.filter)));
     populateControls();
     updateMetrics();
     renderSetup(catalog.defaults||{});
@@ -321,6 +335,45 @@ async function loadCatalog(){
 function populateControls(){
   const values=[...new Set(state.profiles.map(p=>p.process).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"hu"));
   $("#processSelect").innerHTML='<option value="">Minden feldolgozás</option>'+values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join("");
+  $("#processSelect").value=state.process;
+  const tastes=[...new Set(state.profiles.flatMap(p=>p.notes||[]))].sort((a,b)=>a.localeCompare(b,"hu"));
+  $("#tasteRow").innerHTML=tastes.map(t=>`<button class="filter" data-taste="${esc(t)}" aria-pressed="${state.taste.has(t)}">${esc(t)}</button>`).join("");
+}
+function activeFilterCount(){
+  return (state.filter!=="all"?1:0)+(state.query.trim()?1:0)+(state.process?1:0)+state.taste.size;
+}
+function updateClearButton(){
+  const btn=$("#clearFilters");
+  btn.hidden=activeFilterCount()===0;
+}
+function clearFilters(){
+  state.filter="all";state.query="";state.process="";state.taste.clear();
+  $("#searchInput").value="";$("#processSelect").value="";
+  $$(".filter[data-filter]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.filter==="all")));
+  $$(".filter[data-taste]").forEach(b=>b.setAttribute("aria-pressed","false"));
+  renderProfiles();syncURL();
+}
+function paramsFromState(){
+  const params=new URLSearchParams();
+  if(state.query.trim())params.set("q",state.query.trim());
+  if(state.filter!=="all")params.set("type",state.filter);
+  if(state.process)params.set("process",state.process);
+  if(state.taste.size)params.set("taste",[...state.taste].join(","));
+  if(state.sort!=="featured")params.set("sort",state.sort);
+  return params;
+}
+function syncURL(){
+  const qs=paramsFromState().toString();
+  const url=`${location.pathname}${qs?`?${qs}`:""}${location.hash}`;
+  history.replaceState(null,"",url);
+}
+function stateFromURL(){
+  const params=new URLSearchParams(location.search);
+  state.query=params.get("q")||"";
+  state.filter=params.get("type")||"all";
+  state.process=params.get("process")||"";
+  state.sort=params.get("sort")||"featured";
+  state.taste=new Set((params.get("taste")||"").split(",").filter(Boolean));
 }
 function updateMetrics(){
   const variants=state.profiles.flatMap(p=>p.variants);
@@ -335,7 +388,7 @@ function updateMetrics(){
 function updateResultCount(list){
   const el=$("#resultCount");
   if(!el)return;
-  const active=state.filter!=="all"||Boolean(state.query.trim())||Boolean(state.process);
+  const active=activeFilterCount()>0;
   el.textContent=active?`${list.length} találat`:`${list.length} profil`;
 }
 function renderSetup(defaults){
@@ -358,8 +411,16 @@ function knowledgeCardHTML(item){
   const index=KB_ITEMS.indexOf(item);
   return `<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><button class="btn kb-open" data-kb="${index}">Megnyitás</button></article>`;
 }
-function renderKnowledge(){
-  $("#knowledgeGroups").innerHTML=KNOWLEDGE.map(g=>`<div class="kb-group"><h3>${esc(g.group)}</h3><div class="docs-grid">${g.items.map(knowledgeCardHTML).join("")}</div></div>`).join("");
+function renderKnowledge(query){
+  const q=(query||"").trim().toLocaleLowerCase("hu-HU");
+  const groups=q
+    ?KNOWLEDGE.map(g=>({group:g.group,items:g.items.filter(item=>`${item.title} ${item.description}`.toLocaleLowerCase("hu-HU").includes(q))})).filter(g=>g.items.length)
+    :KNOWLEDGE;
+  const total=groups.reduce((sum,g)=>sum+g.items.length,0);
+  $("#kbResultCount").textContent=q?`${total} találat`:"";
+  $("#knowledgeGroups").innerHTML=groups.length
+    ?groups.map(g=>`<div class="kb-group"><h3>${esc(g.group)}</h3><div class="docs-grid">${g.items.map(knowledgeCardHTML).join("")}</div></div>`).join("")
+    :'<div class="empty">Nincs a keresésnek megfelelő tudásbázis-cikk.</div>';
 }
 
 function filteredProfiles(){
@@ -370,6 +431,7 @@ function filteredProfiles(){
     if(state.filter==="scale"&&!hasKind(entry,"scale"))return false;
     if(state.filter==="manual"&&!hasKind(entry,"manual"))return false;
     if(state.process&&entry.process!==state.process)return false;
+    if(state.taste.size&&![...state.taste].every(t=>(entry.notes||[]).includes(t)))return false;
     if(q){
       const hay=[entry.title,entry.subtitle,entry.origin,entry.process,entry.grind,...(entry.notes||[])].join(" ").toLocaleLowerCase("hu-HU");
       if(!hay.includes(q))return false;
@@ -377,6 +439,7 @@ function filteredProfiles(){
     return true;
   });
   if(state.sort==="title")list.sort((a,b)=>a.title.localeCompare(b.title,"hu"));
+  else if(state.sort==="origin")list.sort((a,b)=>(a.origin||"").localeCompare(b.origin||"","hu"));
   else if(state.sort==="temperature")list.sort((a,b)=>(Number(b._profile?.temperature)||0)-(Number(a._profile?.temperature)||0));
   else list.sort((a,b)=>(Number(Boolean(b.featured))-Number(Boolean(a.featured)))||(a._index-b._index));
   return list;
@@ -417,6 +480,7 @@ function phasesHTML(profile){
 function renderProfiles(){
   const list=filteredProfiles();
   updateResultCount(list);
+  updateClearButton();
   const grid=$("#profileGrid");
   if(!list.length){grid.innerHTML='<div class="empty">Nincs a szűrésnek megfelelő profil.</div>';return;}
   grid.innerHTML=list.map(cardHTML).join("");
@@ -426,7 +490,7 @@ function cardHTML(entry){
   const variant=entry._variant||defaultVariant(entry);
   const stats=profileStats(entry);
   const style=`--card-accent:${entry.accent||"var(--accent)"};--card-accent2:${entry.accent2||entry.accent||"var(--accent2)"}`;
-  const page=entry.page?pathFor(entry,entry.page):"";
+  const page=`profile.html?id=${encodeURIComponent(entry.id)}`;
   return `<article class="profile-card${entry.featured?" featured":""}" data-id="${esc(entry.id)}" style="${esc(style)}">
     <div class="card-top">
       <div class="card-kicker"><span>${esc(entry.process||"profil")}</span><span class="kind">${esc(kindLabel(variant))}</span></div>
@@ -552,11 +616,16 @@ function inlineMarkdown(text){
 }
 function isTableSep(line){return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);}
 function splitRow(line){return line.trim().replace(/^\|/,"").replace(/\|$/,"").split("|").map(c=>c.trim());}
-function renderMarkdown(markdown){
+function slugifyHeading(text){
+  return String(text).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"")
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"section";
+}
+function renderMarkdown(markdown,buildToc=true){
   const lines=String(markdown).replace(/\r\n?/g,"\n").split("\n"),out=[];let i=0,inCode=false,code=[],para=[],list=[],ordered=false,quote=[];
+  const headings=[],usedIds=new Set();
   const flushP=()=>{if(para.length){out.push(`<p>${inlineMarkdown(para.join(" "))}</p>`);para=[];}};
   const flushL=()=>{if(list.length){out.push(`${ordered?"<ol>":"<ul>"}${list.map(x=>`<li>${inlineMarkdown(x)}</li>`).join("")}${ordered?"</ol>":"</ul>"}`);list=[];}};
-  const flushQ=()=>{if(quote.length){out.push(`<blockquote>${renderMarkdown(quote.join("\n"))}</blockquote>`);quote=[];}};
+  const flushQ=()=>{if(quote.length){out.push(`<blockquote>${renderMarkdown(quote.join("\n"),false)}</blockquote>`);quote=[];}};
   while(i<lines.length){
     const line=lines[i],trim=line.trim();
     if(trim.startsWith("```")){flushP();flushL();flushQ();if(inCode){out.push(`<pre><code>${esc(code.join("\n"))}</code></pre>`);code=[];inCode=false;}else inCode=true;i++;continue;}
@@ -564,12 +633,32 @@ function renderMarkdown(markdown){
     if(!trim){flushP();flushL();flushQ();i++;continue;}
     if((trim==="---"||trim==="***"||trim==="___")){flushP();flushL();flushQ();out.push("<hr>");i++;continue;}
     if(trim.includes("|")&&i+1<lines.length&&isTableSep(lines[i+1])){flushP();flushL();flushQ();const rows=[line,lines[i+1]];i+=2;while(i<lines.length&&lines[i].trim().includes("|")&&lines[i].trim())rows.push(lines[i++]);const head=splitRow(rows[0]),body=rows.slice(2).map(splitRow);out.push(`<table><thead><tr>${head.map(c=>`<th>${inlineMarkdown(c)}</th>`).join("")}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(c=>`<td>${inlineMarkdown(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);continue;}
-    const h=trim.match(/^(#{1,6})\s+(.+)$/);if(h){flushP();flushL();flushQ();out.push(`<h${h[1].length}>${inlineMarkdown(h[2])}</h${h[1].length}>`);i++;continue;}
+    const h=trim.match(/^(#{1,6})\s+(.+)$/);
+    if(h){
+      flushP();flushL();flushQ();
+      const level=h[1].length,text=h[2];
+      let id="";
+      if(buildToc){
+        id=slugifyHeading(text);
+        let unique=id,n=2;
+        while(usedIds.has(unique))unique=`${id}-${n++}`;
+        id=unique;usedIds.add(id);
+        headings.push({level,text,id});
+      }
+      out.push(`<h${level}${id?` id="${id}"`:""}>${inlineMarkdown(text)}</h${level}>`);
+      i++;continue;
+    }
     const q=trim.match(/^>\s?(.*)$/);if(q){flushP();flushL();quote.push(q[1]);i++;continue;}
     const ul=trim.match(/^[-*+]\s+(.+)$/),ol=trim.match(/^\d+\.\s+(.+)$/);if(ul||ol){flushP();flushQ();const now=Boolean(ol);if(list.length&&ordered!==now)flushL();ordered=now;list.push((ul||ol)[1]);i++;continue;}
     flushL();flushQ();para.push(trim);i++;
   }
-  if(inCode)out.push(`<pre><code>${esc(code.join("\n"))}</code></pre>`);flushP();flushL();flushQ();return out.join("\n");
+  if(inCode)out.push(`<pre><code>${esc(code.join("\n"))}</code></pre>`);flushP();flushL();flushQ();
+  let result=out.join("\n");
+  if(buildToc&&headings.length>=4){
+    const tocHtml=`<nav class="md-toc" aria-label="Tartalomjegyzék"><strong>Tartalom</strong><ul>${headings.filter(h=>h.level<=3).map(h=>`<li class="toc-level-${h.level}"><a href="#${h.id}">${esc(h.text)}</a></li>`).join("")}</ul></nav>`;
+    result=tocHtml+result;
+  }
+  return result;
 }
 function resolveRelativePath(base,rel){
   if(/^([a-z]+:)?\/\//i.test(rel)||rel.startsWith("#"))return rel;
@@ -587,20 +676,33 @@ async function openMarkdown(file,title){
 }
 function closeModal(){const b=$("#modalBackdrop");b.classList.remove("open");document.body.style.overflow="";}
 function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
+function preferredTheme(){
+  const saved=localStorage.getItem("gaggimate-theme");
+  if(saved)return saved;
+  return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{
+    if(!localStorage.getItem("gaggimate-theme"))setTheme(event.matches?"dark":"light");
+  });
+}
 
 document.addEventListener("change",event=>{
   const select=event.target.closest("[data-variant-select]");if(select)selectVariant(select.dataset.variantSelect,select.value);
 });
 document.addEventListener("click",event=>{
-  const filter=event.target.closest(".filter");if(filter){state.filter=filter.dataset.filter;$$(".filter").forEach(b=>b.setAttribute("aria-pressed",String(b===filter)));renderProfiles();return;}
+  const clear=event.target.closest("#clearFilters");if(clear){clearFilters();return;}
+  const taste=event.target.closest(".filter[data-taste]");if(taste){const t=taste.dataset.taste;if(state.taste.has(t))state.taste.delete(t);else state.taste.add(t);taste.setAttribute("aria-pressed",String(state.taste.has(t)));renderProfiles();syncURL();return;}
+  const filter=event.target.closest(".filter[data-filter]");if(filter){state.filter=filter.dataset.filter;$$(".filter[data-filter]").forEach(b=>b.setAttribute("aria-pressed",String(b===filter)));renderProfiles();syncURL();return;}
   const md=event.target.closest(".md-open");if(md){const entry=state.profiles.find(p=>p.id===md.dataset.entry);if(!entry)return;const kind=md.dataset.kind;openMarkdown(pathFor(entry,kind==="recipe"?recipeFile(entry):changelogFile(entry)),`${entry.title} – ${kind==="recipe"?"Recept":"Changelog"}`);return;}
   const doc=event.target.closest(".doc-open");if(doc){const item=DOCS[Number(doc.dataset.doc)];if(item)openMarkdown(item.file,item.title);return;}
   const kb=event.target.closest(".kb-open");if(kb){const item=KB_ITEMS[Number(kb.dataset.kb)];if(item)openMarkdown(item.file,item.title);return;}
   const nested=event.target.closest(".nested-md");if(nested){event.preventDefault();openMarkdown(resolveRelativePath(state.docBase,nested.dataset.file),nested.textContent.trim());}
 });
-$("#searchInput").addEventListener("input",event=>{state.query=event.target.value;renderProfiles();});
-$("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();});
-$("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();});
+$("#searchInput").addEventListener("input",event=>{state.query=event.target.value;renderProfiles();syncURL();});
+$("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();syncURL();});
+$("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();syncURL();});
+$("#kbSearchInput").addEventListener("input",event=>renderKnowledge(event.target.value));
 $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
 const menuBtn=$("#menuBtn"),mobileMenu=$("#mobileMenu");
 menuBtn.addEventListener("click",()=>{mobileMenu.showModal();menuBtn.setAttribute("aria-expanded","true");});
@@ -611,10 +713,11 @@ $$("a",mobileMenu).forEach(a=>a.addEventListener("click",()=>mobileMenu.close())
 $("#modalClose").addEventListener("click",closeModal);
 $("#modalBackdrop").addEventListener("click",event=>{if(event.target.id==="modalBackdrop")closeModal();});
 document.addEventListener("keydown",event=>{if(event.key==="Escape")closeModal();});
-setTheme(localStorage.getItem("gaggimate-theme")||"light");
+setTheme(preferredTheme());
 renderKnowledge();
 if(location.protocol==="file:"){$("#catalogStatus").className="status error";$("#catalogStatus").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>A böngésző a kapcsolódó JSON/Markdown fájlokat valószínűleg nem engedi betölteni. Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
 loadCatalog();
 </script>
+<script src="assets/js/pwa-register.js"></script>
 </body>
 </html>

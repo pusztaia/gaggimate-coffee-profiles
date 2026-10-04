@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7d1d2f">
+<meta name="description" content="GaggiMate Pro brew dashboard – kávéspecifikus profil, recept és grafikon.">
+<title>GaggiMate profil</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<style>
+:root{
+  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
+  --line:#dfd1c1;--accent:#7d1d2f;--accent2:#b94a31;--gold:#d59842;--blue:#1677b8;
+  --flow:#ef7622;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
+  --radius-xl:32px;--radius-lg:24px;--radius-md:18px;--max:980px;color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#171210;--surface:#211a17;--surface2:#2b211d;--text:#f7eee7;--muted:#c3b4a9;
+  --line:#45372f;--accent:#ef7189;--accent2:#ff8b69;--gold:#efb864;--blue:#78b8e6;
+  --flow:#ff9b54;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit}
+.skip{position:fixed;left:1rem;top:-5rem;z-index:100;background:var(--text);color:var(--bg);padding:.7rem 1rem;border-radius:999px}.skip:focus{top:1rem}
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:1rem}
+.home-link{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text);font-weight:800}
+.icon-btn{margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.5rem .72rem;cursor:pointer}
+.container{max-width:var(--max);margin:auto;padding:1.5rem 1.1rem 3rem}
+.eyebrow{color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:.76rem}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.08;letter-spacing:-.03em;margin:.4rem 0 .2rem}
+.subtitle{color:var(--accent);font-weight:800;font-size:1.05rem;margin:0 0 .2rem}
+.origin{color:var(--muted);margin:0 0 .6rem}
+.pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}.pill{border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:.3rem .6rem;font-size:.76rem}
+section{margin-top:2.2rem}
+section h2{font-size:1.3rem;letter-spacing:-.02em;margin:0 0 .8rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.2rem}
+.recipe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+.recipe-stat{background:var(--surface2);border-radius:var(--radius-md);padding:.85rem;text-align:center}.recipe-stat strong{display:block;font-size:1.15rem}.recipe-stat span{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem}
+.variant-row{display:flex;gap:.6rem;align-items:center;margin-top:1rem;flex-wrap:wrap}.variant-row select{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:.55rem .7rem}
+.meta-list{display:grid;gap:.4rem;margin:0;padding:0;list-style:none;color:var(--muted);font-size:.9rem}.meta-list strong{color:var(--text)}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.65rem .95rem;cursor:pointer;font-weight:800;font-size:.84rem;display:inline-flex;align-items:center;gap:.4rem}
+.btn:hover{border-color:var(--accent);color:var(--accent)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.chart-box{min-height:250px}.mini-chart{width:100%;height:260px;display:block;touch-action:pan-y}
+.chart-toggles{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:.7rem;font-size:.82rem;color:var(--muted)}.chart-toggles label{display:flex;align-items:center;gap:.35rem;cursor:pointer}
+.chart-host{position:relative}
+.chart-tooltip{position:absolute;top:.5rem;right:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.55rem .75rem;font-size:.78rem;box-shadow:var(--shadow-soft);pointer-events:none;line-height:1.5}
+.chart-tooltip strong{display:block;font-size:.85rem;margin-bottom:.15rem}
+.chart-fallback-note{color:var(--muted);font-size:.74rem;margin:.6rem 0 0}
+.phase-list{display:grid;gap:.45rem;margin-top:1rem}.phase-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.55rem;align-items:center;background:var(--surface2);border:1px solid var(--line);border-radius:13px;padding:.55rem .65rem;font-size:.8rem}.phase-row span{color:var(--muted)}.phase-row .target{color:var(--accent);font-weight:800}
+.version-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.version-row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:.7rem .85rem}
+.version-row.current{border-color:var(--accent)}
+.version-label{font-weight:800;flex:1 1 auto;min-width:160px}
+.version-badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:.15rem .55rem}
+.version-kind{font-size:.72rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.15rem .55rem}
+.version-actions{display:flex;gap:.4rem;flex-wrap:wrap}
+.version-actions .btn{padding:.55rem .75rem;font-size:.74rem;min-height:36px}
+.taste-group{margin-bottom:1.1rem}
+.taste-label{display:block;font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.taste-options{display:flex;flex-wrap:wrap;gap:.4rem}
+.taste-options label{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:.4rem .7rem;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.35rem}
+.taste-options input{accent-color:var(--accent)}
+.suggestion-box{margin-top:1.2rem;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface));border-radius:var(--radius-md);padding:1rem 1.1rem}
+.suggestion-box h3{margin:0 0 .5rem;font-size:1rem}
+.suggestion-box ul{margin:.4rem 0 0;padding-left:1.1rem}
+.suggestion-box .confidence{display:block;margin-top:.6rem;color:var(--muted);font-size:.76rem;font-style:italic}
+.taste-history{margin-top:1.3rem;border-top:1px solid var(--line);padding-top:1rem}
+.taste-history h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 .6rem}
+.taste-entry{border:1px solid var(--line);background:var(--surface2);border-radius:12px;padding:.6rem .75rem;margin-bottom:.5rem;font-size:.82rem}
+.taste-entry time{color:var(--muted);font-size:.72rem;display:block;margin-bottom:.2rem}
+.shot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1rem}
+.shot-grid label{display:block;font-size:.78rem;font-weight:800;color:var(--muted)}
+.shot-grid input,.dialog-field textarea{display:block;width:100%;margin-top:.3rem;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:10px;padding:.5rem .65rem;font-size:.9rem}
+.shot-list{margin-top:1.2rem;display:grid;gap:.6rem}
+.shot-row{border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:.7rem .85rem;font-size:.84rem}
+.shot-row.best{border-color:var(--gold)}
+.shot-row time{display:block;color:var(--muted);font-size:.72rem;margin-bottom:.2rem}
+.shot-row .shot-actions{margin-top:.5rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.shot-row .shot-actions .btn{padding:.5rem .7rem;font-size:.74rem;min-height:36px}
+.best-shot-box{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--surface));border-radius:var(--radius-md);padding:.9rem 1rem;margin-bottom:1rem}
+.best-shot-box h4{margin:0 0 .3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+@media(max-width:480px){.shot-grid{grid-template-columns:1fr}}
+.md-body h1,.md-body h2,.md-body h3{line-height:1.2}
+.md-body table{width:100%;border-collapse:collapse;font-size:.88rem}.md-body th,.md-body td{padding:.6rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.md-body th{background:var(--surface2)}
+.md-body img{border-radius:16px;max-width:100%}
+.md-toc{border:1px solid var(--line);background:var(--surface2);border-radius:16px;padding:.9rem 1.1rem;margin-bottom:1.3rem;font-size:.86rem}.md-toc strong{display:block;margin-bottom:.4rem;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.md-toc ul{margin:0;padding-left:1.1rem;list-style:none}.md-toc li{margin-bottom:.25rem}.md-toc a{color:var(--accent);text-decoration:none}.md-toc a:hover{text-decoration:underline}.md-toc .toc-level-2{margin-left:.9rem}.md-toc .toc-level-3{margin-left:1.8rem}
+details.card summary{cursor:pointer;font-weight:800;list-style:none}details.card summary::-webkit-details-marker{display:none}
+.advanced pre{overflow:auto;background:#1f1815;color:#f8eee7;border-radius:16px;padding:1rem;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted)}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}.status.ok{border-color:#3f8f5f;background:color-mix(in srgb,#3f8f5f 12%,var(--surface));color:var(--text)}
+dialog#sendDialog,dialog#docDialog{border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.3rem;background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+dialog#sendDialog{width:min(440px,90vw)}
+dialog#docDialog{width:min(680px,92vw)}
+dialog#docDialog::backdrop{background:rgba(12,7,6,.5)}
+dialog#sendDialog::backdrop{background:rgba(12,7,6,.5)}
+dialog#sendDialog h3{margin:0 0 .6rem}
+.dialog-hint{color:var(--muted);font-size:.82rem;margin:0 0 1rem}
+.dialog-field{display:block;font-size:.84rem;font-weight:800;margin-bottom:1rem}
+.dialog-field input{display:block;width:100%;margin-top:.4rem;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:12px;padding:.6rem .75rem;font-size:.9rem}
+dialog#sendDialog .status{margin-bottom:1rem;font-size:.84rem}
+dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
+@media(max-width:720px){.recipe-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Ugrás a tartalomhoz</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home-link" href="index.html">← Katalógus</a>
+    <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+  </div>
+</header>
+<main id="main" class="container">
+  <div id="loadStatus" class="status">Profil betöltése…</div>
+  <div id="dashboard" hidden>
+    <div class="eyebrow" id="kindLabel"></div>
+    <h1 id="title"></h1>
+    <p class="subtitle" id="subtitle"></p>
+    <p class="origin" id="origin"></p>
+    <div class="pills" id="pills"></div>
+
+    <section id="recipe-section">
+      <h2>Ajánlott recept</h2>
+      <div class="card">
+        <div class="recipe-grid">
+          <div class="recipe-stat"><strong id="statDose">—</strong><span>Dózis</span></div>
+          <div class="recipe-stat"><strong id="statYield">—</strong><span>Hozam / stop</span></div>
+          <div class="recipe-stat"><strong id="statTemp">—</strong><span>Hőmérséklet</span></div>
+          <div class="recipe-stat"><strong id="statTime">—</strong><span>Max idő</span></div>
+        </div>
+        <div class="variant-row">
+          <label for="variantSelect">Profil verzió</label>
+          <select id="variantSelect"></select>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile-section">
+      <h2>Profil</h2>
+      <div class="card">
+        <ul class="meta-list">
+          <li><strong>Fájl:</strong> <span id="metaFile"></span></li>
+          <li><strong>Típus:</strong> <span id="metaType"></span></li>
+          <li><strong>Leírás:</strong> <span id="metaDescription"></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="knowledge-links-section">
+      <h2>Kapcsolódó tudásbázis</h2>
+      <div class="card">
+        <div class="actions" id="knowledgeLinks"></div>
+      </div>
+    </section>
+
+    <section id="actions-section">
+      <h2>Műveletek</h2>
+      <div class="actions">
+        <a class="btn primary" id="downloadJson" download>Letöltés (JSON)</a>
+        <a class="btn" id="downloadPng" target="_blank" rel="noopener">PNG megnyitása</a>
+        <button class="btn" id="openSendDialog">Küldés GaggiMate-re</button>
+        <a class="btn" id="brewModeLink" href="#">Brew mode</a>
+        <a class="btn" id="compareLink" href="#">Összehasonlítás</a>
+      </div>
+    </section>
+
+    <section id="chart-section">
+      <h2>Profilgrafikon</h2>
+      <div class="card chart-box">
+        <div class="chart-toggles" role="group" aria-label="Megjelenített mértékek">
+          <label><input type="checkbox" data-toggle="pressure" checked> Nyomás</label>
+          <label><input type="checkbox" data-toggle="flow" checked> Flow</label>
+          <label><input type="checkbox" data-toggle="temperature" checked> Hőmérséklet</label>
+        </div>
+        <div id="chartHost" class="chart-host"></div>
+        <div class="chart-tooltip" id="chartTooltip" hidden role="status" aria-live="polite"></div>
+        <p class="chart-fallback-note">A lenti fázislista szövegesen is tartalmazza a grafikon minden értékét, képernyőolvasóhoz és érintés nélküli hozzáféréshez.</p>
+        <div class="phase-list" id="phaseList"></div>
+      </div>
+    </section>
+
+    <section id="version-section">
+      <h2>Verziók</h2>
+      <div class="card">
+        <ul class="version-list" id="versionList"></ul>
+      </div>
+    </section>
+
+    <section id="dialin-section">
+      <h2>Ízélmény és dial-in asszisztens</h2>
+      <div class="card">
+        <p class="dialog-hint">Shot után add meg a benyomásod — a lenti javaslat egy fix, átlátható szabályrendszerből jön (nem AI), és sosem garantált eredmény. Csak a böngésződben, helyileg tárolódik.</p>
+        <form id="tasteForm">
+          <div class="taste-group"><span class="taste-label">Savasság</span>
+            <div class="taste-options" data-field="acidity">
+              <label><input type="radio" name="acidity" value="too_sour">Túl savanyú</label>
+              <label><input type="radio" name="acidity" value="bright">Élénk</label>
+              <label><input type="radio" name="acidity" value="balanced" checked>Kiegyensúlyozott</label>
+              <label><input type="radio" name="acidity" value="muted">Tompa</label>
+            </div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Keserűség</span>
+            <div class="taste-options" data-field="bitterness">
+              <label><input type="radio" name="bitterness" value="low">Alacsony</label>
+              <label><input type="radio" name="bitterness" value="balanced" checked>Kiegyensúlyozott</label>
+              <label><input type="radio" name="bitterness" value="high">Magas</label>
+            </div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Édesség</span>
+            <div class="taste-options" data-field="sweetness">
+              <label><input type="radio" name="sweetness" value="low">Alacsony</label>
+              <label><input type="radio" name="sweetness" value="medium" checked>Közepes</label>
+              <label><input type="radio" name="sweetness" value="high">Magas</label>
+            </div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Testesség</span>
+            <div class="taste-options" data-field="body">
+              <label><input type="radio" name="body" value="tea-like">Tea-szerű</label>
+              <label><input type="radio" name="body" value="medium" checked>Közepes</label>
+              <label><input type="radio" name="body" value="syrupy">Szirupos</label>
+            </div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Csersavasság</span>
+            <div class="taste-options" data-field="dryness">
+              <label><input type="radio" name="dryness" value="none" checked>Nincs</label>
+              <label><input type="radio" name="dryness" value="slight">Enyhe</label>
+              <label><input type="radio" name="dryness" value="high">Erős</label>
+            </div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Domináns ízjegyek</span>
+            <div class="taste-options" id="flavorOptions"></div>
+          </div>
+          <div class="taste-group"><span class="taste-label">Shot-megfigyelések (opcionális)</span>
+            <div class="taste-options" id="observationOptions"></div>
+          </div>
+          <button type="submit" class="btn primary">Mentés és javaslat kérése</button>
+        </form>
+        <div id="suggestionBox" class="suggestion-box" hidden></div>
+        <div id="tasteHistory" class="taste-history"></div>
+      </div>
+    </section>
+
+    <section id="shot-history-section">
+      <h2>Shot history</h2>
+      <div class="card">
+        <p class="dialog-hint">Helyileg, csak ebben a böngészőben tárolt napló a ténylegesen lefőzött shotokról. A lenti "Duplikálás" gomb egy korábbi shot beállításait tölti be új bejegyzés alapjának.</p>
+        <form id="shotForm">
+          <input type="hidden" id="shotEditId">
+          <div class="shot-grid">
+            <label>Dózis (g)<input type="number" step="0.1" id="shotDose"></label>
+            <label>Hozam (g)<input type="number" step="0.1" id="shotYield"></label>
+            <label>Hőmérséklet (°C)<input type="number" step="0.1" id="shotTemp"></label>
+            <label>Őrlés<input type="text" id="shotGrind"></label>
+            <label>RPM<input type="number" step="1" id="shotRpm"></label>
+            <label>Időtartam (s)<input type="number" step="0.5" id="shotDuration"></label>
+            <label>Pumpa-stop súly (g, opcionális)<input type="number" step="0.1" id="shotPumpStop"></label>
+            <label>Végső csészesúly (g, opcionális)<input type="number" step="0.1" id="shotCupWeight"></label>
+          </div>
+          <div class="taste-group"><span class="taste-label">Értékelés</span>
+            <div class="taste-options" id="shotRating"></div>
+          </div>
+          <label class="dialog-field">Jegyzet<textarea id="shotNotes" rows="2"></textarea></label>
+          <div class="actions">
+            <button type="submit" class="btn primary" id="shotSubmitBtn">Shot mentése</button>
+            <button type="button" class="btn" id="shotCancelEdit" hidden>Szerkesztés mégse</button>
+          </div>
+        </form>
+        <div id="bestShotBox"></div>
+        <div id="shotList" class="shot-list"></div>
+        <div class="actions" style="margin-top:1rem">
+          <button type="button" class="btn" id="exportShots">Shot history exportálása (JSON)</button>
+          <label class="btn" style="cursor:pointer">Importálás<input type="file" id="importShots" accept="application/json" hidden></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="recipe-md-section">
+      <h2>Recept</h2>
+      <div class="card md-body" id="recipeBody">Betöltés…</div>
+    </section>
+
+    <section id="changelog-section">
+      <details class="card">
+        <summary>Changelog / verziótörténet megnyitása</summary>
+        <div class="md-body" id="changelogBody" style="margin-top:1rem">Betöltés…</div>
+      </details>
+    </section>
+
+    <section id="advanced-section" class="advanced">
+      <details class="card">
+        <summary>Fejlesztői / debug adatok</summary>
+        <ul class="meta-list" style="margin-top:1rem">
+          <li><strong>Mappa:</strong> <span id="advFolder"></span></li>
+          <li><strong>JSON elérési út:</strong> <span id="advPath"></span></li>
+        </ul>
+        <pre id="advJson"></pre>
+      </details>
+    </section>
+  </div>
+</main>
+
+<dialog id="docDialog">
+  <h3 id="docDialogTitle">Dokumentum</h3>
+  <div id="docDialogBody" class="md-body" style="max-height:60vh;overflow:auto"></div>
+  <div class="actions" style="margin-top:1rem"><button type="button" class="btn" id="docDialogClose">Bezárás</button></div>
+</dialog>
+
+<dialog id="sendDialog">
+  <h3>Küldés GaggiMate-re</h3>
+  <p class="dialog-hint">A böngésző közvetlenül, helyi hálózaton kapcsolódik a GaggiMate <code>ws://&lt;cím&gt;/ws</code> WebSocket API-jához. Nincs felhős közvetítés, a cím csak ebben a böngészőben, helyileg kerül elmentésre.</p>
+  <div id="mixedContentWarning" class="status error" hidden>Ez az oldal HTTPS-en fut, a GaggiMate viszont titkosítatlan <code>ws://</code> kapcsolatot használ — a böngésző valószínűleg blokkolni fogja a közvetlen kapcsolatot (mixed content). Nyisd meg az oldalt helyi HTTP-szerverről (<code>python -m http.server</code>) ugyanabban a hálózatban, vagy használd a Letöltés (JSON) gombot, és töltsd fel kézileg a GaggiMate webes felületén.</div>
+  <label class="dialog-field">GaggiMate cím
+    <input type="text" id="gmAddress" placeholder="gaggimate.local vagy 192.168.1.50" autocomplete="off">
+  </label>
+  <div id="sendStatus" class="status">Add meg a címet, majd teszteld a kapcsolatot.</div>
+  <div class="actions">
+    <button class="btn" id="testConnBtn">Kapcsolat tesztelése</button>
+    <button class="btn primary" id="installBtn" disabled>Profil telepítése</button>
+    <button class="btn" id="closeSendDialog">Bezárás</button>
+  </div>
+</dialog>
+
+<script src="assets/js/profile-common.js"></script>
+<script src="assets/js/dialin-rules.js"></script>
+<script>
+"use strict";
+const $=(sel,root=document)=>root.querySelector(sel);
+const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
+const state={entry:null,variant:null,profile:null,model:null,visible:{pressure:true,flow:true,temperature:true}};
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
+function preferredTheme(){
+  const saved=localStorage.getItem("gaggimate-theme");
+  if(saved)return saved;
+  return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{
+    if(!localStorage.getItem("gaggimate-theme"))setTheme(event.matches?"dark":"light");
+  });
+}
+setTheme(preferredTheme());
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+
+function statsFor(entry,profile){
+  const target=lastWeightTarget(profile);
+  return {
+    dose:entry.dose?`${String(entry.dose).replace(".",",")} g`:"—",
+    yield:target?`${formatNumber(target)} g`:entry.yield||"—",
+    temp:profile&&Number.isFinite(Number(profile.temperature))?`${formatNumber(profile.temperature)} °C`:"—",
+    time:profile?`${formatNumber(totalDuration(profile),0)} s max`:entry.expectedTime||"—"
+  };
+}
+
+async function loadVariant(){
+  const entry=state.entry,variant=state.variant;
+  $("#chartHost").innerHTML='<div class="status">Grafikon betöltése…</div>';
+  try{
+    state.profile=await fetchJSON(pathFor(entry,variant.file));
+  }catch(error){
+    state.profile=null;
+    $("#chartHost").innerHTML=`<div class="status error">Nem sikerült betölteni a profil JSON-t.<br>${esc(error.message)}</div>`;
+  }
+  const stats=statsFor(entry,state.profile);
+  $("#statDose").textContent=stats.dose;
+  $("#statYield").textContent=stats.yield;
+  $("#statTemp").textContent=stats.temp;
+  $("#statTime").textContent=stats.time;
+  $("#kindLabel").textContent=`${entry.process||"profil"} · ${kindLabel(variant)}`;
+  $("#metaFile").textContent=variant.file;
+  $("#metaType").textContent=state.profile?.type||"—";
+  $("#metaDescription").textContent=state.profile?.description||"—";
+  $("#downloadJson").href=pathFor(entry,variant.file);
+  $("#downloadPng").href=pathFor(entry,pngFile(variant));
+  $("#advPath").textContent=pathFor(entry,variant.file);
+  $("#advJson").textContent=JSON.stringify(entry,null,2);
+  if(state.profile){
+    state.model=buildChartModel(state.profile);
+    renderChart();
+    $("#phaseList").innerHTML=phasesHTML(state.profile);
+  }else{
+    state.model=null;
+    $("#chartHost").innerHTML="";
+    $("#phaseList").innerHTML="";
+  }
+}
+
+function renderChart(){
+  const model=state.model,host=$("#chartHost");
+  if(!model){host.innerHTML="";return;}
+  const entry=state.entry,v=state.visible;
+  const W=760,H=280,pad={l:44,r:42,t:20,b:34},total=model.total;
+  const leftVals=[...(v.pressure?model.pressure:[]),...(v.flow?model.flow:[])].map(p=>p[1]).filter(Number.isFinite);
+  const leftMax=Math.max(10,...leftVals,0)+1;
+  const temps=model.temperature.map(p=>p[1]).filter(Number.isFinite);
+  const tMin=temps.length?Math.min(...temps):0,tMax=temps.length?Math.max(...temps):1,tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
+  const x=t=>pad.l+(W-pad.l-pad.r)*(t/total);
+  const y=val=>H-pad.b-(H-pad.t-pad.b)*(val/leftMax);
+  const yt=val=>H-pad.b-(H-pad.t-pad.b)*((val-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
+  let bands="";
+  model.phases.forEach((p,i)=>{if(i%2)bands+=`<rect x="${x(p.start)}" y="${pad.t}" width="${Math.max(0,x(p.end)-x(p.start))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".035"/>`;bands+=`<line x1="${x(p.start)}" y1="${pad.t}" x2="${x(p.start)}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/>`;});
+  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".10"/>`).join("");
+  host.innerHTML=`<svg class="mini-chart" id="chartSvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(entry.title)} interaktív profilgrafikon" style="--card-accent:${esc(entry.accent||"var(--accent)")}">
+    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
+    <g color="var(--text)">${grid}${bands}<line x1="${W-pad.r}" y1="${pad.t}" x2="${W-pad.r}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/></g>
+    ${v.pressure?`<path d="${pathData(model.pressure,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`:""}
+    ${v.flow?`<path d="${pathData(model.flow,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`:""}
+    ${v.temperature?`<path d="${pathData(model.temperature,x,yt)}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>`:""}
+    <line id="crosshair" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" stroke="currentColor" opacity="0"/>
+    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text></g>
+    <rect id="chartOverlay" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent"/>
+  </svg>`;
+  attachChartInteraction(W,pad,total,model,x);
+}
+
+function attachChartInteraction(W,pad,total,model,x){
+  const svg=$("#chartSvg"),overlay=$("#chartOverlay"),crosshair=$("#crosshair"),tooltip=$("#chartTooltip");
+  function pointerToTime(clientX){
+    const rect=svg.getBoundingClientRect();
+    const svgX=(clientX-rect.left)/rect.width*W;
+    const ratio=Math.max(0,Math.min(1,(svgX-pad.l)/(W-pad.l-pad.r)));
+    return ratio*total;
+  }
+  function show(clientX){
+    const t=pointerToTime(clientX);
+    const phase=phaseAtTime(model,t);
+    const parts=[`${formatNumber(t,1)} s`,`Fázis: ${esc(phase?phase.name:"—")}`];
+    if(state.visible.pressure){const val=valueAtTime(model.pressure,t);if(val!==null)parts.push(`Nyomás: ${formatNumber(val)} bar`);}
+    if(state.visible.flow){const val=valueAtTime(model.flow,t);if(val!==null)parts.push(`Flow: ${formatNumber(val)} ml/s`);}
+    if(state.visible.temperature){const val=valueAtTime(model.temperature,t);if(val!==null)parts.push(`Hőmérséklet: ${formatNumber(val)} °C`);}
+    tooltip.innerHTML=`<strong>${parts[0]}</strong>${parts.slice(1).map(esc).join("<br>")}`;
+    tooltip.hidden=false;
+    crosshair.setAttribute("x1",x(t));crosshair.setAttribute("x2",x(t));crosshair.setAttribute("opacity",".4");
+  }
+  function hide(){tooltip.hidden=true;crosshair.setAttribute("opacity","0");}
+  overlay.addEventListener("pointermove",event=>show(event.clientX));
+  overlay.addEventListener("pointerleave",hide);
+  overlay.addEventListener("pointerdown",event=>show(event.clientX));
+}
+
+$$("[data-toggle]").forEach(input=>input.addEventListener("change",event=>{
+  state.visible[event.target.dataset.toggle]=event.target.checked;
+  renderChart();
+}));
+
+/* Send to GaggiMate — ws://<host>/ws, req:profiles:save / req:profiles:list.
+ * Confirmed against the firmware source (gaggimate-1.9.0/docs/websocket-api.yaml,
+ * src/display/plugins/WebSocketHandler.cpp) — not guessed. The firmware sends no
+ * CORS headers and has no TLS/WSS listener, so a GitHub-Pages (https) origin will
+ * typically be blocked by the browser's mixed-content policy; this is surfaced to
+ * the user instead of failing silently. */
+const sendDialog=$("#sendDialog");
+let gmSocket=null;
+
+function setSendStatus(text,kind){
+  const el=$("#sendStatus");
+  el.className=`status${kind?` ${kind}`:""}`;
+  el.textContent=text;
+}
+function closeSocket(){
+  if(gmSocket){try{gmSocket.close();}catch(e){}gmSocket=null;}
+  $("#installBtn").disabled=true;
+}
+function openSendDialog(){
+  const addr=localStorage.getItem("gaggimate-address")||"";
+  $("#gmAddress").value=addr;
+  $("#mixedContentWarning").hidden=location.protocol!=="https:";
+  $("#installBtn").disabled=true;
+  if(!navigator.onLine){
+    setSendStatus("Jelenleg nincs hálózati kapcsolat ebben a böngészőben — ez a funkció csak akkor működik, ha a GaggiMate-tel azonos helyi hálózaton vagy.","error");
+    $("#testConnBtn").disabled=true;
+  }else{
+    setSendStatus("Add meg a címet, majd teszteld a kapcsolatot.");
+    $("#testConnBtn").disabled=false;
+  }
+  sendDialog.showModal();
+}
+function wsRequestOnce(address,request,matchType,timeoutMs){
+  return new Promise((resolve,reject)=>{
+    let settled=false;
+    let socket;
+    try{socket=new WebSocket(`ws://${address}/ws`);}
+    catch(error){reject(error);return;}
+    const timer=setTimeout(()=>{if(!settled){settled=true;socket.close();reject(new Error("Időtúllépés — nincs válasz a GaggiMate-től."));}},timeoutMs);
+    socket.addEventListener("open",()=>socket.send(JSON.stringify(request)));
+    socket.addEventListener("error",()=>{if(!settled){settled=true;clearTimeout(timer);reject(new Error("Kapcsolódási hiba (lehet mixed content vagy hibás cím)."));}});
+    socket.addEventListener("close",()=>{if(!settled){settled=true;clearTimeout(timer);reject(new Error("A kapcsolat idő előtt bezárult."));}});
+    socket.addEventListener("message",event=>{
+      let msg;try{msg=JSON.parse(event.data);}catch{return;}
+      if(msg.tp===matchType){settled=true;clearTimeout(timer);resolve({socket,msg});}
+    });
+  });
+}
+function validateProfileForUpload(profile){
+  if(!profile||typeof profile.label!=="string"||typeof profile.type!=="string")return "Hiányzik vagy érvénytelen a 'label'/'type' mező.";
+  if(!Array.isArray(profile.phases)||!profile.phases.length)return "A profilnak legalább egy fázist tartalmaznia kell.";
+  return null;
+}
+$("#openSendDialog").addEventListener("click",openSendDialog);
+$("#closeSendDialog").addEventListener("click",()=>{closeSocket();sendDialog.close();});
+sendDialog.addEventListener("click",event=>{if(event.target===sendDialog){closeSocket();sendDialog.close();}});
+$("#testConnBtn").addEventListener("click",async()=>{
+  const address=$("#gmAddress").value.trim();
+  if(!address){setSendStatus("Adj meg egy címet (pl. gaggimate.local).","error");return;}
+  localStorage.setItem("gaggimate-address",address);
+  closeSocket();
+  setSendStatus("Kapcsolódás…");
+  $("#testConnBtn").disabled=true;
+  try{
+    const {socket}=await wsRequestOnce(address,{tp:"req:profiles:list",rid:"test"},"res:profiles:list",6000);
+    gmSocket=socket;
+    setSendStatus("Kapcsolódva. A profil telepíthető.","ok");
+    $("#installBtn").disabled=false;
+  }catch(error){
+    setSendStatus(`Sikertelen kapcsolódás: ${error.message}`,"error");
+  }finally{
+    $("#testConnBtn").disabled=false;
+  }
+});
+$("#installBtn").addEventListener("click",async()=>{
+  if(!gmSocket||!state.profile)return;
+  const problem=validateProfileForUpload(state.profile);
+  if(problem){setSendStatus(`A profil nem küldhető: ${problem}`,"error");return;}
+  const toSend={...state.profile};
+  delete toSend.id;
+  const rid=`install-${Math.random().toString(36).slice(2)}`;
+  setSendStatus("Telepítés…");
+  $("#installBtn").disabled=true;
+  const timer=setTimeout(()=>{setSendStatus("Időtúllépés a mentés közben.","error");$("#installBtn").disabled=false;},8000);
+  function onMessage(event){
+    let msg;try{msg=JSON.parse(event.data);}catch{return;}
+    if(msg.tp==="res:profiles:save"&&msg.rid===rid){
+      clearTimeout(timer);
+      gmSocket.removeEventListener("message",onMessage);
+      if(msg.error){setSendStatus(`A GaggiMate elutasította: ${msg.error}`,"error");$("#installBtn").disabled=false;}
+      else setSendStatus(`Profil telepítve (új id: ${msg.profile?.id||"ismeretlen"}).`,"ok");
+    }
+  }
+  gmSocket.addEventListener("message",onMessage);
+  gmSocket.send(JSON.stringify({tp:"req:profiles:save",rid,profile:toSend}));
+});
+
+function selectVariant(id){
+  const variant=state.entry.variants.find(v=>v.id===id);
+  if(!variant)return;
+  state.variant=variant;
+  $("#variantSelect").value=variant.id;
+  $("#compareLink").href=`compare.html?a=${encodeURIComponent(state.entry.id)}::${encodeURIComponent(variant.id)}`;
+  loadVariant();
+}
+
+async function openDoc(file,title){
+  const dialog=$("#docDialog");
+  $("#docDialogTitle").textContent=title;
+  $("#docDialogBody").innerHTML="Betöltés…";
+  dialog.showModal();
+  try{
+    $("#docDialogBody").innerHTML=renderMarkdown(await fetchText(file));
+  }catch(error){
+    $("#docDialogBody").innerHTML=`<p class="status error">Nem sikerült betölteni: ${esc(file)}</p>`;
+  }
+}
+$("#docDialogClose").addEventListener("click",()=>$("#docDialog").close());
+$("#docDialog").addEventListener("click",event=>{if(event.target.id==="docDialog")$("#docDialog").close();});
+
+function relevantKnowledgeLinks(entry){
+  const links=[
+    {file:"knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md",title:"GaggiMate profilkészítési útmutató"},
+    {file:"knowledge/EXTRACTION_SCIENCE.md",title:"Extrakciótudomány"},
+    {file:"knowledge/PRESSURE_GUIDE.md",title:"Nyomás útmutató"}
+  ];
+  if(hasKind(entry,"scale"))links.push({file:"BLUETOOTH_SCALE_WORKFLOW.md",title:"Bluetooth Scale Workflow"});
+  if(/anaerob/i.test(entry.process||""))links.push({file:"knowledge/SPECIAL_CATEGORIES.md",title:"Speciális kategóriák"});
+  return links;
+}
+function renderKnowledgeLinks(entry){
+  $("#knowledgeLinks").innerHTML=relevantKnowledgeLinks(entry).map(link=>`<button type="button" class="btn" data-doc-file="${esc(link.file)}" data-doc-title="${esc(link.title)}">${esc(link.title)}</button>`).join("");
+  $("#knowledgeLinks").addEventListener("click",event=>{
+    const btn=event.target.closest("[data-doc-file]");
+    if(!btn)return;
+    openDoc(btn.dataset.docFile,btn.dataset.docTitle);
+  });
+}
+
+function renderVersionList(entry){
+  const current=defaultVariant(entry);
+  $("#versionList").innerHTML=entry.variants.map(variant=>{
+    const isCurrent=variant.id===current.id;
+    const extra=(variant.notes||[]).length?`<div style="flex-basis:100%;color:var(--muted);font-size:.8rem">${(variant.notes||[]).map(esc).join(" · ")}</div>`:"";
+    return `<li class="version-row${isCurrent?" current":""}">
+      <span class="version-label">${esc(variant.label)}</span>
+      <span class="version-kind">${esc(kindLabel(variant))}</span>
+      ${isCurrent?'<span class="version-badge">Jelenlegi</span>':""}
+      ${extra}
+      <span class="version-actions">
+        <button class="btn" data-view-variant="${esc(variant.id)}">Megnyitás</button>
+        <a class="btn" href="${esc(pathFor(entry,variant.file))}" download>Letöltés</a>
+        ${isCurrent?"":`<a class="btn" href="compare.html?a=${encodeURIComponent(entry.id)}::${encodeURIComponent(current.id)}&b=${encodeURIComponent(entry.id)}::${encodeURIComponent(variant.id)}">Összehasonlítás az aktuálissal</a>`}
+      </span>
+    </li>`;
+  }).join("");
+  $("#versionList").addEventListener("click",event=>{
+    const btn=event.target.closest("[data-view-variant]");
+    if(!btn)return;
+    selectVariant(btn.dataset.viewVariant);
+    $("#profile-section").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+
+async function loadMarkdownInto(targetId,url){
+  const target=$(`#${targetId}`);
+  try{
+    target.innerHTML=renderMarkdown(await fetchText(url));
+  }catch(error){
+    target.innerHTML=`<p class="status error">Nem sikerült betölteni: ${esc(url)}</p>`;
+  }
+}
+
+const FLAVOR_TAGS=["gyümölcs","virágos","citrusos","bogyós","csokoládé","diós","fűszeres","pörkölt"];
+const OBSERVATION_TAGS=[
+  ["channeling","Csatornázás"],["spraying","Fröcskölés"],["unstable-stream","Instabil sugár"],
+  ["early-flow","Korai folyás"],["slow-start","Lassú indulás"]
+];
+function tasteHistoryKey(entryId){return `gaggimate-taste-log-${entryId}`;}
+function loadTasteHistory(entryId){
+  try{return JSON.parse(localStorage.getItem(tasteHistoryKey(entryId))||"[]");}catch{return [];}
+}
+function saveTasteHistory(entryId,history){
+  localStorage.setItem(tasteHistoryKey(entryId),JSON.stringify(history.slice(-20)));
+}
+function renderTasteHistory(entryId){
+  const history=loadTasteHistory(entryId).slice().reverse();
+  const host=$("#tasteHistory");
+  if(!history.length){host.innerHTML="";return;}
+  host.innerHTML=`<h4>Korábbi visszajelzések (${history.length})</h4>`+history.slice(0,8).map(rec=>{
+    const parts=[`savasság: ${rec.acidity}`,`keserűség: ${rec.bitterness}`,`édesség: ${rec.sweetness}`,`test: ${rec.body}`];
+    if(rec.flavors?.length)parts.push(`ízjegyek: ${rec.flavors.join(", ")}`);
+    return `<div class="taste-entry"><time>${esc(new Date(rec.ts).toLocaleString("hu-HU"))} · ${esc(rec.variantLabel||"")}</time>${esc(parts.join(" · "))}</div>`;
+  }).join("");
+}
+function renderSuggestion(result){
+  const box=$("#suggestionBox");
+  box.hidden=false;
+  if(result.primary){
+    box.innerHTML=`<h3>Javaslat</h3><p>${esc(result.primary)}</p><span class="confidence">${esc(result.confidence)}</span>`;
+    return;
+  }
+  box.innerHTML=`<h3>Javasolt következő teszt</h3><ul>${result.adjustments.map(a=>`<li><strong>${esc(a.variable)}:</strong> ${esc(a.direction)}<br><span style="color:var(--muted);font-size:.82rem">${esc(a.reason)}</span></li>`).join("")}</ul><span class="confidence">${esc(result.confidence)}</span>`;
+}
+function initTasteFeedback(entry){
+  $("#flavorOptions").innerHTML=FLAVOR_TAGS.map(tag=>`<label><input type="checkbox" name="flavor" value="${esc(tag)}">${esc(tag)}</label>`).join("");
+  $("#observationOptions").innerHTML=OBSERVATION_TAGS.map(([value,label])=>`<label><input type="checkbox" name="observation" value="${esc(value)}">${esc(label)}</label>`).join("");
+  $("#suggestionBox").hidden=true;
+  renderTasteHistory(entry.id);
+  $("#tasteForm").addEventListener("submit",event=>{
+    event.preventDefault();
+    const form=event.target;
+    const feedback={
+      acidity:form.acidity.value,
+      bitterness:form.bitterness.value,
+      sweetness:form.sweetness.value,
+      body:form.body.value,
+      dryness:form.dryness.value,
+      flavors:$$('input[name="flavor"]:checked',form).map(i=>i.value),
+      observations:$$('input[name="observation"]:checked',form).map(i=>i.value)
+    };
+    const result=suggestAdjustments(feedback);
+    renderSuggestion(result);
+    const history=loadTasteHistory(entry.id);
+    history.push({...feedback,ts:Date.now(),variantId:state.variant?.id,variantLabel:state.variant?.label,suggestion:result});
+    saveTasteHistory(entry.id,history);
+    renderTasteHistory(entry.id);
+  });
+}
+
+const SHOT_HISTORY_VERSION=1;
+function shotHistoryKey(entryId){return `gaggimate-shot-history-${entryId}`;}
+function loadShotHistory(entryId){
+  try{
+    const parsed=JSON.parse(localStorage.getItem(shotHistoryKey(entryId))||"null");
+    if(parsed&&Array.isArray(parsed.shots))return parsed;
+  }catch{}
+  return {version:SHOT_HISTORY_VERSION,shots:[]};
+}
+function saveShotHistory(entryId,data){
+  localStorage.setItem(shotHistoryKey(entryId),JSON.stringify({version:SHOT_HISTORY_VERSION,shots:data.shots}));
+}
+function newShotId(){return `shot-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;}
+
+function renderRatingStars(selected){
+  $("#shotRating").innerHTML=[1,2,3,4,5].map(n=>`<label><input type="radio" name="shotRating" value="${n}" ${Number(selected)===n?"checked":""}>${"★".repeat(n)}</label>`).join("");
+}
+function currentRating(){
+  const checked=$('input[name="shotRating"]:checked');
+  return checked?Number(checked.value):null;
+}
+
+function shotRatio(shot){
+  if(!shot.dose||!shot.yield)return null;
+  return shot.yield/shot.dose;
+}
+function describeShot(shot){
+  const ratio=shotRatio(shot);
+  const parts=[
+    shot.dose?`${formatNumber(shot.dose)} g → ${formatNumber(shot.yield)} g`:null,
+    ratio?`1:${ratio.toFixed(2)}`:null,
+    shot.duration?`${formatNumber(shot.duration,1)} s`:null,
+    shot.temperature?`${formatNumber(shot.temperature)} °C`:null,
+    shot.grind?`Őrlés ${shot.grind}`:null,
+    shot.rpm?`${shot.rpm} RPM`:null
+  ].filter(Boolean);
+  return parts.join(" · ");
+}
+function renderShotList(entryId){
+  const data=loadShotHistory(entryId);
+  const shots=data.shots.slice().sort((a,b)=>b.ts-a.ts);
+  const best=data.shots.find(s=>s.best);
+  $("#bestShotBox").innerHTML=best?`<div class="best-shot-box"><h4>★ Legjobb shot</h4>${esc(describeShot(best))}${best.notes?`<br><span style="color:var(--muted)">${esc(best.notes)}</span>`:""}</div>`:"";
+  $("#shotList").innerHTML=shots.map(shot=>`<div class="shot-row${shot.best?" best":""}">
+    <time>${esc(new Date(shot.ts).toLocaleString("hu-HU"))} · ${esc(shot.variantLabel||"")}${shot.best?' · <strong class="version-badge">★ Legjobb</strong>':""}</time>
+    ${esc(describeShot(shot))}${shot.rating?` · ${"★".repeat(shot.rating)}`:""}
+    ${shot.notes?`<br><span style="color:var(--muted)">${esc(shot.notes)}</span>`:""}
+    <div class="shot-actions">
+      <button type="button" class="btn" data-shot-action="edit" data-shot-id="${esc(shot.id)}">Szerkesztés</button>
+      <button type="button" class="btn" data-shot-action="duplicate" data-shot-id="${esc(shot.id)}">Duplikálás</button>
+      <button type="button" class="btn" data-shot-action="best" data-shot-id="${esc(shot.id)}">${shot.best?"Legjobb jelölés törlése":"Megjelölés legjobbként"}</button>
+      <button type="button" class="btn" data-shot-action="delete" data-shot-id="${esc(shot.id)}">Törlés</button>
+    </div>
+  </div>`).join("")||'<p class="dialog-hint">Még nincs rögzített shot ehhez a kávéhoz.</p>';
+}
+function fillShotForm(shot){
+  $("#shotEditId").value=shot?shot.id:"";
+  $("#shotDose").value=shot?.dose??"";
+  $("#shotYield").value=shot?.yield??"";
+  $("#shotTemp").value=shot?.temperature??"";
+  $("#shotGrind").value=shot?.grind??"";
+  $("#shotRpm").value=shot?.rpm??"";
+  $("#shotDuration").value=shot?.duration??"";
+  $("#shotPumpStop").value=shot?.pumpStopWeight??"";
+  $("#shotCupWeight").value=shot?.cupWeight??"";
+  $("#shotNotes").value=shot?.notes??"";
+  renderRatingStars(shot?.rating);
+  $("#shotSubmitBtn").textContent=shot&&shot.id&&$("#shotEditId").value?"Shot frissítése":"Shot mentése";
+  $("#shotCancelEdit").hidden=!($("#shotEditId").value);
+}
+function initShotHistory(entry){
+  renderRatingStars(null);
+  renderShotList(entry.id);
+  $("#shotForm").addEventListener("submit",event=>{
+    event.preventDefault();
+    const data=loadShotHistory(entry.id);
+    const editId=$("#shotEditId").value;
+    const payload={
+      id:editId||newShotId(),
+      ts:editId?(data.shots.find(s=>s.id===editId)?.ts||Date.now()):Date.now(),
+      variantId:state.variant?.id,
+      variantLabel:state.variant?.label,
+      dose:parseFloat($("#shotDose").value)||null,
+      yield:parseFloat($("#shotYield").value)||null,
+      temperature:parseFloat($("#shotTemp").value)||null,
+      grind:$("#shotGrind").value.trim()||null,
+      rpm:parseFloat($("#shotRpm").value)||null,
+      duration:parseFloat($("#shotDuration").value)||null,
+      pumpStopWeight:parseFloat($("#shotPumpStop").value)||null,
+      cupWeight:parseFloat($("#shotCupWeight").value)||null,
+      rating:currentRating(),
+      notes:$("#shotNotes").value.trim()||null,
+      best:editId?Boolean(data.shots.find(s=>s.id===editId)?.best):false
+    };
+    const idx=data.shots.findIndex(s=>s.id===payload.id);
+    if(idx>=0)data.shots[idx]=payload;else data.shots.push(payload);
+    saveShotHistory(entry.id,data);
+    fillShotForm(null);
+    renderShotList(entry.id);
+  });
+  $("#shotCancelEdit").addEventListener("click",()=>fillShotForm(null));
+  $("#shotList").addEventListener("click",event=>{
+    const btn=event.target.closest("[data-shot-action]");
+    if(!btn)return;
+    const data=loadShotHistory(entry.id);
+    const shot=data.shots.find(s=>s.id===btn.dataset.shotId);
+    if(!shot)return;
+    const action=btn.dataset.shotAction;
+    if(action==="edit"){fillShotForm(shot);$("#shotForm").scrollIntoView({behavior:"smooth",block:"start"});}
+    else if(action==="duplicate"){fillShotForm({...shot,id:null});}
+    else if(action==="delete"){
+      if(!confirm("Biztosan törlöd ezt a shotot?"))return;
+      data.shots=data.shots.filter(s=>s.id!==shot.id);
+      saveShotHistory(entry.id,data);renderShotList(entry.id);
+    }else if(action==="best"){
+      const makeBest=!shot.best;
+      data.shots.forEach(s=>{s.best=makeBest&&s.id===shot.id;});
+      saveShotHistory(entry.id,data);renderShotList(entry.id);
+    }
+  });
+  $("#exportShots").addEventListener("click",()=>{
+    const data=loadShotHistory(entry.id);
+    const blob=new Blob([JSON.stringify({...data,coffeeId:entry.id,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;a.download=`${entry.id}-shot-history.json`;a.click();
+    URL.revokeObjectURL(url);
+  });
+  $("#importShots").addEventListener("change",async event=>{
+    const file=event.target.files[0];
+    if(!file)return;
+    try{
+      const imported=JSON.parse(await file.text());
+      if(!Array.isArray(imported.shots))throw new Error("Érvénytelen fájl: hiányzik a 'shots' tömb.");
+      const data=loadShotHistory(entry.id);
+      const byId=new Map(data.shots.map(s=>[s.id,s]));
+      imported.shots.forEach(s=>{if(s&&s.id)byId.set(s.id,s);});
+      data.shots=[...byId.values()];
+      saveShotHistory(entry.id,data);
+      renderShotList(entry.id);
+    }catch(error){
+      alert(`Nem sikerült importálni: ${error.message}`);
+    }finally{
+      event.target.value="";
+    }
+  });
+}
+
+async function init(){
+  const params=new URLSearchParams(location.search);
+  const id=params.get("id");
+  const status=$("#loadStatus");
+  if(!id){status.className="status error";status.textContent="Hiányzó profil-azonosító (?id=...).";return;}
+  try{
+    const catalog=await fetchJSON("profiles/catalog.json");
+    const entry=(catalog.profiles||[]).find(p=>p.id===id);
+    if(!entry)throw new Error(`Nincs ilyen profil a katalógusban: ${id}`);
+    state.entry=entry;
+    document.title=`${entry.title} · GaggiMate profil`;
+    $("#title").textContent=entry.title;
+    $("#subtitle").textContent=entry.subtitle||"";
+    $("#origin").textContent=entry.origin||"";
+    $("#pills").innerHTML=[entry.process,...(entry.notes||[])].filter(Boolean).map(n=>`<span class="pill">${esc(n)}</span>`).join("");
+    $("#variantSelect").innerHTML=entry.variants.map(v=>`<option value="${esc(v.id)}">${esc(v.label)}</option>`).join("");
+    $("#variantSelect").addEventListener("change",event=>selectVariant(event.target.value));
+    $("#advFolder").textContent=entry.folder;
+    $("#brewModeLink").href=`brew.html?id=${encodeURIComponent(entry.id)}`;
+    status.hidden=true;
+    $("#dashboard").hidden=false;
+    state.variant=defaultVariant(entry);
+    $("#variantSelect").value=state.variant.id;
+    $("#compareLink").href=`compare.html?a=${encodeURIComponent(entry.id)}::${encodeURIComponent(state.variant.id)}`;
+    renderVersionList(entry);
+    renderKnowledgeLinks(entry);
+    initTasteFeedback(entry);
+    initShotHistory(entry);
+    await loadVariant();
+    loadMarkdownInto("recipeBody",pathFor(entry,recipeFile(entry)));
+    loadMarkdownInto("changelogBody",pathFor(entry,changelogFile(entry)));
+  }catch(error){
+    status.className="status error";
+    status.innerHTML=`<strong>Nem sikerült betölteni a profilt.</strong><br>${esc(error.message)}`;
+  }
+}
+if(location.protocol==="file:"){$("#loadStatus").className="status error";$("#loadStatus").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
+else init();
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>

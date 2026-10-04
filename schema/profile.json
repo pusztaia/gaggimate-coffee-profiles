@@ -175,6 +175,22 @@
           "type": "boolean",
           "default": false,
           "description": "If `true`, the ramp *starts from the measured value* (pressure or flow) at phase entry. If `false`, it starts from the previous phase's setpoint. Useful for smooth hand-off after preinfusion where the measured pressure may differ from the setpoint. The legacy schema declared this as `integer 0|1`; the parser reads it as a boolean via `.as<bool>()` (`src/display/models/profile.h:265`) — always write a JSON boolean."
+        },
+        "target": {
+          "type": "string",
+          "description": "Added in firmware v1.9.0 (`TransitionTarget` enum, `src/display/models/profile.h`). What the ramp progress is driven by, instead of elapsed time. Parser matches these strings exactly; any other value (or omitted) falls back to `\"time\"`.",
+          "oneOf": [
+            { "const": "time",       "title": "Time",       "description": "Ramp progress follows elapsed time within `transition.duration` (default behavior)." },
+            { "const": "volumetric", "title": "Volumetric", "description": "Ramp progress follows measured beverage weight/volume instead of elapsed time." },
+            { "const": "pumped",     "title": "Pumped",     "description": "Ramp progress follows the water volume pumped instead of elapsed time." }
+          ],
+          "enum": ["time", "volumetric", "pumped"],
+          "enumDescriptions": [
+            "Ramp progress follows elapsed time (default).",
+            "Ramp progress follows measured beverage weight/volume.",
+            "Ramp progress follows water volume pumped."
+          ],
+          "default": "time"
         }
       },
       "required": ["type", "duration", "adaptive"]

@@ -1,0 +1,22 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Catalog is in sync with profiles/
+        run: python3 tools/build_catalog.py --check
+
+      - name: Release-hardening checks
+        run: python3 tools/validate_repo.py

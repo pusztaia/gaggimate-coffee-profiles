@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7d1d2f">
+<meta name="description" content="GaggiMate profil összehasonlítás – két profil vagy verzió grafikonja és paraméterei egymás mellett.">
+<title>Profil összehasonlítás · GaggiMate</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<style>
+:root{
+  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
+  --line:#dfd1c1;--accent:#7d1d2f;--accent2:#b94a31;--gold:#d59842;--blue:#1677b8;
+  --flow:#ef7622;--shadow:0 18px 50px rgba(66,38,27,.12);--shadow-soft:0 9px 30px rgba(66,38,27,.07);
+  --radius-xl:30px;--radius-lg:24px;--radius-md:18px;--max:1040px;color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#171210;--surface:#211a17;--surface2:#2b211d;--text:#f7eee7;--muted:#c3b4a9;
+  --line:#45372f;--accent:#ef7189;--accent2:#ff8b69;--gold:#efb864;--blue:#78b8e6;
+  --flow:#ff9b54;--shadow:0 18px 50px rgba(0,0,0,.3);--shadow-soft:0 9px 30px rgba(0,0,0,.22);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}button,select{font:inherit}
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:1rem}
+.home-link{text-decoration:none;font-weight:800;color:var(--text)}
+.icon-btn{margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.5rem .72rem;cursor:pointer}
+.container{max-width:var(--max);margin:auto;padding:1.5rem 1.1rem 3rem}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.03em;margin:0 0 1.2rem}
+.picker-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.picker{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-soft)}
+.picker label{display:block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.picker select{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:12px;padding:.6rem .7rem;margin-bottom:.5rem}
+.picker .swatch{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:.4rem;vertical-align:middle}
+section{margin-top:2rem}
+section h2{font-size:1.2rem;margin:0 0 .8rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.2rem}
+.chart-host{position:relative}.mini-chart{width:100%;height:280px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--muted);margin-top:.6rem}
+.chart-fallback-note{color:var(--muted);font-size:.74rem;margin:.6rem 0 0}
+.legend i{display:inline-block;width:20px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.3rem;vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{padding:.6rem .5rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+td.diff{font-weight:800;color:var(--accent)}
+.summary-list{margin:0;padding-left:1.2rem;color:var(--text)}
+.summary-list li{margin-bottom:.4rem}
+.status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted)}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}
+@media(max-width:720px){.picker-row{grid-template-columns:1fr}table{font-size:.8rem}}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home-link" href="index.html">← Katalógus</a>
+    <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+  </div>
+</header>
+<main class="container">
+  <h1>Profil összehasonlítás</h1>
+  <div class="picker-row">
+    <div class="picker">
+      <label for="selectA"><span class="swatch" style="background:var(--blue)"></span>Profil A (teli vonal)</label>
+      <select id="selectA"></select>
+    </div>
+    <div class="picker">
+      <label for="selectB"><span class="swatch" style="background:var(--gold)"></span>Profil B (szaggatott)</label>
+      <select id="selectB"></select>
+    </div>
+  </div>
+
+  <div id="status" class="status">Katalógus betöltése…</div>
+
+  <div id="compareBody" hidden>
+    <section id="overlay-section">
+      <h2>Grafikon-átfedés</h2>
+      <div class="card">
+        <div class="chart-host" id="chartHost"></div>
+        <div class="legend" id="legendHost"></div>
+        <p class="chart-fallback-note">A lenti paraméter- és fázistáblázat szövegesen is tartalmazza a grafikon minden értékét, képernyőolvasóhoz és érintés nélküli hozzáféréshez.</p>
+      </div>
+    </section>
+
+    <section id="params-section">
+      <h2>Paraméter-összehasonlítás</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Paraméter</th><th id="headA">A</th><th id="headB">B</th></tr></thead>
+          <tbody id="paramsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="phase-diff-section">
+      <h2>Fázis-szintű eltérések</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Fázis</th><th id="phaseHeadA">A</th><th id="phaseHeadB">B</th></tr></thead>
+          <tbody id="phaseDiffBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="summary-section">
+      <h2>Összegzés</h2>
+      <div class="card">
+        <ul class="summary-list" id="summaryList"></ul>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="assets/js/profile-common.js"></script>
+<script>
+"use strict";
+const $=(sel,root=document)=>root.querySelector(sel);
+const state={catalog:null,options:[],a:null,b:null};
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
+function preferredTheme(){
+  const saved=localStorage.getItem("gaggimate-theme");
+  if(saved)return saved;
+  return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{
+    if(!localStorage.getItem("gaggimate-theme"))setTheme(event.matches?"dark":"light");
+  });
+}
+setTheme(preferredTheme());
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+
+function optionKey(entryId,variantId){return `${entryId}::${variantId}`;}
+function findOption(key){
+  const [entryId,variantId]=key.split("::");
+  const entry=state.catalog.profiles.find(p=>p.id===entryId);
+  if(!entry)return null;
+  const variant=entry.variants.find(v=>v.id===variantId);
+  if(!variant)return null;
+  return {entry,variant};
+}
+function populateSelects(){
+  const opts=[];
+  state.catalog.profiles.forEach(entry=>entry.variants.forEach(variant=>{
+    opts.push({key:optionKey(entry.id,variant.id),label:`${entry.title} — ${kindLabel(variant)}`});
+  }));
+  state.options=opts;
+  const html=opts.map(o=>`<option value="${esc(o.key)}">${esc(o.label)}</option>`).join("");
+  $("#selectA").innerHTML=html;
+  $("#selectB").innerHTML=html;
+}
+function syncURL(){
+  const params=new URLSearchParams();
+  if(state.aKey)params.set("a",state.aKey);
+  if(state.bKey)params.set("b",state.bKey);
+  history.replaceState(null,"",`${location.pathname}${params.toString()?`?${params}`:""}`);
+}
+async function loadSide(key){
+  const found=findOption(key);
+  if(!found)return null;
+  const profile=await fetchJSON(pathFor(found.entry,found.variant.file));
+  return {entry:found.entry,variant:found.variant,profile,model:buildChartModel(profile)};
+}
+
+function fmtStat(side,fn){try{return fn(side);}catch{return "—";}}
+function ratioOf(side){
+  const dose=Number(side.entry.dose);
+  const target=lastWeightTarget(side.profile)||parseFloat(String(side.entry.yield||"").replace(",","."));
+  if(!dose||!Number.isFinite(target))return null;
+  return target/dose;
+}
+function scaleSupport(side){return hasKind(side.entry,"scale")?"igen":"nem";}
+
+function renderParams(a,b){
+  const rows=[
+    ["Dózis",s=>s.entry.dose?`${formatNumber(s.entry.dose)} g`:"—"],
+    ["Hozam / stop",s=>{const t=lastWeightTarget(s.profile);return t?`${formatNumber(t)} g`:(s.entry.yield||"—");}],
+    ["Arány",s=>{const r=ratioOf(s);return r?`1:${r.toFixed(2)}`:"—";}],
+    ["Hőmérséklet",s=>Number.isFinite(Number(s.profile.temperature))?`${formatNumber(s.profile.temperature)} °C`:"—"],
+    ["Teljes idő (max)",s=>`${formatNumber(totalDuration(s.profile),0)} s`],
+    ["Csúcsnyomás",s=>`${formatNumber(peakPressure(s.profile))} bar`],
+    ["Scale támogatás",s=>scaleSupport(s)]
+  ];
+  $("#headA").textContent=a.entry.title;
+  $("#headB").textContent=b.entry.title;
+  $("#paramsBody").innerHTML=rows.map(([label,fn])=>{
+    const va=fmtStat(a,fn),vb=fmtStat(b,fn);
+    const differs=va!==vb;
+    return `<tr><td>${esc(label)}</td><td${differs?' class="diff"':""}>${esc(va)}</td><td${differs?' class="diff"':""}>${esc(vb)}</td></tr>`;
+  }).join("");
+}
+
+function renderPhaseDiff(a,b){
+  $("#phaseHeadA").textContent=a.entry.title;
+  $("#phaseHeadB").textContent=b.entry.title;
+  const count=Math.max(a.model.phases.length,b.model.phases.length);
+  const rows=[];
+  for(let i=0;i<count;i++){
+    const pa=a.model.phases[i],pb=b.model.phases[i];
+    const describe=(p,src)=>{
+      if(!p)return "—";
+      const pump=p.phase.pump||{};
+      const val=pump.target==="flow"?`${formatNumber(pump.flow)} ml/s`:`${formatNumber(pump.pressure)} bar`;
+      return `${esc(p.name)}: ${val} · ${formatNumber(p.end-p.start,0)} s`;
+    };
+    const va=describe(pa),vb=describe(pb);
+    rows.push(`<tr><td>${i+1}.</td><td${va!==vb?' class="diff"':""}>${va}</td><td${va!==vb?' class="diff"':""}>${vb}</td></tr>`);
+  }
+  $("#phaseDiffBody").innerHTML=rows.join("");
+}
+
+function renderSummary(a,b){
+  const items=[];
+  const tempA=Number(a.profile.temperature),tempB=Number(b.profile.temperature);
+  if(Number.isFinite(tempA)&&Number.isFinite(tempB)&&Math.abs(tempA-tempB)>=0.3){
+    items.push(`A hőmérséklet ${formatNumber(tempA)} °C-ról ${formatNumber(tempB)} °C-ra változik B-ben.`);
+  }
+  const durA=totalDuration(a.profile),durB=totalDuration(b.profile);
+  if(Math.abs(durA-durB)>=2){
+    items.push(`A maximális idő ${formatNumber(durA,0)} s-ról ${formatNumber(durB,0)} s-ra változik B-ben (${durB>durA?"hosszabb":"rövidebb"}).`);
+  }
+  const lastA=a.model.phases[a.model.phases.length-1],lastB=b.model.phases[b.model.phases.length-1];
+  if(lastA&&lastB){
+    const pa=lastA.phase.pump||{},pb=lastB.phase.pump||{};
+    const va=pa.target==="flow"?Number(pa.flow):Number(pa.pressure),vb=pb.target==="flow"?Number(pb.flow):Number(pb.pressure);
+    if(Number.isFinite(va)&&Number.isFinite(vb)&&pa.target===pb.target&&Math.abs(va-vb)>=.15){
+      const unit=pa.target==="flow"?"ml/s":"bar";
+      items.push(`Az utolsó fázis (${esc(lastA.name)}) ${pa.target==="flow"?"flow":"nyomás"} célértéke ${formatNumber(va)}→${formatNumber(vb)} ${unit}-ra változik.`);
+    }
+  }
+  const targetA=lastWeightTarget(a.profile),targetB=lastWeightTarget(b.profile);
+  if(Number.isFinite(targetA)&&Number.isFinite(targetB)&&targetA!==targetB){
+    items.push(`A cél hozam ${formatNumber(targetA)} g-ról ${formatNumber(targetB)} g-ra változik.`);
+  }
+  if(a.model.phases.length!==b.model.phases.length){
+    items.push(`A fázisok száma eltér: A = ${a.model.phases.length}, B = ${b.model.phases.length}.`);
+  }
+  $("#summaryList").innerHTML=items.length?items.map(i=>`<li>${i}</li>`).join(""):"<li>Nincs a küszöböt elérő, érdemi eltérés a két profil fő paraméterei között.</li>";
+}
+
+function renderOverlay(a,b){
+  const W=820,H=300,pad={l:46,r:44,t:20,b:36};
+  const total=Math.max(a.model.total,b.model.total);
+  const leftVals=[a.model.pressure,a.model.flow,b.model.pressure,b.model.flow].flat().map(p=>p[1]).filter(Number.isFinite);
+  const leftMax=Math.max(10,...leftVals,0)+1;
+  const temps=[a.model.temperature,b.model.temperature].flat().map(p=>p[1]).filter(Number.isFinite);
+  const tMin=temps.length?Math.min(...temps):0,tMax=temps.length?Math.max(...temps):1,tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
+  const x=t=>pad.l+(W-pad.l-pad.r)*(t/total);
+  const y=v=>H-pad.b-(H-pad.t-pad.b)*(v/leftMax);
+  const yt=v=>H-pad.b-(H-pad.t-pad.b)*((v-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
+  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".1"/>`).join("");
+  let bands="";
+  a.model.phases.forEach((p,i)=>{if(i%2)bands+=`<rect x="${x(p.start)}" y="${pad.t}" width="${Math.max(0,x(p.end)-x(p.start))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".03"/>`;});
+  const line=(points,scale,color,dash)=>`<path d="${pathData(points,x,scale)}" fill="none" stroke="${color}" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"${dash?' stroke-dasharray="9 6"':""}/>`;
+  $("#chartHost").innerHTML=`<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Profil A és B grafikon-átfedés">
+    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
+    <g color="var(--text)">${grid}${bands}</g>
+    ${line(a.model.pressure,y,"var(--blue)",false)}
+    ${line(a.model.flow,y,"var(--flow)",false)}
+    ${line(a.model.temperature,yt,"var(--accent)",false)}
+    ${line(b.model.pressure,y,"var(--blue)",true)}
+    ${line(b.model.flow,y,"var(--flow)",true)}
+    ${line(b.model.temperature,yt,"var(--gold)",true)}
+    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s</text></g>
+  </svg>`;
+  $("#legendHost").innerHTML=[
+    ["var(--blue)","Nyomás",false],["var(--flow)","Flow",false],["var(--accent)","Hőmérséklet (A)",false],
+    ["var(--blue)","Nyomás (B)",true],["var(--flow)","Flow (B)",true],["var(--gold)","Hőmérséklet (B)",true]
+  ].map(([color,label,dash])=>`<span><i style="border-top-color:${color};${dash?"border-top-style:dashed":""}"></i>${esc(label)}</span>`).join("");
+}
+
+async function renderCompare(){
+  const status=$("#status");
+  const aKey=$("#selectA").value,bKey=$("#selectB").value;
+  if(!aKey||!bKey)return;
+  state.aKey=aKey;state.bKey=bKey;syncURL();
+  status.hidden=false;status.className="status";status.textContent="Profilok betöltése…";
+  $("#compareBody").hidden=true;
+  try{
+    const [a,b]=await Promise.all([loadSide(aKey),loadSide(bKey)]);
+    if(!a||!b)throw new Error("Nem található az egyik kiválasztott profil.");
+    renderOverlay(a,b);
+    renderParams(a,b);
+    renderPhaseDiff(a,b);
+    renderSummary(a,b);
+    status.hidden=true;
+    $("#compareBody").hidden=false;
+  }catch(error){
+    status.className="status error";
+    status.textContent=`Hiba: ${error.message}`;
+  }
+}
+
+async function init(){
+  const status=$("#status");
+  try{
+    state.catalog=await fetchJSON("profiles/catalog.json");
+    populateSelects();
+    const params=new URLSearchParams(location.search);
+    const aKey=params.get("a")||state.options[0]?.key;
+    const bKey=params.get("b")||state.options[1]?.key||state.options[0]?.key;
+    if(aKey)$("#selectA").value=aKey;
+    if(bKey)$("#selectB").value=bKey;
+    $("#selectA").addEventListener("change",renderCompare);
+    $("#selectB").addEventListener("change",renderCompare);
+    if(aKey&&bKey)await renderCompare();
+    else{status.className="status error";status.textContent="Nincs elég profil az összehasonlításhoz.";}
+  }catch(error){
+    status.className="status error";
+    status.innerHTML=`<strong>Nem sikerült betölteni a katalógust.</strong><br>${esc(error.message)}`;
+  }
+}
+if(location.protocol==="file:"){$("#status").className="status error";$("#status").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
+else init();
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>
