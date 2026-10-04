@@ -18,7 +18,7 @@ Steaming technique, oat-milk temperature targets, drink specs, and single-boiler
 | 65-68°C | Very sweet | Upper end for oat milk | More sweetness/body, but oat texture can become heavier |
 | > 68-70°C | Quality starts degrading | **Avoid** | Scalded flavor, weaker texture, higher separation/curdling risk |
 
-**Oat-milk target:** **63-65°C** in the pitcher for a hot espresso drink. Alpro's Hungarian Barista guidance specifically recommends **65°C** for oat milk. citeturn370871search0
+**Oat-milk target:** **63-65°C** in the pitcher for a hot espresso drink. Alpro's Hungarian Barista guidance specifically recommends **65°C** for oat milk.
 
 **Key thresholds to remember:**
 - **60°C** — texture is established and sweetness starts to round out.
@@ -70,9 +70,9 @@ Steaming has three distinct phases. Each has a different wand position, sound, a
 | **Oatly Barista Edition** | 3.0% | 1.1% | High | Very good | Rich, creamy, coffee-friendly; strong all-rounder |
 | **Alpro Barista Oat / Barista Gluten-Free Oat** | ~3.1% | ~0.3% on the current HU gluten-free formula | Medium-high | Very good | Lighter, clean oat character; easy to foam |
 
-**Oatly Barista Edition:** the current Oatly product page lists water, 10% oats and rapeseed oil as the main ingredients, with **3.0 g fat** and **1.1 g protein per 100 ml**. citeturn360755search1
+**Oatly Barista Edition:** the current Oatly product page lists water, 10% oats and rapeseed oil as the main ingredients, with **3.0 g fat** and **1.1 g protein per 100 ml**.
 
-**Alpro Barista Oat:** Alpro's current UK product information lists oat base, sunflower oil, chicory-root fibre and pea protein; the Hungarian site currently presents the Barista oat product as **Barista gluténmentes zabital**, with **3.1 g fat** and **0.3 g protein per 100 ml**. citeturn360755search9turn370871search2
+**Alpro Barista Oat:** Alpro's current UK product information lists oat base, sunflower oil, chicory-root fibre and pea protein; the Hungarian site currently presents the Barista oat product as **Barista gluténmentes zabital**, with **3.1 g fat** and **0.3 g protein per 100 ml**.
 
 > **Important:** formulations can vary by market and can change over time. Use the carton label as the final reference for the exact product you have.
 
@@ -80,7 +80,7 @@ Steaming has three distinct phases. Each has a different wand position, sound, a
 
 Barista oat drinks are formulated for coffee use. Their combination of oat solids, fats, fibers and stabilizing ingredients helps produce a creamy texture and more stable foam than standard oat drinks.
 
-Oatly Barista uses rapeseed oil and oat solids; Alpro's current Barista oat formulation uses sunflower oil and additional structuring ingredients. citeturn360755search1turn360755search9
+Oatly Barista uses rapeseed oil and oat solids; Alpro's current Barista oat formulation uses sunflower oil and additional structuring ingredients.
 
 ### Preventing Oat-Milk Curdling / Separation
 

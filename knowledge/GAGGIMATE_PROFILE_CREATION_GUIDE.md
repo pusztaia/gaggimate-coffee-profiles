@@ -2,7 +2,7 @@
 
 ## Overview
 
-Quick-reference card for Gaggimate profile JSON structure. For full profile creation workflow, use `/gaggimate-profiles`. For complete examples, transition details, and advanced techniques, see [`reference/PROFILE_CREATION_REFERENCE.md`](reference/PROFILE_CREATION_REFERENCE.md).
+Quick-reference card for Gaggimate profile JSON structure. For the full profile creation workflow, see `PROFILE_CREATION_GUIDE.md` in the repository root. For complete examples, transition details, and advanced techniques, see [`reference/PROFILE_CREATION_REFERENCE.md`](reference/PROFILE_CREATION_REFERENCE.md).
 
 > **Looking for ready-to-use profiles?** See `PROFILE_LIBRARY.md` for a curated collection organized by roast level, processing method, and shot style.
 
@@ -156,7 +156,7 @@ Pioneered by modsmthng_57901 on Gaggimate Discord. This technique creates **self
 
 **Scaling flow to dose**: `Flow = Dose × 2 / 20s` (e.g., 16g → 1.6 g/s, 18g → 1.8 g/s, 22g → 2.2 g/s)
 
-> **Gaggimate's built-in Automatic Pro profile** implements this technique with a 5-phase architecture including declining flow extraction. See [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md).
+> **Gaggimate's built-in Automatic Pro profile** implements this technique with a 5-phase architecture including declining flow extraction.
 
 ---
 
@@ -190,4 +190,4 @@ For ready-to-use profile patterns, see `PROFILE_LIBRARY.md`.
 
 ---
 
-*For complete profile examples, transition details, taste-driven profile tuning, advanced techniques, troubleshooting, lever simulation, and volumetric estimation — see [`reference/PROFILE_CREATION_REFERENCE.md`](reference/PROFILE_CREATION_REFERENCE.md). For full profile creation workflow — use `/gaggimate-profiles`.*
+*For complete profile examples, transition details, taste-driven profile tuning, advanced techniques, troubleshooting, lever simulation, and volumetric estimation — see [`reference/PROFILE_CREATION_REFERENCE.md`](reference/PROFILE_CREATION_REFERENCE.md). For the full profile creation workflow, see `PROFILE_CREATION_GUIDE.md` in the repository root.*

@@ -1,6 +1,6 @@
 # DF64V Grinder Reference
 
-A quick reference for grind settings and adjustments on the **DF64V Gen-3 variable-speed single-dose grinder** with factory-fitted **SSP Cast Lab Sweet V3 Red Speed espresso burrs** (64 mm flat, pre-installed). For your personal grind settings that have worked well, see `grind-map.md` in the project root. Log all settings using the format in [`_NOTATION.md`](_NOTATION.md).
+A quick reference for grind settings and adjustments on the **DF64V Gen-3 variable-speed single-dose grinder** with factory-fitted **SSP Cast Lab Sweet V3 Red Speed espresso burrs** (64 mm flat, pre-installed). Keep your own grind log for settings that have worked well, with a clear header declaring your notation (e.g. "Grind = marks open from chirp zero (DF64V)").
 
 > **Deep dive:** Seasoning schedule, RDT/bellows workflow, commissioning, stall troubleshooting, and burr notes in [`../reference/DF64V_REFERENCE.md`](../reference/DF64V_REFERENCE.md).
 
@@ -17,13 +17,13 @@ The DF64V is zeroed by motor-assisted chirp dialing:
 1. Start the motor at your working RPM.
 2. Slowly rotate the collar finer until the burrs make first contact — a faint, brief chirp or scratch.
 3. Back off 1–2 marks immediately. This is your **zero reference**.
-4. Log this zero date in `grind-map.md` as `zero set: YYYY-MM-DD` (see [`_NOTATION.md`](_NOTATION.md)).
+4. Log this zero date in your own grind log as `zero set: YYYY-MM-DD`.
 
-Re-zero after any burr removal, reinstallation, or alignment adjustment. Prior-epoch rows in your grind map do not carry forward — see [`_NOTATION.md`](_NOTATION.md) for the superseding convention.
+Re-zero after any burr removal, reinstallation, or alignment adjustment. Prior-epoch rows in your grind log do not carry forward after a re-zero — mark them superseded rather than deleting them.
 
 ### Logging Your Setting
 
-Record your grind as a **bare integer** equal to the number of marks the collar is open from your current chirp zero (e.g. `11`). The grind-log table declares **"Grind = marks open from chirp zero (DF64V)"** once in its header/footnote, so the bare number is unambiguous; without that header declaration a bare number is meaningless. The recorded number is still the chirp-relative operator coordinate — the header supplies the "from chirp" anchor; it is **not** the absolute printed-dial position. This is an operator coordinate, not a micron or particle-size claim. No microns-per-mark figure exists for the DF64V's stepless collar; do not treat mark counts as absolute gap measurements. See [`_NOTATION.md`](_NOTATION.md).
+Record your grind as a **bare integer** equal to the number of marks the collar is open from your current chirp zero (e.g. `11`). The grind-log table declares **"Grind = marks open from chirp zero (DF64V)"** once in its header/footnote, so the bare number is unambiguous; without that header declaration a bare number is meaningless. The recorded number is still the chirp-relative operator coordinate — the header supplies the "from chirp" anchor; it is **not** the absolute printed-dial position. This is an operator coordinate, not a micron or particle-size claim. No microns-per-mark figure exists for the DF64V's stepless collar; do not treat mark counts as absolute gap measurements.
 
 ### Espresso Start Window
 
@@ -106,4 +106,4 @@ The **Red Speed** TiAlCN coating is vendor-described as adding body relative to 
 
 ---
 
-*For your personal successful settings, see `grind-map.md` in the project root. For the logging format and epoch conventions, see [`_NOTATION.md`](_NOTATION.md).*
+*Keep your own grind log for settings that have worked well, with a clear header declaring your notation and epoch conventions.*

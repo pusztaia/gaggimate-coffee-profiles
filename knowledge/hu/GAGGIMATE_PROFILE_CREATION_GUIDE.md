@@ -2,7 +2,7 @@
 
 ## Áttekintés
 
-Gyorsreferencia kártya a Gaggimate profil JSON szerkezetéhez. A teljes profilkészítési workflow-hoz használd a `/gaggimate-profiles`-t. Teljes példákért, transition részletekért és haladó technikákért lásd: [`reference/PROFILE_CREATION_REFERENCE.md`](../reference/PROFILE_CREATION_REFERENCE.md).
+Gyorsreferencia kártya a Gaggimate profil JSON szerkezetéhez. A teljes profilkészítési workflow-hoz lásd a repository gyökerében a `PROFILE_CREATION_GUIDE.md` fájlt. Teljes példákért, transition részletekért és haladó technikákért lásd: [`reference/PROFILE_CREATION_REFERENCE.md`](../reference/PROFILE_CREATION_REFERENCE.md).
 
 > **Kész, használatra kész profilokat keresel?** Lásd a `PROFILE_LIBRARY.md`-t, amely roastszint, feldolgozási mód és shot-stílus szerint rendezett, válogatott gyűjteményt tartalmaz.
 
@@ -157,7 +157,7 @@ A modsmthng_57901 nevű felhasználó úttörő munkája a Gaggimate Discordon. 
 
 **Flow skálázása a dózishoz**: `Flow = Dose × 2 / 20s` (pl. 16g → 1.6 g/s, 18g → 1.8 g/s, 22g → 2.2 g/s)
 
-> **A Gaggimate beépített Automatic Pro profilja** ezt a technikát valósítja meg egy 5 fázisú architektúrával, amely tartalmaz egy csökkenő flow-jú extrakciót is. Lásd: [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md).
+> **A Gaggimate beépített Automatic Pro profilja** ezt a technikát valósítja meg egy 5 fázisú architektúrával, amely tartalmaz egy csökkenő flow-jú extrakciót is.
 
 ---
 
@@ -191,4 +191,4 @@ Kész, használatra kész profilmintákért lásd a `PROFILE_LIBRARY.md`-t.
 
 ---
 
-*Teljes profilpéldákért, transition részletekért, íz-vezérelt profilhangolásért, haladó technikákért, hibaelhárításért, lever szimulációért és volumetrikus becslésért — lásd a [`reference/PROFILE_CREATION_REFERENCE.md`](../reference/PROFILE_CREATION_REFERENCE.md)-t. A teljes profilkészítési workflow-hoz — használd a `/gaggimate-profiles`-t.*
+*Teljes profilpéldákért, transition részletekért, íz-vezérelt profilhangolásért, haladó technikákért, hibaelhárításért, lever szimulációért és volumetrikus becslésért — lásd a [`reference/PROFILE_CREATION_REFERENCE.md`](../reference/PROFILE_CREATION_REFERENCE.md)-t. A teljes profilkészítési workflow-hoz lásd a repository gyökerében a `PROFILE_CREATION_GUIDE.md` fájlt.*

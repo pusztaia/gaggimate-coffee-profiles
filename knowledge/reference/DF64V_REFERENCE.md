@@ -54,7 +54,7 @@ New SSP Cast Lab Sweet burrs (factory-installed or user-swapped) require a meani
 
 - Break in with **coffee only** — not rice, not cleaning tablets. Rice does not correctly bed in espresso burrs and can skew the surface finish; cleaning tablets are a maintenance tool, not a seasoning medium.
 - The ~5–10 kg settling range is drawn from DF64V + SSP Cast user experience (Home-Barista thread reports of ~7–9 kg). Earlier generic-SSP guidance (~2–3 kg) reflects lower-fines SSP lines and understates this burr's break-in requirement.
-- **During break-in, treat all grind settings as provisional.** A grind logged at N marks from chirp at 1 kg throughput does not reproduce the same cup at 7 kg — the zero itself has drifted coarser. See [`../grinders/_NOTATION.md`](../grinders/_NOTATION.md) for the epoch-binding and row-superseding conventions.
+- **During break-in, treat all grind settings as provisional.** A grind logged at N marks from chirp at 1 kg throughput does not reproduce the same cup at 7 kg — the zero itself has drifted coarser — mark prior-epoch rows as superseded in your grind log rather than deleting them.
 - If your shot time is drifting coarser week-over-week without any intentional change, you are still in break-in. Do not keep chasing the drift by going finer without acknowledging the epoch drift in your log.
 
 ---
@@ -191,4 +191,4 @@ See *Low-RPM Stall* in the Motor Speed section above. Quick mitigation: increase
 
 ---
 
-*For your personal successful settings, see `grind-map.md` in the project root. For the logging format and epoch conventions, see [`../grinders/_NOTATION.md`](../grinders/_NOTATION.md).*
+*Keep your own grind log for settings that have worked well, with a clear header declaring your notation and epoch conventions.*

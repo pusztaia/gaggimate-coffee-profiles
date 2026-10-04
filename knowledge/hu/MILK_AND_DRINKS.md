@@ -18,7 +18,7 @@ Gőzölési technika, zabtej hőmérséklet-célértékek, italspecifikációk �
 | 65-68°C | Nagyon édes | Felső határ zabtejnél | Több édesség/testesség, de a zabtej textúrája nehezebbé válhat |
 | > 68-70°C | A minőség romlani kezd | **Kerülendő** | Megégett íz, gyengébb textúra, nagyobb szétválási/összecsapódási kockázat |
 
-**Zabtej célérték:** **63-65°C** a kancsóban egy meleg eszpresszó alapú italhoz. Az Alpro magyar Barista útmutatója kifejezetten **65°C**-ot javasol zabtejhez. citeturn370871search0
+**Zabtej célérték:** **63-65°C** a kancsóban egy meleg eszpresszó alapú italhoz. Az Alpro magyar Barista útmutatója kifejezetten **65°C**-ot javasol zabtejhez.
 
 **Fontos küszöbértékek, amiket érdemes megjegyezni:**
 - **60°C** — a textúra kialakul, az édesség kerekedni kezd.
@@ -70,9 +70,9 @@ A gőzölésnek három jól elkülöníthető fázisa van. Mindegyiknek más a g
 | **Oatly Barista Edition** | 3.0% | 1.1% | Magas | Nagyon jó | Gazdag, krémes, kávéhoz illő; erős, sokoldalú választás |
 | **Alpro Barista Oat / Barista gluténmentes zab** | ~3.1% | ~0.3% a jelenlegi HU gluténmentes receptúránál | Közepesen magas | Nagyon jó | Könnyedebb, tiszta zab jelleg; könnyen habosítható |
 
-**Oatly Barista Edition:** a jelenlegi Oatly termékoldal víz, 10% zab és repceolaj fő összetevőket sorol fel, **3,0 g zsírral** és **1,1 g fehérjével 100 ml-enként**. citeturn360755search1
+**Oatly Barista Edition:** a jelenlegi Oatly termékoldal víz, 10% zab és repceolaj fő összetevőket sorol fel, **3,0 g zsírral** és **1,1 g fehérjével 100 ml-enként**.
 
-**Alpro Barista Oat:** az Alpro jelenlegi UK termékinformációja zabalapot, napraforgóolajat, cikóriagyökér-rostot és borsófehérjét sorol fel; a magyar oldal jelenleg **Barista gluténmentes zabital**-ként mutatja be a Barista zab terméket, **3,1 g zsírral** és **0,3 g fehérjével 100 ml-enként**. citeturn360755search9turn370871search2
+**Alpro Barista Oat:** az Alpro jelenlegi UK termékinformációja zabalapot, napraforgóolajat, cikóriagyökér-rostot és borsófehérjét sorol fel; a magyar oldal jelenleg **Barista gluténmentes zabital**-ként mutatja be a Barista zab terméket, **3,1 g zsírral** és **0,3 g fehérjével 100 ml-enként**.
 
 > **Fontos:** a receptúrák piaconként eltérhetnek, és idővel változhatnak. A pontos referencia mindig a dobozon lévő címke legyen, az adott termékre vonatkozóan.
 
@@ -80,7 +80,7 @@ A gőzölésnek három jól elkülöníthető fázisa van. Mindegyiknek más a g
 
 A Barista zabtej-italokat kifejezetten kávés felhasználásra fejlesztették ki. A bennük lévő zabszilárd-anyagok, zsírok, rostok és stabilizáló összetevők kombinációja krémesebb textúrát és stabilabb habot eredményez, mint a hagyományos zabitalok esetén.
 
-Az Oatly Barista repceolajat és zabszilárd-anyagokat használ; az Alpro jelenlegi Barista zab receptúrája napraforgóolajat és további struktúraadó összetevőket tartalmaz. citeturn360755search1turn360755search9
+Az Oatly Barista repceolajat és zabszilárd-anyagokat használ; az Alpro jelenlegi Barista zab receptúrája napraforgóolajat és további struktúraadó összetevőket tartalmaz.
 
 ### A zabtej összecsapódásának / szétválásának megelőzése
 

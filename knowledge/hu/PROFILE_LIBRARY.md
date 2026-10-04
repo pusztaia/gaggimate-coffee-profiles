@@ -67,8 +67,6 @@ Az **Automatic Pro** a Gaggimate fejlesztője által karbantartott, firmware-be 
 
 Flow-alapú változó nyomást használ, csökkenő flow-jú extrakcióval. Válaszd ki a megfelelő dózisváltozatot a gép kijelzőjén, majd állítsd be a hőmérsékletet és a célsúlyt/időt.
 
-> **Teljes dokumentáció**: [`automatic-pro/AUTOMATIC_PRO_GUIDE.md`](automatic-pro/AUTOMATIC_PRO_GUIDE.md) — 5-fázisú architektúra, dózisskálázás és a Second Blooming hatás.
-
 ---
 
 ## Profilválasztási útmutató

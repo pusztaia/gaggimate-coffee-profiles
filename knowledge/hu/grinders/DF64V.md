@@ -1,6 +1,6 @@
 # DF64V Daráló Referencia
 
-Gyors referencia az őrlési beállításokhoz és azok finomhangolásához a **DF64V Gen-3 változtatható fordulatszámú, single-dose darálóhoz**, gyárilag szerelt **SSP Cast Lab Sweet V3 Red Speed espresso késekkel** (64 mm-es flat, előre felszerelve). A saját, bevált őrlési beállításaidért lásd a projekt gyökerében a `grind-map.md` fájlt. Minden beállítást a [`_NOTATION.md`](_NOTATION.md) formátuma szerint naplózz.
+Gyors referencia az őrlési beállításokhoz és azok finomhangolásához a **DF64V Gen-3 változtatható fordulatszámú, single-dose darálóhoz**, gyárilag szerelt **SSP Cast Lab Sweet V3 Red Speed espresso késekkel** (64 mm-es flat, előre felszerelve). Vezess saját őrlési naplót a bevált beállításaidról, egy egyértelmű fejléccel, ami deklarálja a jelölési konvenciót (pl. "Őrlés = jelölések száma a chirp nullponttól nyitva (DF64V)").
 
 > **Mélyebb áttekintés:** a seasoning ütemterv, az RDT/bellows munkafolyamat, az üzembe helyezés, a stallhibák elhárítása és a kés jegyzetek itt találhatók: [`../reference/DF64V_REFERENCE.md`](../../reference/DF64V_REFERENCE.md).
 
@@ -17,13 +17,13 @@ A DF64V nullázása motoros segítséggel, ún. chirp dialing módszerrel tört�
 1. Indítsd el a motort a munkafordulatszámodon.
 2. Lassan forgasd a gyűrűt finomabb irányba, amíg a kések első érintkezésbe nem kerülnek — ezt egy halk, rövid csippanás vagy súrlódó hang jelzi.
 3. Azonnal lazíts 1–2 jelöléssel. Ez lesz a **nullponti referenciád**.
-4. Naplózd ezt a nullpont-dátumot a `grind-map.md`-ben `zero set: ÉÉÉÉ-HH-NN` formában (lásd [`_NOTATION.md`](_NOTATION.md)).
+4. Naplózd ezt a nullpont-dátumot a saját őrlési naplódban `zero set: ÉÉÉÉ-HH-NN` formában.
 
-Kés eltávolítása, visszaszerelése vagy beállítás-igazítás után mindig nullázz újra. A korábbi epoch sorai a grind map-edben nem érvényesek tovább — lásd a [`_NOTATION.md`](_NOTATION.md) felülíró konvencióját.
+Kés eltávolítása, visszaszerelése vagy beállítás-igazítás után mindig nullázz újra. A korábbi epoch sorai a grind log-odban nem érvényesek tovább egy újranullázás után — jelöld felülírtnak őket törlés helyett.
 
 ### A beállítás naplózása
 
-Az őrlést egy **egyszerű egész számként** rögzítsd, amely azt mutatja, hány jelölésnyire van nyitva a gyűrű az aktuális chirp nullponttól (pl. `11`). A grind-log táblázat egyszer, a fejlécében/lábjegyzetében deklarálja: **"Őrlés = jelölések száma a chirp nullponttól nyitva (DF64V)"**, így a puszta szám egyértelmű; e fejléc-deklaráció nélkül egy puszta szám értelmezhetetlen. A rögzített szám továbbra is a chirp-relatív operátori koordináta — a fejléc adja hozzá a "chirp-től" horgonypontot; ez **nem** az abszolút, nyomtatott tárcsapozíció. Ez egy operátori koordináta, nem mikron- vagy szemcseméret-állítás. A DF64V fokozatmentes gyűrűjéhez nem tartozik mikron/jelölés érték; ne kezeld a jelölésszámokat abszolút rés-mérésként. Lásd [`_NOTATION.md`](_NOTATION.md).
+Az őrlést egy **egyszerű egész számként** rögzítsd, amely azt mutatja, hány jelölésnyire van nyitva a gyűrű az aktuális chirp nullponttól (pl. `11`). A grind-log táblázat egyszer, a fejlécében/lábjegyzetében deklarálja: **"Őrlés = jelölések száma a chirp nullponttól nyitva (DF64V)"**, így a puszta szám egyértelmű; e fejléc-deklaráció nélkül egy puszta szám értelmezhetetlen. A rögzített szám továbbra is a chirp-relatív operátori koordináta — a fejléc adja hozzá a "chirp-től" horgonypontot; ez **nem** az abszolút, nyomtatott tárcsapozíció. Ez egy operátori koordináta, nem mikron- vagy szemcseméret-állítás. A DF64V fokozatmentes gyűrűjéhez nem tartozik mikron/jelölés érték; ne kezeld a jelölésszámokat abszolút rés-mérésként.
 
 ### Espresso kiindulási ablak
 
@@ -106,4 +106,4 @@ A **Red Speed** TiAlCN bevonatot a gyártó úgy írja le, hogy a Silver Knight 
 
 ---
 
-*A saját, bevált beállításaidért lásd a projekt gyökerében a `grind-map.md` fájlt. A naplózási formátumért és az epoch konvenciókért lásd a [`_NOTATION.md`](_NOTATION.md) fájlt.*
+*Vezess saját őrlési naplót a bevált beállításaidról, egyértelmű fejléccel a jelölési konvenciódról és az epoch-szabályaidról.*
