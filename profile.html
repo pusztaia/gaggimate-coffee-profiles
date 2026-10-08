@@ -427,9 +427,12 @@ function renderChart(){
 
 function attachChartInteraction(W,pad,total,model,x){
   const svg=$("#chartSvg"),overlay=$("#chartOverlay"),crosshair=$("#crosshair"),tooltip=$("#chartTooltip");
+  /* The SVG box (width:100%, fixed height) rarely has the viewBox's aspect
+   * ratio, so the drawing is letterboxed (preserveAspectRatio: xMidYMid meet).
+   * Map through the real screen transform instead of rect.width-scaling. */
   function pointerToTime(clientX){
-    const rect=svg.getBoundingClientRect();
-    const svgX=(clientX-rect.left)/rect.width*W;
+    const ctm=svg.getScreenCTM();
+    const svgX=ctm?new DOMPoint(clientX,0).matrixTransform(ctm.inverse()).x:0;
     const ratio=Math.max(0,Math.min(1,(svgX-pad.l)/(W-pad.l-pad.r)));
     return ratio*total;
   }

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is **not** a software application — it's a documentation/data repository of espresso brew profiles for a **GaggiMate Pro** controller (Gaggia Classic Pro 2025 + DF64V Gen 2 grinder + IMS B682TH24.5M basket + IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 holes, DS58.5) + BOOKOO Themis Ultra Bluetooth scale). The "code" is JSON profile files consumed by GaggiMate firmware, a Python chart-rendering script, and a static HTML gallery viewer. Most prose in the repo is in Hungarian.
+This is **not** a software application — it's a documentation/data repository of espresso brew profiles for a **GaggiMate Pro** controller (Gaggia Classic Pro 2025 + DF64V Gen 2 grinder + IMS B682TH24.5M basket + IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 holes, DS58.5) + BOOKOO Themis Ultra Bluetooth scale). The "code" is JSON profile files consumed by GaggiMate firmware, a few Python tools (chart rendering, catalog generation, validation), and a static, dependency-free multi-page PWA site (vanilla HTML/JS, no framework, no bundler). Most prose in the repo is in Hungarian.
 
 ## Commands
 
@@ -27,23 +27,23 @@ python3 tools/build_catalog.py --dry-run  # print the generated catalog instead 
 
 It derives variants (manual/scale/general JSON files, PNG, recipe, changelog) straight from each `profiles/{coffee-slug}/` folder's contents, and preserves curated fields (title, subtitle, notes, accent colors, featured, variant labels) from the existing `catalog.json`, optionally overridden per-folder via `profiles/{coffee-slug}/catalog.meta.json` (see the script's module docstring for the schema).
 
-This runs automatically on commit via a git pre-commit hook (not tracked by git itself — reinstall after a fresh clone with `cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`), which regenerates and re-stages `catalog.json` whenever it's out of sync. Run `build_catalog.py` manually only to preview the result before committing.
+This runs automatically on commit via a git pre-commit hook (not tracked by git itself — reinstall after a fresh clone with `cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`), which regenerates and re-stages `catalog.json` whenever it's out of sync, then runs `validate_repo.py` (below) and blocks the commit if it fails. Run `build_catalog.py` manually only to preview the result before committing.
 
-Quick JSON syntax check on a new profile:
+Repo-wide validation (the closest thing to a test suite — run it after any change to profiles, site pages, or referenced docs):
 
 ```bash
-python3 -c "import json; json.load(open('profiles/<coffee>/<file>.json'))" && echo OK
+python3 tools/validate_repo.py
 ```
 
-Full structural validation against the schema's allowed keys (root + phase level) across every profile — see `PROFILE_CREATION_GUIDE.md` for the full script; run it after adding/editing any profile JSON to catch stray/typo'd keys, since the firmware rejects unknown root fields (`additionalProperties: false`).
+It checks that every `profiles/**/*.json` only uses keys defined in `schema/profile.json` (key sets are read from the schema at runtime, at root/phase/pump/transition/target level — the firmware rejects unknown root fields), that each profile has non-empty `label`/`type`/`phases`, that `build_catalog.py --check` passes and every catalog variant's PNG/recipe/changelog exists, and that every file referenced by the site shell exists: `index.html`'s `DOCS`/`KNOWLEDGE` arrays, each page's `<script src>`, `manifest.json` icons, and `sw.js`'s `SHELL_ASSETS`. The same two checks (`build_catalog.py --check` + `validate_repo.py`) run in CI via `.github/workflows/validate.yml` on push to `main` and on PRs. Python tools need only the stdlib, except `render_gaggimate_profiles.py` (matplotlib) and `tools/generate_icons.py` (Pillow; regenerates the PWA icons in `assets/icons/` — only needed after a brand-color change).
 
-View the gallery (`index.html`) locally — it `fetch()`es recipe/changelog `.md` files client-side, so it must be served over HTTP, not opened via `file://`:
+View the site locally — it `fetch()`es recipe/changelog `.md` files client-side, so it must be served over HTTP, not opened via `file://`:
 
 ```bash
 python3 -m http.server 8000   # then open http://localhost:8000/
 ```
 
-There is no build step, package manager, linter, or test suite in this repo (the `.kilo/` directory is an unrelated local agent-tool cache, not part of the project).
+There is no build step, package manager, or linter in this repo.
 
 ## Repository structure
 
@@ -52,6 +52,11 @@ There is no build step, package manager, linter, or test suite in this repo (the
 - `tools/render_gaggimate_profiles.py` — renders each JSON profile's pressure/flow/temperature-over-time into the accompanying PNG chart.
 - `tools/build_catalog.py` — regenerates `profiles/catalog.json` from the `profiles/*` directory tree; this is what `index.html` actually renders (see below).
 - `index.html` — single-file static gallery. It has **no hardcoded profile cards** — at load time it `fetch()`es `profiles/catalog.json` and builds every card, variant selector, mini chart, and phase list from that plus the referenced GaggiMate JSON files, and `fetch()`es each coffee's recipe/changelog Markdown on demand for the modal viewer. Adding a new profile means only adding files under `profiles/{coffee-slug}/` — `catalog.json` (and therefore `index.html`) updates itself via `tools/build_catalog.py` (see Commands), which runs automatically on commit through the pre-commit hook.
+- Other site pages, all driven by the same `catalog.json` + profile JSON: `profile.html` (single-profile detail + dial-in assistant), `brew.html` (brew mode), `compare.html` (side-by-side profiles), `finder.html` (recommends an existing profile archetype from processing method), plus `offline.html`. Shared logic lives in `assets/js/`: `profile-common.js` (catalog path resolution, mini SVG chart, markdown rendering — note `index.html` still carries its own **inline copy** of these helpers, so a fix there may need mirroring), `dialin-rules.js` and `finder-rules.js` (deterministic, non-AI rule engines; `finder-rules.js`'s `PROCESS_TABLE` encodes temp/pressure/yield ranges and archetype slugs from `PROFILE_CREATION_GUIDE.md`, so keep them in sync), and `pwa-register.js`.
+- PWA: `manifest.json` + `sw.js`. When adding/renaming a shell page or `assets/js` file, add it to `sw.js`'s `SHELL_ASSETS` and bump `SHELL_CACHE`/`DATA_CACHE` version names so clients drop stale caches (`validate_repo.py` fails on missing `SHELL_ASSETS` entries).
+- `knowledge/` — English espresso knowledge-base articles, with Hungarian translations under `knowledge/hu/` (same filenames) and longer source/reference versions under `knowledge/reference/`. They're surfaced in `index.html`'s `KNOWLEDGE` array, where each entry has `file` (English) and `fileHu` (Hungarian) — adding or renaming an article means updating both files and that array.
+- `schema/shot_history.json`, `schema/shot_notes.json` — schemas for GaggiMate shot-log data; `shot-logs/gaggimate_shots_to_json.py` (stdlib-only) downloads `.slog` shot logs from the machine's HTTP API and converts them to JSON, viewable in `shot-logs/shot-viewer.html`. `websocket/websocket-api.yaml` documents the machine's WebSocket API.
+- `dev/` and `development/` — the phased web-roadmap prompts and specs that the site pages and `validate_repo.py` were built from (planning docs, not runtime). `index_old.html` is the pre-catalog legacy gallery, kept for reference only.
 - `templates/` — starter Markdown templates (`recipe-template.md`, `changelog-template.md`, `shot-log-template.md`) for documenting a new coffee.
 - `README.md`, `SUMMARY.md`, `PROFILE_GALLERY.md`, `FILE_NAMING.md`, `PROFILE_CREATION_GUIDE.md`, `BREW_GUIDELINES.md`, `BLUETOOTH_SCALE_WORKFLOW.md`, `CHANGELOG.md`, `kaveviz-5l-epsom-bikarbonat.md` — all human documentation; several are effectively views over the same profile data (index, gallery, naming rules, dial-in guidance, scale workflow) and must be kept in sync manually when profiles change. `kaveviz-5l-epsom-bikarbonat.md` is a standalone brew-water recipe guide (Epsom salt + sodium bicarbonate GH/KH profiles for 5 L distilled water), not tied to any single coffee profile — it's linked from `README.md`'s Dokumentumok table and `index.html`'s `DOCS` array like the other top-level guides.
 
