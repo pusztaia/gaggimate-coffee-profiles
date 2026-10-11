@@ -9,34 +9,26 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="assets/css/theme.css">
+<script>/* set the theme before first paint (theme.css defaults to the dark Roast theme) */
+try{const t=localStorage.getItem("gaggimate-theme");document.documentElement.dataset.theme=t||"dark";}catch(e){}
+</script>
 <style>
-:root{
-  --bg:#121014;--surface:#1b181d;--surface2:#242027;--text:#f8f5f2;--muted:#ad9fa8;
-  --line:#352f36;--accent:#ff8fa3;--gold:#f0b94c;--ok:#6fcf97;--shadow:0 18px 50px rgba(0,0,0,.4);
-  --radius-xl:30px;--radius-lg:22px;color-scheme:dark;
-}
-html[data-theme="light"]{
-  --bg:#f6f1e8;--surface:#fffdf8;--surface2:#f1e7da;--text:#241a16;--muted:#6f625a;
-  --line:#dfd1c1;--accent:#7d1d2f;--gold:#b5781f;--ok:#2e7d4f;--shadow:0 18px 50px rgba(66,38,27,.12);
-  color-scheme:light;
-}
 *{box-sizing:border-box}
-body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font-family:var(--gm-font);-webkit-font-smoothing:antialiased}
 a{color:inherit}button{font:inherit}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
-.topbar a{text-decoration:none;font-weight:800;padding:.5rem .8rem;border-radius:999px;border:1px solid var(--line)}
 .icon-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.5rem .8rem;cursor:pointer}
 .container{max-width:520px;margin:auto;padding:1.2rem 1.1rem 3rem;text-align:center}
-.coffee-name{font-size:clamp(1.6rem,7vw,2.3rem);font-weight:900;letter-spacing:-.02em;margin:.8rem 0 .2rem;text-transform:uppercase}
+.coffee-name{font-family:var(--gm-font-display);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:600;letter-spacing:0;line-height:1.05;margin:.8rem 0 .2rem;text-transform:uppercase}
 .coffee-sub{color:var(--muted);font-weight:700;margin:0 0 1.4rem}
-.dose-flow{display:flex;align-items:center;justify-content:center;gap:1rem;font-size:clamp(2.2rem,11vw,3.4rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.dose-flow{display:flex;align-items:center;justify-content:center;gap:1rem;font-family:var(--gm-font-display);font-size:clamp(2.6rem,13vw,4rem);font-weight:600;letter-spacing:-.03em;line-height:1}
 .dose-flow .arrow{font-size:.5em;color:var(--accent)}
-.ratio{color:var(--gold);font-weight:800;font-size:1.3rem;margin:.5rem 0 1.3rem}
+.ratio{color:var(--gold);font-weight:600;font-size:1.3rem;margin:.5rem 0 1.3rem}
 .stat-row{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.6rem}
 .stat-chip{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:.9rem 1.2rem;min-width:110px}
 .stat-chip strong{display:block;font-size:1.4rem}
 .stat-chip span{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;margin-top:.2rem}
-.grinder-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem;margin-bottom:1.6rem;font-size:1.15rem;font-weight:800}
+.grinder-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem;margin-bottom:1.6rem;font-size:1.15rem;font-weight:600}
 .grinder-card span{display:block;color:var(--muted);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
 .phase-timeline{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);padding:1.1rem 1.2rem;margin-bottom:1.6rem}
 .phase-timeline h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .8rem}
@@ -49,20 +41,27 @@ a{color:inherit}button{font:inherit}
 .checklist label:last-child{border-bottom:0}
 .checklist input{width:22px;height:22px;accent-color:var(--accent)}
 .btn-row{display:flex;flex-direction:column;gap:.7rem}
-.btn-big{display:block;width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);text-decoration:none;border-radius:999px;padding:1rem;font-weight:900;font-size:1.05rem;cursor:pointer}
-.btn-big.primary{background:var(--accent);border-color:var(--accent);color:#1a0f12}
+.btn-big{display:block;width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);text-decoration:none;border-radius:var(--gm-radius-control);padding:1rem;font-weight:600;font-size:1.05rem;cursor:pointer}
+.btn-big.primary{background:var(--accent);border-color:transparent;color:var(--on-accent)}
 .status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-lg);padding:1rem 1.1rem;color:var(--muted)}.status.error{border-color:#c06a68}
 .wake-note{color:var(--muted);font-size:.75rem;margin-top:1rem}
 @media(orientation:landscape) and (max-height:500px){.container{max-width:760px}.dose-flow{font-size:clamp(1.8rem,7vw,2.6rem)}}
-:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 70%,white);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
 </head>
 <body>
 <header class="topbar">
-  <a id="backLink" href="index.html">← Profil</a>
-  <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="GaggiMate Coffee Profiles – katalógus"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10h12v3.5a5.5 5.5 0 0 1-5.5 5.5h-1a5.5 5.5 0 0 1-5.5-5.5Z"/><path d="M16.5 11h1.25a2.5 2.5 0 0 1 0 5H16"/><path d="M3.5 21.5h15"/><path d="M8.5 3c-.8 1 .8 2 0 3.5M12.5 3c-.8 1 .8 2 0 3.5"/></svg><span class="brand-name">Coffee Profiles <span>GaggiMate</span></span></a>
+    <a class="home-link" id="backLink" href="index.html">← Profil</a>
+    <div class="topbar-end">
+      <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </div>
+  </div>
 </header>
+<script src="assets/js/site-nav.js"></script>
 <main class="container">
   <div id="status" class="status">Betöltés…</div>
   <div id="brewBody" hidden>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#191310">
+<meta name="description" content="GaggiMate kávévíz – Epsom-só + szódabikarbóna vízreceptek desztillált vízből, GH/KH kalkulátorral.">
+<title>Kávévíz · GaggiMate</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="assets/css/theme.css">
+<script>/* set the theme before first paint (theme.css defaults to the dark Roast theme) */
+try{const t=localStorage.getItem("gaggimate-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}
+</script>
+<style>
+:root{--max:860px}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:var(--gm-font);-webkit-font-smoothing:antialiased}
+a{color:inherit}button,input{font:inherit}
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.topbar-inner{max-width:var(--max);margin:auto;padding:.75rem 1.1rem;display:flex;align-items:center;gap:.5rem}
+.icon-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.5rem .72rem;cursor:pointer;font-weight:700}
+.container{max-width:var(--max);margin:auto;padding:1.5rem 1.1rem 3rem}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:-.03em;margin:0 0 .3rem}
+h2{font-size:1.25rem;margin:2.2rem 0 .8rem;letter-spacing:-.01em}
+.lead{color:var(--muted);margin:0 0 1.2rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.3rem}
+.notice{border:1px solid color-mix(in srgb,var(--warn) 45%,var(--line));background:color-mix(in srgb,var(--warn) 8%,var(--surface));border-radius:var(--radius-md);padding:.9rem 1rem;font-size:.9rem}
+.recipe-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.recipe-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.1rem;display:flex;flex-direction:column;gap:.5rem}
+.recipe-card.default{border-color:var(--accent)}
+.recipe-head{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap}
+.recipe-letter{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:999px;background:var(--accent);color:var(--on-accent);font-weight:600;flex:none}
+.recipe-name{font-weight:600;font-size:1.05rem}
+.recipe-ratio{color:var(--muted);font-weight:700}
+.badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:.05rem .5rem}
+.recipe-goal{margin:0;color:var(--muted);font-size:.9rem}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.stat{background:var(--surface2);border-radius:var(--radius-md);padding:.55rem;text-align:center}
+.stat strong{display:block;font-size:1.05rem}
+.stat span{display:block;color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em}
+.recipe-use{margin:0;padding-left:1.1rem;font-size:.88rem}
+.recipe-card .btn{align-self:flex-start;margin-top:auto}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.calc-grid label{display:flex;flex-direction:column;gap:.3rem;font-weight:600;font-size:.82rem}
+.calc-grid input{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:var(--gm-radius-control);padding:.55rem .65rem;font-weight:600}
+.calc-result{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:1rem}
+.calc-result .stat{padding:.8rem}
+.calc-result .stat strong{font-size:1.5rem;color:var(--accent)}
+.hint{color:var(--muted);font-size:.82rem;margin:.8rem 0 0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+tr:last-child td{border-bottom:0}
+ol.steps{margin:0;padding-left:1.2rem}
+ol.steps li{margin-bottom:.4rem}
+ul.plain{margin:.4rem 0 0;padding-left:1.1rem}
+.sources{font-size:.8rem;color:var(--muted)}
+.sources a{word-break:break-word}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.5rem .9rem;cursor:pointer;font-weight:600;font-size:.82rem;display:inline-flex;align-items:center;gap:.4rem}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:620px){.recipe-cards{grid-template-columns:1fr}.calc-grid{grid-template-columns:1fr 1fr}.calc-grid label:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="GaggiMate Coffee Profiles – katalógus"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10h12v3.5a5.5 5.5 0 0 1-5.5 5.5h-1a5.5 5.5 0 0 1-5.5-5.5Z"/><path d="M16.5 11h1.25a2.5 2.5 0 0 1 0 5H16"/><path d="M3.5 21.5h15"/><path d="M8.5 3c-.8 1 .8 2 0 3.5M12.5 3c-.8 1 .8 2 0 3.5"/></svg><span class="brand-name">Coffee Profiles <span>GaggiMate</span></span></a>
+    <div class="topbar-end">
+      <button class="icon-btn" id="langBtn" aria-label="Language / Nyelv" title="Language / Nyelv">EN</button>
+      <button class="icon-btn" id="themeBtn" data-i18n-attr="aria-label:theme;title:theme" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </div>
+  </div>
+</header>
+<script src="assets/js/site-nav.js"></script>
+<main class="container">
+  <h1 data-i18n="title">Kávévíz</h1>
+  <p class="lead" data-i18n="lead">Reprodukálható vízprofilok desztillált vízből, Epsom-sóval (MgSO4·7H2O) és szódabikarbónával (NaHCO3). Az Epsom-só adja a GH-t (összkeménység), a szódabikarbóna a KH-t (alkalinitás) — a többi változót (őrlés, hozam, hőmérséklet) előbb állítsd be.</p>
+  <div class="notice" data-i18n-html="notice"></div>
+
+  <h2 data-i18n="recipesTitle">Vízreceptek (5 L)</h2>
+  <div class="recipe-cards" id="recipeCards"></div>
+
+  <h2 id="calc" data-i18n="calcTitle">Kalkulátor</h2>
+  <div class="card">
+    <div class="calc-grid">
+      <label><span data-i18n="calcLiters">Víz (L)</span><input type="number" id="liters" min="0.1" step="0.1" value="5" inputmode="decimal"></label>
+      <label><span data-i18n="calcGh">Cél GH (ppm)</span><input type="number" id="gh" min="0" step="1" value="70" inputmode="numeric"></label>
+      <label><span data-i18n="calcKh">Cél KH (ppm)</span><input type="number" id="kh" min="0" step="1" value="40" inputmode="numeric"></label>
+    </div>
+    <div class="calc-result" aria-live="polite">
+      <div class="stat"><strong id="epsomOut">—</strong><span data-i18n="epsom">Epsom-só</span></div>
+      <div class="stat"><strong id="bicarbOut">—</strong><span data-i18n="bicarb">Szódabikarbóna</span></div>
+    </div>
+    <p class="hint" data-i18n="calcHint">2,45 g Epsom-só / L ≈ 1000 ppm GH, 1,68 g NaHCO3 / L ≈ 1000 ppm KH (CaCO3-egyenérték). 0,01 g felbontású mérleg ajánlott. Finomhangolás 5 L-re: +5 ppm KH ≈ +0,04 g NaHCO3, +5 ppm GH ≈ +0,06 g Epsom-só.</p>
+  </div>
+
+  <h2 data-i18n="chooserTitle">Gyors választó kávétípus szerint</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th data-i18n="thCoffee">Kávé típusa / ízcél</th><th data-i18n="thFirst">Első választás</th><th data-i18n="thAlt">Alternatíva</th></tr></thead>
+    <tbody id="chooserBody"></tbody>
+  </table></div>
+  <p class="hint" data-i18n="chooserHint">Ha nem akarsz többféle vizet tartani: mindenhez a C — BALANCED 70/40. Az A/B/D finomhangolás, nem feltétele a jó espressónak.</p>
+
+  <h2 data-i18n="prepTitle">Elkészítés az 5 literes palackban</h2>
+  <div class="card">
+    <ol class="steps" id="prepSteps"></ol>
+    <p class="hint" data-i18n="prepNote">Csak tiszta, adalék- és illatmentes Epsom-sót és szódabikarbónát használj (nem sütőport, nem fürdősót).</p>
+  </div>
+
+  <h2 data-i18n="diagTitle">Mikor nyúlj a vízhez?</h2>
+  <div class="card">
+    <p style="margin:0" data-i18n="diagLead">Ha egy espresso nem jó, ne a vízzel kezdd. Sorrend: puck prep / channeling → őrlés és shotidő → hozam / arány → hőmérséklet → csak ezután vízprofil. Egyszerre egy változót módosíts.</p>
+    <ul class="plain" id="diagList"></ul>
+  </div>
+
+  <h2 data-i18n="machineTitle">Gépvédelem</h2>
+  <div class="card">
+    <ul class="plain" id="machineList" style="margin-top:0"></ul>
+  </div>
+
+  <h2 data-i18n="sourcesTitle">Források</h2>
+  <div class="sources">
+    <p data-i18n-html="sourcesDoc"></p>
+    <ul class="plain">
+      <li><a href="https://sca.coffee/sca-news/news-from-our-partners/water-and-the-taste-of-coffee-ay9gh" rel="noopener">SCA — Water and the Taste of Coffee</a></li>
+      <li><a href="https://www.baristahustle.com/diy-water-recipes-redux/" rel="noopener">Barista Hustle — DIY Water Recipes Redux</a></li>
+      <li><a href="https://www.baristahustle.com/diy-water-recipes-the-world-in-two-bottles/" rel="noopener">Barista Hustle — The World in Two Bottles</a></li>
+      <li><a href="https://www.baristahustle.com/lesson/twc-4-06-basic-brew-water-recipes/" rel="noopener">Barista Hustle — Basic Brew Water Recipes</a></li>
+      <li><a href="https://www.lamarzocco.com/uk/en/technical-questions/la-marzocco-water-specifications/" rel="noopener">La Marzocco — Water Specifications</a></li>
+      <li><a href="https://www.gaggia.com/manual-machines/classic-up/" rel="noopener">Gaggia — Classic FAQ</a></li>
+    </ul>
+  </div>
+</main>
+<script>
+"use strict";
+const $=(sel,root=document)=>root.querySelector(sel);
+function esc(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+
+// Barista Hustle concentrates: 2.45 g Epsom / L ≈ 1000 ppm GH, 1.68 g NaHCO3 / L ≈ 1000 ppm KH (as CaCO3).
+const EPSOM_G_PER_L_PER_PPM=2.45/1000;
+const BICARB_G_PER_L_PER_PPM=1.68/1000;
+
+const RECIPES=[
+  {id:"A",name:"CLARITY",gh:70,kh:30,
+    goal:{hu:"Tisztaság, tea, virág, citrus, piros gyümölcs, élénk savszerkezet.",en:"Clarity, tea, florals, citrus, red fruit, vivid acidity."},
+    use:{hu:["világos pörkölés, washed","Kenya, Etiópia, virágos/teás tételek","hibiszkusz, csipkebogyó, jázmin"],en:["light roast, washed","Kenya, Ethiopia, floral/tea-like lots","hibiscus, rosehip, jasmine"]}},
+  {id:"B",name:"JUICY",gh:75,kh:35,
+    goal:{hu:"Lédús, édes, intenzív gyümölcsösség jól elkülönülő savakkal.",en:"Juicy, sweet, intense fruit with well-separated acids."},
+    use:{hu:["tiszta natural","bogyós gyümölcs, dinnye, barack, trópusi","világos–közepesen világos pörkölés"],en:["clean naturals","berries, melon, stone fruit, tropical","light to medium-light roast"]}},
+  {id:"C",name:"BALANCED",gh:70,kh:40,default:true,
+    goal:{hu:"Édesség, savasság és test egyensúlya — ez a kontrollvíz.",en:"Balance of sweetness, acidity and body — the control water."},
+    use:{hu:["általános espresso, első dial-in","washed, honey és natural","tejjel és tisztán is"],en:["everyday espresso, first dial-in","washed, honey and natural","with milk or straight"]}},
+  {id:"D",name:"ROUND",gh:70,kh:50,
+    goal:{hu:"Kerekebb savérzet, a boros/fermentált karakter visszafogása.",en:"Rounder acidity, tames winey/fermented character."},
+    use:{hu:["anaerobic natural, winey profil","dzsemes, sangriás, fűszeres kávék","ha lapos vagy krétás lesz: vissza 40 KH-ra"],en:["anaerobic naturals, winey profiles","jammy, sangria-like, spiced coffees","if flat or chalky: back to 40 KH"]}}
+];
+
+const CHOOSER=[
+  [{hu:"Washed, világos, virágos, teás",en:"Washed, light, floral, tea-like"},"A","C"],
+  [{hu:"Washed, élénk citrusos",en:"Washed, bright citrus"},"A",{hu:"C, ha túl savas",en:"C if too sour"}],
+  [{hu:"Tiszta natural, gyümölcsös",en:"Clean natural, fruity"},"B","C"],
+  [{hu:"Juicy / berry / dinnye / csonthéjas",en:"Juicy / berry / melon / stone fruit"},"B",{hu:"A, ha több clarity kell",en:"A for more clarity"}],
+  [{hu:"Általános specialty espresso",en:"Everyday specialty espresso"},"C","—"],
+  [{hu:"Anaerobic natural, dzsemes",en:"Anaerobic natural, jammy"},"D",{hu:"C, ha túl tompa",en:"C if too muted"}],
+  [{hu:"Winey / sangria / erősen fermentált",en:"Winey / sangria / heavily fermented"},"D","C"],
+  [{hu:"Csokoládé / karamell / testesebb",en:"Chocolate / caramel / more body"},{hu:"C vagy D",en:"C or D"},{hu:"ízlés szerint",en:"to taste"}],
+  [{hu:"Közepes–sötétebb espresso",en:"Medium to darker espresso"},"C",{hu:"D, ha élesnek érzed",en:"D if it tastes sharp"}]
+];
+
+const LISTS={
+  prep:{
+    hu:["Önts ki a palackból kb. 150–250 ml vizet egy tiszta pohárba.","Mérd ki a profilhoz szükséges Epsom-sót és szódabikarbónát (0,01 g felbontás).","Oldd fel mindkettőt teljesen a kivett vízben.","Öntsd vissza az oldatot az 5 literes palackba, zárd le, és alaposan rázd össze.","Címkézd fel, pl. BALANCED 70/40 · dátum.","Dial-in közben több egymást követő shothoz ugyanazt a vizet használd."],
+    en:["Pour about 150–250 ml out of the bottle into a clean glass.","Weigh the Epsom salt and baking soda for the recipe (0.01 g resolution).","Dissolve both completely in that water.","Pour the solution back into the 5 L bottle, close it and shake well.","Label it, e.g. BALANCED 70/40 · date.","Keep the same water across consecutive shots while dialling in."]},
+  diag:{
+    hu:["ugyanazzal a stabil recepttel több shoton át túl éles a savérzet → +5 KH;","lapos, tompa, eltűnnek a gyümölcsök → −5 KH;","a fermentált karakter rendszeresen túl domináns → D;","két vízzel kontrollált A/B kóstolást szeretnél."],
+    en:["acidity stays too sharp across several shots of a stable recipe → +5 KH;","flat, muted, fruit disappears → −5 KH;","fermented character is consistently too dominant → D;","you want a controlled A/B tasting with two waters."]},
+  machine:{
+    hu:["A keverékben csak a GH és KH van beállítva: a keménység teljes egészében magnézium, kalcium nincs, a szulfát több lehet, mint természetes víznél.","A Barista Hustle óvatosságot javasol a kalciummentes DIY vizekkel espresso gépben (korróziós kockázat).","A Gaggia Classic mérsékelt keménységű, iható vizet javasol; a La Marzocco spec. 70–100 ppm keménység, 40–80 ppm alkalinitás, 90–150 ppm TDS, pH 6,5–8.","Rendszeres gépvíznek a C — 70/40 a kiindulópont, de nem gyártó által hitelesített vízspecifikáció.","Tiszta desztillált vizet önmagában ne használj rendszeres gépvízként."],
+    en:["Only GH and KH are set: all hardness is magnesium, there is no calcium, and sulfate may be higher than in natural water of the same GH.","Barista Hustle advises caution with calcium-free DIY water in espresso machines (corrosion risk).","Gaggia recommends moderately hard drinking water for the Classic; La Marzocco's spec is 70–100 ppm hardness, 40–80 ppm alkalinity, 90–150 ppm TDS, pH 6.5–8.","For regular machine water start from C — 70/40, but it is not a manufacturer-certified water spec.","Never use plain distilled water on its own as regular machine water."]}
+};
+
+const I18N={
+  hu:{
+    back:"← Katalógus",theme:"Téma váltása",title:"Kávévíz",
+    lead:"Reprodukálható vízprofilok desztillált vízből, Epsom-sóval (MgSO4·7H2O) és szódabikarbónával (NaHCO3). Az Epsom-só adja a GH-t (összkeménység), a szódabikarbóna a KH-t (alkalinitás) — a többi változót (őrlés, hozam, hőmérséklet) előbb állítsd be.",
+    notice:"<strong>Ízprofilozási rendszer, nem gépvíz-specifikáció.</strong> A desztillált víz + magnézium alapú, kalciummentes receptek korróziós kockázatot hordozhatnak — lásd <a href=\"#machine\">Gépvédelem</a>.",
+    recipesTitle:"Vízreceptek (5 L)",defaultBadge:"alap",calcThis:"Kalkulátorba",
+    calcTitle:"Kalkulátor",calcLiters:"Víz (L)",calcGh:"Cél GH (ppm)",calcKh:"Cél KH (ppm)",epsom:"Epsom-só",bicarb:"Szódabikarbóna",
+    calcHint:"2,45 g Epsom-só / L ≈ 1000 ppm GH, 1,68 g NaHCO3 / L ≈ 1000 ppm KH (CaCO3-egyenérték). 0,01 g felbontású mérleg ajánlott. Finomhangolás 5 L-re: +5 ppm KH ≈ +0,04 g NaHCO3, +5 ppm GH ≈ +0,06 g Epsom-só.",
+    chooserTitle:"Gyors választó kávétípus szerint",thCoffee:"Kávé típusa / ízcél",thFirst:"Első választás",thAlt:"Alternatíva",
+    chooserHint:"Ha nem akarsz többféle vizet tartani: mindenhez a C — BALANCED 70/40. Az A/B/D finomhangolás, nem feltétele a jó espressónak.",
+    prepTitle:"Elkészítés az 5 literes palackban",prepNote:"Csak tiszta, adalék- és illatmentes Epsom-sót és szódabikarbónát használj (nem sütőport, nem fürdősót).",
+    diagTitle:"Mikor nyúlj a vízhez?",diagLead:"Ha egy espresso nem jó, ne a vízzel kezdd. Sorrend: puck prep / channeling → őrlés és shotidő → hozam / arány → hőmérséklet → csak ezután vízprofil. Egyszerre egy változót módosíts. Vízváltás akkor indokolt, ha:",
+    machineTitle:"Gépvédelem",sourcesTitle:"Források",
+    sourcesDoc:"Részletes leírás: <a href=\"kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
+  },
+  en:{
+    back:"← Catalogue",theme:"Toggle theme",title:"Brew water",
+    lead:"Repeatable water profiles from distilled water with Epsom salt (MgSO4·7H2O) and baking soda (NaHCO3). Epsom salt sets GH (general hardness), baking soda sets KH (alkalinity) — dial in grind, yield and temperature first.",
+    notice:"<strong>A flavour-tuning system, not a machine water spec.</strong> Calcium-free recipes made from distilled water and magnesium can carry a corrosion risk — see <a href=\"#machine\">Machine safety</a>.",
+    recipesTitle:"Water recipes (5 L)",defaultBadge:"default",calcThis:"Use in calculator",
+    calcTitle:"Calculator",calcLiters:"Water (L)",calcGh:"Target GH (ppm)",calcKh:"Target KH (ppm)",epsom:"Epsom salt",bicarb:"Baking soda",
+    calcHint:"2.45 g Epsom salt / L ≈ 1000 ppm GH, 1.68 g NaHCO3 / L ≈ 1000 ppm KH (as CaCO3). A 0.01 g scale is recommended. Fine-tuning per 5 L: +5 ppm KH ≈ +0.04 g NaHCO3, +5 ppm GH ≈ +0.06 g Epsom salt.",
+    chooserTitle:"Quick chooser by coffee type",thCoffee:"Coffee type / flavour goal",thFirst:"First choice",thAlt:"Alternative",
+    chooserHint:"If you'd rather keep a single water: use C — BALANCED 70/40 for everything. A/B/D are refinements, not a requirement for good espresso.",
+    prepTitle:"Making it in the 5 L bottle",prepNote:"Use only pure, unscented, additive-free Epsom salt and baking soda (not baking powder, not bath salt).",
+    diagTitle:"When to change the water",diagLead:"If a shot is off, don't start with the water. Order: puck prep / channeling → grind and shot time → yield / ratio → temperature → only then the water profile. Change one variable at a time. A water change makes sense when:",
+    machineTitle:"Machine safety",sourcesTitle:"Sources",
+    sourcesDoc:"Full write-up (Hungarian): <a href=\"kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
+  }
+};
+
+let lang="hu";
+function t(key){return I18N[lang][key]??I18N.hu[key]??key;}
+function pick(value){return typeof value==="object"&&value!==null?value[lang]:value;}
+function fmt(value,digits){return value.toLocaleString(lang==="hu"?"hu-HU":"en-GB",{minimumFractionDigits:digits,maximumFractionDigits:digits});}
+function grams(ppm,litres,perPpm){return ppm*litres*perPpm;}
+
+function storageGet(key){try{return localStorage.getItem(key);}catch(e){return null;}}
+function storageSet(key,value){try{localStorage.setItem(key,value);}catch(e){/* private mode — fine */}}
+
+function renderRecipes(){
+  $("#recipeCards").innerHTML=RECIPES.map(r=>`
+    <article class="recipe-card${r.default?" default":""}">
+      <div class="recipe-head"><span class="recipe-letter">${esc(r.id)}</span><span class="recipe-name">${esc(r.name)}</span><span class="recipe-ratio">${r.gh}/${r.kh}</span>${r.default?`<span class="badge">${esc(t("defaultBadge"))}</span>`:""}</div>
+      <p class="recipe-goal">${esc(pick(r.goal))}</p>
+      <div class="stat-grid">
+        <div class="stat"><strong>${fmt(grams(r.gh,5,EPSOM_G_PER_L_PER_PPM),2)} g</strong><span>${esc(t("epsom"))}</span></div>
+        <div class="stat"><strong>${fmt(grams(r.kh,5,BICARB_G_PER_L_PER_PPM),2)} g</strong><span>${esc(t("bicarb"))}</span></div>
+        <div class="stat"><strong>~${r.gh} ppm</strong><span>GH</span></div>
+        <div class="stat"><strong>~${r.kh} ppm</strong><span>KH</span></div>
+      </div>
+      <ul class="recipe-use">${pick(r.use).map(u=>`<li>${esc(u)}</li>`).join("")}</ul>
+      <button class="btn" type="button" data-recipe="${esc(r.id)}">${esc(t("calcThis"))} ↓</button>
+    </article>`).join("");
+}
+
+function recipeLabel(id){const r=RECIPES.find(x=>x.id===id);return r?`${r.id} — ${r.name} ${r.gh}/${r.kh}`:pick(id);}
+function renderChooser(){
+  $("#chooserBody").innerHTML=CHOOSER.map(([type,first,alt])=>
+    `<tr><td>${esc(pick(type))}</td><td><strong>${esc(recipeLabel(first))}</strong></td><td>${esc(recipeLabel(alt))}</td></tr>`).join("");
+}
+
+function renderLists(){
+  $("#prepSteps").innerHTML=LISTS.prep[lang].map(s=>`<li>${esc(s)}</li>`).join("");
+  $("#diagList").innerHTML=LISTS.diag[lang].map(s=>`<li>${esc(s)}</li>`).join("");
+  $("#machineList").innerHTML=LISTS.machine[lang].map(s=>`<li>${esc(s)}</li>`).join("");
+}
+
+function updateCalc(){
+  const litres=Number($("#liters").value),gh=Number($("#gh").value),kh=Number($("#kh").value);
+  const ok=v=>Number.isFinite(v)&&v>=0;
+  $("#epsomOut").textContent=ok(litres)&&ok(gh)&&litres>0?`${fmt(grams(gh,litres,EPSOM_G_PER_L_PER_PPM),2)} g`:"—";
+  $("#bicarbOut").textContent=ok(litres)&&ok(kh)&&litres>0?`${fmt(grams(kh,litres,BICARB_G_PER_L_PER_PPM),2)} g`:"—";
+}
+
+function applyLang(next){
+  lang=next==="en"?"en":"hu";
+  document.documentElement.lang=lang;
+  document.title=lang==="en"?"Brew water · GaggiMate":"Kávévíz · GaggiMate";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml);});
+  document.querySelectorAll("[data-i18n-attr]").forEach(el=>{
+    el.dataset.i18nAttr.split(";").forEach(pair=>{const [attr,key]=pair.split(":");el.setAttribute(attr,t(key));});
+  });
+  $("#langBtn").textContent=lang==="hu"?"EN":"HU";
+  renderRecipes();renderChooser();renderLists();updateCalc();
+  storageSet("gaggimate-lang",lang);
+}
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;storageSet("gaggimate-theme",theme);}
+function preferredTheme(){
+  const saved=storageGet("gaggimate-theme");
+  if(saved)return saved;
+  return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{
+    if(!storageGet("gaggimate-theme"))setTheme(event.matches?"dark":"light");
+  });
+}
+setTheme(preferredTheme());
+$("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+$("#langBtn").addEventListener("click",()=>applyLang(lang==="hu"?"en":"hu"));
+
+// The machine-safety heading is the notice's link target.
+document.querySelector('[data-i18n="machineTitle"]').id="machine";
+
+["#liters","#gh","#kh"].forEach(sel=>$(sel).addEventListener("input",updateCalc));
+$("#recipeCards").addEventListener("click",event=>{
+  const btn=event.target.closest("[data-recipe]");if(!btn)return;
+  const r=RECIPES.find(x=>x.id===btn.dataset.recipe);if(!r)return;
+  $("#gh").value=r.gh;$("#kh").value=r.kh;updateCalc();
+  $("#calc").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+applyLang(storageGet("gaggimate-lang")||"hu");
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>

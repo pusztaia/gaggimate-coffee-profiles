@@ -1,8 +1,8 @@
 "use strict";
 /* Bump both names whenever SHELL_ASSETS or the fetch strategy changes, so the
  * activate handler cleanly drops the previous version's caches. */
-const SHELL_CACHE = "gm-shell-v1";
-const DATA_CACHE = "gm-data-v1";
+const SHELL_CACHE = "gm-shell-v5";
+const DATA_CACHE = "gm-data-v5";
 
 const SHELL_ASSETS = [
   "./",
@@ -11,12 +11,31 @@ const SHELL_ASSETS = [
   "brew.html",
   "compare.html",
   "finder.html",
+  "water.html",
   "offline.html",
   "manifest.json",
+  "assets/css/theme.css",
+  "assets/css/site.css",
+  "assets/css/site-nav.css",
+  "assets/fonts/barlow-400-latin-ext.woff2",
+  "assets/fonts/barlow-400-latin.woff2",
+  "assets/fonts/barlow-500-latin-ext.woff2",
+  "assets/fonts/barlow-500-latin.woff2",
+  "assets/fonts/barlow-600-latin-ext.woff2",
+  "assets/fonts/barlow-600-latin.woff2",
+  "assets/fonts/barlow-700-latin-ext.woff2",
+  "assets/fonts/barlow-700-latin.woff2",
+  "assets/fonts/barlow-condensed-500-latin-ext.woff2",
+  "assets/fonts/barlow-condensed-500-latin.woff2",
+  "assets/fonts/barlow-condensed-600-latin-ext.woff2",
+  "assets/fonts/barlow-condensed-600-latin.woff2",
+  "assets/fonts/barlow-condensed-700-latin-ext.woff2",
+  "assets/fonts/barlow-condensed-700-latin.woff2",
   "assets/js/profile-common.js",
   "assets/js/dialin-rules.js",
   "assets/js/finder-rules.js",
   "assets/js/pwa-register.js",
+  "assets/js/site-nav.js",
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
   "assets/icons/icon-maskable-512.png",

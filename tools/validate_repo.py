@@ -185,7 +185,7 @@ def check_referenced_files(issues: list[str]) -> None:
         if not (ROOT / rel_path).is_file():
             issues.append(f"index.html: referenced doc/knowledge file not found: {rel_path}")
 
-    for html_name in ("index.html", "profile.html", "brew.html", "compare.html", "finder.html"):
+    for html_name in ("index.html", "profile.html", "brew.html", "compare.html", "finder.html", "water.html"):
         html_path = ROOT / html_name
         if not html_path.is_file():
             continue
