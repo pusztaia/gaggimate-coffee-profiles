@@ -80,7 +80,7 @@ A `duration` értékek hard capek. Aktív BOOKOO mérleggel a tömeg-targetek v�
 
 ## Scale V2 profil
 
-**Profilfájl:** [`colombia-manos-juntas-scale.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-scale.json)
+**Profilfájl:** [`colombia-manos-juntas-scale.json`](colombia-manos-juntas-scale.json)
 
 A verziószám szándékosan **V2 maradt**. A fájl a javított, kétlépcsős stop-logikát tartalmazza.
 

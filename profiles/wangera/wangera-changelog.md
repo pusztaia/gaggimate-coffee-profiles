@@ -1,5 +1,9 @@
 # Changelog – Kenya Wangera Creamy Fruit
 
+## Javítás (2026-10-13)
+
+- Fejléc: **Eredet: Kenya** (a kávé nevéből; régió/farm nincs dokumentálva).
+
 ## Repo konzisztencia (2026-07-25)
 
 - A négy JSON fájlnév átalakítva a `kirinyaga/` mintájára: `wangera-stable-38s.json` → `wangera-manual-v1.json` (94.0 °C), `wangera-stable-38s-945c.json` → `wangera-manual-v2.json` (94.5 °C), `wangera-stable-38s-scale-v2.json` → `wangera-scale-v1.json` (94.0 °C), `wangera-stable-38s-945c-scale-v2.json` → `wangera-scale-v2.json` (94.5 °C). A `-v1`/`-v2` sorszám a manual és scale oldalon ugyanazt a hőmérséklet-variánst jelöli. A PNG-k újragenerálva.

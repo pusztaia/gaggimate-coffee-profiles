@@ -3,6 +3,7 @@
 | Mező | Érték |
 |---|---|
 | Kávé | Bagira - Costa Rica Finca San Calletano |
+| Eredet | Costa Rica |
 | Ízjegyek | cseresznyebefőtt · csokoládé · krémes |
 | Setup | DF64V Gen 2 + Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) / BOOKOO Themis Ultra Bluetooth mérleg |
 | Őrlőskála | 0-90, egész jelölések |
@@ -40,7 +41,7 @@ A Gentle Ramp indulása előtt kb. **17 s** telik el. A bevált tartomány ezen 
 
 | 17 s / Gentle Ramp előtti hozam | Értelmezés | Teendő |
 |---:|---|---|
-| **3-4 g** | fojtott indulás, várhatóan alacsonyabb végső hozam | WDT/tamp/screen ellenőrzés; ha stabil a prep, menj picit 11 felé |
+| **3-4 g** | fojtott indulás, várhatóan alacsonyabb végső hozam | WDT/tamp/screen ellenőrzés; ha stabil a prep, menj picit 12 felé / durvábbra |
 | **6-9 g** | egészséges indulás | marad a profil és az őrlési zóna |
 | **10 g+** | túl gyors indulás vagy channeling gyanú | puck prep ellenőrzés; ha kell, picit 10 felé / finomabbra |
 
@@ -66,7 +67,7 @@ A tényleges shotidőt a Bluetooth mérleg targetje rövidíti. A `duration` ér
 | Eredmény | Következő lépés |
 |---|---|
 | **17 s körül 6-9 g, végén 41.5-42.5 g, jó ízjegyek** | marad a Scale V1 profil |
-| **17 s körül 3-4 g, végén 41 g alatt** | fojtott indulás: WDT/tamp/screen; ha stabil, picit 11 felé |
+| **17 s körül 3-4 g, végén 41 g alatt** | fojtott indulás: WDT/tamp/screen; ha stabil, picit 12 felé / durvábbra |
 | **17 s körül 10 g+, spriccelés vagy 43 g fölötti vég** | channeling/túl gyors indulás: puck prep; ha kell, picit 10 felé / finomabbra |
 | **42 g körül jó, de túl savas** | a végső pumpastop target emelhető 41.5 g-ra |
 | **42 g körül jó, de száraz/fagyos** | a végső pumpastop target csökkenthető 40.5 g-ra, vagy hő 93.0 °C-ra |

@@ -1,4 +1,4 @@
-# El Salvador Ochupse – Grape Rose 18.5-41 – 93C Scale V3
+# El Salvador Ochupse – Grape Rose 19-42 – 93C Scale V3
 
 | Mező | Érték |
 |---|---|
@@ -80,11 +80,11 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`el-salvador-ochupse-manual
 
 ---
 
-## V3 – Bluetooth Scale Edition (Grind 11)
+## V3 – Bluetooth Scale Edition (Grind 10)
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V3 profil fájl:** [`el-salvador-ochupse-93c-scale-v3.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-93c-scale-v3.json)
+**V3 profil fájl:** [`el-salvador-ochupse-93c-scale-v3.json`](el-salvador-ochupse-93c-scale-v3.json)
 
 A BOOKOO Themis Ultra legyen bekapcsolva, párosítva és nullázva a főzés előtt. A gyártó szerint a Themis Ultra Bluetooth 5.0 kapcsolatot használ; az eszköz neve jellemzően `BOOKOO_SC U...`.
 
@@ -92,10 +92,11 @@ A BOOKOO Themis Ultra legyen bekapcsolva, párosítva és nullázva a főzés el
 
 | Paraméter | Érték |
 |---|---:|
-| Dózis | **18.5 g** |
-| Grinder Setting | **Grind 11** |
-| Target Yield | **41.0 g** |
-| Arány | **1:2.22** |
+| Dózis | **19 g** |
+| Grinder Setting | **Grind 10** |
+| Fordulat | **1200 RPM** |
+| Target Yield | **42.0 g** |
+| Arány | **1:2.21** |
 | Hőmérséklet | **93 °C** |
 | Előáztatás | **10 s (4 s wetting + 6 s saturation)** |
 | Main Extraction | **Flow-based, declining pressure** |
@@ -109,26 +110,26 @@ A BOOKOO Themis Ultra legyen bekapcsolva, párosítva és nullázva a főzés el
 | 1 | Grape Wetting | **4 s** | 93 °C | flow | 5.5 ml/s | idő |
 | 2 | Rosehip Saturation | **6 s** | 93 °C | pressure | 2.2 bar / 4.2 ml/s | idő |
 | 3 | Gentle Ramp | **5 s** | 93 °C | pressure | 7.2 bar / 2.4 ml/s | idő |
-| 4 | Grape Rose Extraction | **35 s** | 93 °C | flow decline | 5.2 bar / 1.8 ml/s | **volumetric target: 41.0 g** |
+| 4 | Grape Rose Extraction | **35 s** | 93 °C | flow decline | 5.2 bar / 1.8 ml/s | **volumetric target: 42.0 g** |
 |  | **Teljes hard cap** | **50 s** |  |  |  |  |
 
-A V3 profil kíméletes előáztatást használ (5.5 ml/s wetting helyett 7.5 ml/s-ról csökkent), és a fő extrakció flow-alapú, nyomáscsökkentéssel. Az 1.8 ml/s flow extraction az ízjegyek megőrzésére van optimalizálva. A **41.0 g-os target a fő extrakciós fázisban aktív**, így a GaggiMate a csésze alatt lévő mérleg súlyadata alapján automatikusan leállítja a shotot.
+A V3 profil kíméletes előáztatást használ (5.5 ml/s wetting helyett 7.5 ml/s-ról csökkent), és a fő extrakció flow-alapú, nyomáscsökkentéssel. Az 1.8 ml/s flow extraction az ízjegyek megőrzésére van optimalizálva. A **42.0 g-os target a fő extrakciós fázisban aktív**, így a GaggiMate a csésze alatt lévő mérleg súlyadata alapján automatikusan leállítja a shotot.
 
 ### Első shot – V3
 
-**18.5 g · 1200 RPM · grind 11 · 93 °C · BOOKOO stop 41.0 g**
+**19 g · 1200 RPM · grind 10 · 93 °C · BOOKOO stop 42.0 g**
 
 ### V3 dial-in
 
 | Eredmény | Következő lépés |
 |---|---|
-| **41 g, kb. 30–36 s, stabil stream, jó gyümölcsösség és csokoládé** | marad a profil |
-| **41 g 25–28 s alatt vagy spriccel** | picit finomabbra; WDT/tamp/screen ellenőrzés |
-| **41 g 37–42 s, fojtott start** | picit durvábbra, grind 12 felé |
-| **túl savas / éretlen szőlős** | target **42.0 g**, vagy 93.5 °C csak stabil flow után |
-| **túl fermentált / alkoholos boros** | target **40.0 g**, szükség esetén 92.5 °C |
-| **száraz / keserű / étcsokoládé túl erős** | target **39.5–40.0 g** vagy 92.5 °C |
-| **41 g-nál nem lép ki Grape Rose fázisból** | Bluetooth kapcsolat, mérleg-adat és brew-by-weight mód ellenőrzése |
+| **42 g, kb. 30–36 s, stabil stream, jó gyümölcsösség és csokoládé** | marad a profil |
+| **42 g 25–28 s alatt vagy spriccel** | picit finomabbra; WDT/tamp/screen ellenőrzés |
+| **42 g 37–42 s, fojtott start** | picit durvábbra, grind 11 felé |
+| **túl savas / éretlen szőlős** | target **43.0 g**, vagy 93.5 °C csak stabil flow után |
+| **túl fermentált / alkoholos boros** | target **41.0 g**, szükség esetén 92.5 °C |
+| **száraz / keserű / étcsokoládé túl erős** | target **40.5–41.0 g** vagy 92.5 °C |
+| **42 g-nál nem lép ki Grape Rose fázisból** | Bluetooth kapcsolat, mérleg-adat és brew-by-weight mód ellenőrzése |
 
 ### BOOKOO indulási ellenőrzés – V3
 
@@ -144,8 +145,8 @@ A mérleg a végső hozamot stabilizálja, de a spriccelést, több streamet vag
 
 ## Rövid menthető recept
 
-**El Salvador Ochupse Grape Rose – Grind 11**
+**El Salvador Ochupse Grape Rose – Grind 10**
 
 **V1 (időalapú):** 18.5 g · grind 10–11 között, inkább 10 felé · 1200 RPM · 93 °C · 31 s · 41 g out cél
 
-**V3 (Scale):** 18.5 g · grind 11 · 1200 RPM · 93 °C · stop 41.0 g beverage weight · safety 50 s
+**V3 (Scale):** 19 g · grind 10 · 1200 RPM · 93 °C · stop 42.0 g beverage weight · safety 50 s

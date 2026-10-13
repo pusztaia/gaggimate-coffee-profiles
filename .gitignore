@@ -1,3 +1,6 @@
 .DS_Store
 /gaggimate-1.8.1/
 /gaggimate-1.9.0/
+
+# charts rendered locally by tools/render_gaggimate_profiles.py (the site draws them from the JSON)
+profiles/**/*-profile.png

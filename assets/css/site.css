@@ -26,12 +26,14 @@ button,input,select,textarea{font:inherit}
 .icon-btn:hover{color:var(--text);border-color:var(--line-strong)}
 @media(max-width:520px){.brand-name{display:none}}
 
-/* Page header */
-.container{padding-left:var(--gm-gutter);padding-right:var(--gm-gutter)}
-h1{font-family:var(--gm-font-display);font-weight:600;line-height:1;letter-spacing:-.005em}
-.eyebrow{font-weight:600;letter-spacing:.08em;font-size:13px}
-.lead{font-size:16px;line-height:1.55}
-section h2,.container>h2{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(24px,2.6vw,30px);line-height:1.1;letter-spacing:0}
+/* Page sizing and header — the same as the Profilkatalógus (index.html / catalog.css) */
+.container{max-width:var(--gm-max);margin:0 auto;padding:30px var(--gm-gutter) 48px}
+.container>h1:first-child,.container>.eyebrow:first-child,.container>.status:first-child{margin-top:0}
+h1{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(34px,4.6vw,52px);line-height:1;letter-spacing:-.005em;margin:10px 0 10px}
+.eyebrow{color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:13px}
+.lead{font-size:16px;line-height:1.55;max-width:68ch;color:var(--muted);margin:0 0 22px}
+section h2,.container>h2{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(28px,3.4vw,38px);line-height:1.05;letter-spacing:0;margin:0 0 18px}
+section{scroll-margin-top:calc(var(--gm-bar-h) + 16px)}
 
 /* Panels */
 .card,.picker{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:none}

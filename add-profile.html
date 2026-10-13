@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#191310">
+<meta name="description" content="GaggiMate Coffee Profiles – új kávéprofil hozzáadása a katalógushoz.">
+<title>Új profil hozzáadása · GaggiMate Coffee Profiles</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="assets/css/theme.css">
+<script>/* set the theme before first paint (theme.css defaults to the dark Roast theme) */
+try{const t=localStorage.getItem("gaggimate-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}
+</script>
+<link rel="stylesheet" href="assets/css/catalog.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+</head>
+<body>
+<a class="skip" href="#main">Ugrás a tartalomhoz</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="GaggiMate Coffee Profiles – katalógus">
+      <span class="brand-mark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10h12v3.5a5.5 5.5 0 0 1-5.5 5.5h-1a5.5 5.5 0 0 1-5.5-5.5Z"/><path d="M16.5 11h1.25a2.5 2.5 0 0 1 0 5H16"/><path d="M3.5 21.5h15"/><path d="M8.5 3c-.8 1 .8 2 0 3.5M12.5 3c-.8 1 .8 2 0 3.5"/></svg></span>
+      <span class="brand-name">Coffee Profiles <span>GaggiMate</span></span>
+    </a>
+    <div class="topbar-end">
+      <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </div>
+  </div>
+</header>
+<script src="assets/js/site-nav.js"></script>
+
+<main id="main">
+<div class="container">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">GaggiMate Coffee Profiles</div>
+    <h1>Új profil hozzáadása</h1>
+    <p class="lead">Az index kódját nem kell másolni vagy bővíteni. Egy új mappa és egy katalógusbejegyzés elegendő. A katalógus JSON-alapú, interaktív grafikonokkal, és GitHub Pages-en, build lépés nélkül fut.</p>
+  </div>
+</section>
+
+<section id="modular">
+  <div class="modular">
+    <div class="steps">
+      <div class="step"><p><strong>Hozd létre a profil mappáját</strong><br><code>profiles/uj-kave/</code>, a fájlelnevezési konvenció szerint.</p></div>
+      <div class="step"><p><strong>Tedd bele a JSON, recipe és changelog fájlokat</strong><br>Grafikon nem kell: az oldal a profil JSON-ból rajzolja ki.</p></div>
+      <div class="step"><p><strong>Adj hozzá egy objektumot a katalógushoz</strong><br>A <code>profiles/catalog.json</code> <code>profiles</code> tömbjéhez.</p></div>
+      <div class="step"><p><strong>Nem kell módosítani az indexet</strong><br>Az új kártya, variánsok, fázislista és mini grafikon automatikusan megjelenik.</p></div>
+    </div>
+    <div>
+      <div class="code-card"><pre>{
+  "id": "ethiopia-yirgacheffe",
+  "folder": "ethiopia-yirgacheffe",
+  "title": "Ethiopia Yirgacheffe",
+  "subtitle": "Floral Citrus",
+  "origin": "Pörkölő · Ethiopia",
+  "process": "washed",
+  "notes": ["jázmin", "citrom", "fekete tea"],
+  "grind": "9–10",
+  "dose": 18.5,
+  "yield": "43 g",
+  "expectedTime": "37 s",
+  "page": "ethiopia-yirgacheffe.html",
+  "variants": [
+    {
+      "id": "scale",
+      "label": "Scale V2",
+      "kind": "scale",
+      "file": "ethiopia-yirgacheffe-scale.json",
+      "default": true
+    },
+    {
+      "id": "manual",
+      "label": "Manual",
+      "kind": "manual",
+      "file": "ethiopia-yirgacheffe-manual.json"
+    }
+  ]
+}</pre></div>
+      <div class="notice"><strong>Futtatás:</strong> a dinamikus JSON- és Markdown-betöltéshez GitHub Pages vagy helyi HTTP-szerver szükséges. Példa: <code>python -m http.server 8000</code>.</div>
+    </div>
+  </div>
+</section>
+<div class="footer-space"></div>
+</div>
+</main>
+
+<script>
+"use strict";
+function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("gaggimate-theme",theme);}catch(e){}}
+function savedTheme(){try{return localStorage.getItem("gaggimate-theme");}catch(e){return null;}}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{if(!savedTheme())setTheme(event.matches?"dark":"light");});
+}
+document.getElementById("themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>

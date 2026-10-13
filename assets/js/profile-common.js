@@ -1,8 +1,9 @@
 "use strict";
 /* Shared, DOM-independent helpers for rendering a GaggiMate profile JSON
- * (phase list, mini SVG chart, markdown) and for resolving catalog.json
- * entry paths. Used by profile.html; index.html still carries its own
- * inline copy pending the Phase 0 asset-extraction migration step. */
+ * (chart series, phase model, markdown) and for resolving catalog.json
+ * entry paths. Used by profile.html, compare.html, brew.html and the
+ * documents/knowledge pages; the charts themselves are drawn by
+ * profile-chart.js. index.html still carries its own inline copy. */
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 
@@ -23,7 +24,6 @@ function hasKind(entry,kind){return entry.variants.some(v=>v.kind===kind);}
 function isGeneral(entry){return entry.variants.every(v=>v.kind==="general");}
 function recipeFile(entry){return `${entry.folder}-recipe.md`;}
 function changelogFile(entry){return `${entry.folder}-changelog.md`;}
-function pngFile(variant){return variant.file.replace(/\.json$/i,"-profile.png");}
 function kindLabel(variant){
   if(variant.kind==="scale")return "Scale";
   if(variant.kind==="manual")return "Manual";
@@ -44,15 +44,6 @@ function targetText(phase){
   });
   return parts.join(" · ");
 }
-function phasesHTML(profile){
-  if(!profile?.phases?.length)return '<div class="phase-row"><strong>JSON betöltésre vár</strong><span>—</span><span class="target">—</span></div>';
-  return profile.phases.map((p,index)=>{
-    const pump=p.pump||{};
-    const target=pump.target==="flow"?`${formatNumber(pump.flow)} ml/s`:`${formatNumber(pump.pressure)} bar`;
-    return `<div class="phase-row"><strong>${index+1}. ${esc(p.name||"Fázis")}</strong><span>${esc(target)} · ${formatNumber(p.duration,0)} s</span><span class="target">${esc(targetText(p))}</span></div>`;
-  }).join("");
-}
-
 function easing(kind,p){
   p=Math.max(0,Math.min(1,p));
   if(kind==="linear")return p;
@@ -86,24 +77,6 @@ function pathData(points,xScale,yScale){
   points.forEach(([x,y])=>{if(y===null||!Number.isFinite(y)){open=false;return;}out+=(open?"L":"M")+xScale(x).toFixed(1)+" "+yScale(y).toFixed(1)+" ";open=true;});
   return out.trim();
 }
-function renderMiniChart(profile,title,accent){
-  const W=760,H=260,pad={l:44,r:42,t:20,b:34},total=Math.max(1,totalDuration(profile));
-  const p=curveSeries(profile,"pressure"),f=curveSeries(profile,"flow"),temp=tempSeries(profile);
-  const leftVals=[...p,...f].map(v=>v[1]).filter(Number.isFinite),leftMax=Math.max(10,...leftVals)+1;
-  const temps=temp.map(v=>v[1]).filter(Number.isFinite),tMin=Math.min(...temps),tMax=Math.max(...temps),tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
-  const x=v=>pad.l+(W-pad.l-pad.r)*(v/total),y=v=>H-pad.b-(H-pad.t-pad.b)*(v/leftMax),yt=v=>H-pad.b-(H-pad.t-pad.b)*((v-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
-  let bands="",cursor=0;(profile.phases||[]).forEach((phase,i)=>{const d=Math.max(0,Number(phase.duration)||0);if(i%2)bands+=`<rect x="${x(cursor)}" y="${pad.t}" width="${Math.max(0,x(cursor+d)-x(cursor))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".035"/>`;bands+=`<line x1="${x(cursor)}" y1="${pad.t}" x2="${x(cursor)}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/>`;cursor+=d;});
-  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".10"/>`).join("");
-  return `<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} profilgrafikon" style="--card-accent:${esc(accent||"var(--accent)")}">
-    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
-    <g color="var(--text)">${grid}${bands}<line x1="${W-pad.r}" y1="${pad.t}" x2="${W-pad.r}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/></g>
-    <path d="${pathData(p,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="${pathData(f,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="${pathData(temp,x,yt)}" fill="none" stroke="var(--card-accent)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>
-    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text><text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)}</text><text x="18" y="${H-pad.b}">0</text><text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text></g>
-  </svg>`;
-}
-
 function phaseBoundaries(profile){
   let t=0;
   return (profile?.phases||[]).map(phase=>{

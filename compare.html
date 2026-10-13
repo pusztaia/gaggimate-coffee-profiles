@@ -27,12 +27,13 @@ h1{font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.03em;margin:0 0 1.2rem}
 .picker-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
 .picker{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-soft)}
 .picker label{display:block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.picker select:disabled{opacity:1;color:var(--muted);cursor:default}
 .picker select{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:var(--gm-radius-item);padding:.6rem .7rem;margin-bottom:.5rem}
 .picker .swatch{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:.4rem;vertical-align:middle}
 section{margin-top:2rem}
 section h2{font-size:1.2rem;margin:0 0 .8rem}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.2rem}
-.chart-host{position:relative}.mini-chart{width:100%;height:280px;display:block}
+.chart-host{position:relative}.mini-chart{width:100%;height:auto;display:block;overflow:visible}
 .legend{display:flex;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--muted);margin-top:.6rem}
 .chart-fallback-note{color:var(--muted);font-size:.74rem;margin:.6rem 0 0}
 .legend i{display:inline-block;width:20px;height:0;border-top-width:3px;border-top-style:solid;margin-right:.3rem;vertical-align:middle}
@@ -63,12 +64,14 @@ td.diff{font-weight:600;color:var(--accent)}
   <h1>Profil összehasonlítás</h1>
   <div class="picker-row">
     <div class="picker">
-      <label for="selectA"><span class="swatch" style="background:var(--blue)"></span>Profil A (teli vonal)</label>
-      <select id="selectA"></select>
+      <label for="coffeeA"><span class="swatch" style="background:var(--blue)"></span>Profil A (teli vonal)</label>
+      <select id="coffeeA" aria-label="Profil A – kávé"></select>
+      <select id="selectA" aria-label="Profil A – verzió"></select>
     </div>
     <div class="picker">
-      <label for="selectB"><span class="swatch" style="background:var(--gold)"></span>Profil B (szaggatott)</label>
-      <select id="selectB"></select>
+      <label for="coffeeB"><span class="swatch" style="background:var(--gold)"></span>Profil B (szaggatott)</label>
+      <select id="coffeeB" aria-label="Profil B – kávé"></select>
+      <select id="selectB" aria-label="Profil B – verzió"></select>
     </div>
   </div>
 
@@ -113,6 +116,7 @@ td.diff{font-weight:600;color:var(--accent)}
   </div>
 </main>
 <script src="assets/js/profile-common.js"></script>
+<script src="assets/js/profile-chart.js"></script>
 <script>
 "use strict";
 const $=(sel,root=document)=>root.querySelector(sel);
@@ -134,22 +138,39 @@ $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.da
 
 function optionKey(entryId,variantId){return `${entryId}::${variantId}`;}
 function findOption(key){
-  const [entryId,variantId]=key.split("::");
+  const [entryId,variantId]=String(key||"").split("::");
   const entry=state.catalog.profiles.find(p=>p.id===entryId);
   if(!entry)return null;
   const variant=entry.variants.find(v=>v.id===variantId);
   if(!variant)return null;
   return {entry,variant};
 }
+// "Coffee — Scale V2 · 94,5 °C": the version label from the catalog, so two variants of one coffee can be told apart
+function sideLabel(entry,variant){return `${entry.title} — ${variant.label||kindLabel(variant)}`;}
 function populateSelects(){
   const opts=[];
   state.catalog.profiles.forEach(entry=>entry.variants.forEach(variant=>{
-    opts.push({key:optionKey(entry.id,variant.id),label:`${entry.title} — ${kindLabel(variant)}`});
+    opts.push({key:optionKey(entry.id,variant.id),label:sideLabel(entry,variant)});
   }));
   state.options=opts;
-  const html=opts.map(o=>`<option value="${esc(o.key)}">${esc(o.label)}</option>`).join("");
-  $("#selectA").innerHTML=html;
-  $("#selectB").innerHTML=html;
+  const coffees=[...state.catalog.profiles].sort((x,y)=>x.title.localeCompare(y.title,"hu",{sensitivity:"base",numeric:true})).map(entry=>`<option value="${esc(entry.id)}">${esc(entry.title)}</option>`).join("");
+  $("#coffeeA").innerHTML=coffees;
+  $("#coffeeB").innerHTML=coffees;
+}
+// Each side picks a coffee first, then one of that coffee's versions; the version select's value is the "entry::variant" key.
+function fillVersions(side,entryId){
+  const entry=state.catalog.profiles.find(e=>e.id===entryId);
+  const select=$(`#select${side}`);
+  const variants=entry?entry.variants:[];
+  select.innerHTML=variants.map(v=>`<option value="${esc(optionKey(entry.id,v.id))}">${esc(v.label||kindLabel(v))}</option>`).join("");
+  select.disabled=variants.length<2;
+}
+function setSide(side,key){
+  const found=findOption(key)||findOption(state.options[0]?.key);
+  if(!found)return;
+  $(`#coffee${side}`).value=found.entry.id;
+  fillVersions(side,found.entry.id);
+  $(`#select${side}`).value=optionKey(found.entry.id,found.variant.id);
 }
 function syncURL(){
   const params=new URLSearchParams();
@@ -183,8 +204,8 @@ function renderParams(a,b){
     ["Csúcsnyomás",s=>`${formatNumber(peakPressure(s.profile))} bar`],
     ["Scale támogatás",s=>scaleSupport(s)]
   ];
-  $("#headA").textContent=a.entry.title;
-  $("#headB").textContent=b.entry.title;
+  $("#headA").textContent=sideLabel(a.entry,a.variant);
+  $("#headB").textContent=sideLabel(b.entry,b.variant);
   $("#paramsBody").innerHTML=rows.map(([label,fn])=>{
     const va=fmtStat(a,fn),vb=fmtStat(b,fn);
     const differs=va!==vb;
@@ -193,8 +214,8 @@ function renderParams(a,b){
 }
 
 function renderPhaseDiff(a,b){
-  $("#phaseHeadA").textContent=a.entry.title;
-  $("#phaseHeadB").textContent=b.entry.title;
+  $("#phaseHeadA").textContent=sideLabel(a.entry,a.variant);
+  $("#phaseHeadB").textContent=sideLabel(b.entry,b.variant);
   const count=Math.max(a.model.phases.length,b.model.phases.length);
   const rows=[];
   for(let i=0;i<count;i++){
@@ -241,34 +262,17 @@ function renderSummary(a,b){
 }
 
 function renderOverlay(a,b){
-  const W=820,H=300,pad={l:46,r:44,t:20,b:36};
   const total=Math.max(a.model.total,b.model.total);
-  const leftVals=[a.model.pressure,a.model.flow,b.model.pressure,b.model.flow].flat().map(p=>p[1]).filter(Number.isFinite);
-  const leftMax=Math.max(10,...leftVals,0)+1;
-  const temps=[a.model.temperature,b.model.temperature].flat().map(p=>p[1]).filter(Number.isFinite);
-  const tMin=temps.length?Math.min(...temps):0,tMax=temps.length?Math.max(...temps):1,tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
-  const x=t=>pad.l+(W-pad.l-pad.r)*(t/total);
-  const y=v=>H-pad.b-(H-pad.t-pad.b)*(v/leftMax);
-  const yt=v=>H-pad.b-(H-pad.t-pad.b)*((v-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
-  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".1"/>`).join("");
-  let bands="";
-  a.model.phases.forEach((p,i)=>{if(i%2)bands+=`<rect x="${x(p.start)}" y="${pad.t}" width="${Math.max(0,x(p.end)-x(p.start))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".03"/>`;});
-  const line=(points,scale,color,dash)=>`<path d="${pathData(points,x,scale)}" fill="none" stroke="${color}" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"${dash?' stroke-dasharray="9 6"':""}/>`;
-  $("#chartHost").innerHTML=`<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Profil A és B grafikon-átfedés">
-    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
-    <g color="var(--text)">${grid}${bands}</g>
-    ${line(a.model.pressure,y,"var(--blue)",false)}
-    ${line(a.model.flow,y,"var(--flow)",false)}
-    ${line(a.model.temperature,yt,"var(--temp)",false)}
-    ${line(b.model.pressure,y,"var(--blue)",true)}
-    ${line(b.model.flow,y,"var(--flow)",true)}
-    ${line(b.model.temperature,yt,"var(--gold)",true)}
-    <g fill="var(--muted)" font-size="12">
-      <text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s</text>
-      <text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar·ml/s</text><text x="18" y="${H-pad.b}">0</text>
-      <text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text>
-    </g>
-  </svg>`;
+  mountChart($("#chartHost"),width=>{
+    $("#chartHost").innerHTML=profileChartSVG({width,height:300,total,phases:a.model.phases,label:"Profil A és B grafikon-átfedés",series:[
+      {points:a.model.pressure,color:"var(--blue)",fill:true},
+      {points:a.model.flow,color:"var(--flow)"},
+      {points:a.model.temperature,axis:"temp",color:"var(--temp)",width:1.8},
+      {points:b.model.pressure,color:"var(--blue)",dash:"7 5"},
+      {points:b.model.flow,color:"var(--flow)",dash:"7 5"},
+      {points:b.model.temperature,axis:"temp",color:"var(--gold)",width:1.8,dash:"7 5"}
+    ]}).svg;
+  });
   $("#legendHost").innerHTML=[
     ["var(--blue)","Nyomás (bar)",false],["var(--flow)","Flow (ml/s)",false],["var(--temp)","Hőmérséklet (°C) · A",false],
     ["var(--blue)","Nyomás (B)",true],["var(--flow)","Flow (B)",true],["var(--gold)","Hőmérséklet (B)",true]
@@ -305,8 +309,9 @@ async function init(){
     const params=new URLSearchParams(location.search);
     const aKey=params.get("a")||state.options[0]?.key;
     const bKey=params.get("b")||state.options[1]?.key||state.options[0]?.key;
-    if(aKey)$("#selectA").value=aKey;
-    if(bKey)$("#selectB").value=bKey;
+    if(aKey)setSide("A",aKey);
+    if(bKey)setSide("B",bKey);
+    ["A","B"].forEach(side=>$(`#coffee${side}`).addEventListener("change",event=>{fillVersions(side,event.target.value);renderCompare();}));
     $("#selectA").addEventListener("change",renderCompare);
     $("#selectB").addEventListener("change",renderCompare);
     if(aKey&&bKey)await renderCompare();

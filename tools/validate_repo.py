@@ -2,7 +2,7 @@
 """Release-hardening validator for the GaggiMate Coffee Profiles site.
 
 Runs the checks described in the Phase 15 ("release hardening") step of
-dev/gaggimate-web-development-prompts.md:
+development/gaggimate-web-development-prompts.md:
 
 - every profiles/**/*.json GaggiMate profile only uses keys the firmware
   schema (schema/profile.json) actually defines, derived at runtime so this
@@ -11,10 +11,10 @@ dev/gaggimate-web-development-prompts.md:
   parseProfile() validation added in firmware v1.9.0)
 - profiles/catalog.json passes tools/build_catalog.py --check (duplicate
   ids, duplicate variant ids, exactly one default variant, variant files
-  exist) and additionally: every variant's PNG/recipe.md/changelog.md
+  exist) and additionally: every entry's recipe.md/changelog.md
   resolves (hard failure here, not just a warning)
 - every file referenced from the static site shell actually exists on disk:
-  index.html's DOCS/KNOWLEDGE arrays, each top-level page's <script src="...">
+  assets/js/docs-data.js's DOCS/KNOWLEDGE arrays, each top-level page's <script src="...">
   tags, manifest.json icons, sw.js's SHELL_ASSETS precache list
 
 Exit code is non-zero if any check fails, so this is safe to wire into a
@@ -150,9 +150,6 @@ def check_catalog_companions(issues: list[str]) -> None:
             if not json_file.is_file():
                 issues.append(f"catalog.json [{entry_id}/{vid}]: missing profile JSON {json_file.relative_to(ROOT)}")
                 continue
-            png_file = json_file.with_name(json_file.stem + "-profile.png")
-            if not png_file.is_file():
-                issues.append(f"catalog.json [{entry_id}/{vid}]: missing chart PNG {png_file.relative_to(ROOT)}")
 
         if defaults != 1:
             issues.append(f"catalog.json [{entry_id}]: expected exactly one default/current variant, found {defaults}")
@@ -178,14 +175,15 @@ def extract_quoted_paths(text: str, *keys: str) -> list[str]:
 
 
 def check_referenced_files(issues: list[str]) -> None:
-    index_html = (ROOT / "index.html").read_text(encoding="utf-8")
-    for rel_path in extract_quoted_paths(index_html, "file"):
+    docs_data = (ROOT / "assets" / "js" / "docs-data.js").read_text(encoding="utf-8")
+    for rel_path in extract_quoted_paths(docs_data, "file", "fileHu", "ref"):
         if rel_path.startswith(("http:", "https:", "#")):
             continue
         if not (ROOT / rel_path).is_file():
-            issues.append(f"index.html: referenced doc/knowledge file not found: {rel_path}")
+            issues.append(f"assets/js/docs-data.js: referenced doc/knowledge file not found: {rel_path}")
 
-    for html_name in ("index.html", "profile.html", "brew.html", "compare.html", "finder.html", "water.html"):
+    for html_name in ("index.html", "profile.html", "brew.html", "compare.html", "finder.html", "water.html",
+                      "documents.html", "knowledge.html", "add-profile.html"):
         html_path = ROOT / html_name
         if not html_path.is_file():
             continue

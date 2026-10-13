@@ -1,5 +1,12 @@
 # Changelog – El Salvador Ochupse
 
+## V3 frissítés – 19 g / 42 g / grind 10 (2026-10-13)
+
+- `el-salvador-ochupse-93c-scale-v3.json`: **volumetric target 41.0 → 42.0 g**, a leírás az új receptet mutatja.
+- **Dózis:** 18.5 → **19 g**. **Célhozam:** 41.0 → **42.0 g** (arány 1:2.21). **Hőmérséklet:** 93 °C (változatlan).
+- **Grinder:** DF64V Gen 2, grind 11 → **grind 10**, **1200 RPM**.
+- A recept V3 dial-in táblázatának célértékei 1 g-mal feljebb kerültek az új 42 g-os alaphoz.
+
 ## V3 – Gentle Flow Extraction with Grind 11 (2026-09-25)
 
 - Harmadik BOOKOO Themis Ultra kompatibilis profil az Impresso - El Salvador Ochupse kávéhoz (`el-salvador-ochupse-93c-scale-v3.json`).

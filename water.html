@@ -27,7 +27,7 @@ h2{font-size:1.25rem;margin:2.2rem 0 .8rem;letter-spacing:-.01em}
 .lead{color:var(--muted);margin:0 0 1.2rem}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.3rem}
 .notice{border:1px solid color-mix(in srgb,var(--warn) 45%,var(--line));background:color-mix(in srgb,var(--warn) 8%,var(--surface));border-radius:var(--radius-md);padding:.9rem 1rem;font-size:.9rem}
-.recipe-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.recipe-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
 .recipe-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.1rem;display:flex;flex-direction:column;gap:.5rem}
 .recipe-card.default{border-color:var(--accent)}
 .recipe-head{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap}
@@ -61,7 +61,7 @@ ul.plain{margin:.4rem 0 0;padding-left:1.1rem}
 .sources a{word-break:break-word}
 .btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.5rem .9rem;cursor:pointer;font-weight:600;font-size:.82rem;display:inline-flex;align-items:center;gap:.4rem}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
-@media(max-width:620px){.recipe-cards{grid-template-columns:1fr}.calc-grid{grid-template-columns:1fr 1fr}.calc-grid label:first-child{grid-column:1/-1}}
+@media(max-width:620px){.calc-grid{grid-template-columns:1fr 1fr}.calc-grid label:first-child{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
@@ -198,7 +198,7 @@ const I18N={
     prepTitle:"Elkészítés az 5 literes palackban",prepNote:"Csak tiszta, adalék- és illatmentes Epsom-sót és szódabikarbónát használj (nem sütőport, nem fürdősót).",
     diagTitle:"Mikor nyúlj a vízhez?",diagLead:"Ha egy espresso nem jó, ne a vízzel kezdd. Sorrend: puck prep / channeling → őrlés és shotidő → hozam / arány → hőmérséklet → csak ezután vízprofil. Egyszerre egy változót módosíts. Vízváltás akkor indokolt, ha:",
     machineTitle:"Gépvédelem",sourcesTitle:"Források",
-    sourcesDoc:"Részletes leírás: <a href=\"kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
+    sourcesDoc:"Részletes leírás: <a href=\"docs/brewing/kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
   },
   en:{
     back:"← Catalogue",theme:"Toggle theme",title:"Brew water",
@@ -212,7 +212,7 @@ const I18N={
     prepTitle:"Making it in the 5 L bottle",prepNote:"Use only pure, unscented, additive-free Epsom salt and baking soda (not baking powder, not bath salt).",
     diagTitle:"When to change the water",diagLead:"If a shot is off, don't start with the water. Order: puck prep / channeling → grind and shot time → yield / ratio → temperature → only then the water profile. Change one variable at a time. A water change makes sense when:",
     machineTitle:"Machine safety",sourcesTitle:"Sources",
-    sourcesDoc:"Full write-up (Hungarian): <a href=\"kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
+    sourcesDoc:"Full write-up (Hungarian): <a href=\"docs/brewing/kaveviz-5l-epsom-bikarbonat.md\">kaveviz-5l-epsom-bikarbonat.md</a>"
   }
 };
 

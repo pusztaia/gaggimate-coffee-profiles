@@ -1,17 +1,16 @@
 "use strict";
 /* The site's main navigation, the same on every page: renders the menu into the page's
  * .topbar-inner (after .brand), the ☰ button into .topbar-end and the narrow-screen menu
- * dialog. The links live only here. On index.html the section links stay in-page anchors. */
+ * dialog. The links live only here. Links of the form index.html#x become in-page anchors on index.html. */
 (function(){
   const LINKS=[
-    {label:"Profilok",href:"index.html#profiles"},
-    {label:"Profile Finder",href:"finder.html"},
+    {label:"Profilkatalógus",href:"index.html"},
+    {label:"Profilkereső",href:"finder.html"},
     {label:"Összehasonlítás",href:"compare.html"},
     {label:"Kávévíz",href:"water.html"},
-    {label:"Setup",href:"index.html#setup"},
-    {label:"Dokumentáció",href:"index.html#documents"},
-    {label:"Tudásbázis",href:"index.html#knowledge"},
-    {label:"Fejlesztőknek",href:"index.html#modular"}
+    {label:"Dokumentáció",href:"documents.html"},
+    {label:"Tudásbázis",href:"knowledge.html"},
+    {label:"Új profil",href:"add-profile.html"}
   ];
   const inner=document.querySelector(".topbar-inner");
   if(!inner)return;

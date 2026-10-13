@@ -3,6 +3,7 @@
 | Mező | Érték |
 |---|---|
 | Kávé | Impresso - Kenya Wangera |
+| Eredet | Kenya |
 | Ízjegyek | szeder · tejszín · pomelo |
 | Setup | DF64V Gen 2 + SSP Sweet Lab Espresso V3 / Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) |
 | Őrlőskála | 0-90, egész jelölések |
@@ -99,8 +100,8 @@ A verziószám **szándékosan V2 maradt**. A meglévő V2 JSON-fájlok tartalma
 
 **Változatlan fájlnevek:**
 
-- [`wangera-scale-v1.json`](profiles/wangera/wangera-scale-v1.json) – 94.0 °C
-- [`wangera-scale-v2.json`](profiles/wangera/wangera-scale-v2.json) – 94.5 °C
+- [`wangera-scale-v1.json`](wangera-scale-v1.json) – 94.0 °C
+- [`wangera-scale-v2.json`](wangera-scale-v2.json) – 94.5 °C
 
 ### V2 paraméterek
 

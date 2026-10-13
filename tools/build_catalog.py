@@ -146,7 +146,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument(
         "--strict",
         action="store_true",
-        help="Fail when companion recipe/changelog/PNG files are missing.",
+        help="Fail when companion recipe/changelog files are missing.",
     )
     parser.add_argument(
         "--check",
@@ -664,9 +664,6 @@ def validate_companions(entry: Mapping[str, Any], folder: Path, warnings: list[s
         file_name = str(variant.get("file", ""))
         if not file_name or not (folder / file_name).is_file():
             raise CatalogError(f"Catalog variant file is missing: {folder / file_name}")
-        png = folder / re.sub(r"\.json$", "-profile.png", file_name, flags=re.IGNORECASE)
-        if not png.is_file():
-            warn(f"missing generated PNG: {png}", warnings, verbose)
 
 
 def validate_catalog(catalog: Mapping[str, Any]) -> None:

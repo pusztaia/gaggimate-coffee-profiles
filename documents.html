@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#191310">
+<meta name="description" content="GaggiMate Coffee Profiles – dokumentáció: útmutatók, receptek, workflow-k.">
+<title>Dokumentáció · GaggiMate Coffee Profiles</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="assets/css/theme.css">
+<script>/* set the theme before first paint (theme.css defaults to the dark Roast theme) */
+try{const t=localStorage.getItem("gaggimate-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}
+</script>
+<link rel="stylesheet" href="assets/css/catalog.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+</head>
+<body>
+<a class="skip" href="#main">Ugrás a tartalomhoz</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="GaggiMate Coffee Profiles – katalógus">
+      <span class="brand-mark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10h12v3.5a5.5 5.5 0 0 1-5.5 5.5h-1a5.5 5.5 0 0 1-5.5-5.5Z"/><path d="M16.5 11h1.25a2.5 2.5 0 0 1 0 5H16"/><path d="M3.5 21.5h15"/><path d="M8.5 3c-.8 1 .8 2 0 3.5M12.5 3c-.8 1 .8 2 0 3.5"/></svg></span>
+      <span class="brand-name">Coffee Profiles <span>GaggiMate</span></span>
+    </a>
+    <div class="topbar-end">
+      <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása">◐</button>
+    </div>
+  </div>
+</header>
+<script src="assets/js/site-nav.js"></script>
+
+<main id="main">
+<div class="container">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">GaggiMate Coffee Profiles</div>
+    <h1>Dokumentáció</h1>
+    <p class="lead">A Markdown fájlok az oldalon belül, HTML-formázással nyílnak meg. Az interaktív eszközök új lapon.</p>
+  </div>
+</section>
+
+<section id="documents">
+  <div class="docs-grid" id="docsGrid"></div>
+</section>
+<div class="footer-space"></div>
+</div>
+</main>
+
+<script src="assets/js/profile-common.js"></script>
+<script src="assets/js/docs-data.js"></script>
+<script src="assets/js/md-modal.js"></script>
+<script>
+"use strict";
+function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("gaggimate-theme",theme);}catch(e){}}
+function savedTheme(){try{return localStorage.getItem("gaggimate-theme");}catch(e){return null;}}
+if(window.matchMedia){
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",event=>{if(!savedTheme())setTheme(event.matches?"dark":"light");});
+}
+document.getElementById("themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+const docIcon=icon=>`<div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></div>`;
+document.getElementById("docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card">${docIcon(doc.icon)}<h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p><div class="doc-card-actions">${doc.external?`<a class="btn" href="${esc(doc.file)}" target="_blank" rel="noopener">Megnyitás új lapon</a>`:`<button class="btn doc-open" data-doc="${index}">Megnyitás</button>`}</div></article>`).join("");
+document.addEventListener("click",event=>{
+  const doc=event.target.closest(".doc-open");if(doc){const item=DOCS[Number(doc.dataset.doc)];if(item)openMarkdown(item.file,item.title);}
+});
+</script>
+<script src="assets/js/pwa-register.js"></script>
+</body>
+</html>

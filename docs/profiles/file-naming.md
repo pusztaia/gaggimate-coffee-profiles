@@ -65,26 +65,17 @@ Ha egy kávénak több manual vagy több scale változata is van (pl. eltérő h
 
 ---
 
-## PNG grafikonok
+## Grafikonok
 
-A `tools/render_gaggimate_profiles.py` script generálja őket a JSON fájlokból. A PNG neve mindig a JSON nevéből képződik:
+A weboldal a profilgrafikonokat közvetlenül a JSON profilokból rajzolja ki, ezért PNG grafikonokat nem tárolunk a repóban.
 
+Ha mégis kell egy kép (például megosztáshoz), a `tools/render_gaggimate_profiles.py` (matplotlib szükséges) helyben elkészíti a JSON mellé `{json-stem}-profile.png` néven:
+
+```bash
+python3 tools/render_gaggimate_profiles.py profiles/wangera/wangera-manual-v2.json
 ```
-{json-fájlnév-kiterjesztés-nélkül}-profile.png
-```
 
-**Példák:**
-
-| JSON | Generált PNG |
-|---|---|
-| `kirinyaga-manual.json` | `kirinyaga-manual-profile.png` |
-| `kirinyaga-scale.json` | `kirinyaga-scale-profile.png` |
-| `wangera-manual-v1.json` | `wangera-manual-v1-profile.png` |
-| `wangera-scale-v2.json` | `wangera-scale-v2-profile.png` |
-
-**Szabály:** Ha egy könyvtárban több JSON van, mindegyikhez külön PNG keletkezik. A script automatikusan kezeli ezt.
-
-> **Megjegyzés:** A `*-profile.png` nevű fájlok (pl. `wangera-profile.png`) a könyvtár névből képzett, kézzel átnevezett korábbi verziók. A script által generáltak a JSON névből képzett neveket kapják.
+Az így készült PNG-ket a `.gitignore` kizárja, nem kerülnek commitba.
 
 ---
 
@@ -127,7 +118,6 @@ A profil változástörténete:
 | **Könyvtár** | kávé neve | `burundi-mubuga/` |
 | **JSON (V1)** | kávé azonosító + `-manual` (+ `-vN` több variánsnál) | `burundi-mubuga-manual.json` |
 | **JSON (V2)** | kávé azonosító + `-scale` (+ `-vN` több variánsnál) | `burundi-mubuga-scale.json` |
-| **PNG** | JSON neve + `-profile` | `burundi-mubuga-manual-profile.png` |
 | **Recept MD** | könyvtárnév + `-recipe` | `burundi-mubuga-recipe.md` |
 | **Changelog MD** | könyvtárnév + `-changelog` | `burundi-mubuga-changelog.md` |
 

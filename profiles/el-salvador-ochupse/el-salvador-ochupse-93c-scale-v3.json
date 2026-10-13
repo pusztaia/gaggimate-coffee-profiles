@@ -1,7 +1,7 @@
 {
   "label": "El Salvador Ochupse - Scale V3",
   "type": "pro",
-  "description": "18.5 g / 93 C / grind 9 / 41.0 g / gentler wetting / 1.8 ml/s extraction",
+  "description": "19 g / 93 C / grind 10 / 42.0 g / gentler wetting / 1.8 ml/s extraction",
   "temperature": 93,
   "utility": false,
   "phases": [
@@ -76,7 +76,7 @@
         {
           "type": "volumetric",
           "operator": "gte",
-          "value": 41
+          "value": 42
         }
       ]
     }

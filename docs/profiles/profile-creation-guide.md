@@ -467,12 +467,19 @@ A V2 az V1 másolata, de az Extraction fázisban `targets` tömb kerül, és a `
 
 **Fájlnév:** `{könyvtárnév}-recipe.md`
 
-Kötelező tartalom:
-- Kávé neve, márka, feldolgozás, eredet, ízjegyek
-- Alap recept táblázat (dózis, hozam, hő, idő, arány, őrlés, RPM, kosár)
-- GaggiMate Pro fázistáblázat (fázisnév, idő, hő, pump target, nyomás/flow)
+Sablon: [`templates/recipe-template.md`](../../templates/recipe-template.md) — a Burundi Mubuga receptjének szerkezete (ez a minta).
+
+Tartalom, ebben a sorrendben:
+- Fejléctábla: kávé, feldolgozás, eredet, ízjegyek, setup, mérleg, aktuális profil, státusz, frissítés dátuma
+- Cél ízprofil
+- Aktuális baseline paramétertáblája, „Következő shot” sor és egy shot közbeni megfigyelési pont (pl. hozam a fő extrakció előtt)
+- Mért shotok / tesztek dátummal: beállítás, eredmény, megfigyelések, következtetés (a legújabb felül)
+- GaggiMate Pro fázistáblázat a stop-triggerekkel, és „Mi változott” az előző verzióhoz képest
+- Kompatibilitási profilok (korábbi Scale verziók, Manual fallback)
 - Dial-in logika táblázat (tünet → következő lépés)
-- V1 és V2 rövid recept sor
+- Rövid menthető recept
+
+A profiloldal a „…fázisok” és „…dial-in…” című szakaszokat verziónként egymás mellett mutatja, ezért ezeket a címeket érdemes megtartani.
 
 ### 6. Changelog.md fájl létrehozása
 
@@ -536,17 +543,17 @@ for i in issues: print(i)
 
 ---
 
-## Grafikonok generálása
+## Grafikonok
+
+A weboldal a profilgrafikonokat közvetlenül a JSON profilokból rajzolja ki, ezért PNG grafikonokat nem tárolunk a repóban.
+
+Ha mégis kell egy kép (például megosztáshoz), a `tools/render_gaggimate_profiles.py` (matplotlib szükséges) helyben elkészíti a JSON mellé `{json-stem}-profile.png` néven:
 
 ```bash
-# Összes profil
-python3 tools/render_gaggimate_profiles.py
-
-# Egy adott profil
-python3 tools/render_gaggimate_profiles.py profiles/uj-kave/uj-kave-38s.json
+python3 tools/render_gaggimate_profiles.py profiles/wangera/wangera-manual-v2.json
 ```
 
-A script a JSON neve alapján hozza létre a PNG-t: `{json-stem}-profile.png`.
+Az így készült PNG-ket a `.gitignore` kizárja, nem kerülnek commitba.
 
 ---
 
@@ -557,7 +564,6 @@ A script a JSON neve alapján hozza létre a PNG-t: `{json-stem}-profile.png`.
 | Könyvtár | `profiles/{eredet-kave}/` |
 | JSON (V1) | `{eredet-kave}-manual.json` (több variánsnál `-manual-v1.json`, `-v2.json`, ...) |
 | JSON (V2) | `{eredet-kave}-scale.json` (több variánsnál `-scale-v1.json`, `-v2.json`, ...) |
-| PNG | `{json-stem}-profile.png` (auto) |
 | Recept | `{könyvtárnév}-recipe.md` |
 | Changelog | `{könyvtárnév}-changelog.md` |
 

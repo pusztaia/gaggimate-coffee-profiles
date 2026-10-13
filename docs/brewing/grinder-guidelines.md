@@ -4,10 +4,10 @@ Ez a dokumentum a darálással és az espresso dial-in folyamattal kapcsolatos l
 
 **Kapcsolódó dokumentumok:**
 
-- [`BREW_GUIDELINES.md`](BREW_GUIDELINES.md) – teljes espresso dial-in folyamat
-- [`PROFILE_CREATION_GUIDE.md`](PROFILE_CREATION_GUIDE.md) – profilkészítési alapértékek
-- [`SUMMARY.md`](SUMMARY.md) – aktuális kávéprofilok és kiinduló őrlések
-- [`speciality_kave_feldolgozasok.md`](speciality_kave_feldolgozasok.md) – feldolgozások és várható ízprofilok
+- [`brew-guidelines.md`](brew-guidelines.md) – teljes espresso dial-in folyamat
+- [`profile-creation-guide.md`](../profiles/profile-creation-guide.md) – profilkészítési alapértékek
+- [`summary.md`](../profiles/summary.md) – aktuális kávéprofilok és kiinduló őrlések
+- [`speciality-kave-feldolgozasok.md`](../coffee/speciality-kave-feldolgozasok.md) – feldolgozások és várható ízprofilok
 
 ---
 

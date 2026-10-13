@@ -32,15 +32,32 @@ h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.08;letter-spacing:-.03em;mar
 section{margin-top:2.2rem}
 section h2{font-size:1.3rem;letter-spacing:-.02em;margin:0 0 .8rem}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:1.2rem}
-.recipe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
-.recipe-stat{background:var(--surface2);border-radius:var(--radius-md);padding:.85rem;text-align:center}.recipe-stat strong{display:block;font-size:1.15rem}.recipe-stat span{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem}
+.brew-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.variant-table-wrap{overflow-x:auto;margin:0 -4px}
+.variant-table{width:100%;border-collapse:separate;border-spacing:4px 0;font-variant-numeric:tabular-nums}
+.variant-table th,.variant-table td{padding:9px 12px;text-align:center;white-space:nowrap;border-bottom:1px solid var(--line)}
+.variant-table tbody tr:last-child th,.variant-table tbody tr:last-child td{border-bottom:0}
+.variant-table thead th:first-child,.variant-table tbody th{width:1%}
+.variant-table tbody th{text-align:left;color:var(--muted);font-weight:500;font-size:13px}
+.variant-table tbody th small{font-weight:400;color:var(--gm-faint)}
+.variant-table td{font-family:var(--gm-font-display);font-weight:600;font-size:20px}
+.variant-table thead th{vertical-align:bottom;border-bottom:1px solid var(--line-strong)}
+.variant-table .is-active{background:var(--gm-accent-soft)}
+.variant-table thead th.is-active{border-radius:var(--gm-radius-item) var(--gm-radius-item) 0 0}
+.variant-table tbody tr:last-child td.is-active{border-radius:0 0 var(--gm-radius-item) var(--gm-radius-item)}
+.variant-pick{display:block;margin:0 auto 2px;border:0;background:none;color:var(--text);font:inherit;font-weight:600;font-size:14px;cursor:pointer;padding:2px 4px;border-radius:6px}
+.variant-pick:hover{color:var(--accent)}
+.variant-table .is-active .variant-pick{color:var(--accent)}
+.variant-kind{display:block;font-size:11px;font-weight:500;color:var(--gm-faint);text-transform:uppercase;letter-spacing:.06em}
+.variant-hint{margin:10px 0 0;color:var(--gm-faint);font-size:13px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sub-head{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 10px}
 .variant-row{display:flex;gap:.6rem;align-items:center;margin-top:1rem;flex-wrap:wrap}.variant-row select{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:var(--gm-radius-item);padding:.55rem .7rem}
-.meta-list{display:grid;gap:.4rem;margin:0;padding:0;list-style:none;color:var(--muted);font-size:.9rem}.meta-list strong{color:var(--text)}
 .actions{display:flex;flex-wrap:wrap;gap:.6rem}
 .btn{border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;border-radius:999px;padding:.65rem .95rem;cursor:pointer;font-weight:600;font-size:.84rem;display:inline-flex;align-items:center;gap:.4rem}
 .btn:hover{border-color:var(--accent);color:var(--accent)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
-.chart-box{min-height:250px}.mini-chart{width:100%;height:260px;display:block;touch-action:pan-y}
+.chart-box{min-height:250px}.mini-chart{width:100%;height:auto;display:block;overflow:visible;touch-action:pan-y}
 .chart-toggles{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:.7rem;font-size:.82rem;color:var(--muted)}.chart-toggles label{display:flex;align-items:center;gap:.35rem;cursor:pointer}
 .chart-host{position:relative}
 .chart-tooltip{position:absolute;top:.5rem;right:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--gm-radius-item);padding:.55rem .75rem;font-size:.78rem;box-shadow:var(--shadow-soft);pointer-events:none;line-height:1.5}
@@ -55,42 +72,32 @@ section h2{font-size:1.3rem;letter-spacing:-.02em;margin:0 0 .8rem}
 .version-kind{font-size:.72rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.15rem .55rem}
 .version-actions{display:flex;gap:.4rem;flex-wrap:wrap}
 .version-actions .btn{padding:.55rem .75rem;font-size:.74rem;min-height:36px}
-.taste-group{margin-bottom:1.1rem}
-.taste-label{display:block;font-size:.76rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
-.taste-options{display:flex;flex-wrap:wrap;gap:.4rem}
-.taste-options label{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:.4rem .7rem;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.35rem}
-.taste-options input{accent-color:var(--accent)}
-.suggestion-box{margin-top:1.2rem;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface));border-radius:var(--radius-md);padding:1rem 1.1rem}
-.suggestion-box h3{margin:0 0 .5rem;font-size:1rem}
-.suggestion-box ul{margin:.4rem 0 0;padding-left:1.1rem}
-.suggestion-box .confidence{display:block;margin-top:.6rem;color:var(--muted);font-size:.76rem;font-style:italic}
-.taste-history{margin-top:1.3rem;border-top:1px solid var(--line);padding-top:1rem}
-.taste-history h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 .6rem}
-.taste-entry{border:1px solid var(--line);background:var(--surface2);border-radius:var(--gm-radius-item);padding:.6rem .75rem;margin-bottom:.5rem;font-size:.82rem}
-.taste-entry time{color:var(--muted);font-size:.72rem;display:block;margin-bottom:.2rem}
-.shot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1rem}
-.shot-grid label{display:block;font-size:.78rem;font-weight:600;color:var(--muted)}
-.shot-grid input,.dialog-field textarea{display:block;width:100%;margin-top:.3rem;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:var(--gm-radius-control);padding:.5rem .65rem;font-size:.9rem}
-.shot-list{margin-top:1.2rem;display:grid;gap:.6rem}
-.shot-row{border:1px solid var(--line);background:var(--surface2);border-radius:var(--gm-radius-item);padding:.7rem .85rem;font-size:.84rem}
-.shot-row.best{border-color:var(--gold)}
-.shot-row time{display:block;color:var(--muted);font-size:.72rem;margin-bottom:.2rem}
-.shot-row .shot-actions{margin-top:.5rem;display:flex;gap:.4rem;flex-wrap:wrap}
-.shot-row .shot-actions .btn{padding:.5rem .7rem;font-size:.74rem;min-height:36px}
-.best-shot-box{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--surface));border-radius:var(--radius-md);padding:.9rem 1rem;margin-bottom:1rem}
-.best-shot-box h4{margin:0 0 .3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-@media(max-width:480px){.shot-grid{grid-template-columns:1fr}}
 .md-body h1,.md-body h2,.md-body h3{line-height:1.2}
 .md-body table{width:100%;border-collapse:collapse;font-size:.88rem}.md-body th,.md-body td{padding:.6rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.md-body th{background:var(--surface2)}
+.version-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px;margin-bottom:8px}
+.version-column{min-width:0;overflow-x:auto;border:1px solid var(--line);border-radius:var(--gm-radius-item);padding:12px 14px}
+.version-column-head{font-family:var(--gm-font-display);font-weight:600;font-size:20px;color:var(--accent);margin:0 0 6px}
+.version-column table{font-size:.82rem}.version-column th,.version-column td{padding:.45rem .5rem}
+.version-column p{margin:.5rem 0}
+#phaseBlock+#dialinBlock{margin-top:18px}
+.version-column.is-active{border-color:var(--accent);background:var(--gm-accent-soft)}
+.variant-pick-head{display:block;width:100%;text-align:left;border:0;background:none;cursor:pointer;padding:0;color:var(--text)}
+.version-column.is-active .variant-pick-head,.variant-pick-head:hover{color:var(--accent)}
+.variant-pick-head .variant-kind{display:inline;margin-left:6px;vertical-align:middle}
+.phase-table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
+.phase-table th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line-strong);padding:.4rem .45rem}
+.phase-table td{border-bottom:1px solid var(--line);padding:.4rem .45rem;vertical-align:top}
+.phase-table td.num{white-space:nowrap}
+.phase-table small{color:var(--gm-faint);white-space:nowrap}
+.phase-table tr.total td{font-weight:600;border-bottom:0}
+.notes-head{margin-top:14px}
+.phase-note{font-size:.88rem;color:var(--muted)}.phase-note p{margin:.3rem 0}
 .md-body img{border-radius:var(--gm-radius-item);max-width:100%}
 .md-toc{border:1px solid var(--line);background:var(--surface2);border-radius:var(--gm-radius-item);padding:.9rem 1.1rem;margin-bottom:1.3rem;font-size:.86rem}.md-toc strong{display:block;margin-bottom:.4rem;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.md-toc ul{margin:0;padding-left:1.1rem;list-style:none}.md-toc li{margin-bottom:.25rem}.md-toc a{color:var(--accent);text-decoration:none}.md-toc a:hover{text-decoration:underline}.md-toc .toc-level-2{margin-left:.9rem}.md-toc .toc-level-3{margin-left:1.8rem}
 details.card summary{cursor:pointer;font-weight:600;list-style:none}details.card summary::-webkit-details-marker{display:none}
-.advanced pre{overflow:auto;background:var(--sunken);color:var(--text);border:1px solid var(--line);border-radius:var(--gm-radius-item);padding:1rem;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .status{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-md);padding:1rem 1.1rem;color:var(--muted)}.status.error{border-color:#bb6b62;background:color-mix(in srgb,#bb6b62 10%,var(--surface));color:var(--text)}.status.ok{border-color:#3f8f5f;background:color-mix(in srgb,#3f8f5f 12%,var(--surface));color:var(--text)}
-dialog#sendDialog,dialog#docDialog{border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.3rem;background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+dialog#sendDialog{border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.3rem;background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
 dialog#sendDialog{width:min(440px,90vw)}
-dialog#docDialog{width:min(680px,92vw)}
-dialog#docDialog::backdrop{background:rgba(12,7,6,.5)}
 dialog#sendDialog::backdrop{background:rgba(12,7,6,.5)}
 dialog#sendDialog h3{margin:0 0 .6rem}
 .dialog-hint{color:var(--muted);font-size:.82rem;margin:0 0 1rem}
@@ -98,7 +105,6 @@ dialog#sendDialog h3{margin:0 0 .6rem}
 .dialog-field input{display:block;width:100%;margin-top:.4rem;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:var(--gm-radius-item);padding:.6rem .75rem;font-size:.9rem}
 dialog#sendDialog .status{margin-bottom:1rem;font-size:.84rem}
 dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
-@media(max-width:720px){.recipe-grid{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
@@ -124,48 +130,21 @@ dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
     <p class="origin" id="origin"></p>
     <div class="pills" id="pills"></div>
 
-    <section id="recipe-section">
-      <h2>Ajánlott recept</h2>
+    <section id="brew-section">
+      <h2>Főzés</h2>
       <div class="card">
-        <div class="recipe-grid">
-          <div class="recipe-stat"><strong id="statDose">—</strong><span>Dózis</span></div>
-          <div class="recipe-stat"><strong id="statYield">—</strong><span>Hozam / stop</span></div>
-          <div class="recipe-stat"><strong id="statTemp">—</strong><span>Hőmérséklet</span></div>
-          <div class="recipe-stat"><strong id="statTime">—</strong><span>Max idő</span></div>
+        <div class="variant-table-wrap">
+          <table class="variant-table" id="variantTable"><tbody><tr><td>Verziók betöltése…</td></tr></tbody></table>
         </div>
-        <div class="variant-row">
-          <label for="variantSelect">Profil verzió</label>
-          <select id="variantSelect"></select>
+        <p class="variant-hint">Egy verzió oszlopfejére kattintva az lesz az aktív: a grafikon, a fázislista és a gombok erre vonatkoznak.</p>
+        <div class="brew-controls">
+          <div class="actions">
+            <a class="btn primary" id="downloadJson" download>Letöltés (JSON)</a>
+            <button class="btn" id="openSendDialog">Küldés GaggiMate-re</button>
+            <a class="btn" id="brewModeLink" href="#">Brew mode</a>
+            <a class="btn" id="compareLink" href="#">Összehasonlítás</a>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="profile-section">
-      <h2>Profil</h2>
-      <div class="card">
-        <ul class="meta-list">
-          <li><strong>Fájl:</strong> <span id="metaFile"></span></li>
-          <li><strong>Típus:</strong> <span id="metaType"></span></li>
-          <li><strong>Leírás:</strong> <span id="metaDescription"></span></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="knowledge-links-section">
-      <h2>Kapcsolódó tudásbázis</h2>
-      <div class="card">
-        <div class="actions" id="knowledgeLinks"></div>
-      </div>
-    </section>
-
-    <section id="actions-section">
-      <h2>Műveletek</h2>
-      <div class="actions">
-        <a class="btn primary" id="downloadJson" download>Letöltés (JSON)</a>
-        <a class="btn" id="downloadPng" target="_blank" rel="noopener">PNG megnyitása</a>
-        <button class="btn" id="openSendDialog">Küldés GaggiMate-re</button>
-        <a class="btn" id="brewModeLink" href="#">Brew mode</a>
-        <a class="btn" id="compareLink" href="#">Összehasonlítás</a>
       </div>
     </section>
 
@@ -179,103 +158,15 @@ dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
         </div>
         <div id="chartHost" class="chart-host"></div>
         <div class="chart-tooltip" id="chartTooltip" hidden role="status" aria-live="polite"></div>
-        <p class="chart-fallback-note">A lenti fázislista szövegesen is tartalmazza a grafikon minden értékét, képernyőolvasóhoz és érintés nélküli hozzáféréshez.</p>
-        <div class="phase-list" id="phaseList"></div>
+        <p class="chart-fallback-note">A grafikon minden értéke szövegesen is megvan a lenti „Fázisok és dial-in” táblázataiban, képernyőolvasóhoz és érintés nélküli hozzáféréshez.</p>
       </div>
     </section>
 
-    <section id="version-section">
-      <h2>Verziók</h2>
+    <section id="phases-dialin-section">
+      <h2>Fázisok és dial-in</h2>
       <div class="card">
-        <ul class="version-list" id="versionList"></ul>
-      </div>
-    </section>
-
-    <section id="dialin-section">
-      <h2>Ízélmény és dial-in asszisztens</h2>
-      <div class="card">
-        <p class="dialog-hint">Shot után add meg a benyomásod — a lenti javaslat egy fix, átlátható szabályrendszerből jön (nem AI), és sosem garantált eredmény. Csak a böngésződben, helyileg tárolódik.</p>
-        <form id="tasteForm">
-          <div class="taste-group"><span class="taste-label">Savasság</span>
-            <div class="taste-options" data-field="acidity">
-              <label><input type="radio" name="acidity" value="too_sour">Túl savanyú</label>
-              <label><input type="radio" name="acidity" value="bright">Élénk</label>
-              <label><input type="radio" name="acidity" value="balanced" checked>Kiegyensúlyozott</label>
-              <label><input type="radio" name="acidity" value="muted">Tompa</label>
-            </div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Keserűség</span>
-            <div class="taste-options" data-field="bitterness">
-              <label><input type="radio" name="bitterness" value="low">Alacsony</label>
-              <label><input type="radio" name="bitterness" value="balanced" checked>Kiegyensúlyozott</label>
-              <label><input type="radio" name="bitterness" value="high">Magas</label>
-            </div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Édesség</span>
-            <div class="taste-options" data-field="sweetness">
-              <label><input type="radio" name="sweetness" value="low">Alacsony</label>
-              <label><input type="radio" name="sweetness" value="medium" checked>Közepes</label>
-              <label><input type="radio" name="sweetness" value="high">Magas</label>
-            </div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Testesség</span>
-            <div class="taste-options" data-field="body">
-              <label><input type="radio" name="body" value="tea-like">Tea-szerű</label>
-              <label><input type="radio" name="body" value="medium" checked>Közepes</label>
-              <label><input type="radio" name="body" value="syrupy">Szirupos</label>
-            </div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Csersavasság</span>
-            <div class="taste-options" data-field="dryness">
-              <label><input type="radio" name="dryness" value="none" checked>Nincs</label>
-              <label><input type="radio" name="dryness" value="slight">Enyhe</label>
-              <label><input type="radio" name="dryness" value="high">Erős</label>
-            </div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Domináns ízjegyek</span>
-            <div class="taste-options" id="flavorOptions"></div>
-          </div>
-          <div class="taste-group"><span class="taste-label">Shot-megfigyelések (opcionális)</span>
-            <div class="taste-options" id="observationOptions"></div>
-          </div>
-          <button type="submit" class="btn primary">Mentés és javaslat kérése</button>
-        </form>
-        <div id="suggestionBox" class="suggestion-box" hidden></div>
-        <div id="tasteHistory" class="taste-history"></div>
-      </div>
-    </section>
-
-    <section id="shot-history-section">
-      <h2>Shot history</h2>
-      <div class="card">
-        <p class="dialog-hint">Helyileg, csak ebben a böngészőben tárolt napló a ténylegesen lefőzött shotokról. A lenti "Duplikálás" gomb egy korábbi shot beállításait tölti be új bejegyzés alapjának.</p>
-        <form id="shotForm">
-          <input type="hidden" id="shotEditId">
-          <div class="shot-grid">
-            <label>Dózis (g)<input type="number" step="0.1" id="shotDose"></label>
-            <label>Hozam (g)<input type="number" step="0.1" id="shotYield"></label>
-            <label>Hőmérséklet (°C)<input type="number" step="0.1" id="shotTemp"></label>
-            <label>Őrlés<input type="text" id="shotGrind"></label>
-            <label>RPM<input type="number" step="1" id="shotRpm"></label>
-            <label>Időtartam (s)<input type="number" step="0.5" id="shotDuration"></label>
-            <label>Pumpa-stop súly (g, opcionális)<input type="number" step="0.1" id="shotPumpStop"></label>
-            <label>Végső csészesúly (g, opcionális)<input type="number" step="0.1" id="shotCupWeight"></label>
-          </div>
-          <div class="taste-group"><span class="taste-label">Értékelés</span>
-            <div class="taste-options" id="shotRating"></div>
-          </div>
-          <label class="dialog-field">Jegyzet<textarea id="shotNotes" rows="2"></textarea></label>
-          <div class="actions">
-            <button type="submit" class="btn primary" id="shotSubmitBtn">Shot mentése</button>
-            <button type="button" class="btn" id="shotCancelEdit" hidden>Szerkesztés mégse</button>
-          </div>
-        </form>
-        <div id="bestShotBox"></div>
-        <div id="shotList" class="shot-list"></div>
-        <div class="actions" style="margin-top:1rem">
-          <button type="button" class="btn" id="exportShots">Shot history exportálása (JSON)</button>
-          <label class="btn" style="cursor:pointer">Importálás<input type="file" id="importShots" accept="application/json" hidden></label>
-        </div>
+        <div id="phaseBlock"><h3 class="sub-head">GaggiMate Pro fázisok</h3><div class="version-columns" id="phaseColumns"></div><div id="phaseNotes"></div></div>
+        <div id="dialinBlock"><h3 class="sub-head">Dial-in logika</h3><div class="version-columns" id="dialinColumns"></div></div>
       </div>
     </section>
 
@@ -284,31 +175,17 @@ dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
       <div class="card md-body" id="recipeBody">Betöltés…</div>
     </section>
 
-    <section id="changelog-section">
+    <section id="history-section">
       <details class="card">
-        <summary>Changelog / verziótörténet megnyitása</summary>
-        <div class="md-body" id="changelogBody" style="margin-top:1rem">Betöltés…</div>
-      </details>
-    </section>
-
-    <section id="advanced-section" class="advanced">
-      <details class="card">
-        <summary>Fejlesztői / debug adatok</summary>
-        <ul class="meta-list" style="margin-top:1rem">
-          <li><strong>Mappa:</strong> <span id="advFolder"></span></li>
-          <li><strong>JSON elérési út:</strong> <span id="advPath"></span></li>
-        </ul>
-        <pre id="advJson"></pre>
+        <summary>Verziók és changelog</summary>
+        <h3 class="sub-head">Verziók</h3>
+        <ul class="version-list" id="versionList"></ul>
+        <h3 class="sub-head">Changelog</h3>
+        <div class="md-body" id="changelogBody">Betöltés…</div>
       </details>
     </section>
   </div>
 </main>
-
-<dialog id="docDialog">
-  <h3 id="docDialogTitle">Dokumentum</h3>
-  <div id="docDialogBody" class="md-body" style="max-height:60vh;overflow:auto"></div>
-  <div class="actions" style="margin-top:1rem"><button type="button" class="btn" id="docDialogClose">Bezárás</button></div>
-</dialog>
 
 <dialog id="sendDialog">
   <h3>Küldés GaggiMate-re</h3>
@@ -326,7 +203,7 @@ dialog#sendDialog .actions{display:flex;flex-wrap:wrap;gap:.5rem}
 </dialog>
 
 <script src="assets/js/profile-common.js"></script>
-<script src="assets/js/dialin-rules.js"></script>
+<script src="assets/js/profile-chart.js"></script>
 <script>
 "use strict";
 const $=(sel,root=document)=>root.querySelector(sel);
@@ -347,79 +224,69 @@ if(window.matchMedia){
 setTheme(preferredTheme());
 $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
 
-function statsFor(entry,profile){
+/* Per-version recipe facts. Dose, grind and (for manual profiles) yield are only written in each
+ * profile's description ("19 g / 93 C / grind 10 / 42.0 g"); where it says nothing, the coffee's
+ * catalog value stands in. The yield of a scale profile is its last volumetric stop target. */
+function variantFacts(entry,profile){
+  const desc=String(profile?.description||"");
+  const num=v=>parseFloat(String(v).replace(",","."));
+  const grams=[...desc.matchAll(/(\d+(?:[.,]\d+)?)\s*g\b/g)].map(m=>num(m[1]));
+  const dose=grams.length?grams[0]:(Number(entry.dose)||null);
   const target=lastWeightTarget(profile);
+  const yieldNum=target||(grams.length>1?grams[1]:num(entry.yield))||null;
+  const grindMatch=desc.match(/grind:?\s*([0-9][0-9.,]*(?:\s*[-–]\s*[0-9][0-9.,]*)?)/i);
+  const temp=Number(profile?.temperature);
   return {
-    dose:entry.dose?`${String(entry.dose).replace(".",",")} g`:"—",
-    yield:target?`${formatNumber(target)} g`:entry.yield||"—",
-    temp:profile&&Number.isFinite(Number(profile.temperature))?`${formatNumber(profile.temperature)} °C`:"—",
-    time:profile?`${formatNumber(totalDuration(profile),0)} s max`:entry.expectedTime||"—"
+    dose:dose?`${formatNumber(dose)} g`:"—",
+    yield:yieldNum?`${formatNumber(yieldNum)} g`:"—",
+    ratio:dose&&yieldNum?`1:${formatNumber(yieldNum/dose,2)}`:"—",
+    temp:Number.isFinite(temp)&&temp>0?`${formatNumber(temp)} °C`:"—",
+    time:profile?`${formatNumber(totalDuration(profile),0)} s`:"—",
+    grind:grindMatch?grindMatch[1].replace(/\s+/g,"").replace(/[.,]+$/,""):(entry.grind||"—")
   };
+}
+const FACT_ROWS=[["dose","Dózis"],["yield","Hozam / stop"],["ratio","Arány"],["temp","Hőmérséklet"],["time","Max idő"],["grind","Őrlés"]];
+function renderVariantTable(){
+  const entry=state.entry,active=state.variant?.id;
+  const cols=entry.variants.map(v=>({v,facts:variantFacts(entry,state.variantProfiles[v.id])}));
+  const cls=v=>v.id===active?' class="is-active"':"";
+  const grindLabel=state.rpm?`Őrlés <small>(${esc(state.rpm)} RPM)</small>`:"Őrlés";
+  $("#variantTable").innerHTML=`<thead><tr><th scope="col"><span class="sr-only">Érték</span></th>${cols.map(({v})=>`<th scope="col"${cls(v)}><button type="button" class="variant-pick" data-variant="${esc(v.id)}" aria-pressed="${v.id===active}">${esc(v.label)}</button><span class="variant-kind">${esc(kindLabel(v))}</span></th>`).join("")}</tr></thead>
+    <tbody>${FACT_ROWS.map(([key,label])=>`<tr><th scope="row">${key==="grind"?grindLabel:esc(label)}</th>${cols.map(({v,facts})=>`<td${cls(v)}>${esc(facts[key])}</td>`).join("")}</tr>`).join("")}</tbody>`;
 }
 
 async function loadVariant(){
   const entry=state.entry,variant=state.variant;
   $("#chartHost").innerHTML='<div class="status">Grafikon betöltése…</div>';
-  try{
-    state.profile=await fetchJSON(pathFor(entry,variant.file));
-  }catch(error){
-    state.profile=null;
-    $("#chartHost").innerHTML=`<div class="status error">Nem sikerült betölteni a profil JSON-t.<br>${esc(error.message)}</div>`;
-  }
-  const stats=statsFor(entry,state.profile);
-  $("#statDose").textContent=stats.dose;
-  $("#statYield").textContent=stats.yield;
-  $("#statTemp").textContent=stats.temp;
-  $("#statTime").textContent=stats.time;
+  state.profile=state.variantProfiles[variant.id]||null;
+  if(!state.profile)$("#chartHost").innerHTML=`<div class="status error">Nem sikerült betölteni a profil JSON-t.<br>${esc(pathFor(entry,variant.file))}</div>`;
+  renderVariantTable();
+  renderPhaseColumns();
   $("#kindLabel").textContent=`${entry.process||"profil"} · ${kindLabel(variant)}`;
-  $("#metaFile").textContent=variant.file;
-  $("#metaType").textContent=state.profile?.type||"—";
-  $("#metaDescription").textContent=state.profile?.description||"—";
   $("#downloadJson").href=pathFor(entry,variant.file);
-  $("#downloadPng").href=pathFor(entry,pngFile(variant));
-  $("#advPath").textContent=pathFor(entry,variant.file);
-  $("#advJson").textContent=JSON.stringify(entry,null,2);
   if(state.profile){
     state.model=buildChartModel(state.profile);
     renderChart();
-    $("#phaseList").innerHTML=phasesHTML(state.profile);
   }else{
     state.model=null;
     $("#chartHost").innerHTML="";
-    $("#phaseList").innerHTML="";
   }
 }
 
 function renderChart(){
   const model=state.model,host=$("#chartHost");
-  if(!model){host.innerHTML="";return;}
+  if(!model){host.__chartDraw=null;host.innerHTML="";return;}
   const entry=state.entry,v=state.visible;
-  const W=760,H=280,pad={l:44,r:42,t:20,b:34},total=model.total;
-  const leftVals=[...(v.pressure?model.pressure:[]),...(v.flow?model.flow:[])].map(p=>p[1]).filter(Number.isFinite);
-  const leftMax=Math.max(10,...leftVals,0)+1;
-  const temps=model.temperature.map(p=>p[1]).filter(Number.isFinite);
-  const tMin=temps.length?Math.min(...temps):0,tMax=temps.length?Math.max(...temps):1,tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
-  const x=t=>pad.l+(W-pad.l-pad.r)*(t/total);
-  const y=val=>H-pad.b-(H-pad.t-pad.b)*(val/leftMax);
-  const yt=val=>H-pad.b-(H-pad.t-pad.b)*((val-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
-  let bands="";
-  model.phases.forEach((p,i)=>{if(i%2)bands+=`<rect x="${x(p.start)}" y="${pad.t}" width="${Math.max(0,x(p.end)-x(p.start))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".035"/>`;bands+=`<line x1="${x(p.start)}" y1="${pad.t}" x2="${x(p.start)}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/>`;});
-  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".10"/>`).join("");
-  host.innerHTML=`<svg class="mini-chart" id="chartSvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(entry.title)} interaktív profilgrafikon" style="--card-accent:${esc(entry.accent||"var(--accent)")}">
-    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
-    <g color="var(--text)">${grid}${bands}<line x1="${W-pad.r}" y1="${pad.t}" x2="${W-pad.r}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/></g>
-    ${v.pressure?`<path d="${pathData(model.pressure,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`:""}
-    ${v.flow?`<path d="${pathData(model.flow,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`:""}
-    ${v.temperature?`<path d="${pathData(model.temperature,x,yt)}" fill="none" stroke="var(--temp)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>`:""}
-    <line id="crosshair" x1="0" y1="${pad.t}" x2="0" y2="${H-pad.b}" stroke="currentColor" opacity="0"/>
-    <g fill="var(--muted)" font-size="12">
-      <text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text>
-      ${(v.pressure||v.flow)?`<text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar · ml/s</text><text x="18" y="${H-pad.b}">0</text>`:""}
-      ${v.temperature?`<text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text>`:""}
-    </g>
-    <rect id="chartOverlay" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent"/>
-  </svg>`;
-  attachChartInteraction(W,pad,total,model,x);
+  mountChart(host,width=>{
+    const series=[];
+    if(v.pressure)series.push({points:model.pressure,color:"var(--blue)",fill:true});
+    if(v.flow)series.push({points:model.flow,color:"var(--flow)"});
+    if(v.temperature)series.push({points:model.temperature,axis:"temp",color:"var(--temp)",width:1.8,dash:"6 5"});
+    const chart=profileChartSVG({width,height:280,total:model.total,phases:model.phases,series,
+      label:`${entry.title} interaktív profilgrafikon`,ids:{svg:"chartSvg",crosshair:"crosshair",overlay:"chartOverlay"}});
+    host.innerHTML=chart.svg;
+    attachChartInteraction(width,chart.pad,model.total,model,chart.x);
+  });
 }
 
 function attachChartInteraction(W,pad,total,model,x){
@@ -556,42 +423,8 @@ function selectVariant(id){
   const variant=state.entry.variants.find(v=>v.id===id);
   if(!variant)return;
   state.variant=variant;
-  $("#variantSelect").value=variant.id;
   $("#compareLink").href=`compare.html?a=${encodeURIComponent(state.entry.id)}::${encodeURIComponent(variant.id)}`;
   loadVariant();
-}
-
-async function openDoc(file,title){
-  const dialog=$("#docDialog");
-  $("#docDialogTitle").textContent=title;
-  $("#docDialogBody").innerHTML="Betöltés…";
-  dialog.showModal();
-  try{
-    $("#docDialogBody").innerHTML=renderMarkdown(await fetchText(file));
-  }catch(error){
-    $("#docDialogBody").innerHTML=`<p class="status error">Nem sikerült betölteni: ${esc(file)}</p>`;
-  }
-}
-$("#docDialogClose").addEventListener("click",()=>$("#docDialog").close());
-$("#docDialog").addEventListener("click",event=>{if(event.target.id==="docDialog")$("#docDialog").close();});
-
-function relevantKnowledgeLinks(entry){
-  const links=[
-    {file:"knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md",title:"GaggiMate profilkészítési útmutató"},
-    {file:"knowledge/EXTRACTION_SCIENCE.md",title:"Extrakciótudomány"},
-    {file:"knowledge/PRESSURE_GUIDE.md",title:"Nyomás útmutató"}
-  ];
-  if(hasKind(entry,"scale"))links.push({file:"BLUETOOTH_SCALE_WORKFLOW.md",title:"Bluetooth Scale Workflow"});
-  if(/anaerob/i.test(entry.process||""))links.push({file:"knowledge/SPECIAL_CATEGORIES.md",title:"Speciális kategóriák"});
-  return links;
-}
-function renderKnowledgeLinks(entry){
-  $("#knowledgeLinks").innerHTML=relevantKnowledgeLinks(entry).map(link=>`<button type="button" class="btn" data-doc-file="${esc(link.file)}" data-doc-title="${esc(link.title)}">${esc(link.title)}</button>`).join("");
-  $("#knowledgeLinks").addEventListener("click",event=>{
-    const btn=event.target.closest("[data-doc-file]");
-    if(!btn)return;
-    openDoc(btn.dataset.docFile,btn.dataset.docTitle);
-  });
 }
 
 function renderVersionList(entry){
@@ -615,8 +448,74 @@ function renderVersionList(entry){
     const btn=event.target.closest("[data-view-variant]");
     if(!btn)return;
     selectVariant(btn.dataset.viewVariant);
-    $("#profile-section").scrollIntoView({behavior:"smooth",block:"start"});
+    $("#brew-section").scrollIntoView({behavior:"smooth",block:"start"});
   });
+}
+
+/* The recipe's phase and dial-in sections ("GaggiMate Pro fázisok – V1", "V3 fázis stop logika",
+ * "Dial-in logika – V1", "V3 dial-in", …) are lifted out of the recipe text and shown per version,
+ * side by side; the rest of the recipe renders below as before. */
+function markdownSections(lines){
+  const heads=[];let inCode=false;
+  lines.forEach((line,i)=>{
+    if(line.trim().startsWith("```"))inCode=!inCode;
+    const m=!inCode&&line.match(/^(#{2,4})\s+(.+)$/);
+    if(m)heads.push({start:i,level:m[1].length,title:m[2].trim()});
+  });
+  return heads.map((h,k)=>{
+    let end=lines.length;
+    for(let n=k+1;n<heads.length;n++)if(heads[n].level<=h.level){end=heads[n].start;break;}
+    return {...h,end};
+  });
+}
+function sectionVersionLabel(title){
+  const m=title.match(/(?:Scale\s+)?V\d+(?:\s+Fruity)?/i);
+  return m?m[0]:"Alap recept";
+}
+function sectionBody(lines,sec){
+  const body=lines.slice(sec.start+1,sec.end);
+  while(body.length&&/^\s*(---)?\s*$/.test(body[0]))body.shift();
+  while(body.length&&/^\s*(---)?\s*$/.test(body[body.length-1]))body.pop();
+  return body.join("\n");
+}
+function pumpText(pump){
+  pump=pump||{};
+  const p=Number(pump.pressure),f=Number(pump.flow);
+  if(pump.target==="flow")return `${formatNumber(f)} ml/s${p>0?` <small>max ${formatNumber(p)} bar</small>`:""}`;
+  return `${formatNumber(p)} bar${f>0?` <small>max ${formatNumber(f)} ml/s</small>`:""}`;
+}
+function phaseTableHTML(profile){
+  if(!profile?.phases?.length)return '<p class="status error">A profil JSON nem tölthető be.</p>';
+  const rows=profile.phases.map((ph,i)=>`<tr><td>${i+1}</td><td>${esc(ph.name||"Fázis")}</td><td class="num">${formatNumber(ph.duration,0)} s</td><td class="num">${formatNumber(resolveTemperature(ph,profile.temperature),1)} °C</td><td>${pumpText(ph.pump)}</td><td>${esc(targetText(ph))||"idő"}</td></tr>`).join("");
+  return `<table class="phase-table"><thead><tr><th>#</th><th>Fázis</th><th>Idő</th><th>Hő</th><th>Pumpa</th><th>Stop</th></tr></thead><tbody>${rows}<tr class="total"><td></td><td>Összesen (max)</td><td class="num">${formatNumber(totalDuration(profile),0)} s</td><td colspan="3"></td></tr></tbody></table>`;
+}
+function renderPhaseColumns(){
+  const entry=state.entry,active=state.variant?.id;
+  $("#phaseColumns").innerHTML=entry.variants.map(v=>`<div class="version-column${v.id===active?" is-active":""}"><button type="button" class="version-column-head variant-pick-head" data-variant="${esc(v.id)}" aria-pressed="${v.id===active}">${esc(v.label)} <span class="variant-kind">${esc(kindLabel(v))}</span></button>${phaseTableHTML(state.variantProfiles[v.id])}</div>`).join("");
+}
+function renderVersionColumns(hostId,blockId,lines,sections){
+  $(`#${blockId}`).hidden=!sections.length;
+  $(`#${hostId}`).innerHTML=sections.map(sec=>`<div class="version-column md-body">${sections.length>1?`<div class="version-column-head">${esc(sectionVersionLabel(sec.title))}</div>`:""}${renderMarkdown(sectionBody(lines,sec),false)}</div>`).join("");
+}
+async function loadRecipe(entry){
+  const target=$("#recipeBody"),url=pathFor(entry,recipeFile(entry));
+  let text;
+  try{text=await fetchText(url);}
+  catch(error){target.innerHTML=`<p class="status error">Nem sikerült betölteni: ${esc(url)}</p>`;return;}
+  const lines=text.replace(/\r\n?/g,"\n").split("\n");
+  const all=markdownSections(lines);
+  const pick=re=>all.filter(sec=>re.test(sec.title)&&!/analízis|összefoglal|mi változott/i.test(sec.title))
+    .filter((sec,_,list)=>!list.some(o=>o!==sec&&o.start>sec.start&&o.start<sec.end));  // keep the innermost match
+  const phases=pick(/fázisok|fázis[-\s]+(és\s+)?stop/i),dialin=pick(/dial-in/i);
+  const notes=phases.map(sec=>{
+    const prose=sectionBody(lines,sec).split("\n").filter(l=>!l.trim().startsWith("|")).join("\n").trim();
+    return prose?`<div class="phase-note md-body">${phases.length>1?`<strong>${esc(sectionVersionLabel(sec.title))}:</strong> `:""}${renderMarkdown(prose,false)}</div>`:"";
+  }).join("");
+  $("#phaseNotes").innerHTML=notes?`<h4 class="sub-head notes-head">Megjegyzések a receptből</h4>${notes}`:"";
+  renderVersionColumns("dialinColumns","dialinBlock",lines,dialin);
+  const lifted=new Set();
+  [...phases,...dialin].forEach(sec=>{for(let i=sec.start;i<sec.end;i++)lifted.add(i);});
+  target.innerHTML=renderMarkdown(lines.filter((_,i)=>!lifted.has(i)).join("\n"));
 }
 
 async function loadMarkdownInto(targetId,url){
@@ -626,211 +525,6 @@ async function loadMarkdownInto(targetId,url){
   }catch(error){
     target.innerHTML=`<p class="status error">Nem sikerült betölteni: ${esc(url)}</p>`;
   }
-}
-
-const FLAVOR_TAGS=["gyümölcs","virágos","citrusos","bogyós","csokoládé","diós","fűszeres","pörkölt"];
-const OBSERVATION_TAGS=[
-  ["channeling","Csatornázás"],["spraying","Fröcskölés"],["unstable-stream","Instabil sugár"],
-  ["early-flow","Korai folyás"],["slow-start","Lassú indulás"]
-];
-function tasteHistoryKey(entryId){return `gaggimate-taste-log-${entryId}`;}
-function loadTasteHistory(entryId){
-  try{return JSON.parse(localStorage.getItem(tasteHistoryKey(entryId))||"[]");}catch{return [];}
-}
-function saveTasteHistory(entryId,history){
-  localStorage.setItem(tasteHistoryKey(entryId),JSON.stringify(history.slice(-20)));
-}
-function renderTasteHistory(entryId){
-  const history=loadTasteHistory(entryId).slice().reverse();
-  const host=$("#tasteHistory");
-  if(!history.length){host.innerHTML="";return;}
-  host.innerHTML=`<h4>Korábbi visszajelzések (${history.length})</h4>`+history.slice(0,8).map(rec=>{
-    const parts=[`savasság: ${rec.acidity}`,`keserűség: ${rec.bitterness}`,`édesség: ${rec.sweetness}`,`test: ${rec.body}`];
-    if(rec.flavors?.length)parts.push(`ízjegyek: ${rec.flavors.join(", ")}`);
-    return `<div class="taste-entry"><time>${esc(new Date(rec.ts).toLocaleString("hu-HU"))} · ${esc(rec.variantLabel||"")}</time>${esc(parts.join(" · "))}</div>`;
-  }).join("");
-}
-function renderSuggestion(result){
-  const box=$("#suggestionBox");
-  box.hidden=false;
-  if(result.primary){
-    box.innerHTML=`<h3>Javaslat</h3><p>${esc(result.primary)}</p><span class="confidence">${esc(result.confidence)}</span>`;
-    return;
-  }
-  box.innerHTML=`<h3>Javasolt következő teszt</h3><ul>${result.adjustments.map(a=>`<li><strong>${esc(a.variable)}:</strong> ${esc(a.direction)}<br><span style="color:var(--muted);font-size:.82rem">${esc(a.reason)}</span></li>`).join("")}</ul><span class="confidence">${esc(result.confidence)}</span>`;
-}
-function initTasteFeedback(entry){
-  $("#flavorOptions").innerHTML=FLAVOR_TAGS.map(tag=>`<label><input type="checkbox" name="flavor" value="${esc(tag)}">${esc(tag)}</label>`).join("");
-  $("#observationOptions").innerHTML=OBSERVATION_TAGS.map(([value,label])=>`<label><input type="checkbox" name="observation" value="${esc(value)}">${esc(label)}</label>`).join("");
-  $("#suggestionBox").hidden=true;
-  renderTasteHistory(entry.id);
-  $("#tasteForm").addEventListener("submit",event=>{
-    event.preventDefault();
-    const form=event.target;
-    const feedback={
-      acidity:form.acidity.value,
-      bitterness:form.bitterness.value,
-      sweetness:form.sweetness.value,
-      body:form.body.value,
-      dryness:form.dryness.value,
-      flavors:$$('input[name="flavor"]:checked',form).map(i=>i.value),
-      observations:$$('input[name="observation"]:checked',form).map(i=>i.value)
-    };
-    const result=suggestAdjustments(feedback);
-    renderSuggestion(result);
-    const history=loadTasteHistory(entry.id);
-    history.push({...feedback,ts:Date.now(),variantId:state.variant?.id,variantLabel:state.variant?.label,suggestion:result});
-    saveTasteHistory(entry.id,history);
-    renderTasteHistory(entry.id);
-  });
-}
-
-const SHOT_HISTORY_VERSION=1;
-function shotHistoryKey(entryId){return `gaggimate-shot-history-${entryId}`;}
-function loadShotHistory(entryId){
-  try{
-    const parsed=JSON.parse(localStorage.getItem(shotHistoryKey(entryId))||"null");
-    if(parsed&&Array.isArray(parsed.shots))return parsed;
-  }catch{}
-  return {version:SHOT_HISTORY_VERSION,shots:[]};
-}
-function saveShotHistory(entryId,data){
-  localStorage.setItem(shotHistoryKey(entryId),JSON.stringify({version:SHOT_HISTORY_VERSION,shots:data.shots}));
-}
-function newShotId(){return `shot-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;}
-
-function renderRatingStars(selected){
-  $("#shotRating").innerHTML=[1,2,3,4,5].map(n=>`<label><input type="radio" name="shotRating" value="${n}" ${Number(selected)===n?"checked":""}>${"★".repeat(n)}</label>`).join("");
-}
-function currentRating(){
-  const checked=$('input[name="shotRating"]:checked');
-  return checked?Number(checked.value):null;
-}
-
-function shotRatio(shot){
-  if(!shot.dose||!shot.yield)return null;
-  return shot.yield/shot.dose;
-}
-function describeShot(shot){
-  const ratio=shotRatio(shot);
-  const parts=[
-    shot.dose?`${formatNumber(shot.dose)} g → ${formatNumber(shot.yield)} g`:null,
-    ratio?`1:${ratio.toFixed(2)}`:null,
-    shot.duration?`${formatNumber(shot.duration,1)} s`:null,
-    shot.temperature?`${formatNumber(shot.temperature)} °C`:null,
-    shot.grind?`Őrlés ${shot.grind}`:null,
-    shot.rpm?`${shot.rpm} RPM`:null
-  ].filter(Boolean);
-  return parts.join(" · ");
-}
-function renderShotList(entryId){
-  const data=loadShotHistory(entryId);
-  const shots=data.shots.slice().sort((a,b)=>b.ts-a.ts);
-  const best=data.shots.find(s=>s.best);
-  $("#bestShotBox").innerHTML=best?`<div class="best-shot-box"><h4>★ Legjobb shot</h4>${esc(describeShot(best))}${best.notes?`<br><span style="color:var(--muted)">${esc(best.notes)}</span>`:""}</div>`:"";
-  $("#shotList").innerHTML=shots.map(shot=>`<div class="shot-row${shot.best?" best":""}">
-    <time>${esc(new Date(shot.ts).toLocaleString("hu-HU"))} · ${esc(shot.variantLabel||"")}${shot.best?' · <strong class="version-badge">★ Legjobb</strong>':""}</time>
-    ${esc(describeShot(shot))}${shot.rating?` · ${"★".repeat(shot.rating)}`:""}
-    ${shot.notes?`<br><span style="color:var(--muted)">${esc(shot.notes)}</span>`:""}
-    <div class="shot-actions">
-      <button type="button" class="btn" data-shot-action="edit" data-shot-id="${esc(shot.id)}">Szerkesztés</button>
-      <button type="button" class="btn" data-shot-action="duplicate" data-shot-id="${esc(shot.id)}">Duplikálás</button>
-      <button type="button" class="btn" data-shot-action="best" data-shot-id="${esc(shot.id)}">${shot.best?"Legjobb jelölés törlése":"Megjelölés legjobbként"}</button>
-      <button type="button" class="btn" data-shot-action="delete" data-shot-id="${esc(shot.id)}">Törlés</button>
-    </div>
-  </div>`).join("")||'<p class="dialog-hint">Még nincs rögzített shot ehhez a kávéhoz.</p>';
-}
-function fillShotForm(shot){
-  $("#shotEditId").value=shot?shot.id:"";
-  $("#shotDose").value=shot?.dose??"";
-  $("#shotYield").value=shot?.yield??"";
-  $("#shotTemp").value=shot?.temperature??"";
-  $("#shotGrind").value=shot?.grind??"";
-  $("#shotRpm").value=shot?.rpm??"";
-  $("#shotDuration").value=shot?.duration??"";
-  $("#shotPumpStop").value=shot?.pumpStopWeight??"";
-  $("#shotCupWeight").value=shot?.cupWeight??"";
-  $("#shotNotes").value=shot?.notes??"";
-  renderRatingStars(shot?.rating);
-  $("#shotSubmitBtn").textContent=shot&&shot.id&&$("#shotEditId").value?"Shot frissítése":"Shot mentése";
-  $("#shotCancelEdit").hidden=!($("#shotEditId").value);
-}
-function initShotHistory(entry){
-  renderRatingStars(null);
-  renderShotList(entry.id);
-  $("#shotForm").addEventListener("submit",event=>{
-    event.preventDefault();
-    const data=loadShotHistory(entry.id);
-    const editId=$("#shotEditId").value;
-    const payload={
-      id:editId||newShotId(),
-      ts:editId?(data.shots.find(s=>s.id===editId)?.ts||Date.now()):Date.now(),
-      variantId:state.variant?.id,
-      variantLabel:state.variant?.label,
-      dose:parseFloat($("#shotDose").value)||null,
-      yield:parseFloat($("#shotYield").value)||null,
-      temperature:parseFloat($("#shotTemp").value)||null,
-      grind:$("#shotGrind").value.trim()||null,
-      rpm:parseFloat($("#shotRpm").value)||null,
-      duration:parseFloat($("#shotDuration").value)||null,
-      pumpStopWeight:parseFloat($("#shotPumpStop").value)||null,
-      cupWeight:parseFloat($("#shotCupWeight").value)||null,
-      rating:currentRating(),
-      notes:$("#shotNotes").value.trim()||null,
-      best:editId?Boolean(data.shots.find(s=>s.id===editId)?.best):false
-    };
-    const idx=data.shots.findIndex(s=>s.id===payload.id);
-    if(idx>=0)data.shots[idx]=payload;else data.shots.push(payload);
-    saveShotHistory(entry.id,data);
-    fillShotForm(null);
-    renderShotList(entry.id);
-  });
-  $("#shotCancelEdit").addEventListener("click",()=>fillShotForm(null));
-  $("#shotList").addEventListener("click",event=>{
-    const btn=event.target.closest("[data-shot-action]");
-    if(!btn)return;
-    const data=loadShotHistory(entry.id);
-    const shot=data.shots.find(s=>s.id===btn.dataset.shotId);
-    if(!shot)return;
-    const action=btn.dataset.shotAction;
-    if(action==="edit"){fillShotForm(shot);$("#shotForm").scrollIntoView({behavior:"smooth",block:"start"});}
-    else if(action==="duplicate"){fillShotForm({...shot,id:null});}
-    else if(action==="delete"){
-      if(!confirm("Biztosan törlöd ezt a shotot?"))return;
-      data.shots=data.shots.filter(s=>s.id!==shot.id);
-      saveShotHistory(entry.id,data);renderShotList(entry.id);
-    }else if(action==="best"){
-      const makeBest=!shot.best;
-      data.shots.forEach(s=>{s.best=makeBest&&s.id===shot.id;});
-      saveShotHistory(entry.id,data);renderShotList(entry.id);
-    }
-  });
-  $("#exportShots").addEventListener("click",()=>{
-    const data=loadShotHistory(entry.id);
-    const blob=new Blob([JSON.stringify({...data,coffeeId:entry.id,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;a.download=`${entry.id}-shot-history.json`;a.click();
-    URL.revokeObjectURL(url);
-  });
-  $("#importShots").addEventListener("change",async event=>{
-    const file=event.target.files[0];
-    if(!file)return;
-    try{
-      const imported=JSON.parse(await file.text());
-      if(!Array.isArray(imported.shots))throw new Error("Érvénytelen fájl: hiányzik a 'shots' tömb.");
-      const data=loadShotHistory(entry.id);
-      const byId=new Map(data.shots.map(s=>[s.id,s]));
-      imported.shots.forEach(s=>{if(s&&s.id)byId.set(s.id,s);});
-      data.shots=[...byId.values()];
-      saveShotHistory(entry.id,data);
-      renderShotList(entry.id);
-    }catch(error){
-      alert(`Nem sikerült importálni: ${error.message}`);
-    }finally{
-      event.target.value="";
-    }
-  });
 }
 
 async function init(){
@@ -843,26 +537,25 @@ async function init(){
     const entry=(catalog.profiles||[]).find(p=>p.id===id);
     if(!entry)throw new Error(`Nincs ilyen profil a katalógusban: ${id}`);
     state.entry=entry;
+    state.rpm=catalog.defaults?.rpm||null;
     document.title=`${entry.title} · GaggiMate profil`;
     $("#title").textContent=entry.title;
     $("#subtitle").textContent=entry.subtitle||"";
     $("#origin").textContent=entry.origin||"";
     $("#pills").innerHTML=[entry.process,...(entry.notes||[])].filter(Boolean).map(n=>`<span class="pill">${esc(n)}</span>`).join("");
-    $("#variantSelect").innerHTML=entry.variants.map(v=>`<option value="${esc(v.id)}">${esc(v.label)}</option>`).join("");
-    $("#variantSelect").addEventListener("change",event=>selectVariant(event.target.value));
-    $("#advFolder").textContent=entry.folder;
+    // every version's JSON up front: the table compares them side by side
+    state.variantProfiles={};
+    await Promise.all(entry.variants.map(async v=>{try{state.variantProfiles[v.id]=await fetchJSON(pathFor(entry,v.file));}catch(error){state.variantProfiles[v.id]=null;}}));
+    $("#variantTable").addEventListener("click",event=>{const btn=event.target.closest("[data-variant]");if(btn)selectVariant(btn.dataset.variant);});
+    $("#phaseColumns").addEventListener("click",event=>{const btn=event.target.closest("[data-variant]");if(btn)selectVariant(btn.dataset.variant);});
     $("#brewModeLink").href=`brew.html?id=${encodeURIComponent(entry.id)}`;
     status.hidden=true;
     $("#dashboard").hidden=false;
     state.variant=defaultVariant(entry);
-    $("#variantSelect").value=state.variant.id;
     $("#compareLink").href=`compare.html?a=${encodeURIComponent(entry.id)}::${encodeURIComponent(state.variant.id)}`;
     renderVersionList(entry);
-    renderKnowledgeLinks(entry);
-    initTasteFeedback(entry);
-    initShotHistory(entry);
     await loadVariant();
-    loadMarkdownInto("recipeBody",pathFor(entry,recipeFile(entry)));
+    loadRecipe(entry);
     loadMarkdownInto("changelogBody",pathFor(entry,changelogFile(entry)));
   }catch(error){
     status.className="status error";

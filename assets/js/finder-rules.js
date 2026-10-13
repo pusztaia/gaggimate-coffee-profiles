@@ -1,8 +1,8 @@
 "use strict";
-/* Deterministic Profile Finder rule engine. Not a generator — it recommends an
+/* Deterministic Profilkereső (finder.html) rule engine. Not a generator — it recommends an
  * existing profile archetype (a real coffee already in profiles/) plus a
  * starting recipe, using the documented process/temperature/pressure/ratio
- * relationships from PROFILE_CREATION_GUIDE.md ("Feldolgozás és profil
+ * relationships from profile-creation-guide.md ("Feldolgozás és profil
  * összefüggések", "Paraméterek és ízhatásuk", "Kiindulópont kiválasztása").
  * Fixed rules, no scoring/confidence percentage — only explicit reasoning. */
 
@@ -14,7 +14,7 @@ const PROCESS_TABLE={
   other:{tempLow:94.0,tempHigh:94.5,pressureLow:7.0,pressureHigh:7.6,yieldLow:41,yieldHigh:43,archetype:"wangera",label:"Általános"}
 };
 const ARCHETYPES={
-  "kirinyaga":{title:"Kirinyaga PB (Tea Rose)",reason:"washed Kenya/Ethiopia kávékhoz dokumentált alap (PROFILE_CREATION_GUIDE.md)"},
+  "kirinyaga":{title:"Kirinyaga PB (Tea Rose)",reason:"washed Kenya/Ethiopia kávékhoz dokumentált alap (profile-creation-guide.md)"},
   "burundi-mubuga":{title:"Burundi Mubuga",reason:"natural Burundi/Ethiopia kávékhoz dokumentált alap"},
   "colombia-manos-juntas":{title:"Colombia Manos Juntas",reason:"anaerobic/honey Colombia kávékhoz dokumentált alap"},
   "twenty-eight-caturron":{title:"28 · Caturron",reason:"natural Guatemala / Közép-Amerika kávékhoz dokumentált alap"},
@@ -22,7 +22,7 @@ const ARCHETYPES={
   "9-bar":{title:"9 Bar Espresso (klasszikus)",reason:"hagyományos, magas nyomású (9 bar) espresso stílushoz dokumentált baseline"}
 };
 const ROAST_SHIFT={
-  "light":"+0.3 °C a sáv tetejéhez közelebb — világos pörkölésnél a magasabb hő segít kihozni az aromaélénkséget (PROFILE_CREATION_GUIDE.md: 94.5–95 °C sáv).",
+  "light":"+0.3 °C a sáv tetejéhez közelebb — világos pörkölésnél a magasabb hő segít kihozni az aromaélénkséget (profile-creation-guide.md: 94.5–95 °C sáv).",
   "medium-light":"a sáv közepe felé — nincs erős ok elmozdulni egyik irányba sem.",
   "medium":"a sáv közepe.",
   "medium-dark":"-0.2 °C a sáv aljához közelebb — a keserűség kockázatának csökkentésére.",
@@ -34,7 +34,7 @@ const BEAN_AGE_NOTE={
   "older":"Régebbi, már kevésbé gázos kávénál gyakran picit magasabb hőmérséklet vagy finomabb őrlés kompenzálja a halványuló aromákat."
 };
 const CUP_STYLE_TABLE={
-  "fruity-clarity":{pressureBias:"high",timeRange:"38–39 s",ratio:"~1:2.3",reason:"Tisztább, gyümölcsösebb csészéhez a sáv felső nyomástartománya és a közepesnél kicsit hosszabb hozam segít (PROFILE_CREATION_GUIDE.md ratio/idő táblázat)."},
+  "fruity-clarity":{pressureBias:"high",timeRange:"38–39 s",ratio:"~1:2.3",reason:"Tisztább, gyümölcsösebb csészéhez a sáv felső nyomástartománya és a közepesnél kicsit hosszabb hozam segít (profile-creation-guide.md ratio/idő táblázat)."},
   "balanced":{pressureBias:"mid",timeRange:"38–39 s",ratio:"~1:2.2–1:2.3",reason:"Kiegyensúlyozott csészéhez a dokumentált standard idő/arány tartomány illik."},
   "sweet":{pressureBias:"low",timeRange:"35–37 s",ratio:"~1:2.2",reason:"Lágyabb, édesebb csészéhez alacsonyabb főnyomás és rövidebb profilidő véd az extra keserűségtől (6.5–7.0 bar sáv logikája)."},
   "body":{pressureBias:"high",timeRange:"40–42 s",ratio:"~1:2.3–1:2.4",reason:"Testesebb csészéhez magasabb nyomás és valamivel hosszabb hozam ad több kivonatot (7.6–8.5 bar sáv logikája)."},
@@ -57,7 +57,7 @@ function findProfileRecommendation(input){
   const alternative=ARCHETYPES[alternativeId]||ARCHETYPES.wangera;
 
   const reasoning=[
-    `Feldolgozás: ${table.label} → dokumentált hőtartomány ${table.tempLow}–${table.tempHigh} °C, főnyomás ${table.pressureLow}–${table.pressureHigh} bar, hozam ${table.yieldLow}–${table.yieldHigh} g (PROFILE_CREATION_GUIDE.md).`,
+    `Feldolgozás: ${table.label} → dokumentált hőtartomány ${table.tempLow}–${table.tempHigh} °C, főnyomás ${table.pressureLow}–${table.pressureHigh} bar, hozam ${table.yieldLow}–${table.yieldHigh} g (profile-creation-guide.md).`,
     `Pörkölési fok (${input.roast}): ${ROAST_SHIFT[input.roast]||ROAST_SHIFT.medium}`,
     `Kávé kora: ${BEAN_AGE_NOTE[input.beanAge]||BEAN_AGE_NOTE.rested}`,
     `Kívánt csésze-stílus (${input.cupStyle}): ${cupStyle.reason}`,
@@ -76,6 +76,6 @@ function findProfileRecommendation(input){
       timeRange:cupStyle.timeRange
     },
     reasoning,
-    disclaimer:"Ez egy determinisztikus, a PROFILE_CREATION_GUIDE.md dokumentált szabályaiból levezetett kiindulópont-javaslat, nem egy validált, az adott kávéra mért recept. A tényleges dial-in (őrlés, pontos hozam) mindig a kóstolás alapján finomhangolandó."
+    disclaimer:"Ez egy determinisztikus, a profile-creation-guide.md dokumentált szabályaiból levezetett kiindulópont-javaslat, nem egy validált, az adott kávéra mért recept. A tényleges dial-in (őrlés, pontos hozam) mindig a kóstolás alapján finomhangolandó."
   };
 }

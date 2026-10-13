@@ -24,14 +24,14 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 ## Aktív profilok – V1 (Time Based)
 
-| Kávé | Profil | JSON | Grafikon | Recept |
-|---|---|---|---|---|
-| Impresso - Kenya Wangera | Stable Start 38s 94.5C | [`wangera-manual-v2.json`](profiles/wangera/wangera-manual-v2.json) | [`wangera-profile.png`](profiles/wangera/wangera-profile.png) | [`wangera-recipe.md`](profiles/wangera/wangera-recipe.md) |
-| Impresso - Burundi Mubuga | Melon Currant 38s | [`burundi-mubuga-manual.json`](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [`burundi-mubuga-manual-profile.png`](profiles/burundi-mubuga/burundi-mubuga-manual-profile.png) | [`burundi-mubuga-recipe.md`](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
-| Impresso - Colombia Manos Juntas | Jam Mango 39s | [`colombia-manos-juntas-manual.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json) | [`colombia-manos-juntas-profile.png`](profiles/colombia-manos-juntas/colombia-manos-juntas-profile.png) | [`colombia-manos-juntas-recipe.md`](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
-| Impresso - Kenya Kirinyaga PB | Tea Rose 37s | [`kirinyaga-manual.json`](profiles/kirinyaga/kirinyaga-manual.json) | [`kirinyaga-profile.png`](profiles/kirinyaga/kirinyaga-profile.png) | [`kirinyaga-recipe.md`](profiles/kirinyaga/kirinyaga-recipe.md) |
-| 28 - Finca el Recreo Caturron | Flavor 42s | [`caturron-manual.json`](profiles/twenty-eight-caturron/caturron-manual.json) | [`twenty-eight-caturron-profile.png`](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png) | [`twenty-eight-caturron-recipe.md`](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
-| Impresso - El Salvador Ochupse | Grape Rose 31s 93C | [`el-salvador-ochupse-manual.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-manual.json) | [`el-salvador-ochupse-manual-profile.png`](profiles/el-salvador-ochupse/el-salvador-ochupse-manual-profile.png) | [`el-salvador-ochupse-recipe.md`](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
+| Kávé | Profil | JSON | Recept |
+|---|---|---|---|
+| Impresso - Kenya Wangera | Stable Start 38s 94.5C | [`wangera-manual-v2.json`](profiles/wangera/wangera-manual-v2.json) | [`wangera-recipe.md`](profiles/wangera/wangera-recipe.md) |
+| Impresso - Burundi Mubuga | Melon Currant 38s | [`burundi-mubuga-manual.json`](profiles/burundi-mubuga/burundi-mubuga-manual.json) | [`burundi-mubuga-recipe.md`](profiles/burundi-mubuga/burundi-mubuga-recipe.md) |
+| Impresso - Colombia Manos Juntas | Jam Mango 39s | [`colombia-manos-juntas-manual.json`](profiles/colombia-manos-juntas/colombia-manos-juntas-manual.json) | [`colombia-manos-juntas-recipe.md`](profiles/colombia-manos-juntas/colombia-manos-juntas-recipe.md) |
+| Impresso - Kenya Kirinyaga PB | Tea Rose 37s | [`kirinyaga-manual.json`](profiles/kirinyaga/kirinyaga-manual.json) | [`kirinyaga-recipe.md`](profiles/kirinyaga/kirinyaga-recipe.md) |
+| 28 - Finca el Recreo Caturron | Flavor 42s | [`caturron-manual.json`](profiles/twenty-eight-caturron/caturron-manual.json) | [`twenty-eight-caturron-recipe.md`](profiles/twenty-eight-caturron/twenty-eight-caturron-recipe.md) |
+| Impresso - El Salvador Ochupse | Grape Rose 31s 93C | [`el-salvador-ochupse-manual.json`](profiles/el-salvador-ochupse/el-salvador-ochupse-manual.json) | [`el-salvador-ochupse-recipe.md`](profiles/el-salvador-ochupse/el-salvador-ochupse-recipe.md) |
 
 ---
 
@@ -55,12 +55,12 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 ## Általános (nem kávé-specifikus) profilok
 
-| Profil | Leírás | JSON | Grafikon | Recept |
-|---|---|---|---|---|
-| 9 Bar Espresso | Klasszikus 9 baros baseline | [`profile-9bar.json`](profiles/9-bar/profile-9bar.json) | [`profile-9bar-profile.png`](profiles/9-bar/profile-9bar-profile.png) | [`9-bar-recipe.md`](profiles/9-bar/9-bar-recipe.md) |
-| Cremina lever machine | Sötét pörkölésű, testes, édes, leveres espresso | [`profile-lever.json`](profiles/cremina-lever/profile-lever.json) | [`profile-lever-profile.png`](profiles/cremina-lever/profile-lever-profile.png) | [`cremina-lever-recipe.md`](profiles/cremina-lever/cremina-lever-recipe.md) |
-| Damian's LM Leva | Modern specialty, világos-közepes pörköléshez | [`profile-lmleva.json`](profiles/damians-lm-leva/profile-lmleva.json) | [`profile-lmleva-profile.png`](profiles/damians-lm-leva/profile-lmleva-profile.png) | [`damians-lm-leva-recipe.md`](profiles/damians-lm-leva/damians-lm-leva-recipe.md) |
-| Adaptive v2 | Univerzális, adaptív preinfusion, light-to-medium pörköléshez | [`profile-adapt.json`](profiles/adaptive-v2/profile-adapt.json) | [`profile-adapt-profile.png`](profiles/adaptive-v2/profile-adapt-profile.png) | [`adaptive-v2-recipe.md`](profiles/adaptive-v2/adaptive-v2-recipe.md) |
+| Profil | Leírás | JSON | Recept |
+|---|---|---|---|
+| 9 Bar Espresso | Klasszikus 9 baros baseline | [`profile-9bar.json`](profiles/9-bar/profile-9bar.json) | [`9-bar-recipe.md`](profiles/9-bar/9-bar-recipe.md) |
+| Cremina lever machine | Sötét pörkölésű, testes, édes, leveres espresso | [`profile-lever.json`](profiles/cremina-lever/profile-lever.json) | [`cremina-lever-recipe.md`](profiles/cremina-lever/cremina-lever-recipe.md) |
+| Damian's LM Leva | Modern specialty, világos-közepes pörköléshez | [`profile-lmleva.json`](profiles/damians-lm-leva/profile-lmleva.json) | [`damians-lm-leva-recipe.md`](profiles/damians-lm-leva/damians-lm-leva-recipe.md) |
+| Adaptive v2 | Univerzális, adaptív preinfusion, light-to-medium pörköléshez | [`profile-adapt.json`](profiles/adaptive-v2/profile-adapt.json) | [`adaptive-v2-recipe.md`](profiles/adaptive-v2/adaptive-v2-recipe.md) |
 
 ---
 
@@ -73,7 +73,7 @@ A JSON profilokat a GaggiMate Web UI-ban lehet importálni: **Profiles → Impor
 
 ### Bluetooth kapcsolat
 
-A GaggiMate Pro a BOOKOO Themis Ultra mérleggel Bluetooth-on kommunikál. A párosítást a GaggiMate Web UI-ban kell elvégezni. Részletes leírás: [`BLUETOOTH_SCALE_WORKFLOW.md`](BLUETOOTH_SCALE_WORKFLOW.md)
+A GaggiMate Pro a BOOKOO Themis Ultra mérleggel Bluetooth-on kommunikál. A párosítást a GaggiMate Web UI-ban kell elvégezni. Részletes leírás: [`bluetooth-scale-workflow.md`](docs/equipment/bluetooth-scale-workflow.md)
 
 ### Automatikus shot stop
 
@@ -100,7 +100,7 @@ A V2 profilok beverage weight alapján állítják meg a shotot:
 4. Portafilter behelyezése, csésze a mérlegre
 5. Shot indítása – a GaggiMate automatikusan megáll a céltömegnél
 
-Részletes workflow: [`BLUETOOTH_SCALE_WORKFLOW.md`](BLUETOOTH_SCALE_WORKFLOW.md)
+Részletes workflow: [`bluetooth-scale-workflow.md`](docs/equipment/bluetooth-scale-workflow.md)
 
 ### Firmware viselkedés (GaggiMate 1.9.0)
 
@@ -113,45 +113,17 @@ A `targets` tömb **fázis szintű** — minden phase-hez külön definiálható
 
 ---
 
-## Galéria
+## Grafikonok
 
-### Wangera Stable Start 38s 94.5C
+A weboldal a profilgrafikonokat közvetlenül a JSON profilokból rajzolja ki, ezért PNG grafikonokat nem tárolunk a repóban.
 
-![Wangera Stable Start 38s 94.5C](profiles/wangera/wangera-profile.png)
-
-### Burundi Mubuga Melon Currant – Scale V4 Fruity
-
-![Burundi Mubuga Melon Currant Scale V4 Fruity](profiles/burundi-mubuga/burundi-mubuga-scale-v4-fruity-profile.png)
-
-### Colombia Manos Juntas Jam Mango 39s
-
-![Colombia Manos Juntas Jam Mango 39s](profiles/colombia-manos-juntas/colombia-manos-juntas-profile.png)
-
-### Kirinyaga PB Tea Rose 37s
-
-![Kirinyaga PB Tea Rose 37s](profiles/kirinyaga/kirinyaga-profile.png)
-
-### 28 - Finca el Recreo Caturron Flavor 42s
-
-![28 - Finca el Recreo Caturron Flavor 42s](profiles/twenty-eight-caturron/twenty-eight-caturron-profile.png)
-
----
-
-## Grafikonok újragenerálása
-
-A grafikonokat a `tools/render_gaggimate_profiles.py` generálja a JSON profilokból.
-
-```bash
-python3 tools/render_gaggimate_profiles.py
-```
-
-Egyetlen profilhoz:
+Ha mégis kell egy kép (például megosztáshoz), a `tools/render_gaggimate_profiles.py` (matplotlib szükséges) helyben elkészíti a JSON mellé `{json-stem}-profile.png` néven:
 
 ```bash
 python3 tools/render_gaggimate_profiles.py profiles/wangera/wangera-manual-v2.json
 ```
 
-A script minden JSON mellé létrehozza / felülírja az egyedi nevű `*-profile.png` képet. A V2 JSON profilokhoz is generál grafikont.
+Az így készült PNG-ket a `.gitignore` kizárja, nem kerülnek commitba.
 
 ---
 
@@ -170,23 +142,37 @@ Ez commitkor automatikusan lefut egy git pre-commit hook-on keresztül (a hook m
 cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
 ```
 
-Így egy új kávé mappa hozzáadásakor elég a JSON/PNG/recipe/changelog fájlokat elhelyezni — az `index.html`-hez nem kell hozzányúlni.
+Így egy új kávé mappa hozzáadásakor elég a JSON/recipe/changelog fájlokat elhelyezni — az `index.html`-hez nem kell hozzányúlni.
 
 ---
+
+## Könyvtárszerkezet
+
+| Mappa | Tartalom |
+|---|---|
+| gyökér | a weboldal oldalai (`index.html`, `profile.html`, …), `manifest.json`, `sw.js`, `README.md`, `CHANGELOG.md` |
+| [`profiles/`](profiles/) | kávénként egy mappa (JSON profilok, recept, changelog) + `catalog.json` |
+| [`docs/`](docs/) | útmutatók téma szerint: `profiles/` (profilok), `brewing/` (főzés, daráló, víz), `equipment/` (gép, mérleg), `coffee/` (kávéismeret); angol változat a magyar mellett: `*.en.md` |
+| [`knowledge/`](knowledge/) | espresso tudásbázis (angol, magyar: `knowledge/hu/`, mélyreferencia: `knowledge/reference/`) |
+| [`assets/`](assets/) | a weboldal stílusai, szkriptjei, betűi és ikonjai |
+| [`schema/`](schema/) | profil- és shot-séma, GaggiMate WebSocket API |
+| [`shot-logs/`](shot-logs/) | shot logok letöltése és megjelenítése |
+| [`templates/`](templates/) | sablonok új kávé dokumentálásához |
+| [`tools/`](tools/) | katalógus, ellenőrzés, kézi PNG-renderelő |
+| [`development/`](development/) | fejlesztési tervek és specifikációk |
 
 ## Dokumentumok
 
 | Fájl | Tartalom |
 |---|---|
-| [`BLUETOOTH_SCALE_WORKFLOW.md`](BLUETOOTH_SCALE_WORKFLOW.md) | Párosítás, kalibráció, shot workflow, troubleshooting |
-| [`BREW_GUIDELINES.md`](BREW_GUIDELINES.md) | Dial-in, dózis, arány, hozam, shot értékelés |
-| [`SUMMARY.md`](SUMMARY.md) | Összes profil összefoglalója |
-| [`PROFILE_GALLERY.md`](PROFILE_GALLERY.md) | Profilgrafikonok galériája |
-| [`FILE_NAMING.md`](FILE_NAMING.md) | Fájlelnevezési konvenció |
+| [`bluetooth-scale-workflow.md`](docs/equipment/bluetooth-scale-workflow.md) | Párosítás, kalibráció, shot workflow, troubleshooting |
+| [`brew-guidelines.md`](docs/brewing/brew-guidelines.md) | Dial-in, dózis, arány, hozam, shot értékelés |
+| [`summary.md`](docs/profiles/summary.md) | Összes profil összefoglalója |
+| [`file-naming.md`](docs/profiles/file-naming.md) | Fájlelnevezési konvenció |
 | [`CHANGELOG.md`](CHANGELOG.md) | Projekt szintű változásnapló |
-| [`speciality_kave_feldolgozasok.md`](speciality_kave_feldolgozasok.md) | Kávé feldolgozási módszerek |
-| [`equipment/setup.md`](equipment/setup.md) | Gép és daráló beállítások |
-| [`kaveviz-5l-epsom-bikarbonat.md`](kaveviz-5l-epsom-bikarbonat.md) | Kávévíz recept 5 literes desztillált vízhez (Epsom-só + szódabikarbóna) |
+| [`speciality-kave-feldolgozasok.md`](docs/coffee/speciality-kave-feldolgozasok.md) | Kávé feldolgozási módszerek |
+| [`setup.md`](docs/equipment/setup.md) | Gép és daráló beállítások |
+| [`kaveviz-5l-epsom-bikarbonat.md`](docs/brewing/kaveviz-5l-epsom-bikarbonat.md) | Kávévíz recept 5 literes desztillált vízhez (Epsom-só + szódabikarbóna) |
 | [`shot-logs/GaggiMate-Shot-Downloader-HOWTO.md`](shot-logs/GaggiMate-Shot-Downloader-HOWTO.md) | GaggiMate shot logok letöltése és grafikus megtekintése (`shot-viewer.html`) |
 
 ---

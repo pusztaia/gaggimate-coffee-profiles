@@ -50,6 +50,8 @@ a{color:inherit}button{font:inherit}
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/site-nav.css">
+<style>/* brew mode is a phone-sized view used at the machine: keep its narrow centred column */
+main.container.brew-container{max-width:520px;padding-top:1.2rem;text-align:center}</style>
 </head>
 <body>
 <header class="topbar">
@@ -62,7 +64,7 @@ a{color:inherit}button{font:inherit}
   </div>
 </header>
 <script src="assets/js/site-nav.js"></script>
-<main class="container">
+<main class="container brew-container">
   <div id="status" class="status">Betöltés…</div>
   <div id="brewBody" hidden>
     <div class="coffee-name" id="coffeeName"></div>

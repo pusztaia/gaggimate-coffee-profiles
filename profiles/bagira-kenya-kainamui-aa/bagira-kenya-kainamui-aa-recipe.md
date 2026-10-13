@@ -3,6 +3,7 @@
 | Mező | Érték |
 |---|---|
 | Kávé | Bagira - Kenya Kainamui AA |
+| Eredet | Kenya |
 | Ízjegyek | feketeribizli · bogyós gyümölcs · tea |
 | Setup | DF64V Gen 2 + Gaggia Classic Pro 2025 + GaggiMate Pro / IMS B682TH24.5M kosár / IMS E&B Lab puck diffuser screen (Ø 2.4 mm, 253 lyuk, DS58.5) / BOOKOO Themis Ultra Bluetooth mérleg |
 | Őrlőskála | 0-90, egész jelölések |
@@ -40,7 +41,7 @@ A Smooth Ramp indulása előtt kb. **17 s** telik el. A bevált kiindulási tart
 
 | 17 s / Smooth Ramp előtti hozam | Értelmezés | Teendő |
 |---:|---|---|
-| **3-4 g** | fojtott indulás, várhatóan alacsonyabb végső hozam | WDT/tamp/screen ellenőrzés; ha stabil a prep, menj picit 11 felé |
+| **3-4 g** | fojtott indulás, várhatóan alacsonyabb végső hozam | WDT/tamp/screen ellenőrzés; ha stabil a prep, menj picit 12 felé / durvábbra |
 | **6-9 g** | egészséges indulás | marad a profil és az őrlési zóna |
 | **10 g+** | túl gyors indulás vagy channeling gyanú | puck prep ellenőrzése; ha kell, picit 10 felé / finomabbra |
 
@@ -76,7 +77,7 @@ A `pro` profilban a `targets` az aktuális fázist zárják le, ezért a célhoz
 | Eredmény | Következő lépés |
 |---|---|
 | **17 s körül 6-9 g, végén 42.5-43.5 g, tiszta és bogyós íz** | marad a Scale V1 profil |
-| **17 s körül 3-4 g, végén 42 g alatt** | fojtott indulás: WDT/tamp/screen; ha stabil, picit 11 felé |
+| **17 s körül 3-4 g, végén 42 g alatt** | fojtott indulás: WDT/tamp/screen; ha stabil, picit 12 felé / durvábbra |
 | **17 s körül 10 g+, spriccelés vagy 43.5 g fölötti vég** | channeling/túl gyors indulás: puck prep; ha kell, picit 10 felé / finomabbra |
 | **43 g körül jó, de túl savas vagy vékony** | ellenőrizd a puck prep-et; szükség esetén kissé finomabb őrlés |
 | **43 g körül száraz vagy túl intenzív** | a Clean Finish target csökkenthető **41.0 g-ra**, vagy a hőmérséklet 93.5 °C-ra állítható |

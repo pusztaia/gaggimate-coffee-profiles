@@ -78,7 +78,7 @@ Ez a recept **idő/fázis alapú GaggiMate profil** (`kirinyaga-manual.json`). A
 
 **Szükséges hardver:** BOOKOO Themis Ultra + GaggiMate Pro Bluetooth kapcsolat
 
-**V2 profil fájl:** [`kirinyaga-scale.json`](profiles/kirinyaga/kirinyaga-scale.json)
+**V2 profil fájl:** [`kirinyaga-scale.json`](kirinyaga-scale.json)
 
 ### V2 paraméterek
 

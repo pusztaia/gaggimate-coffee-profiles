@@ -13,149 +13,7 @@
 <script>/* set the theme before first paint (theme.css defaults to the dark Roast theme) */
 try{const t=localStorage.getItem("gaggimate-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}
 </script>
-<style>
-/* Colours, fonts and radii come from assets/css/theme.css (the Tools for GaggiMate design system). */
-:root{
-  --bg:var(--gm-bg);--surface:var(--gm-surface);--surface2:var(--gm-surface-2);--sunken:var(--gm-sunken);--text:var(--gm-text);--muted:var(--gm-muted);
-  --line:var(--gm-line);--line-strong:var(--gm-line-strong);--accent:var(--gm-accent);--accent2:var(--gm-accent-strong);--on-accent:var(--gm-on-accent);
-  --gold:var(--gm-warn);--blue:var(--gm-pressure);--flow:var(--gm-flow);--temp:var(--gm-temp);
-  --shadow:var(--gm-shadow);--shadow-soft:var(--gm-shadow-soft);
-  --radius-xl:var(--gm-radius-panel);--radius-lg:var(--gm-radius-panel);--radius-md:var(--gm-radius-item);--max:var(--gm-max);
-}
-html{scroll-behavior:smooth}
-button,input,select,a{font:inherit}
-button,a{-webkit-tap-highlight-color:transparent}
-a{color:inherit}
-img{display:block;max-width:100%}
-.skip{position:fixed;left:1rem;top:-5rem;z-index:100;background:var(--text);color:var(--bg);padding:.7rem 1rem;border-radius:var(--gm-radius-control)}.skip:focus{top:1rem}
-
-/* App bar — same look as Tools' .gm-bar */
-.topbar{position:sticky;top:0;z-index:40;background:var(--gm-bar-bg);-webkit-backdrop-filter:saturate(1.2) blur(12px);backdrop-filter:saturate(1.2) blur(12px);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;flex:0 0 auto}
-.brand-mark{display:grid;place-items:center;color:var(--accent);flex:0 0 auto}
-.brand-name{font-family:var(--gm-font-display);font-weight:600;font-size:21px;letter-spacing:.01em;line-height:1;white-space:nowrap}
-.brand-name span{color:var(--muted);font-weight:500}
-.icon-btn{width:38px;height:38px;display:inline-grid;place-items:center;border-radius:var(--gm-radius-control);border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:16px;transition:color .15s ease,border-color .15s ease}
-.icon-btn:hover{color:var(--text);border-color:var(--line-strong)}
-
-.container{max-width:var(--max);margin:auto;padding:0 var(--gm-gutter)}
-.hero{padding:30px 0 8px}
-.hero-inner{max-width:880px}
-.hero .toolbar{margin-top:22px}
-.hero .filter-row{margin-bottom:0}
-.eyebrow{color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:13px}
-h1{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(34px,4.6vw,52px);line-height:1;letter-spacing:-.005em;margin:10px 0 10px;max-width:900px}
-h1 span{color:var(--accent)}
-.lead{font-size:16px;line-height:1.55;max-width:68ch;color:var(--muted);margin:0}
-.result-count{color:var(--muted);font-family:var(--gm-font);font-weight:500;font-size:.5em;text-transform:none;letter-spacing:0;margin-left:.5rem}
-section{padding:40px 0;scroll-margin-top:calc(var(--gm-bar-h) + 16px)}
-.section-head{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:18px}
-.section-head h2{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(28px,3.4vw,38px);line-height:1.05;margin:0}
-.section-head p{max-width:68ch;color:var(--muted);margin:6px 0 0}
-
-/* Search, selects and filter chips — Tools' .field and chip controls */
-.toolbar{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:10px;margin-bottom:12px}
-.field{position:relative}.field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gm-faint)}
-.search,.select{width:100%;min-height:42px;border:1px solid var(--line);background:var(--sunken);color:var(--text);border-radius:var(--gm-radius-control);padding:9px 12px;outline:none;transition:border-color .15s ease}
-.search:focus,.select:focus{border-color:var(--accent)}
-.search{padding-left:38px}.select{cursor:pointer}
-.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.filter{border:1px solid var(--line-strong);background:transparent;color:var(--text);border-radius:999px;padding:5px 12px;cursor:pointer;font-weight:600;font-size:14px}
-.filter:hover{border-color:var(--accent)}
-.filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.filter-clear{border-style:dashed;color:var(--accent)}
-#tasteRow[hidden]{display:none}
-#tasteRow{flex-direction:column;align-items:flex-start;gap:10px}
-.taste-category{width:100%}
-.taste-category-label{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.taste-category-tags{display:flex;flex-wrap:wrap;gap:6px}
-.taste-toggle{border:0;background:none;color:var(--accent);font-weight:600;font-size:14px;cursor:pointer;padding:4px 0;margin-bottom:12px;display:inline-flex;align-items:center;gap:4px}
-.taste-toggle:hover{text-decoration:underline}
-.status{border:1px solid var(--line);background:var(--surface);border-radius:var(--gm-radius-item);padding:12px 16px;color:var(--muted);margin-bottom:16px}
-.status.error{border-color:var(--gm-danger-line);background:color-mix(in srgb,var(--gm-crit) 10%,var(--surface));color:var(--gm-danger-text)}
-
-/* Profile cards — Tools panels; the coffee's own catalog colour stays only on the side stripe */
-.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.profile-card{--card-accent:var(--accent);--card-accent2:var(--accent2);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.profile-card.featured{border-color:var(--line-strong)}
-.card-top{padding:18px 20px 14px;position:relative}.card-top:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--card-accent),var(--card-accent2))}
-.card-kicker{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}.card-kicker .kind{color:var(--accent)}
-.profile-card h3{font-family:var(--gm-font-display);font-weight:600;font-size:clamp(24px,2.6vw,30px);line-height:1.08;margin:6px 0 2px;overflow-wrap:anywhere}
-.subtitle{color:var(--accent);font-weight:600}.origin{color:var(--muted);font-size:14px;margin-top:4px}
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.pill{border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:2px 9px;font-size:12px;font-weight:500}
-.pill.process{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,var(--line));background:var(--gm-accent-soft)}
-.variant-row{display:flex;gap:10px;align-items:center;margin-top:14px}.variant-row label{font-size:13px;color:var(--muted);font-weight:500}
-.variant-select{min-width:0;flex:1;min-height:38px;border:1px solid var(--line);background:var(--sunken);color:var(--text);border-radius:var(--gm-radius-control);padding:7px 10px;outline:none}
-.variant-select:focus{border-color:var(--accent)}
-.card-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.card-stat{padding:12px 8px;text-align:center;border-right:1px solid var(--line)}.card-stat:last-child{border-right:0}
-.card-stat strong{display:block;font-family:var(--gm-font-display);font-weight:600;font-size:22px;line-height:1.1}
-.card-stat span{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
-.chart-box{padding:14px 14px 10px;background:var(--surface);min-height:250px}.mini-chart{width:100%;height:230px;display:block}
-.chart-fallback{min-height:230px;display:grid;place-items:center;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--gm-radius-item);padding:1rem}
-.chart-legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:13px;padding:6px 2px 0}.chart-legend i{display:inline-block;width:18px;height:3px;border-radius:99px;margin-right:5px;vertical-align:middle}
-.chart-legend .p i{background:var(--blue)}.chart-legend .f i{background:var(--flow)}.chart-legend .t i{background:var(--temp)}
-.phase-list{display:grid;gap:6px;padding:4px 14px 14px}
-.phase-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;background:var(--surface2);border:1px solid var(--line);border-radius:var(--gm-radius-control);padding:8px 10px;font-size:13px}
-.phase-row strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}.phase-row span{color:var(--muted)}.phase-row .target{color:var(--accent);font-weight:600}
-.card-details{border-top:1px solid var(--line);margin-top:2px}
-.card-details summary{cursor:pointer;list-style:none;padding:12px 18px;font-weight:600;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
-.card-details summary:hover{color:var(--text)}
-.card-details summary::-webkit-details-marker{display:none}.card-details summary::after{content:"+";font-size:18px}.card-details[open] summary::after{content:"−"}.card-details[open] summary{border-bottom:1px solid var(--line)}
-.card-actions{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 16px;margin-top:auto;border-top:1px solid var(--line)}
-
-/* Buttons — Tools' button look */
-.btn{display:inline-flex;align-items:center;gap:6px;min-height:38px;border:1px solid var(--line-strong);background:transparent;color:var(--text);text-decoration:none;border-radius:var(--gm-radius-control);padding:7px 14px;cursor:pointer;font-weight:600;font-size:14px;transition:background .15s ease,border-color .15s ease}
-.btn:hover{background:var(--surface2)}
-.btn.primary{background:var(--accent);border-color:transparent;color:var(--on-accent)}.btn.primary:hover{background:var(--accent2)}
-.btn[hidden]{display:none}
-.empty{grid-column:1/-1;padding:3rem 1rem;text-align:center;border:1px dashed var(--line);border-radius:var(--radius-lg);color:var(--muted)}
-
-.setup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
-.setup-card{background:var(--surface);padding:16px 20px}
-.setup-card span{display:block;color:var(--muted);font-size:13px;font-weight:500}
-.setup-card strong{display:block;font-size:17px;font-weight:600;margin-top:4px}
-.doc-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px 20px}
-.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.doc-card{display:flex;flex-direction:column;min-height:190px}
-.doc-icon{width:42px;height:42px;border-radius:var(--gm-radius-item);display:grid;place-items:center;background:var(--gm-accent-soft);color:var(--accent)}
-.doc-card h3{font-size:17px;font-weight:600;margin:12px 0 4px}.doc-card p{color:var(--muted);font-size:14px;margin:0 0 16px}.doc-card .btn{align-self:flex-start}
-.doc-card-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
-.kb-group{margin-bottom:28px}.kb-group:last-child{margin-bottom:0}.kb-group>h3{font-size:13px;margin:0 0 12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.modular{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px}
-.code-card{background:var(--sunken);color:var(--text);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px 20px;overflow:auto}
-pre{margin:0;font:13px/1.55 var(--gm-font-mono);white-space:pre-wrap}
-.steps{display:grid;gap:10px;counter-reset:step}
-.step{counter-increment:step;display:grid;grid-template-columns:2.4rem 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--gm-radius-item);padding:14px 16px}
-.step:before{content:counter(step);display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:var(--accent);color:var(--on-accent);font-weight:700}
-.step p{margin:2px 0;color:var(--muted)}.step strong{color:var(--text);font-weight:600}
-.notice{margin-top:16px;padding:10px 14px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:var(--gm-radius-item);background:color-mix(in srgb,var(--gold) 14%,transparent)}
-
-/* Markdown modal */
-.modal-backdrop{display:none;position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.5);padding:1rem;overflow:auto}.modal-backdrop.open{display:grid;place-items:center}
-.modal{width:min(920px,96vw);max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
-.modal-head{position:sticky;top:0;background:var(--surface);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px 12px 22px;border-bottom:1px solid var(--line);z-index:2}
-.modal-head h2{font-size:19px;font-weight:600;margin:0}
-.modal-close{width:38px;height:38px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:var(--gm-radius-control);cursor:pointer;font-size:20px;line-height:1}
-.modal-close:hover{color:var(--text);border-color:var(--line-strong)}
-.modal-body{padding:18px 22px 24px}
-.modal-body h1{font-size:34px}.modal-body h2{font-size:22px;font-weight:600;margin-top:28px}.modal-body h3{font-size:17px;font-weight:600;margin-top:22px}
-.modal-body p,.modal-body li{color:var(--muted)}
-.modal-body table{width:100%;border-collapse:collapse;font-size:14px}.modal-body th,.modal-body td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.modal-body th{background:var(--surface2);font-weight:600}
-.modal-body pre{background:var(--sunken);color:var(--text);border:1px solid var(--line);border-radius:var(--gm-radius-item);padding:14px;overflow:auto}
-.modal-body code{font-family:var(--gm-font-mono);background:var(--surface2);padding:.08em .3em;border-radius:5px;color:var(--text)}
-.modal-body blockquote{margin:16px 0;padding:10px 14px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:var(--gm-radius-item);background:color-mix(in srgb,var(--gold) 12%,transparent)}
-.modal-body img{border-radius:var(--gm-radius-item)}
-.md-toc{border:1px solid var(--line);background:var(--surface2);border-radius:var(--gm-radius-item);padding:14px 18px;margin-bottom:20px;font-size:14px}
-.md-toc strong{display:block;margin-bottom:6px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.md-toc ul{margin:0;padding-left:1.1rem;list-style:none}.md-toc li{margin-bottom:4px}.md-toc a{color:var(--accent);text-decoration:none}.md-toc a:hover{text-decoration:underline}.md-toc .toc-level-2{margin-left:.9rem}.md-toc .toc-level-3{margin-left:1.8rem}
-
-.footer-space{height:2rem}
-@media(max-width:980px){.modular{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr}.setup-grid{grid-template-columns:repeat(2,1fr)}.docs-grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field{grid-column:1/-1}}
-@media(max-width:640px){.hero{padding:20px 0 4px}.setup-grid,.docs-grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.card-stats{grid-template-columns:repeat(2,1fr)}.card-stat:nth-child(2){border-right:0}.card-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.section-head{display:block}.phase-row{grid-template-columns:minmax(0,1fr) auto}.phase-row .target{grid-column:1/-1}.brand-name{font-size:18px}}
-@media(max-width:359px){.brand-name{display:none}}
-@media print{.topbar,.toolbar,.filter-row,.card-actions,.docs-grid,#knowledgeGroups,.modular,.modal-backdrop,#mobileMenu{display:none!important}body{background:#fff}.profile-card,.setup-card{box-shadow:none;break-inside:avoid}.profile-grid{grid-template-columns:1fr 1fr}}
-</style>
+<link rel="stylesheet" href="assets/css/catalog.css">
 <link rel="stylesheet" href="assets/css/site-nav.css">
 </head>
 <body>
@@ -209,90 +67,16 @@ pre{margin:0;font:13px/1.55 var(--gm-font-mono);white-space:pre-wrap}
   <div class="setup-grid" id="setupGrid"></div>
 </section>
 
-<section id="documents">
-  <div class="section-head"><div><h2>Dokumentáció</h2><p>A Markdown fájlok az oldalon belül, HTML-formázással nyílnak meg. Az interaktív eszközök új lapon.</p></div></div>
-  <div class="docs-grid" id="docsGrid"></div>
-</section>
-
-<section id="knowledge">
-  <div class="section-head"><div><h2>Tudásbázis<span id="kbResultCount" class="result-count"></span></h2><p>Espresso dial-in tudásanyag: alapok, daráló-referenciák és mélyreferenciák. A fájlok az oldalon belül nyílnak meg, a köztük lévő kereszthivatkozásokkal együtt.</p></div></div>
-  <div class="field" style="margin-bottom:1.25rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="search" id="kbSearchInput" type="search" placeholder="Keresés a tudásbázisban…" autocomplete="off"></div>
-  <div id="knowledgeGroups"></div>
-</section>
-
-<section id="modular">
-  <div class="section-head"><div><h2>Új profil hozzáadása</h2><p>Az index kódját nem kell másolni vagy bővíteni. Egy új mappa és egy katalógusbejegyzés elegendő. A katalógus JSON-alapú, interaktív grafikonokkal, és GitHub Pages-en, build lépés nélkül fut.</p></div></div>
-  <div class="modular">
-    <div class="steps">
-      <div class="step"><p><strong>Hozd létre a profil mappáját</strong><br><code>profiles/uj-kave/</code>, a fájlelnevezési konvenció szerint.</p></div>
-      <div class="step"><p><strong>Tedd bele a JSON, PNG, recipe és changelog fájlokat</strong><br>A PNG neve automatikusan a JSON stem + <code>-profile.png</code>.</p></div>
-      <div class="step"><p><strong>Adj hozzá egy objektumot a katalógushoz</strong><br>A <code>profiles/catalog.json</code> <code>profiles</code> tömbjéhez.</p></div>
-      <div class="step"><p><strong>Nem kell módosítani az indexet</strong><br>Az új kártya, variánsok, fázislista és mini grafikon automatikusan megjelenik.</p></div>
-    </div>
-    <div>
-      <div class="code-card"><pre>{
-  "id": "ethiopia-yirgacheffe",
-  "folder": "ethiopia-yirgacheffe",
-  "title": "Ethiopia Yirgacheffe",
-  "subtitle": "Floral Citrus",
-  "origin": "Pörkölő · Ethiopia",
-  "process": "washed",
-  "notes": ["jázmin", "citrom", "fekete tea"],
-  "grind": "9–10",
-  "dose": 18.5,
-  "yield": "43 g",
-  "expectedTime": "37 s",
-  "page": "ethiopia-yirgacheffe.html",
-  "variants": [
-    {
-      "id": "scale",
-      "label": "Scale V2",
-      "kind": "scale",
-      "file": "ethiopia-yirgacheffe-scale.json",
-      "default": true
-    },
-    {
-      "id": "manual",
-      "label": "Manual",
-      "kind": "manual",
-      "file": "ethiopia-yirgacheffe-manual.json"
-    }
-  ]
-}</pre></div>
-      <div class="notice"><strong>Futtatás:</strong> a dinamikus JSON- és Markdown-betöltéshez GitHub Pages vagy helyi HTTP-szerver szükséges. Példa: <code>python -m http.server 8000</code>.</div>
-    </div>
-  </div>
-</section>
 <div class="footer-space"></div>
 </div>
 </main>
 
-<div class="modal-backdrop" id="modalBackdrop" role="presentation">
-  <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <header class="modal-head"><h2 id="modalTitle">Dokumentum</h2><button class="modal-close" id="modalClose" aria-label="Bezárás">×</button></header>
-    <div class="modal-body" id="modalBody"></div>
-  </article>
-</div>
-
+<script src="assets/js/md-modal.js"></script>
+<script src="assets/js/profile-chart.js"></script>
 <script>
 "use strict";
+{const moved={"#documents":"documents.html","#knowledge":"knowledge.html","#modular":"add-profile.html"}[location.hash];if(moved)location.replace(moved);}
 const CATALOG_URL = "profiles/catalog.json";
-const DOCS = [
-  {title:"README",file:"README.md",description:"Projektáttekintés, profilok, Bluetooth Scale Edition.",icon:'<path d="M12 6.5c-1.7-1-4-1.3-6-1v12c2 0 4.3.3 6 1.3 1.7-1 4-1.3 6-1.3V5.5c-2-.3-4.3 0-6 1Z"/><path d="M12 6.5v12"/>'},
-  {title:"Összefoglaló",file:"SUMMARY.md",description:"Aktuális profilok, ízjegyek és könyvtárszerkezet.",icon:'<path d="M8 6h10M8 12h10M8 18h10"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>'},
-  {title:"Brew Guidelines",file:"BREW_GUIDELINES.md",description:"Dózis, hozam, őrlés, puck prep és dial-in.",icon:'<path d="M7.5 4.5h9v6.8a4.5 4.5 0 0 1-9 0V4.5Z"/><path d="M16.5 7h1.3a2.7 2.7 0 0 1 0 5.4h-1.5M5 19.5h14"/>'},
-  {title:"Darálási útmutató",file:"GRINDER_GUIDELINES.md",description:"DF64V Gen 2 és SSP Sweet Lab Espresso V3.",icon:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>'},
-  {title:"Setup / berendezés",file:"equipment/setup.md",description:"Gép és daráló dokumentáció: Gaggia Classic Pro 2025, GaggiMate Pro, DF64V, kosár-összehasonlítás.",icon:'<rect x="4" y="3.5" width="16" height="13" rx="2"/><path d="M9 20.5h6M12 16.5v4"/>'},
-  {title:"Bluetooth Scale Workflow",file:"BLUETOOTH_SCALE_WORKFLOW.md",description:"BOOKOO párosítás, kalibráció és hibakeresés.",icon:'<path d="M7 7l10 10L12 22V2l5 5L7 17"/>'},
-  {title:"Profilkészítési útmutató",file:"PROFILE_CREATION_GUIDE.md",description:"GaggiMate JSON séma, fázisok és új profil készítése.",icon:'<path d="M14.5 6.5a3.5 3.5 0 0 1-4.6 4.6L5 16l3 3 4.9-4.9a3.5 3.5 0 0 1 4.6-4.6l-2.3 2.3-2-2 2.3-2.3Z"/>'},
-  {title:"Fájlelnevezés",file:"FILE_NAMING.md",description:"Mappa-, JSON-, PNG-, recipe- és changelog-nevek.",icon:'<path d="M12.6 3H6a1 1 0 0 0-1 1v6.6a1 1 0 0 0 .3.7l9 9a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-9-9a1 1 0 0 0-.4-.3Z"/><circle cx="8.5" cy="8.5" r="1.2"/>'},
-  {title:"Profile Gallery",file:"PROFILE_GALLERY.md",description:"Manual és Scale profilgrafikonok.",icon:'<rect x="3.5" y="4.5" width="17" height="14" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 16.5 5-4.5 3.5 3 3-2.5L20 16"/>'},
-  {title:"Projekt changelog",file:"CHANGELOG.md",description:"Repository-szintű változások.",icon:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'},
-  {title:"Feldolgozások",file:"speciality_kave_feldolgozasok.md",description:"Washed, natural, honey, anaerob és carbonic.",icon:'<path d="M19 5c-8 0-13 5-13 13 8 0 13-5 13-13Z"/><path d="M7 17c3-3 6-6 11-11"/>'},
-  {title:"Kávévíz recept",file:"kaveviz-5l-epsom-bikarbonat.md",description:"5 literes vízprofilok Epsom-sóval és szódabikarbónával.",icon:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>'},
-  {title:"Shot Log Viewer",file:"shot-logs/shot-viewer.html",description:"Letöltött GaggiMate shot logok grafikus megjelenítése – nyomás, flow, hőmérséklet és mérleg görbék.",icon:'<path d="M4 19h16M7 16V9m5 7V5m5 11v-5"/>',external:true}
-];
-
 const TASTE_CATEGORIES=[
   {key:"fruity",label:"Gyümölcsös",icon:'<path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5Z"/>',tags:["alma","cseresznyebefőtt","csipkebogyó","mangó","meggy","sárgabarack","sárgadinnye","sült alma","szőlő"]},
   {key:"berry",label:"Bogyós",icon:'<circle cx="8.5" cy="9" r="2.6"/><circle cx="14.5" cy="8" r="2.2"/><circle cx="11.5" cy="14" r="2.8"/>',tags:["bogyós gyümölcs","feketeribizli","ribizli","szeder","vörösáfonya dzsem"]},
@@ -307,43 +91,6 @@ function tasteCategoryFor(tag){
   const found=TASTE_CATEGORIES.find(c=>c.tags.includes(tag));
   return found?found.key:"other";
 }
-const KB_BOOK_ICON='<path d="M12 6.5c-1.7-1-4-1.3-6-1v12c2 0 4.3.3 6 1.3 1.7-1 4-1.3 6-1.3V5.5c-2-.3-4.3 0-6 1Z"/><path d="M12 6.5v12"/>';
-const KB_GRINDER_ICON='<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>';
-const KB_REF_ICON='<circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.35-4.35"/>';
-const KNOWLEDGE=[
-  {group:"Alapok",items:[
-    {title:"Kosarak",file:"knowledge/BASKETS.md",fileHu:"knowledge/hu/BASKETS.md",description:"Kosarak hatása az extrakcióra – gyors referencia dialing közben.",icon:KB_BOOK_ICON},
-    {title:"Kávé frissesség és tárolás",file:"knowledge/BEAN_FRESHNESS_AND_STORAGE.md",fileHu:"knowledge/hu/BEAN_FRESHNESS_AND_STORAGE.md",description:"Frissességi ablakok, ultra-friss kávé kezelése, vizuális jelek.",icon:KB_BOOK_ICON},
-    {title:"Espresso brewing alapok",file:"knowledge/ESPRESSO_BREWING_BASICS.md",fileHu:"knowledge/hu/ESPRESSO_BREWING_BASICS.md",description:"Alapváltozók, hangolási stratégiák és diagnosztika dialing közben.",icon:KB_BOOK_ICON},
-    {title:"Kóstolási útmutató",file:"knowledge/ESPRESSO_TASTING_GUIDE.md",fileHu:"knowledge/hu/ESPRESSO_TASTING_GUIDE.md",description:"Shot értékelése és visszajelzés adása kóstoláskor.",icon:KB_BOOK_ICON},
-    {title:"Extrakciótudomány",file:"knowledge/EXTRACTION_SCIENCE.md",fileHu:"knowledge/hu/EXTRACTION_SCIENCE.md",description:"Daráló-profil összefüggés, channeling megelőzés, pre-infúzió, vizuális diagnózis.",icon:KB_BOOK_ICON},
-    {title:"GaggiMate profilkészítési útmutató",file:"knowledge/GAGGIMATE_PROFILE_CREATION_GUIDE.md",fileHu:"knowledge/hu/GAGGIMATE_PROFILE_CREATION_GUIDE.md",description:"GaggiMate profil JSON séma, pumpa módok, stop feltételek, példák.",icon:KB_BOOK_ICON},
-    {title:"Tej és tejes italok",file:"knowledge/MILK_AND_DRINKS.md",fileHu:"knowledge/hu/MILK_AND_DRINKS.md",description:"Gőzölési technika, hőmérséklet küszöbök, italreceptek, single-boiler workflow.",icon:KB_BOOK_ICON},
-    {title:"Nyomás útmutató",file:"knowledge/PRESSURE_GUIDE.md",fileHu:"knowledge/hu/PRESSURE_GUIDE.md",description:"Nyomás hatása az ízre, pörkölési fok és feldolgozás szerint.",icon:KB_BOOK_ICON},
-    {title:"Profilkönyvtár",file:"knowledge/PROFILE_LIBRARY.md",fileHu:"knowledge/hu/PROFILE_LIBRARY.md",description:"Kész, általános GaggiMate Pro extrakciós profilsablonok.",icon:KB_BOOK_ICON},
-    {title:"Puck screenek",file:"knowledge/PUCK_SCREENS.md",fileHu:"knowledge/hu/PUCK_SCREENS.md",description:"Puck screen hatása az extrakcióra – gyors referencia.",icon:KB_BOOK_ICON},
-    {title:"Speciális kategóriák",file:"knowledge/SPECIAL_CATEGORIES.md",fileHu:"knowledge/hu/SPECIAL_CATEGORIES.md",description:"Decaf és blendek extrakciós stratégiái.",icon:KB_BOOK_ICON}
-  ]},
-  {group:"Darálók",items:[
-    {title:"DF64V referencia",file:"knowledge/grinders/DF64V.md",fileHu:"knowledge/hu/grinders/DF64V.md",description:"DF64V Gen-3 + SSP Cast Lab Sweet V3 Red Speed daráló beállítási referencia.",icon:KB_GRINDER_ICON}
-  ]},
-  {group:"Mélyreferencia",items:[
-    {title:"Kosarak – mélyreferencia",file:"knowledge/reference/BASKETS_REFERENCE.md",description:"Részletes kosárspecifikációk, összehasonlítás és geometria.",icon:KB_REF_ICON},
-    {title:"Kávé frissesség – mélyreferencia",file:"knowledge/reference/BEAN_FRESHNESS_REFERENCE.md",description:"Degazálás tudománya, tárolási módszerek, fagyasztási protokollok, romlási jelek.",icon:KB_REF_ICON},
-    {title:"DF64V – mélyreferencia",file:"knowledge/reference/DF64V_REFERENCE.md",description:"DF64V mélyreferencia (a gyors útmutató a Darálók csoportban található).",icon:KB_REF_ICON},
-    {title:"Espresso brewing – mélyreferencia",file:"knowledge/reference/ESPRESSO_BREWING_REFERENCE.md",description:"Shot stílusok, extrakciós elmélet, dialing-in módszertan, haladó technikák.",icon:KB_REF_ICON},
-    {title:"Kóstolás – mélyreferencia",file:"knowledge/reference/ESPRESSO_TASTING_REFERENCE.md",description:"Ízkerék, palettafejlesztés, aromaértékelés, hibás ízek, palate fatigue.",icon:KB_REF_ICON},
-    {title:"Extrakciótudomány – mélyreferencia",file:"knowledge/reference/EXTRACTION_SCIENCE_REFERENCE.md",description:"Az extrakciótudomány elméleti háttere a gyors útmutató mögött.",icon:KB_REF_ICON},
-    {title:"Tej és italok – mélyreferencia",file:"knowledge/reference/MILK_AND_DRINKS_REFERENCE.md",description:"Tejgőzölés és italkészítés részletes háttere.",icon:KB_REF_ICON},
-    {title:"Nyomás – mélyreferencia",file:"knowledge/reference/PRESSURE_REFERENCE.md",description:"Nyomásmátrix, shot stílus paraméterek, döntési keretrendszer.",icon:KB_REF_ICON},
-    {title:"Profilkészítés – mélyreferencia",file:"knowledge/reference/PROFILE_CREATION_REFERENCE.md",description:"JSON séma, pumpa módok, stop feltételek részletesen, példákkal.",icon:KB_REF_ICON},
-    {title:"Profilkönyvtár – mélyreferencia",file:"knowledge/reference/PROFILE_LIBRARY_REFERENCE.md",description:"Profil összefoglaló táblázat, kiválasztási útmutatók, paraméterek.",icon:KB_REF_ICON},
-    {title:"Puck screenek – mélyreferencia",file:"knowledge/reference/PUCK_SCREENS_REFERENCE.md",description:"Puck screenek részletes háttere a gyors útmutató mögött.",icon:KB_REF_ICON},
-    {title:"Speciális kategóriák – mélyreferencia",file:"knowledge/reference/SPECIAL_CATEGORIES_REFERENCE.md",description:"Decaf hangolási táblák, blend hőmérséklet-stratégiák, archetípusok.",icon:KB_REF_ICON}
-  ]}
-];
-const KB_ITEMS=KNOWLEDGE.flatMap(g=>g.items);
-
 const state={catalog:null,profiles:[],filter:"all",query:"",process:"",taste:new Set(),sort:"featured",loaded:new Map()};
 const $=(sel,root=document)=>root.querySelector(sel);
 const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
@@ -360,7 +107,6 @@ function hasKind(entry,kind){return entry.variants.some(v=>v.kind===kind);}
 function isGeneral(entry){return entry.variants.every(v=>v.kind==="general");}
 function recipeFile(entry){return `${entry.folder}-recipe.md`;}
 function changelogFile(entry){return `${entry.folder}-changelog.md`;}
-function pngFile(variant){return variant.file.replace(/\.json$/i,"-profile.png");}
 
 async function fetchJSON(url){
   const response=await fetch(url,{cache:"no-store"});
@@ -388,12 +134,10 @@ async function loadCatalog(){
     populateControls();
     updateMetrics();
     renderSetup(catalog.defaults||{});
-    renderDocuments();
     renderProfiles();
   }catch(error){
     status.className="status error";
     status.innerHTML=`<strong>Nem sikerült betölteni a profilkatalógust.</strong><br>${esc(error.message)}<br><br>Az oldalt HTTP-kiszolgálóról nyisd meg, és ellenőrizd a <code>${CATALOG_URL}</code> fájlt.`;
-    renderDocuments();
   }
 }
 
@@ -487,25 +231,6 @@ function renderSetup(defaults){
   ];
   $("#setupGrid").innerHTML=items.map(([k,v])=>`<article class="setup-card"><span>${esc(k)}</span><strong>${esc(v)}</strong></article>`).join("");
 }
-function renderDocuments(){
-  $("#docsGrid").innerHTML=DOCS.map((doc,index)=>`<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${doc.icon}</svg></div><h3>${esc(doc.title)}</h3><p>${esc(doc.description)}</p><div class="doc-card-actions">${doc.external?`<a class="btn" href="${esc(doc.file)}" target="_blank" rel="noopener">Megnyitás új lapon</a>`:`<button class="btn doc-open" data-doc="${index}">Megnyitás</button>`}</div></article>`).join("");
-}
-function knowledgeCardHTML(item){
-  const index=KB_ITEMS.indexOf(item);
-  const huBtn=item.fileHu?`<button class="btn kb-open-lang" data-kb="${index}" data-lang="hu">Magyarul</button>`:"";
-  return `<article class="doc-card"><div class="doc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="doc-card-actions"><button class="btn kb-open" data-kb="${index}">Megnyitás (EN)</button>${huBtn}</div></article>`;
-}
-function renderKnowledge(query){
-  const q=(query||"").trim().toLocaleLowerCase("hu-HU");
-  const groups=q
-    ?KNOWLEDGE.map(g=>({group:g.group,items:g.items.filter(item=>`${item.title} ${item.description}`.toLocaleLowerCase("hu-HU").includes(q))})).filter(g=>g.items.length)
-    :KNOWLEDGE;
-  const total=groups.reduce((sum,g)=>sum+g.items.length,0);
-  $("#kbResultCount").textContent=q?`${total} találat`:"";
-  $("#knowledgeGroups").innerHTML=groups.length
-    ?groups.map(g=>`<div class="kb-group"><h3>${esc(g.group)}</h3><div class="docs-grid">${g.items.map(knowledgeCardHTML).join("")}</div></div>`).join("")
-    :'<div class="empty">Nincs a keresésnek megfelelő tudásbázis-cikk.</div>';
-}
 
 function filteredProfiles(){
   const q=state.query.trim().toLocaleLowerCase("hu-HU");
@@ -596,7 +321,6 @@ function cardHTML(entry){
     <div class="card-actions">
       <a class="btn primary page-link" href="${esc(page)}"${page?"":" hidden"}>Profil megnyitása</a>
       <a class="btn json-link" href="${esc(pathFor(entry,variant.file))}" download>JSON</a>
-      <a class="btn png-link" href="${esc(pathFor(entry,pngFile(variant)))}" target="_blank" rel="noopener">PNG</a>
       <button class="btn md-open" data-entry="${esc(entry.id)}" data-kind="recipe">Recept</button>
       <button class="btn md-open" data-entry="${esc(entry.id)}" data-kind="changelog">Changelog</button>
     </div>
@@ -619,9 +343,9 @@ function updateCard(entry){
   Object.entries(stats).forEach(([key,value])=>{const el=$(`[data-stat="${key}"]`,card);if(el)el.textContent=value;});
   const phases=$(`[data-phases="${CSS.escape(entry.id)}"]`,card);if(phases)phases.innerHTML=phasesHTML(entry._profile);
   const chart=$(`[data-chart="${CSS.escape(entry.id)}"]`,card);
-  if(chart)chart.innerHTML=entry._profile?renderMiniChart(entry._profile,entry):`<div class="chart-fallback"><strong>A JSON nem tölthető be.</strong><br>${esc(entry._error||"Ismeretlen hiba")}<br><small>${esc(pathFor(entry,entry._variant.file))}</small></div>`;
+  if(chart&&entry._profile)drawCardChart(chart,entry._profile,entry);
+  else if(chart){chart.__chartDraw=null;chart.innerHTML=`<div class="chart-fallback"><strong>A JSON nem tölthető be.</strong><br>${esc(entry._error||"Ismeretlen hiba")}<br><small>${esc(pathFor(entry,entry._variant.file))}</small></div>`;}
   const json=$(".json-link",card);if(json)json.href=pathFor(entry,entry._variant.file);
-  const png=$(".png-link",card);if(png)png.href=pathFor(entry,pngFile(entry._variant));
   const kind=$(".card-kicker .kind",card);if(kind)kind.textContent=kindLabel(entry._variant);
 }
 
@@ -658,22 +382,16 @@ function pathData(points,xScale,yScale){
   points.forEach(([x,y])=>{if(y===null||!Number.isFinite(y)){open=false;return;}out+=(open?"L":"M")+xScale(x).toFixed(1)+" "+yScale(y).toFixed(1)+" ";open=true;});
   return out.trim();
 }
-function renderMiniChart(profile,entry){
-  const W=760,H=260,pad={l:44,r:42,t:20,b:34},total=Math.max(1,totalDuration(profile));
-  const p=curveSeries(profile,"pressure"),f=curveSeries(profile,"flow"),temp=tempSeries(profile);
-  const leftVals=[...p,...f].map(v=>v[1]).filter(Number.isFinite),leftMax=Math.max(10,...leftVals)+1;
-  const temps=temp.map(v=>v[1]).filter(Number.isFinite),tMin=Math.min(...temps),tMax=Math.max(...temps),tPad=tMin===tMax?1:Math.max(.6,(tMax-tMin)*.25);
-  const x=v=>pad.l+(W-pad.l-pad.r)*(v/total),y=v=>H-pad.b-(H-pad.t-pad.b)*(v/leftMax),yt=v=>H-pad.b-(H-pad.t-pad.b)*((v-(tMin-tPad))/((tMax+tPad)-(tMin-tPad)));
-  let bands="",cursor=0;(profile.phases||[]).forEach((phase,i)=>{const d=Math.max(0,Number(phase.duration)||0);if(i%2)bands+=`<rect x="${x(cursor)}" y="${pad.t}" width="${Math.max(0,x(cursor+d)-x(cursor))}" height="${H-pad.t-pad.b}" fill="currentColor" opacity=".035"/>`;bands+=`<line x1="${x(cursor)}" y1="${pad.t}" x2="${x(cursor)}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/>`;cursor+=d;});
-  const grid=[0,.25,.5,.75,1].map(fr=>`<line x1="${pad.l}" y1="${pad.t+(H-pad.t-pad.b)*fr}" x2="${W-pad.r}" y2="${pad.t+(H-pad.t-pad.b)*fr}" stroke="currentColor" opacity=".10"/>`).join("");
-  return `<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(entry.title)} profilgrafikon">
-    <rect x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" rx="15" fill="var(--surface2)"/>
-    <g color="var(--text)">${grid}${bands}<line x1="${W-pad.r}" y1="${pad.t}" x2="${W-pad.r}" y2="${H-pad.b}" stroke="currentColor" opacity=".12"/></g>
-    <path d="${pathData(p,x,y)}" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="${pathData(f,x,y)}" fill="none" stroke="var(--flow)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="${pathData(temp,x,yt)}" fill="none" stroke="var(--temp)" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>
-    <g fill="var(--muted)" font-size="12"><text x="${pad.l}" y="${H-10}">0 s</text><text x="${W-pad.r}" y="${H-10}" text-anchor="end">${formatNumber(total,0)} s max</text><text x="8" y="${pad.t+8}">${formatNumber(leftMax-1,0)} bar·ml/s</text><text x="18" y="${H-pad.b}">0</text><text x="${W-6}" y="${pad.t+8}" text-anchor="end">${formatNumber(tMax,1)} °C</text><text x="${W-6}" y="${H-pad.b}" text-anchor="end">${formatNumber(tMin,1)} °C</text></g>
-  </svg>`;
+function drawCardChart(host,profile,entry){
+  let t=0;
+  const phases=(profile.phases||[]).map(p=>{const d=Math.max(0,Number(p.duration)||0),start=t;t+=d;return {name:p.name||"",start,end:t};});
+  mountChart(host,width=>{
+    host.innerHTML=profileChartSVG({width,height:230,total:totalDuration(profile),phases,label:`${entry.title} profilgrafikon`,series:[
+      {points:curveSeries(profile,"pressure"),color:"var(--blue)",fill:true},
+      {points:curveSeries(profile,"flow"),color:"var(--flow)"},
+      {points:tempSeries(profile),axis:"temp",color:"var(--temp)",width:1.8,dash:"6 5"}
+    ]}).svg;
+  });
 }
 
 function selectVariant(entryId,variantId){
@@ -681,7 +399,7 @@ function selectVariant(entryId,variantId){
   const variant=entry.variants.find(v=>v.id===variantId);if(!variant)return;
   entry._variant=variant;entry._profile=null;entry._error=null;
   const card=$(`.profile-card[data-id="${CSS.escape(entry.id)}"]`);
-  if(card){const host=$(`[data-chart="${CSS.escape(entry.id)}"]`,card);if(host)host.innerHTML='<div class="chart-fallback">Az új profil betöltése…</div>';}
+  if(card){const host=$(`[data-chart="${CSS.escape(entry.id)}"]`,card);if(host){host.__chartDraw=null;host.innerHTML='<div class="chart-fallback">Az új profil betöltése…</div>';}}
   loadEntryProfile(entry,true);
 }
 
@@ -754,11 +472,6 @@ function resolveRelativePath(base,rel){
   });
   return stack.join("/");
 }
-async function openMarkdown(file,title){
-  const backdrop=$("#modalBackdrop"),body=$("#modalBody");$("#modalTitle").textContent=title||file;body.innerHTML="<p>Betöltés…</p>";backdrop.classList.add("open");document.body.style.overflow="hidden";
-  try{body.innerHTML=renderMarkdown(await fetchText(file));state.docBase=file;}catch(error){body.innerHTML=`<blockquote><strong>Nem sikerült betölteni.</strong><br>${esc(error.message)}<br><code>${esc(file)}</code></blockquote>`;}
-}
-function closeModal(){const b=$("#modalBackdrop");b.classList.remove("open");document.body.style.overflow="";}
 function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem("gaggimate-theme",theme);}
 function preferredTheme(){
   const saved=localStorage.getItem("gaggimate-theme");
@@ -771,6 +484,20 @@ if(window.matchMedia){
   });
 }
 
+// "Profil részletei" opens and closes together with the card(s) next to it in the same grid row,
+// so the row's cards keep the same height. "toggle" doesn't bubble, hence the capture listener.
+// A neighbour's own toggle event finds this card already in the same state, so it doesn't loop.
+document.addEventListener("toggle",event=>{
+  const details=event.target;
+  if(!details.matches?.(".card-details"))return;
+  const card=details.closest(".profile-card");if(!card)return;
+  const top=card.offsetTop;
+  $$(".profile-card",card.parentElement).forEach(other=>{
+    if(other===card||other.offsetTop!==top)return;
+    const otherDetails=$(".card-details",other);
+    if(otherDetails&&otherDetails.open!==details.open)otherDetails.open=details.open;
+  });
+},true);
 document.addEventListener("change",event=>{
   const select=event.target.closest("[data-variant-select]");if(select)selectVariant(select.dataset.variantSelect,select.value);
 });
@@ -779,22 +506,13 @@ document.addEventListener("click",event=>{
   const taste=event.target.closest(".filter[data-taste]");if(taste){const t=taste.dataset.taste;if(state.taste.has(t))state.taste.delete(t);else state.taste.add(t);taste.setAttribute("aria-pressed",String(state.taste.has(t)));renderProfiles();syncURL();return;}
   const filter=event.target.closest(".filter[data-filter]");if(filter){state.filter=filter.dataset.filter;$$(".filter[data-filter]").forEach(b=>b.setAttribute("aria-pressed",String(b===filter)));renderProfiles();syncURL();return;}
   const md=event.target.closest(".md-open");if(md){const entry=state.profiles.find(p=>p.id===md.dataset.entry);if(!entry)return;const kind=md.dataset.kind;openMarkdown(pathFor(entry,kind==="recipe"?recipeFile(entry):changelogFile(entry)),`${entry.title} – ${kind==="recipe"?"Recept":"Changelog"}`);return;}
-  const doc=event.target.closest(".doc-open");if(doc){const item=DOCS[Number(doc.dataset.doc)];if(item)openMarkdown(item.file,item.title);return;}
-  const kb=event.target.closest(".kb-open");if(kb){const item=KB_ITEMS[Number(kb.dataset.kb)];if(item)openMarkdown(item.file,item.title);return;}
-  const kbHu=event.target.closest(".kb-open-lang");if(kbHu){const item=KB_ITEMS[Number(kbHu.dataset.kb)];if(item&&item.fileHu)openMarkdown(item.fileHu,`${item.title} (magyarul)`);return;}
-  const nested=event.target.closest(".nested-md");if(nested){event.preventDefault();openMarkdown(resolveRelativePath(state.docBase,nested.dataset.file),nested.textContent.trim());}
 });
 $("#searchInput").addEventListener("input",event=>{state.query=event.target.value;renderProfiles();syncURL();});
 $("#processSelect").addEventListener("change",event=>{state.process=event.target.value;renderProfiles();syncURL();});
 $("#sortSelect").addEventListener("change",event=>{state.sort=event.target.value;renderProfiles();syncURL();});
-$("#kbSearchInput").addEventListener("input",event=>renderKnowledge(event.target.value));
 $("#tasteToggle").addEventListener("click",()=>setTasteExpanded($("#tasteRow").hidden));
 $("#themeBtn").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
-$("#modalClose").addEventListener("click",closeModal);
-$("#modalBackdrop").addEventListener("click",event=>{if(event.target.id==="modalBackdrop")closeModal();});
-document.addEventListener("keydown",event=>{if(event.key==="Escape")closeModal();});
 setTheme(preferredTheme());
-renderKnowledge();
 if(location.protocol==="file:"){$("#catalogStatus").className="status error";$("#catalogStatus").innerHTML="<strong>Helyi fájl mód észlelve.</strong><br>A böngésző a kapcsolódó JSON/Markdown fájlokat valószínűleg nem engedi betölteni. Indíts helyi szervert: <code>python -m http.server 8000</code>.";}
 loadCatalog();
 </script>

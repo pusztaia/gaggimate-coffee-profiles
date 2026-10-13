@@ -1,7 +1,7 @@
 "use strict";
 /* Registers sw.js and shows a small "update available" banner instead of
- * silently reloading — a shot-logging form or a half-filled taste-feedback
- * form losing input on an unannounced reload would be a bad surprise. */
+ * silently reloading — a half-filled form (e.g. the profile send dialog) losing
+ * input on an unannounced reload would be a bad surprise. */
 function showUpdateBanner(registration){
   if(document.getElementById("swUpdateBanner"))return;
   const bar=document.createElement("div");
