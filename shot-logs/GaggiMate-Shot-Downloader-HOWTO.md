@@ -5,7 +5,7 @@ Ez a HOWTO a `gaggimate_shots_to_json.py` script használatát írja le.
 A script alapértelmezett GaggiMate címe:
 
 ```text
-192.168.50.68
+gaggimate.local
 ```
 
 A script a GaggiMate shot history bináris indexét és `.slog` fájljait HTTP-n keresztül olvassa le, majd minden shotból külön JSON fájlt készít.
@@ -42,7 +42,7 @@ A jelenlegi shot log formátum v5, 512 bájtos fejléccel és 26 bájtos minták
 
 - Python 3
 - A számítógép vagy Raspberry Pi ugyanazon a hálózaton legyen, mint a GaggiMate
-- A GaggiMate címe elérhető legyen: `192.168.50.68`
+- A GaggiMate címe elérhető legyen: `gaggimate.local`
 - A script fájl:
   `gaggimate_shots_to_json.py`
 
@@ -55,25 +55,25 @@ Először ellenőrizd, hogy a GaggiMate elérhető.
 ### Linux / Raspberry Pi / macOS
 
 ```bash
-ping 192.168.50.68
+ping gaggimate.local
 ```
 
 ### Windows
 
 ```powershell
-ping 192.168.50.68
+ping gaggimate.local
 ```
 
 A GaggiMate webes felületét böngészőből is megnyithatod:
 
 ```text
-http://192.168.50.68
+http://gaggimate.local
 ```
 
 Az index közvetlen címe:
 
 ```text
-http://192.168.50.68/api/history/index.bin
+http://gaggimate.local/api/history/index.bin
 ```
 
 Ez bináris fájl, ezért böngészőben nem olvasható szövegként.
@@ -139,7 +139,7 @@ py gaggimate_shots_to_json.py
 A script először letölti:
 
 ```text
-http://192.168.50.68/api/history/index.bin
+http://gaggimate.local/api/history/index.bin
 ```
 
 Ezután az indexben szereplő aktív shotokhoz lekéri a `.slog` fájlokat, például:
@@ -411,13 +411,13 @@ Connection refused
 Ellenőrizd:
 
 ```bash
-ping 192.168.50.68
+ping gaggimate.local
 ```
 
 és böngészőből:
 
 ```text
-http://192.168.50.68
+http://gaggimate.local
 ```
 
 ### Timeout

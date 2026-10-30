@@ -177,6 +177,22 @@ cp tools/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-c
 
 ---
 
+## Licenc és források
+
+Ez a projekt a **Creative Commons Nevezd meg! – Nem kereskedelmi – Így add tovább 4.0 (CC BY-NC-SA 4.0)** licenc alatt áll, lásd a [`LICENSE`](LICENSE) fájlt. Másolható, módosítható és megosztható a szerző megnevezésével, nem kereskedelmi célra, azonos licenccel.
+*(English: CC BY-NC-SA 4.0, see [`LICENSE`](LICENSE): share and adapt with attribution, non-commercially, under the same licence.)*
+
+Miért ez a licenc: a profil-séma és a gép protokolljának leírása (`schema/`) a **GaggiMate firmware** ([jniebuhr/gaggimate](https://github.com/jniebuhr/gaggimate)) forrásából és sémáiból készült, a firmware pedig CC BY-NC-SA 4.0 alatt áll; az átdolgozás ugyanezt a licencet örökli. A GaggiMate név és a firmware a saját szerzőié, ez a projekt nem hivatalos, és nem a GaggiMate fejlesztőinek műve.
+
+| Rész | Forrás / licenc |
+|---|---|
+| `schema/profile.json`, `schema/shot_history.json`, `schema/shot_notes.json`, `schema/websocket-api.yaml` | A GaggiMate firmware formátumai alapján, annak forráshivatkozásaival; CC BY-NC-SA 4.0 |
+| `shot-logs/gaggimate_shots_to_json.py` | A firmware `.slog` formátuma (`src/display/models/shot_log_format.h`) alapján |
+| `assets/fonts/` (Barlow, Barlow Condensed) | SIL Open Font License 1.1, lásd [`assets/fonts/OFL.txt`](assets/fonts/OFL.txt) |
+| Profilok, receptek, tudásbázis, oldal | Saját munka, CC BY-NC-SA 4.0 |
+
+---
+
 ## GitHub megjegyzés
 
 A Markdownban relatív képhivatkozásokat használunk. Minden fájlnév egyedi (tartalmazza a profil nevét), így GitHub-ra gond nélkül feltölthető.

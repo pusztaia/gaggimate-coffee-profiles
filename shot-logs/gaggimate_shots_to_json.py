@@ -9,7 +9,7 @@ Network endpoints used:
   GET /api/history/000123.slog
   GET /api/history/000123.json   (optional shot notes)
 
-Default GaggiMate address: 192.168.50.68
+Default GaggiMate address: gaggimate.local
 No third-party Python packages are required.
 """
 
@@ -501,8 +501,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "host",
         nargs="?",
-        default="192.168.50.68",
-        help="GaggiMate IP/hostname (default: 192.168.50.68)",
+        default="gaggimate.local",
+        help="GaggiMate IP/hostname (default: gaggimate.local)",
     )
     parser.add_argument(
         "-o",

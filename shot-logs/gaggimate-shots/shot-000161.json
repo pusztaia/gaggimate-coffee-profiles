@@ -3459,7 +3459,7 @@
     }
   ],
   "source": {
-    "gaggimate": "http://192.168.50.68",
+    "gaggimate": "http://gaggimate.local",
     "slog_endpoint": "/api/history/000161.slog",
     "notes_endpoint": "/api/history/000161.json",
     "downloaded_at_utc": "2026-08-31T17:30:47.411777Z"

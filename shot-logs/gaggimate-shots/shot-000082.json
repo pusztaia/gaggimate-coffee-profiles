@@ -4242,7 +4242,7 @@
     }
   ],
   "source": {
-    "gaggimate": "http://192.168.50.68",
+    "gaggimate": "http://gaggimate.local",
     "slog_endpoint": "/api/history/000082.slog",
     "notes_endpoint": "/api/history/000082.json",
     "downloaded_at_utc": "2026-08-10T09:33:56.348517Z"
